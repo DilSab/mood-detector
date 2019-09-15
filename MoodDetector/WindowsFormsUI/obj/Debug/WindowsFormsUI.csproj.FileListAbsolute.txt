@@ -1,0 +1,12 @@
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\bin\Debug\WindowsFormsUI.exe.config
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\bin\Debug\WindowsFormsUI.exe
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\bin\Debug\WindowsFormsUI.pdb
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\obj\Debug\WindowsFormsUI.csprojAssemblyReference.cache
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\obj\Debug\WindowsFormsUI.Properties.Resources.resources
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\obj\Debug\WindowsFormsUI.csproj.GenerateResource.cache
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\obj\Debug\WindowsFormsUI.csproj.CoreCompileInputs.cache
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\obj\Debug\WindowsFormsUI.exe
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\obj\Debug\WindowsFormsUI.pdb
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\obj\Debug\WindowsFormsUI.IndexForm.resources
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\bin\Debug\MoodDetectorDB.mdf
+C:\Users\Dilanas\Source\Repos\mood-detector\MoodDetector\WindowsFormsUI\bin\Debug\MoodDetectorDB_log.ldf
