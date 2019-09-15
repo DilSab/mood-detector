@@ -1,3 +1,6 @@
 *.vs/
 .gitattributes
-*/Debug/
+*.mdf
+*.ldf
+**/Debug
+**/Release
