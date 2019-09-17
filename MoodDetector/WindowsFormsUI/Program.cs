@@ -16,7 +16,7 @@ namespace WindowsFormsUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AddTeacherForm());
+            Application.Run(new AddNewTeacherForm());
         }
     }
 }
