@@ -4,3 +4,6 @@
 *.ldf
 **/Debug
 **/Release
+*.dbmdl
+*.jfm
+**/packages/*
