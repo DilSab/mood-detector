@@ -64,6 +64,7 @@
   <ItemGroup>
     <Build Include="dbo\Tables\Teacher.sql" />
     <Build Include="dbo\Tables\ClassMood.sql" />
+    <Build Include="dbo\Tables\LoginInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\LocalSQLServerDatabase.publish.xml" />
