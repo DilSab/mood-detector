@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsUI
 {
-    public partial class teacherForm : Form
+    public partial class TeacherForm : Form
     {
-        public teacherForm()
+        public TeacherForm()
         {
             InitializeComponent();
         }

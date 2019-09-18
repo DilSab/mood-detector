@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsUI
 {
-    partial class teacherForm
+    partial class TeacherForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,9 +37,9 @@
             this.commentsTextBox = new System.Windows.Forms.TextBox();
             this.newsessionGroupBox = new System.Windows.Forms.GroupBox();
             this.getfeedbackGroupBox = new System.Windows.Forms.GroupBox();
-            this.selectLabel = new System.Windows.Forms.Label();
-            this.selectComboBox = new System.Windows.Forms.ComboBox();
             this.getButton = new System.Windows.Forms.Button();
+            this.selectComboBox = new System.Windows.Forms.ComboBox();
+            this.selectLabel = new System.Windows.Forms.Label();
             this.newsessionGroupBox.SuspendLayout();
             this.getfeedbackGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -130,23 +130,6 @@
             this.getfeedbackGroupBox.TabStop = false;
             this.getfeedbackGroupBox.Text = "Get Event Feedback";
             // 
-            // selectLabel
-            // 
-            this.selectLabel.AutoSize = true;
-            this.selectLabel.Location = new System.Drawing.Point(6, 34);
-            this.selectLabel.Name = "selectLabel";
-            this.selectLabel.Size = new System.Drawing.Size(47, 17);
-            this.selectLabel.TabIndex = 0;
-            this.selectLabel.Text = "Select";
-            // 
-            // selectComboBox
-            // 
-            this.selectComboBox.FormattingEnabled = true;
-            this.selectComboBox.Location = new System.Drawing.Point(59, 31);
-            this.selectComboBox.Name = "selectComboBox";
-            this.selectComboBox.Size = new System.Drawing.Size(190, 24);
-            this.selectComboBox.TabIndex = 1;
-            // 
             // getButton
             // 
             this.getButton.Location = new System.Drawing.Point(174, 217);
@@ -156,14 +139,31 @@
             this.getButton.Text = "Get";
             this.getButton.UseVisualStyleBackColor = true;
             // 
-            // teacherForm
+            // selectComboBox
+            // 
+            this.selectComboBox.FormattingEnabled = true;
+            this.selectComboBox.Location = new System.Drawing.Point(59, 31);
+            this.selectComboBox.Name = "selectComboBox";
+            this.selectComboBox.Size = new System.Drawing.Size(190, 24);
+            this.selectComboBox.TabIndex = 1;
+            // 
+            // selectLabel
+            // 
+            this.selectLabel.AutoSize = true;
+            this.selectLabel.Location = new System.Drawing.Point(6, 34);
+            this.selectLabel.Name = "selectLabel";
+            this.selectLabel.Size = new System.Drawing.Size(47, 17);
+            this.selectLabel.TabIndex = 0;
+            this.selectLabel.Text = "Select";
+            // 
+            // TeacherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 279);
             this.Controls.Add(this.getfeedbackGroupBox);
             this.Controls.Add(this.newsessionGroupBox);
-            this.Name = "teacherForm";
+            this.Name = "TeacherForm";
             this.Text = "Teacher";
             this.newsessionGroupBox.ResumeLayout(false);
             this.newsessionGroupBox.PerformLayout();
