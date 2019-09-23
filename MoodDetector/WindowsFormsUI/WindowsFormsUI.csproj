@@ -64,12 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AppForm.Designer.cs">
-      <DependentUpon>AppForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ContainerConfig.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -85,9 +79,6 @@
     <Compile Include="TeacherForm.Designer.cs">
       <DependentUpon>TeacherForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AppForm.resx">
-      <DependentUpon>AppForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

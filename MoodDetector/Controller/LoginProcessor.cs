@@ -13,14 +13,12 @@ namespace Controller
 
         public bool ProcessLogin(string username, string password)
         {
-            if (_loginAuthenticator.IsLoginCorrect(username, password))
-            {
-                return true;
-            }
-            else
+            if (username == "" || password == "")
             {
                 return false;
             }
+
+            return _loginAuthenticator.IsLoginCorrect(username, password) ? true : false;
         }
     }
 }

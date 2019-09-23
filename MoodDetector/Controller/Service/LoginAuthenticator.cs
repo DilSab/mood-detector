@@ -15,10 +15,6 @@ namespace Controller.Service
 
         public bool IsLoginCorrect(string username, string password)
         {
-            if (username == "" || password == "")
-            {
-                return false;
-            }
             int userCount = _userCounter.GetUserCount(username, password);
 
             return userCount == 1 ? true : false;
