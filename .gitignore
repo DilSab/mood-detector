@@ -2,6 +2,8 @@
 .gitattributes
 *.mdf
 *.ldf
+*.dbmdl
+*.jfm
 **/Debug
 **/Release
 *.dbmdl
