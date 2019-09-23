@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Authentication;
 using System.Windows.Forms;
 using Controller;
 
@@ -16,14 +15,14 @@ namespace WindowsFormsUI
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            try
+            bool loginCorrect = _loginProcessor.ProcessLogin(usernameTextBox.Text, passwordTextBox.Text);
+            if (loginCorrect)
             {
-                _loginProcessor.ProcessLogin(usernameTextBox.Text, passwordTextBox.Text);
                 MessageBox.Show("Hello " + usernameTextBox.Text);
             }
-            catch (AuthenticationException exception)
+            else
             {
-                MessageBox.Show("Please check your username or password");
+                MessageBox.Show("Please check username or password");
             }
         }
 

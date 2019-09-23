@@ -62,7 +62,7 @@
     <Folder Include="dbo\Views" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Teacher.sql" />
+    <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\ClassMood.sql" />
     <Build Include="dbo\Tables\LoginInfo.sql" />
   </ItemGroup>

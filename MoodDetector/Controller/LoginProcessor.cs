@@ -1,17 +1,14 @@
 ﻿using Controller.Service;
-using System.Security.Authentication;
 
 namespace Controller
 {
     public class LoginProcessor : ILoginProcessor
     {
-        ILoginAuthenticator _loginAuthenticator;
-        IUserInfoReceiver _userInfoReceiver;
+        private ILoginAuthenticator _loginAuthenticator;
 
-        public LoginProcessor(ILoginAuthenticator loginAuthenticator, IUserInfoReceiver userInfoReceiver)
+        public LoginProcessor(ILoginAuthenticator loginAuthenticator)
         {
             _loginAuthenticator = loginAuthenticator;
-            _userInfoReceiver = userInfoReceiver;
         }
 
         public bool ProcessLogin(string username, string password)
@@ -22,7 +19,7 @@ namespace Controller
             }
             else
             {
-                throw new AuthenticationException();
+                return false;
             }
         }
     }
