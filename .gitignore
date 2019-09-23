@@ -6,3 +6,6 @@
 *.jfm
 **/Debug
 **/Release
+*.dbmdl
+*.jfm
+**/packages/*
