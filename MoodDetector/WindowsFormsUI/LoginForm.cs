@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Windows.Forms;
 using Controller;
+using Controller.Service;
 
 namespace WindowsFormsUI
 {
     public partial class LoginForm : Form
     {
         private ILoginProcessor _loginProcessor;
-        public LoginForm(ILoginProcessor loginProcessor)
+        private IUserService _userService;
+
+        public LoginForm(ILoginProcessor loginProcessor, IUserService userService)
         {
             _loginProcessor = loginProcessor;
+            _userService = userService;
             InitializeComponent();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
             bool loginCorrect = _loginProcessor.ProcessLogin(usernameTextBox.Text, passwordTextBox.Text);
-            if (loginCorrect)
+            if (loginCorrect && usernameTextBox.Text == "admin")
             {
-                MessageBox.Show("Hello " + usernameTextBox.Text);
+                AdminForm adminForm = new AdminForm(_userService);
+                adminForm.Show();
+                this.Close();
             }
             else
             {

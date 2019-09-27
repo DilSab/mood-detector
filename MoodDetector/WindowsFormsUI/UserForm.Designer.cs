@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsUI
 {
-    partial class TeacherForm
+    partial class UserForm
     {
         /// <summary>
         /// Required designer variable.
