@@ -22,9 +22,9 @@ namespace WindowsFormsUI
             bool loginCorrect = _loginProcessor.ProcessLogin(usernameTextBox.Text, passwordTextBox.Text);
             if (loginCorrect && usernameTextBox.Text == "admin")
             {
+                this.Hide();
                 AdminForm adminForm = new AdminForm(_userService);
                 adminForm.Show();
-                this.Close();
             }
             else
             {
