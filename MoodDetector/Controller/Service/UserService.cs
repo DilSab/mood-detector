@@ -1,21 +1,28 @@
 ﻿using Model;
+using Model.Entity;
 using System.Linq;
 
 namespace Controller.Service
 {
     public class UserService : IUserService
     {
-        public void AddNewUser(string firstname, string lastname, string accessRights)
+        public void AddNewUser(AddUser addUser)
         {
             using (var context = new MoodDetectorDBEntities())
             {
-                var user = new User()
+                var loginInfo = new LoginInfo()
                 {
-                    Firstname = firstname,
-                    Lastname = lastname,
-                    AccessRights = accessRights
+                    User = new User()
+                    {
+                        Firstname = addUser.Firstname,
+                        Lastname = addUser.Lastname,
+                        AccessRights = addUser.AccessRights
+                    },
+                    Username = addUser.Username,
+                    Password = addUser.Password,
+                    Email = addUser.Email
                 };
-                context.Users.Add(user);
+                context.LoginInfoes.Add(loginInfo);
                 context.SaveChanges();
             }
         }

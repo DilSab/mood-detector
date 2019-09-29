@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using Controller.Service;
+using Model.Entity;
 
 namespace WindowsFormsUI
 {
@@ -18,11 +19,17 @@ namespace WindowsFormsUI
 
         private void AddUserButton_Click(object sender, EventArgs e)
         {
-            _userService.AddNewUser(
-                firstnameTextBox.Text,
-                lastnameTextBox.Text,
-                accessRightsTextBox.Text
-            );
+            var addUser = new AddUser
+            {
+                Firstname = firstnameTextBox.Text,
+                Lastname = lastnameTextBox.Text,
+                AccessRights = accessRightsTextBox.Text,
+                Username = usernameTextBox.Text,
+                Password = passwordTextBox.Text,
+                Email = emailTextBox.Text
+            };
+
+            _userService.AddNewUser(addUser);
             this.Close();
         }
     }

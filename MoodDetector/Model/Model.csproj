@@ -61,6 +61,7 @@
     <Compile Include="ClassMood.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\AddUser.cs" />
     <Compile Include="LoginInfo.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>

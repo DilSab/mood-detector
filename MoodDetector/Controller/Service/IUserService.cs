@@ -1,10 +1,11 @@
 ﻿using Model;
+using Model.Entity;
 
 namespace Controller.Service
 {
     public interface IUserService
     {
-        void AddNewUser(string firstname, string lastname, string accessRights);
+        void AddNewUser(AddUser addUser);
 
         User GetUser(string username);
     }
