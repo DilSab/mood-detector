@@ -20,11 +20,22 @@ namespace WindowsFormsUI
         private void LoginButton_Click(object sender, EventArgs e)
         {
             bool loginCorrect = _loginProcessor.ProcessLogin(usernameTextBox.Text, passwordTextBox.Text);
-            if (loginCorrect && usernameTextBox.Text == "admin")
+            if (loginCorrect)
             {
-                this.Hide();
-                AdminForm adminForm = new AdminForm(_userService);
-                adminForm.Show();
+                var user = _userService.GetUser(usernameTextBox.Text);
+                switch (user.AccessRights)
+                {
+                    case "Admin":
+                        this.Hide();
+                        AdminForm adminForm = new AdminForm(_userService);
+                        adminForm.Show();
+                        break;
+                    case "Teacher":
+                        this.Hide();
+                        UserForm userForm = new UserForm(user);
+                        userForm.Show();
+                        break;
+                }
             }
             else
             {

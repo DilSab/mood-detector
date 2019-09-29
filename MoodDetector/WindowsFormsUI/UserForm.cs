@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Model;
 using System.Windows.Forms;
 
 namespace WindowsFormsUI
 {
     public partial class UserForm : Form
     {
-        public UserForm()
+        public UserForm(User user)
         {
             InitializeComponent();
+
+            userInfoLabel.Text = "Hello " + user.Firstname + " " + user.Lastname;
         }
     }
 }
