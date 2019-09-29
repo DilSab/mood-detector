@@ -58,7 +58,7 @@
             // classroomTextBox
             // 
             this.classroomTextBox.Location = new System.Drawing.Point(158, 12);
-            this.classroomTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.classroomTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.classroomTextBox.Name = "classroomTextBox";
             this.classroomTextBox.Size = new System.Drawing.Size(76, 20);
             this.classroomTextBox.TabIndex = 1;
@@ -76,7 +76,7 @@
             // classTextBox
             // 
             this.classTextBox.Location = new System.Drawing.Point(158, 35);
-            this.classTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.classTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.classTextBox.Name = "classTextBox";
             this.classTextBox.Size = new System.Drawing.Size(76, 20);
             this.classTextBox.TabIndex = 3;
@@ -84,7 +84,7 @@
             // startButton
             // 
             this.startButton.Location = new System.Drawing.Point(136, 176);
-            this.startButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startButton.Margin = new System.Windows.Forms.Padding(2);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(99, 19);
             this.startButton.TabIndex = 4;
@@ -104,7 +104,7 @@
             // commentsTextBox
             // 
             this.commentsTextBox.Location = new System.Drawing.Point(10, 79);
-            this.commentsTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.commentsTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.commentsTextBox.Multiline = true;
             this.commentsTextBox.Name = "commentsTextBox";
             this.commentsTextBox.Size = new System.Drawing.Size(226, 93);
@@ -120,9 +120,9 @@
             this.newsessionGroupBox.Controls.Add(this.startButton);
             this.newsessionGroupBox.Controls.Add(this.classTextBox);
             this.newsessionGroupBox.Location = new System.Drawing.Point(9, 35);
-            this.newsessionGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.newsessionGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.newsessionGroupBox.Name = "newsessionGroupBox";
-            this.newsessionGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.newsessionGroupBox.Padding = new System.Windows.Forms.Padding(2);
             this.newsessionGroupBox.Size = new System.Drawing.Size(241, 177);
             this.newsessionGroupBox.TabIndex = 7;
             this.newsessionGroupBox.TabStop = false;
@@ -134,9 +134,9 @@
             this.getfeedbackGroupBox.Controls.Add(this.selectComboBox);
             this.getfeedbackGroupBox.Controls.Add(this.selectLabel);
             this.getfeedbackGroupBox.Location = new System.Drawing.Point(262, 35);
-            this.getfeedbackGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.getfeedbackGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.getfeedbackGroupBox.Name = "getfeedbackGroupBox";
-            this.getfeedbackGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.getfeedbackGroupBox.Padding = new System.Windows.Forms.Padding(2);
             this.getfeedbackGroupBox.Size = new System.Drawing.Size(191, 177);
             this.getfeedbackGroupBox.TabIndex = 8;
             this.getfeedbackGroupBox.TabStop = false;
@@ -145,7 +145,7 @@
             // getButton
             // 
             this.getButton.Location = new System.Drawing.Point(130, 176);
-            this.getButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.getButton.Margin = new System.Windows.Forms.Padding(2);
             this.getButton.Name = "getButton";
             this.getButton.Size = new System.Drawing.Size(56, 19);
             this.getButton.TabIndex = 2;
@@ -156,7 +156,7 @@
             // 
             this.selectComboBox.FormattingEnabled = true;
             this.selectComboBox.Location = new System.Drawing.Point(44, 25);
-            this.selectComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.selectComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.selectComboBox.Name = "selectComboBox";
             this.selectComboBox.Size = new System.Drawing.Size(144, 21);
             this.selectComboBox.TabIndex = 1;
@@ -188,8 +188,9 @@
             this.Controls.Add(this.userInfoLabel);
             this.Controls.Add(this.getfeedbackGroupBox);
             this.Controls.Add(this.newsessionGroupBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UserForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Teacher";
             this.newsessionGroupBox.ResumeLayout(false);
             this.newsessionGroupBox.PerformLayout();
