@@ -60,11 +60,13 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="PublishProfiles" />
     <Folder Include="dbo\Views" />
+    <Folder Include="dbo\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\ClassMood.sql" />
     <Build Include="dbo\Tables\LoginInfo.sql" />
+    <Build Include="dbo\Stored Procedures\addUsers.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\LocalSQLServerDatabase.publish.xml" />
