@@ -8,31 +8,38 @@ namespace Controller.Affectiva
         Dictionary<string, float> emotions;
         Dictionary<string, float> expressions;
         Dictionary<string, float> emojis;
+
         public ImageListenerImpl(PhotoDetector detector)
         {
             detector.setImageListener(this);
         }
+
         public void onImageCapture(Frame frame)
         {
         }
+
         public void onImageResults(Dictionary<int, Face> faces, Frame frame)
         {
             AddEmotions(faces);
             AddExpressions(faces);
             AddEmojis(faces);
         }
+
         public Dictionary<string, float> GetEmotions()
         {
             return emotions;
         }
+
         public Dictionary<string, float> GetExpressions()
         {
             return expressions;
         }
+
         public Dictionary<string, float> GetEmojis()
         {
             return emojis;
         }
+
         private void AddEmotions(Dictionary<int, Face> faces)
         {
             foreach (KeyValuePair<int, Face> face in faces)

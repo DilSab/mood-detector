@@ -8,6 +8,7 @@ namespace Controller.Affectiva
         readonly PhotoDetector detector;
         readonly ImageListenerImpl imageListener;
         readonly Helper helper;
+
         AffectivaService()
         {
             detector = new PhotoDetector(1, FaceDetectorMode.LARGE_FACES);
@@ -19,6 +20,7 @@ namespace Controller.Affectiva
             detector.setDetectAllEmojis(true);
             detector.setDetectAllAppearances(false);
         }
+
         public void ProcessPhoto(string filePath)
         {
             Frame frame = helper.LoadFrameFromFile(filePath);
@@ -26,14 +28,17 @@ namespace Controller.Affectiva
             detector.process(frame);
             detector.stop();
         }
+
         public Dictionary<string, float> GetEmotions()
         {
             return imageListener.GetEmotions();
         }
+
         public Dictionary<string, float> GetExpressions()
         {
             return imageListener.GetExpressions();
         }
+
         public Dictionary<string, float> GetEmojis()
         {
             return imageListener.GetEmojis();
