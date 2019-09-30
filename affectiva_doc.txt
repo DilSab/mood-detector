@@ -1,0 +1,5 @@
+To be able to use GetEmotions, GetExpressions, GetEmojis methods,
+first you need to call ProcessPhoto method.
+
+Engagement 0 - 100
+Valence -100 - 100
