@@ -7,14 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Controller.Service;
 
 namespace WindowsFormsUI
 {
     public partial class AdminForm : Form
     {
-        public AdminForm()
+        private IUserService _userService;
+        public AdminForm(IUserService userService)
         {
+            _userService = userService;
             InitializeComponent();
+        }
+
+        private void addUserButton_Click(object sender, EventArgs e)
+        {
+            AddNewUserForm addNewUserForm = new AddNewUserForm(_userService);
+            addNewUserForm.ShowDialog();
         }
     }
 }

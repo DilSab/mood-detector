@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Autofac;
 using Controller;
+using Controller.Service;
 
 namespace WindowsFormsUI
 {
@@ -18,9 +19,10 @@ namespace WindowsFormsUI
             using (var scope = container.BeginLifetimeScope())
             {
                 var loginProcessor = scope.Resolve<ILoginProcessor>();
+                var userService = scope.Resolve<IUserService>();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new LoginForm(loginProcessor));
+                Application.Run(new LoginForm(loginProcessor,userService));
             }
         }
     }

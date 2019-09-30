@@ -1,23 +1,24 @@
 ﻿using Model;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Controller.Service
 {
     public class LoginAuthenticator : ILoginAuthenticator
     {
-        private IUserCounter _userCounter;
-
-        public LoginAuthenticator(IUserCounter userCounter)
-        {
-            _userCounter = userCounter;
-        }
-
         public bool IsLoginCorrect(string username, string password)
         {
-            int userCount = _userCounter.GetUserCount(username, password);
+            using (MoodDetectorDBEntities context = new MoodDetectorDBEntities())
+            {
+                var user = context.LoginInfoes.FirstOrDefault(u => u.Username == username);
+                if (user != null)
+                {
+                    return user.Password == password ? true : false;
+                }
+            }
 
-            return userCount == 1 ? true : false;
+            return false;
         }
     }
 }

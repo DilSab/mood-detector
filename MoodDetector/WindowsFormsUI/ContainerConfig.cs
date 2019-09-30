@@ -18,12 +18,12 @@ namespace WindowsFormsUI
 
             builder.RegisterType<LoginProcessor>().As<ILoginProcessor>();
 
-            builder.RegisterAssemblyTypes(Assembly.Load(nameof(Controller)))
+            builder.RegisterAssemblyTypes(Assembly.Load(nameof(Model)))
                 .Where(t => t.Namespace.Contains("Service"))
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
 
-            builder.RegisterAssemblyTypes(Assembly.Load(nameof(Model)))
-                .Where(t => t.Namespace.Contains("Model"))
+            builder.RegisterAssemblyTypes(Assembly.Load(nameof(Controller)))
+                .Where(t => t.Namespace.Contains("Service"))
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
 
             return builder.Build();

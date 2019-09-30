@@ -28,12 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.addUserButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // addUserButton
+            // 
+            this.addUserButton.Location = new System.Drawing.Point(12, 12);
+            this.addUserButton.Name = "addUserButton";
+            this.addUserButton.Size = new System.Drawing.Size(75, 23);
+            this.addUserButton.TabIndex = 0;
+            this.addUserButton.Text = "Add user";
+            this.addUserButton.UseVisualStyleBackColor = true;
+            this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
+            // 
+            // AdminForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(584, 361);
+            this.Controls.Add(this.addUserButton);
+            this.Name = "AdminForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminForm";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button addUserButton;
     }
 }
