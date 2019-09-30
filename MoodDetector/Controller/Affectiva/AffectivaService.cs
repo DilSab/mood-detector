@@ -48,6 +48,7 @@ namespace Controller.Affectiva
         {
             AddEmotions(faces);
             AddExpressions(faces);
+            AddEmojis(faces);
         }
 
         public Dictionary<string, float> GetEmotions()
