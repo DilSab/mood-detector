@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Controller.Affectiva
 {
-    class AffectivaService
+    public class AffectivaService
     {
         public Dictionary<string, float> GetEmotions(string filePath)
         {
