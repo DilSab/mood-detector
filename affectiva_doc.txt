@@ -1,0 +1,2 @@
+Engagement 0 - 100
+Valence -100 - 100

@@ -6,26 +6,32 @@ namespace Controller.Affectiva
 {
     public class AffectivaService
     {
+        static PhotoDetector detector = new PhotoDetector(2, FaceDetectorMode.LARGE_FACES);
+        ImageListenerImpl imageListener = new ImageListenerImpl(detector);
         public Dictionary<string, float> GetEmotions(string filePath)
         {
-            Helper helper = new Helper();
             Dictionary<string, float> emotions = new Dictionary<string, float>();
+            ProcessPhoto(filePath);
+            emotions = imageListener.GetEmotions();
+            return emotions;
+        }
 
-            PhotoDetector detector = new PhotoDetector(2, FaceDetectorMode.LARGE_FACES);
+
+
+        private void ProcessPhoto(string filePath)
+        {
+            Helper helper = new Helper();
             String classifierPath = "C:\\Program Files\\Affectiva\\AffdexSDK\\data";
             detector.setClassifierPath(classifierPath);
-            ImageListenerImpl imageListener = new ImageListenerImpl(detector);
             detector.setDetectAllExpressions(true);
             detector.setDetectAllEmotions(true);
             detector.setDetectAllEmojis(true);
-            detector.setDetectAllAppearances(true);
-
+            detector.setDetectAllAppearances(false);
             Frame frame = helper.LoadFrameFromFile(filePath);
             detector.start();
             detector.process(frame);
-            emotions = imageListener.GetEmotions();
             detector.stop();
-            return emotions;
+            
         }
     }
 
