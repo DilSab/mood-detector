@@ -6,32 +6,38 @@ namespace Controller.Affectiva
 {
     public class AffectivaService
     {
-        static PhotoDetector detector = new PhotoDetector(2, FaceDetectorMode.LARGE_FACES);
-        ImageListenerImpl imageListener = new ImageListenerImpl(detector);
-        public Dictionary<string, float> GetEmotions(string filePath)
+        readonly PhotoDetector detector;
+        readonly ImageListenerImpl imageListener;
+        readonly Helper helper;
+        AffectivaService()
         {
-            Dictionary<string, float> emotions = new Dictionary<string, float>();
-            ProcessPhoto(filePath);
-            emotions = imageListener.GetEmotions();
-            return emotions;
-        }
-
-
-
-        private void ProcessPhoto(string filePath)
-        {
-            Helper helper = new Helper();
-            String classifierPath = "C:\\Program Files\\Affectiva\\AffdexSDK\\data";
-            detector.setClassifierPath(classifierPath);
+            detector = new PhotoDetector(1, FaceDetectorMode.LARGE_FACES);
+            imageListener = new ImageListenerImpl(detector);
+            helper = new Helper();
+            detector.setClassifierPath("C:\\Program Files\\Affectiva\\AffdexSDK\\data");
             detector.setDetectAllExpressions(true);
             detector.setDetectAllEmotions(true);
             detector.setDetectAllEmojis(true);
             detector.setDetectAllAppearances(false);
+        }
+        public void ProcessPhoto(string filePath)
+        {
             Frame frame = helper.LoadFrameFromFile(filePath);
             detector.start();
             detector.process(frame);
             detector.stop();
-            
+        }
+        public Dictionary<string, float> GetEmotions()
+        {
+            return imageListener.GetEmotions();
+        }
+        public Dictionary<string, float> GetExpressions()
+        {
+            return imageListener.GetExpressions();
+        }
+        public Dictionary<string, float> GetEmojis()
+        {
+            return imageListener.GetEmojis();
         }
     }
 
@@ -44,34 +50,27 @@ namespace Controller.Affectiva
         {
             detector.setImageListener(this);
         }
-
         public void onImageCapture(Frame frame)
         {
-
         }
-
         public void onImageResults(Dictionary<int, Face> faces, Frame frame)
         {
             AddEmotions(faces);
             AddExpressions(faces);
             AddEmojis(faces);
         }
-
         public Dictionary<string, float> GetEmotions()
         {
             return emotions;
         }
-
         public Dictionary<string, float> GetExpressions()
         {
             return expressions;
         }
-
         public Dictionary<string, float> GetEmojis()
         {
             return emojis;
         }
-
         private void AddEmotions(Dictionary<int, Face> faces)
         {
             foreach (KeyValuePair<int, Face> face in faces)
@@ -88,7 +87,6 @@ namespace Controller.Affectiva
                 emotions.Add("valence", emo.Valence);
             }
         }
-
         private void AddExpressions(Dictionary<int, Face> faces)
         {
             foreach (KeyValuePair<int, Face> face in faces)
@@ -117,7 +115,6 @@ namespace Controller.Affectiva
                 expressions.Add("upper lip raise", exp.UpperLipRaise);
             }
         }
-
         private void AddEmojis(Dictionary<int, Face> faces)
         {
             foreach (KeyValuePair<int, Face> face in faces)
