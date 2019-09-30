@@ -56,6 +56,7 @@ namespace Controller.Affectiva
                 emotions.Add("valence", emo.Valence);
             }
         }
+
         private void AddExpressions(Dictionary<int, Face> faces)
         {
             foreach (KeyValuePair<int, Face> face in faces)
@@ -84,6 +85,7 @@ namespace Controller.Affectiva
                 expressions.Add("upper lip raise", exp.UpperLipRaise);
             }
         }
+
         private void AddEmojis(Dictionary<int, Face> faces)
         {
             foreach (KeyValuePair<int, Face> face in faces)
