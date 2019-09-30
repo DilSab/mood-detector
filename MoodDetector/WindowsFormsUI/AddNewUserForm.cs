@@ -19,15 +19,14 @@ namespace WindowsFormsUI
 
         private void AddUserButton_Click(object sender, EventArgs e)
         {
-            var addUser = new AddUser
-            {
-                Firstname = firstnameTextBox.Text,
-                Lastname = lastnameTextBox.Text,
-                AccessRights = accessRightsTextBox.Text,
-                Username = usernameTextBox.Text,
-                Password = passwordTextBox.Text,
-                Email = emailTextBox.Text
-            };
+            var addUser = new AddUser(
+                usernameTextBox.Text,
+                passwordTextBox.Text,
+                emailTextBox.Text,
+                firstnameTextBox.Text,
+                lastnameTextBox.Text,
+                accessRightsTextBox.Text
+            );
 
             _userService.AddNewUser(addUser);
             this.Close();

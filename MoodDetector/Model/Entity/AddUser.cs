@@ -6,13 +6,30 @@ using System.Threading.Tasks;
 
 namespace Model.Entity
 {
-    public partial class AddUser
+    public struct AddUser
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string AccessRights { get; set; }
+        public string Username;
+        public string Password;
+        public string Email;
+        public string Firstname;
+        public string Lastname;
+        public string AccessRights;
+
+        public AddUser(
+            string username,
+            string password,
+            string email,
+            string firstname,
+            string lastname,
+            string accessRights
+        )
+        {
+            this.Username = username;
+            this.Password = password;
+            this.Email = email;
+            this.Firstname = firstname;
+            this.Lastname = lastname;
+            this.AccessRights = accessRights;
+        }
     }
 }
