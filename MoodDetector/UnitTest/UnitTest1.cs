@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+
 namespace UnitTest
 {
     public class UnitTest1
@@ -9,6 +10,7 @@ namespace UnitTest
         {
             Assert.Equal(2, 1 + 1);
         }
+
         [Theory]
         [InlineData(1, 2, 3)]
         [InlineData(1, 1, 2)]
