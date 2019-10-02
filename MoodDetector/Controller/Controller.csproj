@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILoginProcessor.cs" />
+    <Compile Include="Service\IRegisterAuthenticator.cs" />
+    <Compile Include="Service\RegisterAuthenticator.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\ILoginAuthenticator.cs" />
