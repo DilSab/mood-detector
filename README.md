@@ -16,7 +16,7 @@ This project uses emotion recognition to give teachers feedback about their lect
 #### Dependencies:
 
 * AutoFac (dependency injection)
-* Emgu CV (OpenCV wrapper)
+* Affdex (emotion recognition)
 * xUnit (unit testing)
 
 ### Database
