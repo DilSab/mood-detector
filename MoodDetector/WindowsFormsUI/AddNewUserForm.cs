@@ -10,10 +10,12 @@ namespace WindowsFormsUI
     public partial class AddNewUserForm : Form
     {
         private IUserService _userService;
+        private IRegisterAuthenticator _registerAuthenticator;
 
         public AddNewUserForm(IUserService userService)
         {
             _userService = userService;
+            _registerAuthenticator = new RegisterAuthenticator();
             InitializeComponent();
         }
 
@@ -27,7 +29,11 @@ namespace WindowsFormsUI
                 lastnameTextBox.Text,
                 accessRightsTextBox.Text
             );
-
+            if (!_registerAuthenticator.IsRegisterDataCorrect(addUser))
+            {
+                MessageBox.Show("Check your input");
+                return;
+            }
             _userService.AddNewUser(addUser);
             this.Close();
         }
