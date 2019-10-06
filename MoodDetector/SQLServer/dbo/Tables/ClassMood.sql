@@ -3,7 +3,8 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [UserId] INT NOT NULL, 
 	[Subject] NVARCHAR(30) NOT NULL, 
-    [Class] NVARCHAR(5) NOT NULL, 
-    [AverageMood] INT NOT NULL, 
-    CONSTRAINT [FK_ClassMood_Teacher] FOREIGN KEY ([UserId]) REFERENCES [User]([Id])
+    [Class] NVARCHAR(30) NOT NULL, 
+	[DateTime] DATETIME Not NULL, 
+    [Comments] TEXT NOT NULL, 
+    CONSTRAINT [FK_ClassMood_User] FOREIGN KEY ([UserId]) REFERENCES [User]([Id]), 
 )

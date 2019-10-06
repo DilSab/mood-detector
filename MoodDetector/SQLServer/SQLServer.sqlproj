@@ -67,8 +67,12 @@
     <Build Include="dbo\Tables\ClassMood.sql" />
     <Build Include="dbo\Tables\LoginInfo.sql" />
     <Build Include="dbo\Stored Procedures\addUsers.sql" />
+    <Build Include="dbo\Tables\Mood.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\LocalSQLServerDatabase.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SQLServer.refactorlog" />
   </ItemGroup>
 </Project>

@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.endButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
-            this.chooseButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -53,21 +52,13 @@
             // 
             // uploadButton
             // 
-            this.uploadButton.Location = new System.Drawing.Point(183, 88);
+            this.uploadButton.Location = new System.Drawing.Point(15, 191);
             this.uploadButton.Name = "uploadButton";
             this.uploadButton.Size = new System.Drawing.Size(75, 23);
             this.uploadButton.TabIndex = 5;
             this.uploadButton.Text = "Upload";
             this.uploadButton.UseVisualStyleBackColor = true;
-            // 
-            // chooseButton
-            // 
-            this.chooseButton.Location = new System.Drawing.Point(12, 88);
-            this.chooseButton.Name = "chooseButton";
-            this.chooseButton.Size = new System.Drawing.Size(75, 23);
-            this.chooseButton.TabIndex = 4;
-            this.chooseButton.Text = "Choose";
-            this.chooseButton.UseVisualStyleBackColor = true;
+            this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
             // 
             // SessionForm
             // 
@@ -77,8 +68,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.endButton);
             this.Controls.Add(this.uploadButton);
-            this.Controls.Add(this.chooseButton);
             this.Name = "SessionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Session Form";
             this.ResumeLayout(false);
 
@@ -89,6 +80,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button endButton;
         private System.Windows.Forms.Button uploadButton;
-        private System.Windows.Forms.Button chooseButton;
     }
 }

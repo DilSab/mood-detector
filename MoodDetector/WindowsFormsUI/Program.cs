@@ -20,9 +20,10 @@ namespace WindowsFormsUI
             {
                 var loginProcessor = scope.Resolve<ILoginProcessor>();
                 var userService = scope.Resolve<IUserService>();
+                var moodService = scope.Resolve<IMoodService>();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new LoginForm(loginProcessor,userService));
+                Application.Run(new LoginForm(loginProcessor, userService, moodService));
             }
         }
     }
