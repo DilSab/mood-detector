@@ -9,11 +9,13 @@ namespace WindowsFormsUI
     {
         private ILoginProcessor _loginProcessor;
         private IUserService _userService;
+        private IMoodService _moodService;
 
-        public LoginForm(ILoginProcessor loginProcessor, IUserService userService)
+        public LoginForm(ILoginProcessor loginProcessor, IUserService userService, IMoodService moodService)
         {
             _loginProcessor = loginProcessor;
             _userService = userService;
+            _moodService = moodService;
             InitializeComponent();
         }
 
@@ -32,7 +34,7 @@ namespace WindowsFormsUI
                         break;
                     case "Teacher":
                         this.Hide();
-                        UserForm userForm = new UserForm(user);
+                        UserForm userForm = new UserForm(user, _moodService);
                         userForm.Show();
                         break;
                 }

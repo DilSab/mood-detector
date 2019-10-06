@@ -4,7 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MoodDetectorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MoodDetectorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="ClassMood">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,8 +18,9 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Subject" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="Class" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="AverageMood" Type="int" Nullable="false" />
+          <Property Name="Class" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Comments" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="LoginInfo">
           <Key>
@@ -25,6 +32,22 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Mood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassMoodId" Type="int" Nullable="false" />
+          <Property Name="Anger" Type="float" Nullable="false" />
+          <Property Name="Joy" Type="float" Nullable="false" />
+          <Property Name="Contempt" Type="float" Nullable="false" />
+          <Property Name="Disgust" Type="float" Nullable="false" />
+          <Property Name="Engagement" Type="float" Nullable="false" />
+          <Property Name="Fear" Type="float" Nullable="false" />
+          <Property Name="Sadness" Type="float" Nullable="false" />
+          <Property Name="Suprise" Type="float" Nullable="false" />
+          <Property Name="Valence" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -34,7 +57,7 @@
           <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AccessRights" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_ClassMood_Teacher">
+        <Association Name="FK_ClassMood_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="ClassMood" Type="Self.ClassMood" Multiplicity="*" />
           <ReferentialConstraint>
@@ -58,11 +81,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Mood_ClassMood">
+          <End Role="ClassMood" Type="Self.ClassMood" Multiplicity="1" />
+          <End Role="Mood" Type="Self.Mood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMood">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mood">
+              <PropertyRef Name="ClassMoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="addUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MoodDetectorDBModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassMood" EntityType="Self.ClassMood" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginInfo" EntityType="Self.LoginInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mood" EntityType="Self.Mood" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ClassMood_Teacher" Association="Self.FK_ClassMood_Teacher">
+          <AssociationSet Name="FK_ClassMood_User" Association="Self.FK_ClassMood_User">
             <End Role="User" EntitySet="User" />
             <End Role="ClassMood" EntitySet="ClassMood" />
           </AssociationSet>
@@ -70,23 +108,15 @@
             <End Role="User" EntitySet="User" />
             <End Role="LoginInfo" EntitySet="LoginInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Mood_ClassMood" Association="Self.FK_Mood_ClassMood">
+            <End Role="ClassMood" EntitySet="ClassMood" />
+            <End Role="Mood" EntitySet="Mood" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MoodDetectorDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ClassMood">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Subject" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Class" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AverageMood" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ClassMood_Teacher" FromRole="ClassMood" ToRole="User" />
-        </EntityType>
         <EntityType Name="LoginInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -106,21 +136,9 @@
           <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccessRights" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ClassMoods" Relationship="Self.FK_ClassMood_Teacher" FromRole="User" ToRole="ClassMood" />
           <NavigationProperty Name="LoginInfoes" Relationship="Self.FK_LoginInfo_User" FromRole="User" ToRole="LoginInfo" />
+          <NavigationProperty Name="ClassMoods" Relationship="MoodDetectorDBModel.FK_ClassMood_User" FromRole="User" ToRole="ClassMood" />
         </EntityType>
-        <Association Name="FK_ClassMood_Teacher">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ClassMood" Type="Self.ClassMood" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClassMood">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LoginInfo_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="LoginInfo" Type="Self.LoginInfo" Multiplicity="*" />
@@ -134,35 +152,91 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MoodDetectorDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ClassMoods" EntityType="Self.ClassMood" />
           <EntitySet Name="LoginInfoes" EntityType="Self.LoginInfo" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_ClassMood_Teacher" Association="Self.FK_ClassMood_Teacher">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ClassMood" EntitySet="ClassMoods" />
-          </AssociationSet>
           <AssociationSet Name="FK_LoginInfo_User" Association="Self.FK_LoginInfo_User">
             <End Role="User" EntitySet="Users" />
             <End Role="LoginInfo" EntitySet="LoginInfoes" />
           </AssociationSet>
+          <FunctionImport Name="addUsers" />
+          <EntitySet Name="C__RefactorLog" EntityType="MoodDetectorDBModel.C__RefactorLog" />
+          <EntitySet Name="ClassMoods" EntityType="MoodDetectorDBModel.ClassMood" />
+          <EntitySet Name="Moods" EntityType="MoodDetectorDBModel.Mood" />
+          <AssociationSet Name="FK_ClassMood_User" Association="MoodDetectorDBModel.FK_ClassMood_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ClassMood" EntitySet="ClassMoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mood_ClassMood" Association="MoodDetectorDBModel.FK_Mood_ClassMood">
+            <End Role="ClassMood" EntitySet="ClassMoods" />
+            <End Role="Mood" EntitySet="Moods" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClassMood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="MoodDetectorDBModel.FK_ClassMood_User" FromRole="ClassMood" ToRole="User" />
+          <NavigationProperty Name="Moods" Relationship="MoodDetectorDBModel.FK_Mood_ClassMood" FromRole="ClassMood" ToRole="Mood" />
+        </EntityType>
+        <EntityType Name="Mood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassMoodId" Type="Int32" Nullable="false" />
+          <Property Name="Anger" Type="Double" Nullable="false" />
+          <Property Name="Joy" Type="Double" Nullable="false" />
+          <Property Name="Contempt" Type="Double" Nullable="false" />
+          <Property Name="Disgust" Type="Double" Nullable="false" />
+          <Property Name="Engagement" Type="Double" Nullable="false" />
+          <Property Name="Fear" Type="Double" Nullable="false" />
+          <Property Name="Sadness" Type="Double" Nullable="false" />
+          <Property Name="Suprise" Type="Double" Nullable="false" />
+          <Property Name="Valence" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ClassMood" Relationship="MoodDetectorDBModel.FK_Mood_ClassMood" FromRole="Mood" ToRole="ClassMood" />
+        </EntityType>
+        <Association Name="FK_ClassMood_User">
+          <End Type="MoodDetectorDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="MoodDetectorDBModel.ClassMood" Role="ClassMood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClassMood">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mood_ClassMood">
+          <End Type="MoodDetectorDBModel.ClassMood" Role="ClassMood" Multiplicity="1" />
+          <End Type="MoodDetectorDBModel.Mood" Role="Mood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMood">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mood">
+              <PropertyRef Name="ClassMoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MoodDetectorDBModelStoreContainer" CdmEntityContainer="MoodDetectorDBEntities">
-          <EntitySetMapping Name="ClassMoods">
-            <EntityTypeMapping TypeName="MoodDetectorDBModel.ClassMood">
-              <MappingFragment StoreEntitySet="ClassMood">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="AverageMood" ColumnName="AverageMood" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LoginInfoes">
             <EntityTypeMapping TypeName="MoodDetectorDBModel.LoginInfo">
               <MappingFragment StoreEntitySet="LoginInfo">
@@ -181,6 +255,43 @@
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
                 <ScalarProperty Name="Lastname" ColumnName="Lastname" />
                 <ScalarProperty Name="AccessRights" ColumnName="AccessRights" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="addUsers" FunctionName="MoodDetectorDBModel.Store.addUsers" />
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="MoodDetectorDBModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassMoods">
+            <EntityTypeMapping TypeName="MoodDetectorDBModel.ClassMood">
+              <MappingFragment StoreEntitySet="ClassMood">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moods">
+            <EntityTypeMapping TypeName="MoodDetectorDBModel.Mood">
+              <MappingFragment StoreEntitySet="Mood">
+                <ScalarProperty Name="Valence" ColumnName="Valence" />
+                <ScalarProperty Name="Suprise" ColumnName="Suprise" />
+                <ScalarProperty Name="Sadness" ColumnName="Sadness" />
+                <ScalarProperty Name="Fear" ColumnName="Fear" />
+                <ScalarProperty Name="Engagement" ColumnName="Engagement" />
+                <ScalarProperty Name="Disgust" ColumnName="Disgust" />
+                <ScalarProperty Name="Contempt" ColumnName="Contempt" />
+                <ScalarProperty Name="Joy" ColumnName="Joy" />
+                <ScalarProperty Name="Anger" ColumnName="Anger" />
+                <ScalarProperty Name="ClassMoodId" ColumnName="ClassMoodId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
