@@ -27,7 +27,7 @@ namespace WindowsFormsUI
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string selectedFileName = openFileDialog.FileName;
-
+                
                 MoodCollection moodCollection = new MoodCollection
                 {
                     Anger = 100.00,
