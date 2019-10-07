@@ -5,9 +5,9 @@ namespace Controller.Affectiva
 {
     public class ImageListenerImpl : ImageListener
     {
-        Dictionary<string, float> emotions;
-        Dictionary<string, float> expressions;
-        Dictionary<string, float> emojis;
+        public Dictionary<string, float> emotions = new Dictionary<string, float>();
+        public Dictionary<string, float> expressions = new Dictionary<string, float>();
+        public Dictionary<string, float> emojis = new Dictionary<string, float>();
 
         public ImageListenerImpl(PhotoDetector detector)
         {

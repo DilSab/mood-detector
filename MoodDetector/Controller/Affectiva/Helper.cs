@@ -8,7 +8,7 @@ namespace Controller.Affectiva
 {
     class Helper
     {
-        public Frame LoadFrameFromFile(string filePath)
+        public static Frame LoadFrameFromFile(string filePath)
         {
             Bitmap bitmap = new Bitmap(filePath);
 

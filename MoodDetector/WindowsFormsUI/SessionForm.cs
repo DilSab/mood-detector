@@ -1,7 +1,9 @@
 ﻿using Controller.Service;
+using Controller.Affectiva;
 using Model.Entity;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace WindowsFormsUI
 {
@@ -24,21 +26,27 @@ namespace WindowsFormsUI
             openFileDialog.FilterIndex = 0;
             openFileDialog.RestoreDirectory = true;
 
+            AffectivaService affectivaService = new AffectivaService();
+            Dictionary<string, float> emotions;
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string selectedFileName = openFileDialog.FileName;
-                
+
+                affectivaService.ProcessPhoto(selectedFileName);
+                emotions = affectivaService.GetEmotions();
+
                 MoodCollection moodCollection = new MoodCollection
                 {
-                    Anger = 100.00,
-                    Contempt = 100.00,
-                    Disgust = 100.00,
-                    Engagement = 100.00,
-                    Fear = 100.00,
-                    Joy = 100.00,
-                    Sadness = 100.00,
-                    Suprise = 100.00,
-                    Valence = 100.00
+                    Anger = emotions["anger"],
+                    Contempt = emotions["contempt"],
+                    Disgust = emotions["disgust"],
+                    Engagement = emotions["engagement"],
+                    Fear = emotions["fear"],
+                    Joy = emotions["joy"],
+                    Sadness = emotions["sadness"],
+                    Suprise = emotions["surprise"],
+                    Valence = emotions["valence"]
                 };
 
                 AddMood addMood = new AddMood
