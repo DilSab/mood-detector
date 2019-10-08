@@ -58,5 +58,10 @@ namespace WindowsFormsUI
                 _moodService.AddClassMood(addMood);
             }
         }
+
+        private void endButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

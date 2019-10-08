@@ -49,6 +49,7 @@
             this.endButton.TabIndex = 6;
             this.endButton.Text = "End Session";
             this.endButton.UseVisualStyleBackColor = true;
+            this.endButton.Click += new System.EventHandler(this.endButton_Click);
             // 
             // uploadButton
             // 

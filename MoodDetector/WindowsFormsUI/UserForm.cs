@@ -1,6 +1,13 @@
 ﻿using Controller.Service;
 using Model;
-using Model.Entity;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsUI
@@ -15,23 +22,18 @@ namespace WindowsFormsUI
             this.user = user;
             _moodService = moodService;
             InitializeComponent();
-
-            userInfoLabel.Text = "Hello " + user.Firstname + " " + user.Lastname;
         }
 
-        private void startSessionButton_Click(object sender, System.EventArgs e)
+        private void startNewSessionButton_Click(object sender, EventArgs e)
         {
-            SessionInfo sessionInfo = new SessionInfo
-            {
-                User = this.user,
-                Subject = subjectTextBox.Text,
-                Class = classTextBox.Text,
-                Comments = commentsTextBox.Text,
-                DateTime = dateTimePicker.Value
-            };
+            StartSessionForm startSessionForm = new StartSessionForm(user, _moodService);
+            startSessionForm.ShowDialog();
+        }
 
-            SessionForm sessionForm = new SessionForm(sessionInfo, _moodService);
-            sessionForm.Show();
+        private void showEmotionsButton_Click(object sender, EventArgs e)
+        {
+            ChartForm chartForm = new ChartForm(user, _moodService);
+            chartForm.ShowDialog();
         }
     }
 }
