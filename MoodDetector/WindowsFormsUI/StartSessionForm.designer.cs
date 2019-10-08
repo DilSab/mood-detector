@@ -36,16 +36,11 @@
             this.commentsLabel = new System.Windows.Forms.Label();
             this.commentsTextBox = new System.Windows.Forms.TextBox();
             this.newsessionGroupBox = new System.Windows.Forms.GroupBox();
-            this.getfeedbackGroupBox = new System.Windows.Forms.GroupBox();
-            this.getButton = new System.Windows.Forms.Button();
-            this.selectComboBox = new System.Windows.Forms.ComboBox();
-            this.selectLabel = new System.Windows.Forms.Label();
+            this.startSessionButton = new System.Windows.Forms.Button();
+            this.dateAndTimeLabel = new System.Windows.Forms.Label();
             this.userInfoLabel = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.dateAndTimeLabel = new System.Windows.Forms.Label();
-            this.startSessionButton = new System.Windows.Forms.Button();
             this.newsessionGroupBox.SuspendLayout();
-            this.getfeedbackGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // subjectLabel
@@ -116,7 +111,7 @@
             this.commentsTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.commentsTextBox.Multiline = true;
             this.commentsTextBox.Name = "commentsTextBox";
-            this.commentsTextBox.Size = new System.Drawing.Size(226, 93);
+            this.commentsTextBox.Size = new System.Drawing.Size(349, 94);
             this.commentsTextBox.TabIndex = 6;
             this.commentsTextBox.UseWaitCursor = true;
             // 
@@ -141,52 +136,26 @@
             this.newsessionGroupBox.Text = "New Session";
             this.newsessionGroupBox.UseWaitCursor = true;
             // 
-            // getfeedbackGroupBox
+            // startSessionButton
             // 
-            this.getfeedbackGroupBox.Controls.Add(this.getButton);
-            this.getfeedbackGroupBox.Controls.Add(this.selectComboBox);
-            this.getfeedbackGroupBox.Controls.Add(this.selectLabel);
-            this.getfeedbackGroupBox.Location = new System.Drawing.Point(254, 114);
-            this.getfeedbackGroupBox.Margin = new System.Windows.Forms.Padding(2);
-            this.getfeedbackGroupBox.Name = "getfeedbackGroupBox";
-            this.getfeedbackGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.getfeedbackGroupBox.Size = new System.Drawing.Size(212, 59);
-            this.getfeedbackGroupBox.TabIndex = 8;
-            this.getfeedbackGroupBox.TabStop = false;
-            this.getfeedbackGroupBox.Text = "Get Event Feedback";
-            this.getfeedbackGroupBox.UseWaitCursor = true;
+            this.startSessionButton.Location = new System.Drawing.Point(364, 149);
+            this.startSessionButton.Name = "startSessionButton";
+            this.startSessionButton.Size = new System.Drawing.Size(80, 23);
+            this.startSessionButton.TabIndex = 8;
+            this.startSessionButton.Text = "Start Session";
+            this.startSessionButton.UseVisualStyleBackColor = true;
+            this.startSessionButton.UseWaitCursor = true;
+            this.startSessionButton.Click += new System.EventHandler(this.startSessionButton_Click);
             // 
-            // getButton
+            // dateAndTimeLabel
             // 
-            this.getButton.Location = new System.Drawing.Point(130, 176);
-            this.getButton.Margin = new System.Windows.Forms.Padding(2);
-            this.getButton.Name = "getButton";
-            this.getButton.Size = new System.Drawing.Size(56, 19);
-            this.getButton.TabIndex = 2;
-            this.getButton.Text = "Get";
-            this.getButton.UseVisualStyleBackColor = true;
-            this.getButton.UseWaitCursor = true;
-            // 
-            // selectComboBox
-            // 
-            this.selectComboBox.FormattingEnabled = true;
-            this.selectComboBox.Location = new System.Drawing.Point(44, 25);
-            this.selectComboBox.Margin = new System.Windows.Forms.Padding(2);
-            this.selectComboBox.Name = "selectComboBox";
-            this.selectComboBox.Size = new System.Drawing.Size(144, 21);
-            this.selectComboBox.TabIndex = 1;
-            this.selectComboBox.UseWaitCursor = true;
-            // 
-            // selectLabel
-            // 
-            this.selectLabel.AutoSize = true;
-            this.selectLabel.Location = new System.Drawing.Point(4, 28);
-            this.selectLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.selectLabel.Name = "selectLabel";
-            this.selectLabel.Size = new System.Drawing.Size(37, 13);
-            this.selectLabel.TabIndex = 0;
-            this.selectLabel.Text = "Select";
-            this.selectLabel.UseWaitCursor = true;
+            this.dateAndTimeLabel.AutoSize = true;
+            this.dateAndTimeLabel.Location = new System.Drawing.Point(245, 15);
+            this.dateAndTimeLabel.Name = "dateAndTimeLabel";
+            this.dateAndTimeLabel.Size = new System.Drawing.Size(77, 13);
+            this.dateAndTimeLabel.TabIndex = 7;
+            this.dateAndTimeLabel.Text = "Date and Time";
+            this.dateAndTimeLabel.UseWaitCursor = true;
             // 
             // userInfoLabel
             // 
@@ -204,44 +173,23 @@
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(199, 20);
             this.dateTimePicker.TabIndex = 3;
+            this.dateTimePicker.UseWaitCursor = true;
             // 
-            // dateAndTimeLabel
-            // 
-            this.dateAndTimeLabel.AutoSize = true;
-            this.dateAndTimeLabel.Location = new System.Drawing.Point(245, 15);
-            this.dateAndTimeLabel.Name = "dateAndTimeLabel";
-            this.dateAndTimeLabel.Size = new System.Drawing.Size(77, 13);
-            this.dateAndTimeLabel.TabIndex = 7;
-            this.dateAndTimeLabel.Text = "Date and Time";
-            // 
-            // startSessionButton
-            // 
-            this.startSessionButton.Location = new System.Drawing.Point(353, 149);
-            this.startSessionButton.Name = "startSessionButton";
-            this.startSessionButton.Size = new System.Drawing.Size(80, 23);
-            this.startSessionButton.TabIndex = 8;
-            this.startSessionButton.Text = "Start Session";
-            this.startSessionButton.UseVisualStyleBackColor = true;
-            this.startSessionButton.Click += new System.EventHandler(this.startSessionButton_Click);
-            // 
-            // UserForm
+            // StartSessionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(469, 227);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.userInfoLabel);
-            this.Controls.Add(this.getfeedbackGroupBox);
             this.Controls.Add(this.newsessionGroupBox);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "UserForm";
+            this.Name = "StartSessionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configure Session";
             this.UseWaitCursor = true;
             this.newsessionGroupBox.ResumeLayout(false);
             this.newsessionGroupBox.PerformLayout();
-            this.getfeedbackGroupBox.ResumeLayout(false);
-            this.getfeedbackGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,10 +205,6 @@
         private System.Windows.Forms.Label commentsLabel;
         private System.Windows.Forms.TextBox commentsTextBox;
         private System.Windows.Forms.GroupBox newsessionGroupBox;
-        private System.Windows.Forms.GroupBox getfeedbackGroupBox;
-        private System.Windows.Forms.Button getButton;
-        private System.Windows.Forms.ComboBox selectComboBox;
-        private System.Windows.Forms.Label selectLabel;
         private System.Windows.Forms.Label userInfoLabel;
         private System.Windows.Forms.Label dateAndTimeLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
