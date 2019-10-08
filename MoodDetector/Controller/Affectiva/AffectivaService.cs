@@ -7,13 +7,11 @@ namespace Controller.Affectiva
     {
         readonly PhotoDetector detector;
         readonly ImageListenerImpl imageListener;
-        readonly Helper helper;
 
-        AffectivaService()
+        public AffectivaService()
         {
             detector = new PhotoDetector(1, FaceDetectorMode.LARGE_FACES);
             imageListener = new ImageListenerImpl(detector);
-            helper = new Helper();
             detector.setClassifierPath("C:\\Program Files\\Affectiva\\AffdexSDK\\data");
             detector.setDetectAllExpressions(true);
             detector.setDetectAllEmotions(true);
@@ -23,7 +21,7 @@ namespace Controller.Affectiva
 
         public void ProcessPhoto(string filePath)
         {
-            Frame frame = helper.LoadFrameFromFile(filePath);
+            Frame frame = Helper.LoadFrameFromFile(filePath);
             detector.start();
             detector.process(frame);
             detector.stop();
