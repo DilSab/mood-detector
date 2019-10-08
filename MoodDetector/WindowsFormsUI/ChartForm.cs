@@ -56,6 +56,20 @@ namespace WindowsFormsUI
             chart.Series["Mood"].Points.AddXY("Sadness", moodCollection.Sadness);
             chart.Series["Mood"].Points.AddXY("Suprise", moodCollection.Suprise);
             chart.Series["Mood"].Points.AddXY("Valence", moodCollection.Valence);
+            ChangeColors();
+        }
+
+        private void ChangeColors()
+        {
+            chart.Series["Mood"].Points[0].Color = Color.DarkRed;
+            chart.Series["Mood"].Points[1].Color = Color.Aqua;
+            chart.Series["Mood"].Points[2].Color = Color.Brown;
+            chart.Series["Mood"].Points[3].Color = Color.Beige;
+            chart.Series["Mood"].Points[4].Color = Color.Yellow;
+            chart.Series["Mood"].Points[5].Color = Color.Green;
+            chart.Series["Mood"].Points[6].Color = Color.Blue;
+            chart.Series["Mood"].Points[7].Color = Color.Purple;
+            chart.Series["Mood"].Points[8].Color = Color.Orange;
         }
     }
 }
