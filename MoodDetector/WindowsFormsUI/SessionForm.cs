@@ -11,11 +11,14 @@ namespace WindowsFormsUI
     {
         private SessionInfo sessionInfo;
         private IMoodService _moodService;
+        private AffectivaService _affectivaService;
 
         public SessionForm(SessionInfo sessionInfo, IMoodService moodService)
         {
             this.sessionInfo = sessionInfo;
             _moodService = moodService;
+            _affectivaService = new AffectivaService();
+            _affectivaService.StartDetector();
             InitializeComponent();
         }
 
@@ -27,15 +30,12 @@ namespace WindowsFormsUI
                 openFileDialog.FilterIndex = 0;
                 openFileDialog.RestoreDirectory = true;
 
-                AffectivaService affectivaService = new AffectivaService();
-                Dictionary<string, float> emotions;
-
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedFileName = openFileDialog.FileName;
 
-                    affectivaService.ProcessPhoto(selectedFileName);
-                    emotions = affectivaService.GetEmotions();
+                    _affectivaService.ProcessPhoto(selectedFileName);
+                    Dictionary<string, float> emotions = _affectivaService.GetEmotions();
 
                     MoodCollection moodCollection = new MoodCollection
                     {
@@ -63,6 +63,7 @@ namespace WindowsFormsUI
 
         private void endButton_Click(object sender, EventArgs e)
         {
+            _affectivaService.StopDetector();
             this.Close();
         }
     }
