@@ -52,7 +52,6 @@
             this.subjectLabel.Size = new System.Drawing.Size(43, 13);
             this.subjectLabel.TabIndex = 0;
             this.subjectLabel.Text = "Subject";
-            this.subjectLabel.UseWaitCursor = true;
             // 
             // subjectTextBox
             // 
@@ -61,7 +60,6 @@
             this.subjectTextBox.Name = "subjectTextBox";
             this.subjectTextBox.Size = new System.Drawing.Size(76, 20);
             this.subjectTextBox.TabIndex = 1;
-            this.subjectTextBox.UseWaitCursor = true;
             // 
             // classLabel
             // 
@@ -72,7 +70,6 @@
             this.classLabel.Size = new System.Drawing.Size(32, 13);
             this.classLabel.TabIndex = 2;
             this.classLabel.Text = "Class";
-            this.classLabel.UseWaitCursor = true;
             // 
             // classTextBox
             // 
@@ -81,7 +78,6 @@
             this.classTextBox.Name = "classTextBox";
             this.classTextBox.Size = new System.Drawing.Size(76, 20);
             this.classTextBox.TabIndex = 3;
-            this.classTextBox.UseWaitCursor = true;
             // 
             // startButton
             // 
@@ -92,7 +88,6 @@
             this.startButton.TabIndex = 4;
             this.startButton.Text = "Start new session";
             this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.UseWaitCursor = true;
             // 
             // commentsLabel
             // 
@@ -103,7 +98,6 @@
             this.commentsLabel.Size = new System.Drawing.Size(56, 13);
             this.commentsLabel.TabIndex = 5;
             this.commentsLabel.Text = "Comments";
-            this.commentsLabel.UseWaitCursor = true;
             // 
             // commentsTextBox
             // 
@@ -113,7 +107,6 @@
             this.commentsTextBox.Name = "commentsTextBox";
             this.commentsTextBox.Size = new System.Drawing.Size(349, 94);
             this.commentsTextBox.TabIndex = 6;
-            this.commentsTextBox.UseWaitCursor = true;
             // 
             // newsessionGroupBox
             // 
@@ -134,7 +127,6 @@
             this.newsessionGroupBox.TabIndex = 7;
             this.newsessionGroupBox.TabStop = false;
             this.newsessionGroupBox.Text = "New Session";
-            this.newsessionGroupBox.UseWaitCursor = true;
             // 
             // startSessionButton
             // 
@@ -144,7 +136,6 @@
             this.startSessionButton.TabIndex = 8;
             this.startSessionButton.Text = "Start Session";
             this.startSessionButton.UseVisualStyleBackColor = true;
-            this.startSessionButton.UseWaitCursor = true;
             this.startSessionButton.Click += new System.EventHandler(this.startSessionButton_Click);
             // 
             // dateAndTimeLabel
@@ -155,7 +146,6 @@
             this.dateAndTimeLabel.Size = new System.Drawing.Size(77, 13);
             this.dateAndTimeLabel.TabIndex = 7;
             this.dateAndTimeLabel.Text = "Date and Time";
-            this.dateAndTimeLabel.UseWaitCursor = true;
             // 
             // userInfoLabel
             // 
@@ -165,7 +155,6 @@
             this.userInfoLabel.Size = new System.Drawing.Size(49, 13);
             this.userInfoLabel.TabIndex = 9;
             this.userInfoLabel.Text = "User info";
-            this.userInfoLabel.UseWaitCursor = true;
             // 
             // dateTimePicker
             // 
@@ -173,7 +162,6 @@
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(199, 20);
             this.dateTimePicker.TabIndex = 3;
-            this.dateTimePicker.UseWaitCursor = true;
             // 
             // StartSessionForm
             // 
@@ -187,7 +175,6 @@
             this.Name = "StartSessionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configure Session";
-            this.UseWaitCursor = true;
             this.newsessionGroupBox.ResumeLayout(false);
             this.newsessionGroupBox.PerformLayout();
             this.ResumeLayout(false);
