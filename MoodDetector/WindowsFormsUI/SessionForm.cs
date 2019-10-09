@@ -11,52 +11,60 @@ namespace WindowsFormsUI
     {
         private SessionInfo sessionInfo;
         private IMoodService _moodService;
+        private AffectivaService _affectivaService;
 
         public SessionForm(SessionInfo sessionInfo, IMoodService moodService)
         {
             this.sessionInfo = sessionInfo;
             _moodService = moodService;
+            _affectivaService = new AffectivaService();
+            _affectivaService.StartDetector();
             InitializeComponent();
         }
 
         private void uploadButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.FilterIndex = 0;
-            openFileDialog.RestoreDirectory = true;
-
-            AffectivaService affectivaService = new AffectivaService();
-            Dictionary<string, float> emotions;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                string selectedFileName = openFileDialog.FileName;
+                openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+                openFileDialog.FilterIndex = 0;
+                openFileDialog.RestoreDirectory = true;
 
-                affectivaService.ProcessPhoto(selectedFileName);
-                emotions = affectivaService.GetEmotions();
-
-                MoodCollection moodCollection = new MoodCollection
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Anger = emotions["anger"],
-                    Contempt = emotions["contempt"],
-                    Disgust = emotions["disgust"],
-                    Engagement = emotions["engagement"],
-                    Fear = emotions["fear"],
-                    Joy = emotions["joy"],
-                    Sadness = emotions["sadness"],
-                    Suprise = emotions["surprise"],
-                    Valence = emotions["valence"]
-                };
+                    string selectedFileName = openFileDialog.FileName;
 
-                AddMood addMood = new AddMood
-                {
-                    MoodCollection = moodCollection,
-                    SessionInfo = this.sessionInfo
-                };
+                    _affectivaService.ProcessPhoto(selectedFileName);
+                    Dictionary<string, float> emotions = _affectivaService.GetEmotions();
 
-                _moodService.AddClassMood(addMood);
+                    MoodCollection moodCollection = new MoodCollection
+                    {
+                        Anger = emotions["anger"],
+                        Contempt = emotions["contempt"],
+                        Disgust = emotions["disgust"],
+                        Engagement = emotions["engagement"],
+                        Fear = emotions["fear"],
+                        Joy = emotions["joy"],
+                        Sadness = emotions["sadness"],
+                        Suprise = emotions["surprise"],
+                        Valence = emotions["valence"]
+                    };
+
+                    AddMood addMood = new AddMood
+                    {
+                        MoodCollection = moodCollection,
+                        SessionInfo = this.sessionInfo
+                    };
+
+                    _moodService.AddClassMood(addMood);
+                }
             }
+        }
+
+        private void endButton_Click(object sender, EventArgs e)
+        {
+            _affectivaService.StopDetector();
+            this.Close();
         }
     }
 }

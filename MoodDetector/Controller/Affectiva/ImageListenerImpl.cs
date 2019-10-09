@@ -5,13 +5,20 @@ namespace Controller.Affectiva
 {
     public class ImageListenerImpl : ImageListener
     {
-        public Dictionary<string, float> emotions = new Dictionary<string, float>();
-        public Dictionary<string, float> expressions = new Dictionary<string, float>();
-        public Dictionary<string, float> emojis = new Dictionary<string, float>();
+        public Dictionary<string, float> Emotions;
+        public Dictionary<string, float> Expressions;
+        public Dictionary<string, float> Emojis;
 
         public ImageListenerImpl(PhotoDetector detector)
         {
             detector.setImageListener(this);
+        }
+
+        public void CreateDictionaries()
+        {
+            Emotions = new Dictionary<string, float>();
+            Expressions = new Dictionary<string, float>();
+            Emojis = new Dictionary<string, float>();
         }
 
         public void onImageCapture(Frame frame)
@@ -27,17 +34,17 @@ namespace Controller.Affectiva
 
         public Dictionary<string, float> GetEmotions()
         {
-            return emotions;
+            return Emotions;
         }
 
         public Dictionary<string, float> GetExpressions()
         {
-            return expressions;
+            return Expressions;
         }
 
         public Dictionary<string, float> GetEmojis()
         {
-            return emojis;
+            return Emojis;
         }
 
         private void AddEmotions(Dictionary<int, Face> faces)
@@ -45,15 +52,15 @@ namespace Controller.Affectiva
             foreach (KeyValuePair<int, Face> face in faces)
             {
                 Emotions emo = face.Value.Emotions;
-                emotions.Add("anger", emo.Anger);
-                emotions.Add("joy", emo.Joy);
-                emotions.Add("contempt", emo.Contempt);
-                emotions.Add("disgust", emo.Disgust);
-                emotions.Add("engagement", emo.Engagement);
-                emotions.Add("fear", emo.Fear);
-                emotions.Add("sadness", emo.Sadness);
-                emotions.Add("surprise", emo.Surprise);
-                emotions.Add("valence", emo.Valence);
+                Emotions.Add("anger", emo.Anger);
+                Emotions.Add("joy", emo.Joy);
+                Emotions.Add("contempt", emo.Contempt);
+                Emotions.Add("disgust", emo.Disgust);
+                Emotions.Add("engagement", emo.Engagement);
+                Emotions.Add("fear", emo.Fear);
+                Emotions.Add("sadness", emo.Sadness);
+                Emotions.Add("surprise", emo.Surprise);
+                Emotions.Add("valence", emo.Valence);
             }
         }
 
@@ -62,27 +69,27 @@ namespace Controller.Affectiva
             foreach (KeyValuePair<int, Face> face in faces)
             {
                 Expressions exp = face.Value.Expressions;
-                expressions.Add("attention", exp.Attention);
-                expressions.Add("brow furrow", exp.BrowFurrow);
-                expressions.Add("brow raise", exp.BrowRaise);
-                expressions.Add("cheek raise", exp.CheekRaise);
-                expressions.Add("chin raise", exp.ChinRaise);
-                expressions.Add("dimpler", exp.Dimpler);
-                expressions.Add("eye closure", exp.EyeClosure);
-                expressions.Add("eye widen", exp.EyeWiden);
-                expressions.Add("inner brow raise", exp.InnerBrowRaise);
-                expressions.Add("jaw drop", exp.JawDrop);
-                expressions.Add("lid tighten", exp.LidTighten);
-                expressions.Add("lip corner depressor", exp.LipCornerDepressor);
-                expressions.Add("lip press", exp.LipPress);
-                expressions.Add("lip pucer", exp.LipPucker);
-                expressions.Add("lip stretch", exp.LipStretch);
-                expressions.Add("lip suck", exp.LipSuck);
-                expressions.Add("mouth open", exp.MouthOpen);
-                expressions.Add("nose wrinkle", exp.NoseWrinkle);
-                expressions.Add("smile", exp.Smile);
-                expressions.Add("smirk", exp.Smirk);
-                expressions.Add("upper lip raise", exp.UpperLipRaise);
+                Expressions.Add("attention", exp.Attention);
+                Expressions.Add("brow furrow", exp.BrowFurrow);
+                Expressions.Add("brow raise", exp.BrowRaise);
+                Expressions.Add("cheek raise", exp.CheekRaise);
+                Expressions.Add("chin raise", exp.ChinRaise);
+                Expressions.Add("dimpler", exp.Dimpler);
+                Expressions.Add("eye closure", exp.EyeClosure);
+                Expressions.Add("eye widen", exp.EyeWiden);
+                Expressions.Add("inner brow raise", exp.InnerBrowRaise);
+                Expressions.Add("jaw drop", exp.JawDrop);
+                Expressions.Add("lid tighten", exp.LidTighten);
+                Expressions.Add("lip corner depressor", exp.LipCornerDepressor);
+                Expressions.Add("lip press", exp.LipPress);
+                Expressions.Add("lip pucer", exp.LipPucker);
+                Expressions.Add("lip stretch", exp.LipStretch);
+                Expressions.Add("lip suck", exp.LipSuck);
+                Expressions.Add("mouth open", exp.MouthOpen);
+                Expressions.Add("nose wrinkle", exp.NoseWrinkle);
+                Expressions.Add("smile", exp.Smile);
+                Expressions.Add("smirk", exp.Smirk);
+                Expressions.Add("upper lip raise", exp.UpperLipRaise);
             }
         }
 
@@ -91,18 +98,18 @@ namespace Controller.Affectiva
             foreach (KeyValuePair<int, Face> face in faces)
             {
                 Emojis em = face.Value.Emojis;
-                emojis.Add("disappointed", em.disappointed);
-                emojis.Add("flushed", em.flushed);
-                emojis.Add("kissing", em.kissing);
-                emojis.Add("laughing", em.laughing);
-                emojis.Add("rage", em.rage);
-                emojis.Add("relaxed", em.relaxed);
-                emojis.Add("scream", em.scream);
-                emojis.Add("smiley", em.smiley);
-                emojis.Add("smirk", em.smirk);
-                emojis.Add("stuck out tongue", em.stuckOutTongue);
-                emojis.Add("stuck out tongue winking eye", em.stuckOutTongueWinkingEye);
-                emojis.Add("wink", em.wink);
+                Emojis.Add("disappointed", em.disappointed);
+                Emojis.Add("flushed", em.flushed);
+                Emojis.Add("kissing", em.kissing);
+                Emojis.Add("laughing", em.laughing);
+                Emojis.Add("rage", em.rage);
+                Emojis.Add("relaxed", em.relaxed);
+                Emojis.Add("scream", em.scream);
+                Emojis.Add("smiley", em.smiley);
+                Emojis.Add("smirk", em.smirk);
+                Emojis.Add("stuck out tongue", em.stuckOutTongue);
+                Emojis.Add("stuck out tongue winking eye", em.stuckOutTongueWinkingEye);
+                Emojis.Add("wink", em.wink);
             }
         }
     }

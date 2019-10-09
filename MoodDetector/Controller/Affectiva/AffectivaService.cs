@@ -21,9 +21,19 @@ namespace Controller.Affectiva
 
         public void ProcessPhoto(string filePath)
         {
+            imageListener.CreateDictionaries();
             Frame frame = Helper.LoadFrameFromFile(filePath);
-            detector.start();
+            detector.reset();
             detector.process(frame);
+        }
+
+        public void StartDetector()
+        {
+            detector.start();
+        }
+
+        public void StopDetector()
+        {
             detector.stop();
         }
 
