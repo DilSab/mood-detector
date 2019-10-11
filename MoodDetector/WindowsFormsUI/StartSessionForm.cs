@@ -34,10 +34,5 @@ namespace WindowsFormsUI
             sessionForm.Show();
             this.Close();
         }
-
-        private void NewsessionGroupBox_Enter(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }
