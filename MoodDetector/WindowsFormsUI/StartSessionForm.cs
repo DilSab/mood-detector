@@ -32,6 +32,7 @@ namespace WindowsFormsUI
 
             SessionForm sessionForm = new SessionForm(sessionInfo, _moodService);
             sessionForm.Show();
+            this.Close();
         }
     }
 }

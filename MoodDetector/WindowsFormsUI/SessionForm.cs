@@ -59,6 +59,7 @@ namespace WindowsFormsUI
                     _moodService.AddClassMood(addMood);
                 }
             }
+            MessageBox.Show("Photo uploaded successfully!");
         }
 
         private void endButton_Click(object sender, EventArgs e)
