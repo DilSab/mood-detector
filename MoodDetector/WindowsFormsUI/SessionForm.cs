@@ -59,12 +59,20 @@ namespace WindowsFormsUI
                     _moodService.AddClassMood(addMood);
                 }
             }
+            MessageBox.Show("Photo uploaded successfully!");
         }
 
         private void endButton_Click(object sender, EventArgs e)
         {
             _affectivaService.StopDetector();
             this.Close();
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+            {
+                if (Application.OpenForms[i].Name == "StartSessionForm")
+                {
+                    Application.OpenForms[i].Close();
+                }
+            }
         }
     }
 }
