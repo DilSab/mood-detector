@@ -66,13 +66,6 @@ namespace WindowsFormsUI
         {
             _affectivaService.StopDetector();
             this.Close();
-            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
-            {
-                if (Application.OpenForms[i].Name == "StartSessionForm")
-                {
-                    Application.OpenForms[i].Close();
-                }
-            }
         }
     }
 }

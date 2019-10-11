@@ -32,6 +32,12 @@ namespace WindowsFormsUI
 
             SessionForm sessionForm = new SessionForm(sessionInfo, _moodService);
             sessionForm.Show();
+            this.Close();
+        }
+
+        private void NewsessionGroupBox_Enter(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

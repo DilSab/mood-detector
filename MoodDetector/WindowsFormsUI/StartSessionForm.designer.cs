@@ -127,6 +127,7 @@
             this.newsessionGroupBox.TabIndex = 7;
             this.newsessionGroupBox.TabStop = false;
             this.newsessionGroupBox.Text = "New Session";
+            this.newsessionGroupBox.Enter += new System.EventHandler(this.NewsessionGroupBox_Enter);
             // 
             // startSessionButton
             // 
