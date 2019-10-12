@@ -6,33 +6,41 @@ namespace Controller.Service
 {
     public class UserService : IUserService
     {
+        private MoodDetectorDBEntities _context;
+
+        public UserService(MoodDetectorDBEntities context)
+        {
+            _context = context;
+        }
+
         public void AddNewUser(AddUser addUser)
         {
-            using (var context = new MoodDetectorDBEntities())
+            var loginInfo = new LoginInfo()
             {
-                var loginInfo = new LoginInfo()
+                User = new User()
                 {
-                    User = new User()
-                    {
-                        Firstname = addUser.Firstname,
-                        Lastname = addUser.Lastname,
-                        AccessRights = addUser.AccessRights
-                    },
-                    Username = addUser.Username,
-                    Password = addUser.Password,
-                    Email = addUser.Email
-                };
-                context.LoginInfoes.Add(loginInfo);
-                context.SaveChanges();
-            }
+                    Firstname = addUser.Firstname,
+                    Lastname = addUser.Lastname,
+                    AccessRights = addUser.AccessRights
+                },
+                Username = addUser.Username,
+                Password = addUser.Password,
+                Email = addUser.Email
+            };
+
+            _context.LoginInfoes.Add(loginInfo);
+            _context.SaveChanges();
         }
 
         public User GetUser(string username)
         {
-            using (var context = new MoodDetectorDBEntities())
-            {
-                return context.Users.SqlQuery("SELECT * FROM [User], LoginInfo WHERE [User].Id=UserId AND Username='" + username + "'").FirstOrDefault<User>();           
-            }
+            var user = (from u in _context.Users
+                        from l in _context.LoginInfoes
+                        where l.Username == username
+                        where u.Id == l.UserId
+                        select u).FirstOrDefault<User>();
+
+            return user;
         }
     }
 }
