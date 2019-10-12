@@ -17,6 +17,7 @@ namespace WindowsFormsUI
             var builder = new ContainerBuilder();
 
             builder.RegisterType<LoginProcessor>().As<ILoginProcessor>();
+            builder.RegisterType<MoodDetectorDBEntities>().As<MoodDetectorDBEntities>();
 
             builder.RegisterAssemblyTypes(Assembly.Load(nameof(Model)))
                 .Where(t => t.Namespace.Contains("Service"))
