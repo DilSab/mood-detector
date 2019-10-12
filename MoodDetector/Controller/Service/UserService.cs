@@ -27,22 +27,20 @@ namespace Controller.Service
                 Password = addUser.Password,
                 Email = addUser.Email
             };
+
             _context.LoginInfoes.Add(loginInfo);
             _context.SaveChanges();
         }
 
         public User GetUser(string username)
         {
-            using (_context)
-            {
-                var user = (from u in _context.Users
-                             from l in _context.LoginInfoes
-                             where l.Username == username
-                             where u.Id == l.UserId
-                             select u).FirstOrDefault<User>();
+            var user = (from u in _context.Users
+                        from l in _context.LoginInfoes
+                        where l.Username == username
+                        where u.Id == l.UserId
+                        select u).FirstOrDefault<User>();
 
-                return user;
-            }
+            return user;
         }
     }
 }
