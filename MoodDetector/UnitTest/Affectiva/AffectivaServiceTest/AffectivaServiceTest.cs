@@ -4,13 +4,13 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Xunit;
 
-namespace UnitTest
+namespace UnitTest.Affectiva.AffectivaServiceTest
 {
-    public class AffectivaTests
+    public class AffectivaServiceTest
     {
         AffectivaService affectiva = new AffectivaService();
 
-        public AffectivaTests()
+        public AffectivaServiceTest()
         {
             var projectFolder = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string pattern = @"\\bin";

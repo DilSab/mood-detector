@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Model.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model;
-using Model.Entity;
 using System.Text.RegularExpressions;
 
 namespace Controller.Service
@@ -21,12 +16,13 @@ namespace Controller.Service
             if (!addUser.Password.Any(char.IsDigit)) return false;
             if (addUser.Password.Length < 8) return false;
             if (!addUser.AccessRights.Equals("Admin") && !addUser.AccessRights.Equals("Teacher")) return false;
-            if (String.IsNullOrWhiteSpace(addUser.AccessRights)) return false;
-            if (String.IsNullOrWhiteSpace(addUser.Email)) return false;
-            if (String.IsNullOrWhiteSpace(addUser.Firstname)) return false;
-            if (String.IsNullOrWhiteSpace(addUser.Lastname)) return false;
-            if (String.IsNullOrWhiteSpace(addUser.Password)) return false;
-            if (String.IsNullOrWhiteSpace(addUser.Username)) return false;
+            if (string.IsNullOrWhiteSpace(addUser.AccessRights)) return false;
+            if (string.IsNullOrWhiteSpace(addUser.Email)) return false;
+            if (string.IsNullOrWhiteSpace(addUser.Firstname)) return false;
+            if (string.IsNullOrWhiteSpace(addUser.Lastname)) return false;
+            if (string.IsNullOrWhiteSpace(addUser.Password)) return false;
+            if (string.IsNullOrWhiteSpace(addUser.Username)) return false;
+
             return true;
         } 
     }
