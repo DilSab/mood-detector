@@ -150,7 +150,7 @@ namespace UnitTest.Service.MoodServiceTest
         {
             List<Mood> moods = new List<Mood>
             {
-                new Mood
+                new Mood()
                 {
                     Id = 1,
                     ClassMoodId = 1,
@@ -164,7 +164,7 @@ namespace UnitTest.Service.MoodServiceTest
                     Suprise = 100,
                     Valence = 100,
                 },
-                new Mood
+                new Mood()
                 {
                     Id = 2,
                     ClassMoodId = 1,
