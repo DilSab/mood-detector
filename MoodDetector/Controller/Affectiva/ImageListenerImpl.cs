@@ -82,7 +82,7 @@ namespace Controller.Affectiva
                 Expressions.Add("lid tighten", exp.LidTighten);
                 Expressions.Add("lip corner depressor", exp.LipCornerDepressor);
                 Expressions.Add("lip press", exp.LipPress);
-                Expressions.Add("lip pucer", exp.LipPucker);
+                Expressions.Add("lip pucker", exp.LipPucker);
                 Expressions.Add("lip stretch", exp.LipStretch);
                 Expressions.Add("lip suck", exp.LipSuck);
                 Expressions.Add("mouth open", exp.MouthOpen);
