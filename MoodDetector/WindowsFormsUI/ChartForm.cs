@@ -41,6 +41,10 @@ namespace WindowsFormsUI
             {
                 PopulateDiagram(_moodService.GetMoodAverage(moods));
             }
+            else
+            {
+                chart.Series["Mood"].Points.Clear();
+            }
         }
 
         private void PopulateDiagram(MoodCollection moodCollection)

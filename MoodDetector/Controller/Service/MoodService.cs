@@ -9,67 +9,74 @@ namespace Controller.Service
 {
     public class MoodService : IMoodService
     {
+        private MoodDetectorDBEntities _context;
+
+        public MoodService(MoodDetectorDBEntities context)
+        {
+            _context = context;
+        }
+
         public void AddClassMood(AddMood addMood)
         {
-            using (var context = new MoodDetectorDBEntities())
+            var mood = new Mood()
             {
-                var mood = new Mood()
+                ClassMood = new ClassMood()
                 {
-                    ClassMood = new ClassMood()
-                    {
-                        UserId = addMood.SessionInfo.User.Id,
-                        Subject = addMood.SessionInfo.Subject,
-                        Class = addMood.SessionInfo.Class,
-                        DateTime = addMood.SessionInfo.DateTime,
-                        Comments = addMood.SessionInfo.Comments
-                    },
-                    Anger = addMood.MoodCollection.Anger,
-                    Joy = addMood.MoodCollection.Joy,
-                    Contempt = addMood.MoodCollection.Contempt,
-                    Disgust = addMood.MoodCollection.Disgust,
-                    Engagement = addMood.MoodCollection.Engagement,
-                    Fear = addMood.MoodCollection.Fear,
-                    Sadness = addMood.MoodCollection.Sadness,
-                    Suprise = addMood.MoodCollection.Suprise,
-                    Valence = addMood.MoodCollection.Valence,
-                };
-                context.Moods.Add(mood);
-                context.SaveChanges();
-            }
+                    UserId = addMood.SessionInfo.User.Id,
+                    Subject = addMood.SessionInfo.Subject,
+                    Class = addMood.SessionInfo.Class,
+                    DateTime = addMood.SessionInfo.DateTime,
+                    Comments = addMood.SessionInfo.Comments
+                },
+                Anger = addMood.MoodCollection.Anger,
+                Joy = addMood.MoodCollection.Joy,
+                Contempt = addMood.MoodCollection.Contempt,
+                Disgust = addMood.MoodCollection.Disgust,
+                Engagement = addMood.MoodCollection.Engagement,
+                Fear = addMood.MoodCollection.Fear,
+                Sadness = addMood.MoodCollection.Sadness,
+                Suprise = addMood.MoodCollection.Suprise,
+                Valence = addMood.MoodCollection.Valence,
+            };
+            _context.Moods.Add(mood);
+            _context.SaveChanges();
         }
 
         public List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null)
         {
-            using (var context = new MoodDetectorDBEntities())
+            List<int> classMoodIds;
+
+            if (dateTime != null)
             {
-                List<int> classMoodIds;
-
-                if (dateTime.HasValue)
-                {
-                    var date = dateTime.Value.Date;
-                    classMoodIds = (from c in context.ClassMoods
-                                        where DbFunctions.TruncateTime(c.DateTime) == date
-                                        && c.UserId == user.Id
-                                        select c.Id).ToList();
-                }
-                else
-                {
-                    classMoodIds = (from c in context.ClassMoods
-                                        where c.UserId == user.Id
-                                        select c.Id).ToList();
-                }
-
-                if (classMoodIds.Any())
-                {
-                    List<Mood> moods = (from m in context.Moods
-                                        where classMoodIds.Contains(m.ClassMoodId)
-                                        select m).ToList();
-
-                    return moods;
-                }
-
-                return null;
+                var date = dateTime.Value.Date;
+                classMoodIds = (from c in _context.ClassMoods
+                                where TruncateTime(c.DateTime) == date
+                                && c.UserId == user.Id
+                                select c.Id).ToList();
             }
+            else
+            {
+                classMoodIds = (from c in _context.ClassMoods
+                                where c.UserId == user.Id
+                                select c.Id).ToList();
+            }
+
+            if (classMoodIds.Any())
+            {
+                List<Mood> moods = (from m in _context.Moods
+                                    where classMoodIds.Contains(m.ClassMoodId)
+                                    select m).ToList();
+
+                return moods;
+            }
+
+            return null;
+        }
+
+        [DbFunction("Edm", "TruncateTime")]
+        private DateTime? TruncateTime(DateTime? dateValue)
+        {
+            return dateValue?.Date;
         }
 
         public MoodCollection GetMoodAverage(List<Mood> moods)
