@@ -16,12 +16,6 @@ namespace Controller.Service
             _context = context;
         }
 
-        [DbFunction("Edm", "TruncateTime")]
-        public DateTime? TruncateTime(DateTime? dateValue)
-        {
-            return dateValue?.Date;
-        }
-
         public void AddClassMood(AddMood addMood)
         {
             var mood = new Mood()
@@ -77,6 +71,12 @@ namespace Controller.Service
             }
 
             return null;
+        }
+
+        [DbFunction("Edm", "TruncateTime")]
+        private DateTime? TruncateTime(DateTime? dateValue)
+        {
+            return dateValue?.Date;
         }
 
         public MoodCollection GetMoodAverage(List<Mood> moods)
