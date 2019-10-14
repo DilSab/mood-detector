@@ -1,4 +1,5 @@
 ﻿using Affdex;
+using Model.Entity;
 using System.Collections.Generic;
 
 namespace Controller.Affectiva
@@ -25,6 +26,26 @@ namespace Controller.Affectiva
             Frame frame = Helper.LoadFrameFromFile(filePath);
             detector.reset();
             detector.process(frame);
+        }
+
+        public MoodCollection GetMoodCollection()
+        {
+            Dictionary<string, float> emotions = GetEmotions();
+
+            MoodCollection moodCollection = new MoodCollection
+            {
+                Anger = emotions["anger"],
+                Contempt = emotions["contempt"],
+                Disgust = emotions["disgust"],
+                Engagement = emotions["engagement"],
+                Fear = emotions["fear"],
+                Joy = emotions["joy"],
+                Sadness = emotions["sadness"],
+                Suprise = emotions["surprise"],
+                Valence = emotions["valence"]
+            };
+
+            return moodCollection;
         }
 
         public void StartDetector()
