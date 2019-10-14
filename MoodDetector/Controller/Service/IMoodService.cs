@@ -9,6 +9,8 @@ namespace Controller.Service
     {
         void AddClassMood(AddMood addMood);
         List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null);
+        Mood GetLastClassMood(User user);
+        void UpdateSessionMessageStatus(int classmoodId);
         MoodCollection GetMoodAverage(List<Mood> moods);
     }
 }

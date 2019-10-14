@@ -83,7 +83,9 @@
     <Compile Include="Affectiva\ImageListenerImpl.cs" />
     <Compile Include="ILoginProcessor.cs" />
     <Compile Include="Service\IMoodService.cs" />
+    <Compile Include="Service\ILearningService.cs" />
     <Compile Include="Service\IRegisterAuthenticator.cs" />
+    <Compile Include="Service\LearningService.cs" />
     <Compile Include="Service\MoodService.cs" />
     <Compile Include="Service\RegisterAuthenticator.cs" />
     <Compile Include="Service\UserService.cs" />

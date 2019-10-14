@@ -73,6 +73,30 @@ namespace Controller.Service
             return null;
         }
 
+        public Mood GetLastClassMood(User user)
+        {
+            Mood mood = new Mood();
+            mood.Anger = 0;
+            mood.Joy = 1;
+            if (GetSessionMessageStatus(user)) return mood;
+
+            // needs update for real last class mood
+            Random rng = new Random();
+            mood.Anger = rng.NextDouble();
+            mood.Joy = rng.NextDouble();
+            return mood;
+        }
+
+        public void UpdateSessionMessageStatus(int classmoodId)
+        {
+            // needs to be implemented (set true)
+        }
+        private bool GetSessionMessageStatus(User user)
+        {
+            // needs to be implemented
+            return false;
+        }
+
         [DbFunction("Edm", "TruncateTime")]
         private DateTime? TruncateTime(DateTime? dateValue)
         {

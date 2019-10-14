@@ -46,45 +46,43 @@
             // subjectLabel
             // 
             this.subjectLabel.AutoSize = true;
-            this.subjectLabel.Location = new System.Drawing.Point(111, 15);
-            this.subjectLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.subjectLabel.Location = new System.Drawing.Point(148, 18);
             this.subjectLabel.Name = "subjectLabel";
-            this.subjectLabel.Size = new System.Drawing.Size(43, 13);
+            this.subjectLabel.Size = new System.Drawing.Size(55, 17);
             this.subjectLabel.TabIndex = 0;
             this.subjectLabel.Text = "Subject";
             // 
             // subjectTextBox
             // 
-            this.subjectTextBox.Location = new System.Drawing.Point(158, 12);
-            this.subjectTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.subjectTextBox.Location = new System.Drawing.Point(211, 15);
+            this.subjectTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.subjectTextBox.Name = "subjectTextBox";
-            this.subjectTextBox.Size = new System.Drawing.Size(76, 20);
+            this.subjectTextBox.Size = new System.Drawing.Size(100, 22);
             this.subjectTextBox.TabIndex = 1;
             // 
             // classLabel
             // 
             this.classLabel.AutoSize = true;
-            this.classLabel.Location = new System.Drawing.Point(122, 37);
-            this.classLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.classLabel.Location = new System.Drawing.Point(163, 46);
             this.classLabel.Name = "classLabel";
-            this.classLabel.Size = new System.Drawing.Size(32, 13);
+            this.classLabel.Size = new System.Drawing.Size(42, 17);
             this.classLabel.TabIndex = 2;
             this.classLabel.Text = "Class";
             // 
             // classTextBox
             // 
-            this.classTextBox.Location = new System.Drawing.Point(158, 35);
-            this.classTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.classTextBox.Location = new System.Drawing.Point(211, 43);
+            this.classTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.classTextBox.Name = "classTextBox";
-            this.classTextBox.Size = new System.Drawing.Size(76, 20);
+            this.classTextBox.Size = new System.Drawing.Size(100, 22);
             this.classTextBox.TabIndex = 3;
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(136, 176);
-            this.startButton.Margin = new System.Windows.Forms.Padding(2);
+            this.startButton.Location = new System.Drawing.Point(181, 217);
+            this.startButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(99, 19);
+            this.startButton.Size = new System.Drawing.Size(132, 23);
             this.startButton.TabIndex = 4;
             this.startButton.Text = "Start new session";
             this.startButton.UseVisualStyleBackColor = true;
@@ -92,24 +90,24 @@
             // commentsLabel
             // 
             this.commentsLabel.AutoSize = true;
-            this.commentsLabel.Location = new System.Drawing.Point(8, 63);
-            this.commentsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.commentsLabel.Location = new System.Drawing.Point(11, 78);
             this.commentsLabel.Name = "commentsLabel";
-            this.commentsLabel.Size = new System.Drawing.Size(56, 13);
+            this.commentsLabel.Size = new System.Drawing.Size(74, 17);
             this.commentsLabel.TabIndex = 5;
             this.commentsLabel.Text = "Comments";
             // 
             // commentsTextBox
             // 
-            this.commentsTextBox.Location = new System.Drawing.Point(10, 79);
-            this.commentsTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.commentsTextBox.Location = new System.Drawing.Point(13, 97);
+            this.commentsTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.commentsTextBox.Multiline = true;
             this.commentsTextBox.Name = "commentsTextBox";
-            this.commentsTextBox.Size = new System.Drawing.Size(349, 94);
+            this.commentsTextBox.Size = new System.Drawing.Size(464, 115);
             this.commentsTextBox.TabIndex = 6;
             // 
             // newsessionGroupBox
             // 
+            this.newsessionGroupBox.Controls.Add(this.dateTimePicker);
             this.newsessionGroupBox.Controls.Add(this.startSessionButton);
             this.newsessionGroupBox.Controls.Add(this.dateAndTimeLabel);
             this.newsessionGroupBox.Controls.Add(this.subjectLabel);
@@ -119,20 +117,21 @@
             this.newsessionGroupBox.Controls.Add(this.classLabel);
             this.newsessionGroupBox.Controls.Add(this.startButton);
             this.newsessionGroupBox.Controls.Add(this.classTextBox);
-            this.newsessionGroupBox.Location = new System.Drawing.Point(9, 35);
-            this.newsessionGroupBox.Margin = new System.Windows.Forms.Padding(2);
+            this.newsessionGroupBox.Location = new System.Drawing.Point(12, 50);
+            this.newsessionGroupBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.newsessionGroupBox.Name = "newsessionGroupBox";
-            this.newsessionGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.newsessionGroupBox.Size = new System.Drawing.Size(449, 177);
+            this.newsessionGroupBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.newsessionGroupBox.Size = new System.Drawing.Size(599, 218);
             this.newsessionGroupBox.TabIndex = 7;
             this.newsessionGroupBox.TabStop = false;
             this.newsessionGroupBox.Text = "New Session";
             // 
             // startSessionButton
             // 
-            this.startSessionButton.Location = new System.Drawing.Point(364, 149);
+            this.startSessionButton.Location = new System.Drawing.Point(485, 183);
+            this.startSessionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.startSessionButton.Name = "startSessionButton";
-            this.startSessionButton.Size = new System.Drawing.Size(80, 23);
+            this.startSessionButton.Size = new System.Drawing.Size(107, 28);
             this.startSessionButton.TabIndex = 8;
             this.startSessionButton.Text = "Start Session";
             this.startSessionButton.UseVisualStyleBackColor = true;
@@ -141,37 +140,39 @@
             // dateAndTimeLabel
             // 
             this.dateAndTimeLabel.AutoSize = true;
-            this.dateAndTimeLabel.Location = new System.Drawing.Point(245, 15);
+            this.dateAndTimeLabel.Location = new System.Drawing.Point(327, 18);
+            this.dateAndTimeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.dateAndTimeLabel.Name = "dateAndTimeLabel";
-            this.dateAndTimeLabel.Size = new System.Drawing.Size(77, 13);
+            this.dateAndTimeLabel.Size = new System.Drawing.Size(101, 17);
             this.dateAndTimeLabel.TabIndex = 7;
             this.dateAndTimeLabel.Text = "Date and Time";
             // 
             // userInfoLabel
             // 
             this.userInfoLabel.AutoSize = true;
-            this.userInfoLabel.Location = new System.Drawing.Point(12, 9);
+            this.userInfoLabel.Location = new System.Drawing.Point(16, 11);
+            this.userInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userInfoLabel.Name = "userInfoLabel";
-            this.userInfoLabel.Size = new System.Drawing.Size(49, 13);
+            this.userInfoLabel.Size = new System.Drawing.Size(65, 17);
             this.userInfoLabel.TabIndex = 9;
             this.userInfoLabel.Text = "User info";
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(254, 70);
+            this.dateTimePicker.Location = new System.Drawing.Point(328, 41);
+            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(199, 20);
+            this.dateTimePicker.Size = new System.Drawing.Size(264, 22);
             this.dateTimePicker.TabIndex = 3;
             // 
             // StartSessionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 227);
-            this.Controls.Add(this.dateTimePicker);
+            this.ClientSize = new System.Drawing.Size(625, 279);
             this.Controls.Add(this.userInfoLabel);
             this.Controls.Add(this.newsessionGroupBox);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "StartSessionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configure Session";
