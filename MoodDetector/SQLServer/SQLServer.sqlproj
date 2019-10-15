@@ -88,11 +88,19 @@
     <Folder Include="dbo\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\User.sql" />
-    <Build Include="dbo\Tables\ClassMood.sql" />
-    <Build Include="dbo\Tables\LoginInfo.sql" />
+    <Build Include="dbo\Tables\User.sql">
+      <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
+    </Build>
+    <Build Include="dbo\Tables\ClassMood.sql">
+      <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
+    </Build>
+    <Build Include="dbo\Tables\LoginInfo.sql">
+      <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
+    </Build>
     <Build Include="dbo\Stored Procedures\addUsers.sql" />
-    <Build Include="dbo\Tables\Mood.sql" />
+    <Build Include="dbo\Tables\Mood.sql">
+      <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\LocalSQLServerDatabase.publish.xml" />

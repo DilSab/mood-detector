@@ -21,6 +21,7 @@
           <Property Name="Class" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="Comments" Type="text" Nullable="false" />
+		  <Property Name="MessageSeen" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LoginInfo">
           <Key>
@@ -187,6 +188,7 @@
           <Property Name="Class" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+		  <Property Name="MessageSeen" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="MoodDetectorDBModel.FK_ClassMood_User" FromRole="ClassMood" ToRole="User" />
           <NavigationProperty Name="Moods" Relationship="MoodDetectorDBModel.FK_Mood_ClassMood" FromRole="ClassMood" ToRole="Mood" />
         </EntityType>
@@ -269,6 +271,7 @@
           <EntitySetMapping Name="ClassMoods">
             <EntityTypeMapping TypeName="MoodDetectorDBModel.ClassMood">
               <MappingFragment StoreEntitySet="ClassMood">
+				<ScalarProperty Name="MessageSeen" ColumnName="MessageSeen" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="Class" ColumnName="Class" />

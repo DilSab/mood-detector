@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model;
 
 namespace Controller.Service
@@ -18,20 +14,20 @@ namespace Controller.Service
             _moodService = moodService;
         }
 
-        public Tuple<string, int> GetAngerMessage()
+        public Tuple<string, int, int> GetAngerMessage()
         {
-            Mood mood = _moodService.GetLastClassMood(user);
-            if (mood.Anger >= 0.8) return new Tuple<string, int>("", mood.ClassMoodId);
+            Mood mood = _moodService.GetLastClassMood(user, 1);
+            if (mood.Anger < 0.8) return new Tuple<string, int, int>("", mood.ClassMoodId, 1);
             string mess = "Anger levels are too high in your classes! You have a learning assigned";
-            return new Tuple<string, int>(mess, mood.ClassMoodId);
+            return new Tuple<string, int, int>(mess, mood.ClassMoodId, 1);
         }
 
-        public Tuple<string, int> GetJoyMessage()
+        public Tuple<string, int, int> GetJoyMessage()
         {
-            Mood mood = _moodService.GetLastClassMood(user);
-            if (mood.Joy < 0.8) return new Tuple<string, int>("", mood.ClassMoodId);
+            Mood mood = _moodService.GetLastClassMood(user, 2);
+            if (mood.Joy >= 0.8) return new Tuple<string, int, int>("", mood.ClassMoodId, 2);
             string mess = "Joy levels are too low in your classes! You have a learning assigned";
-            return new Tuple<string, int>(mess, mood.ClassMoodId);
+            return new Tuple<string, int, int>(mess, mood.ClassMoodId, 2);
         }
     }
 }

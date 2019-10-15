@@ -8,7 +8,7 @@ namespace Controller.Service
 {
     public interface ILearningService
     {
-        Tuple<string, int> GetAngerMessage();
-        Tuple<string, int> GetJoyMessage();
+        Tuple<string, int, int> GetAngerMessage();
+        Tuple<string, int, int> GetJoyMessage();
     }
 }

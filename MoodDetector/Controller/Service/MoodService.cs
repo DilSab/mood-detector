@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Diagnostics;
 
 namespace Controller.Service
 {
@@ -26,7 +27,8 @@ namespace Controller.Service
                     Subject = addMood.SessionInfo.Subject,
                     Class = addMood.SessionInfo.Class,
                     DateTime = addMood.SessionInfo.DateTime,
-                    Comments = addMood.SessionInfo.Comments
+                    Comments = addMood.SessionInfo.Comments,
+                    MessageSeen = addMood.SessionInfo.MessageSeen
                 },
                 Anger = addMood.MoodCollection.Anger,
                 Joy = addMood.MoodCollection.Joy,
@@ -73,28 +75,39 @@ namespace Controller.Service
             return null;
         }
 
-        public Mood GetLastClassMood(User user)
+        public Mood GetLastClassMood(User user, int mask)
         {
             Mood mood = new Mood();
             mood.Anger = 0;
             mood.Joy = 1;
-            if (GetSessionMessageStatus(user)) return mood;
-
-            // needs update for real last class mood
-            Random rng = new Random();
-            mood.Anger = rng.NextDouble();
-            mood.Joy = rng.NextDouble();
+            if (!_context.ClassMoods.Any()) return mood;
+            IQueryable<ClassMood> classMoods = (from m in _context.ClassMoods
+                                                where m.UserId == user.Id
+                                                select m);
+            if (!classMoods.Any()) return mood;
+            ClassMood classmood = classMoods.OrderByDescending(x => x.DateTime).First();
+            if (GetSessionMessageStatus(classmood.Id, mask) > 0) return mood;
+            MoodCollection moodCollection = GetMoodAverage(classmood.Moods.ToList());
+            mood = _context.Moods.First(x => x.ClassMoodId == classmood.Id);
+            mood.Anger = moodCollection.Anger;
+            mood.Joy = moodCollection.Joy;
+            //Debug.WriteLine("anger " + mood.Anger+" joy "+mood.Joy);
             return mood;
         }
 
-        public void UpdateSessionMessageStatus(int classmoodId)
+        public void UpdateSessionMessageStatus(int classmoodId, int mask)
         {
-            // needs to be implemented (set true)
+
+            var classmood = _context.ClassMoods.First(x => x.Id == classmoodId);
+            classmood.MessageSeen |= mask;            
+            _context.Entry(classmood).State = EntityState.Modified;
+            _context.SaveChanges();
         }
-        private bool GetSessionMessageStatus(User user)
+
+        private int GetSessionMessageStatus(int classmoodId, int mask)
         {
-            // needs to be implemented
-            return false;
+            ClassMood classmood = _context.ClassMoods.First(x => x.Id == classmoodId);
+            return classmood.MessageSeen & mask;
         }
 
         [DbFunction("Edm", "TruncateTime")]
