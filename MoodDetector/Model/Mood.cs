@@ -15,7 +15,7 @@ namespace Model
     public partial class Mood
     {
         public int Id { get; set; }
-        public int ClassMoodId { get; set; }
+        public int SessionId { get; set; }
         public double Anger { get; set; }
         public double Joy { get; set; }
         public double Contempt { get; set; }
@@ -26,6 +26,6 @@ namespace Model
         public double Suprise { get; set; }
         public double Valence { get; set; }
     
-        public virtual ClassMood ClassMood { get; set; }
+        public virtual Session Session { get; set; }
     }
 }

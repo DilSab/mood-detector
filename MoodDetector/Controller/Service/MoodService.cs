@@ -16,9 +16,9 @@ namespace Controller.Service
             _context = context;
         }
 
-        public int AddClassMood(SessionInfo sessionInfo)
+        public int AddSession(SessionInfo sessionInfo)
         {
-            var classMood = new ClassMood()
+            var session = new Session()
             {
                 UserId = sessionInfo.User.Id,
                 Subject = sessionInfo.Subject,
@@ -28,26 +28,26 @@ namespace Controller.Service
                 MessageSeen = sessionInfo.MessageSeen
             };
 
-            _context.ClassMoods.Add(classMood);
+            _context.Sessions.Add(session);
             _context.SaveChanges();
 
-            return classMood.Id;
+            return session.Id;
         }
 
-        public void AddMood(int sessionId, AddMood addMood)
+        public void AddMood(int sessionId, MoodCollection moodCollection)
         {
             var mood = new Mood()
             {
-                ClassMoodId = sessionId,
-                Anger = addMood.MoodCollection.Anger,
-                Joy = addMood.MoodCollection.Joy,
-                Contempt = addMood.MoodCollection.Contempt,
-                Disgust = addMood.MoodCollection.Disgust,
-                Engagement = addMood.MoodCollection.Engagement,
-                Fear = addMood.MoodCollection.Fear,
-                Sadness = addMood.MoodCollection.Sadness,
-                Suprise = addMood.MoodCollection.Suprise,
-                Valence = addMood.MoodCollection.Valence,
+                SessionId = sessionId,
+                Anger = moodCollection.Anger,
+                Joy = moodCollection.Joy,
+                Contempt = moodCollection.Contempt,
+                Disgust = moodCollection.Disgust,
+                Engagement = moodCollection.Engagement,
+                Fear = moodCollection.Fear,
+                Sadness = moodCollection.Sadness,
+                Suprise = moodCollection.Suprise,
+                Valence = moodCollection.Valence,
             };
 
             _context.Moods.Add(mood);
@@ -57,27 +57,27 @@ namespace Controller.Service
 
         public List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null)
         {
-            List<int> classMoodIds;
+            List<int> sessionIds;
 
             if (dateTime != null)
             {
                 var date = dateTime.Value.Date;
-                classMoodIds = (from c in _context.ClassMoods
+                sessionIds = (from c in _context.Sessions
                                 where TruncateTime(c.DateTime) == date
                                 && c.UserId == user.Id
                                 select c.Id).ToList();
             }
             else
             {
-                classMoodIds = (from c in _context.ClassMoods
+                sessionIds = (from c in _context.Sessions
                                 where c.UserId == user.Id
                                 select c.Id).ToList();
             }
 
-            if (classMoodIds.Any())
+            if (sessionIds.Any())
             {
                 List<Mood> moods = (from m in _context.Moods
-                                    where classMoodIds.Contains(m.ClassMoodId)
+                                    where sessionIds.Contains(m.SessionId)
                                     select m).ToList();
 
                 return moods;
@@ -91,34 +91,38 @@ namespace Controller.Service
             Mood mood = new Mood();
             mood.Anger = 0;
             mood.Joy = 1;
-            if (!_context.ClassMoods.Any()) return mood;
-            IQueryable<ClassMood> classMoods = (from m in _context.ClassMoods
+            if (!_context.Sessions.Any()) return mood;
+            IQueryable<Session> sessions = (from m in _context.Sessions
                                                 where m.UserId == user.Id
                                                 select m);
-            if (!classMoods.Any()) return mood;
-            ClassMood classmood = classMoods.OrderByDescending(x => x.Id).First();
-            if (GetSessionMessageStatus(classmood.Id, mask) > 0) return mood;
-            MoodCollection moodCollection = GetMoodAverage(classmood.Moods.ToList());
-            mood = _context.Moods.First(x => x.ClassMoodId == classmood.Id);
+
+            if (!sessions.Any()) return mood;
+
+            Session session = sessions.OrderByDescending(x => x.Id).First();
+            if (GetSessionMessageStatus(session.Id, mask) > 0) return mood;
+
+            MoodCollection moodCollection = GetMoodAverage(session.Moods.ToList());
+            mood = _context.Moods.First(x => x.SessionId == session.Id);
             mood.Anger = moodCollection.Anger;
             mood.Joy = moodCollection.Joy;
-            //Debug.WriteLine("anger " + mood.Anger+" joy "+mood.Joy);
+
             return mood;
         }
 
         public void UpdateSessionMessageStatus(int classmoodId, int mask)
         {
-
-            var classmood = _context.ClassMoods.First(x => x.Id == classmoodId);
-            classmood.MessageSeen |= mask;            
+            var classmood = _context.Sessions.First(x => x.Id == classmoodId);
+            classmood.MessageSeen |= mask;   
+            
             _context.Entry(classmood).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
         private int GetSessionMessageStatus(int classmoodId, int mask)
         {
-            ClassMood classmood = _context.ClassMoods.First(x => x.Id == classmoodId);
-            return classmood.MessageSeen & mask;
+            Session session = _context.Sessions.First(x => x.Id == classmoodId);
+
+            return session.MessageSeen & mask;
         }
 
         [DbFunction("Edm", "TruncateTime")]

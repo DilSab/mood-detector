@@ -76,13 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassMood.cs">
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="C__RefactorLog.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\AddMood.cs" />
     <Compile Include="Entity\AddUser.cs" />
     <Compile Include="Entity\MoodCollection.cs" />
     <Compile Include="Entity\SessionInfo.cs" />
@@ -106,6 +102,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MoodDetectorModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs">
+      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>

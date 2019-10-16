@@ -27,11 +27,11 @@ namespace Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<LoginInfo> LoginInfoes { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public virtual DbSet<ClassMood> ClassMoods { get; set; }
+        public virtual DbSet<LoginInfo> LoginInfoes { get; set; }
         public virtual DbSet<Mood> Moods { get; set; }
+        public virtual DbSet<Session> Sessions { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     
         public virtual int addUsers()
         {

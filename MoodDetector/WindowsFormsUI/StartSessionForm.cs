@@ -34,7 +34,7 @@ namespace WindowsFormsUI
                 
             };
 
-            int sessionId = _moodService.AddClassMood(sessionInfo);
+            int sessionId = _moodService.AddSession(sessionInfo);
             SessionForm sessionForm = new SessionForm(sessionId, _moodService, userForm);
             sessionForm.Show();
             this.Close();

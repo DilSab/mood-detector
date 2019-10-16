@@ -37,12 +37,7 @@ namespace WindowsFormsUI
 
                     _affectivaService.ProcessPhoto(selectedFileName);
 
-                    AddMood addMood = new AddMood
-                    {
-                        MoodCollection = _affectivaService.GetMoodCollection(),
-                    };
-
-                    _moodService.AddMood(sessionId, addMood);
+                    _moodService.AddMood(sessionId, _affectivaService.GetMoodCollection());
                 }
             }
             MessageBox.Show("Photo uploaded successfully!");

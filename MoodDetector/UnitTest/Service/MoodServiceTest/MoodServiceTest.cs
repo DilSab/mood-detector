@@ -13,7 +13,23 @@ namespace UnitTest.Service.MoodServiceTest
     public class MoodServiceTest
     {
         [Fact]
-        public void TestAddClassMood()
+        public void TestAddSession()
+        {
+            var mockSet = new Mock<DbSet<Session>>();
+
+            var mockContext = new Mock<MoodDetectorDBEntities>();
+            mockContext.Setup(m => m.Sessions).Returns(mockSet.Object);
+
+            var service = new MoodService(mockContext.Object);
+            SessionInfo sessionInfo = CreateSessionInfo();
+            service.AddSession(sessionInfo);
+
+            mockSet.Verify(m => m.Add(It.IsAny<Session>()), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [Fact]
+        public void TestAddMood()
         {
             var mockSet = new Mock<DbSet<Mood>>();
 
@@ -21,8 +37,8 @@ namespace UnitTest.Service.MoodServiceTest
             mockContext.Setup(m => m.Moods).Returns(mockSet.Object);
 
             var service = new MoodService(mockContext.Object);
-            SessionInfo sessionInfo = CreateSessionInfo();
-            service.AddClassMood(sessionInfo);
+            MoodCollection moodCollection = CreateMoodCollection();
+            service.AddMood(1, moodCollection);
 
             mockSet.Verify(m => m.Add(It.IsAny<Mood>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
@@ -33,9 +49,9 @@ namespace UnitTest.Service.MoodServiceTest
         {
             var moodData = new List<Mood>
             {
-                new Mood { Id = 1, ClassMoodId = 1, Joy = 100 },
-                new Mood { Id = 2, ClassMoodId = 2, Joy = 100 },
-                new Mood { Id = 3, ClassMoodId = 2, Joy = 100 },
+                new Mood { Id = 1, SessionId = 1, Joy = 100 },
+                new Mood { Id = 2, SessionId = 2, Joy = 100 },
+                new Mood { Id = 3, SessionId = 2, Joy = 100 },
             }.AsQueryable();
 
             var moodMockSet = new Mock<DbSet<Mood>>();
@@ -44,22 +60,22 @@ namespace UnitTest.Service.MoodServiceTest
             moodMockSet.As<IQueryable<Mood>>().Setup(m => m.ElementType).Returns(moodData.ElementType);
             moodMockSet.As<IQueryable<Mood>>().Setup(m => m.GetEnumerator()).Returns(moodData.GetEnumerator());
 
-            var classMoodData = new List<ClassMood>
+            var sessionData = new List<Session>
             {
-                new ClassMood { Id = 1, UserId = 1, DateTime = new DateTime(2019, 10, 13) },
-                new ClassMood { Id = 2, UserId = 1, DateTime = new DateTime(2019, 10, 11) },
+                new Session { Id = 1, UserId = 1, DateTime = new DateTime(2019, 10, 13) },
+                new Session { Id = 2, UserId = 1, DateTime = new DateTime(2019, 10, 11) },
             }.AsQueryable();
 
-            var classMoodMockSet = new Mock<DbSet<ClassMood>>();
-            classMoodMockSet.As<IQueryable<ClassMood>>().Setup(m => m.Provider).Returns(classMoodData.Provider);
-            classMoodMockSet.As<IQueryable<ClassMood>>().Setup(m => m.Expression).Returns(classMoodData.Expression);
-            classMoodMockSet.As<IQueryable<ClassMood>>().Setup(m => m.ElementType).Returns(classMoodData.ElementType);
-            classMoodMockSet.As<IQueryable<ClassMood>>().Setup(m => m.GetEnumerator()).Returns(classMoodData.GetEnumerator());
+            var sessionMockSet = new Mock<DbSet<Session>>();
+            sessionMockSet.As<IQueryable<Session>>().Setup(m => m.Provider).Returns(sessionData.Provider);
+            sessionMockSet.As<IQueryable<Session>>().Setup(m => m.Expression).Returns(sessionData.Expression);
+            sessionMockSet.As<IQueryable<Session>>().Setup(m => m.ElementType).Returns(sessionData.ElementType);
+            sessionMockSet.As<IQueryable<Session>>().Setup(m => m.GetEnumerator()).Returns(sessionData.GetEnumerator());
 
 
             var mockContext = new Mock<MoodDetectorDBEntities>();
             mockContext.Setup(c => c.Moods).Returns(moodMockSet.Object);
-            mockContext.Setup(c => c.ClassMoods).Returns(classMoodMockSet.Object);
+            mockContext.Setup(c => c.Sessions).Returns(sessionMockSet.Object);
 
             var service = new MoodService(mockContext.Object);
 
@@ -76,7 +92,7 @@ namespace UnitTest.Service.MoodServiceTest
             Assert.NotNull(moods);
             Assert.Equal(1, moods[0].Id);
             Assert.Equal(100, moods[0].Joy);
-            Assert.Equal(1, moods[0].ClassMoodId);
+            Assert.Equal(1, moods[0].SessionId);
 
             moods = service.GetMoodsByDate(GetSampleUser(1, "James", "Smith", "Teacher"), new DateTime(2019, 10, 11));
 
@@ -116,6 +132,24 @@ namespace UnitTest.Service.MoodServiceTest
             return sessionInfo;
         }
 
+        private MoodCollection CreateMoodCollection()
+        {
+            MoodCollection moodCollection = new MoodCollection
+            {
+                Anger = 100,
+                Contempt = 100,
+                Disgust = 100,
+                Engagement = 100,
+                Fear = 100,
+                Joy = 100,
+                Sadness = 100,
+                Suprise = 100,
+                Valence = 100,
+            };
+
+            return moodCollection;
+        }
+
         private User GetSampleUser(int id, string firstname, string lastname, string accessRights)
         {
             User user = new User()
@@ -136,7 +170,7 @@ namespace UnitTest.Service.MoodServiceTest
                 new Mood()
                 {
                     Id = 1,
-                    ClassMoodId = 1,
+                    SessionId = 1,
                     Anger = 100,
                     Contempt = 100,
                     Disgust = 100,
@@ -150,7 +184,7 @@ namespace UnitTest.Service.MoodServiceTest
                 new Mood()
                 {
                     Id = 2,
-                    ClassMoodId = 1,
+                    SessionId = 1,
                     Anger = 0,
                     Contempt = 0,
                     Disgust = 0,

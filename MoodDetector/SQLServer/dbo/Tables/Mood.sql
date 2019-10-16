@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Mood]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [ClassMoodId] INT NOT NULL, 
+    [SessionId] INT NOT NULL, 
     [Anger] FLOAT NOT NULL, 
     [Joy] FLOAT NOT NULL, 
 	[Contempt] FLOAT NOT NULL, 
@@ -11,5 +11,5 @@
 	[Sadness] FLOAT NOT NULL, 
 	[Suprise] FLOAT NOT NULL, 
 	[Valence] FLOAT NOT NULL, 
-    CONSTRAINT [FK_Mood_ClassMood] FOREIGN KEY ([ClassMoodId]) REFERENCES [ClassMood]([Id])
+    CONSTRAINT [FK_Mood_Session] FOREIGN KEY ([SessionId]) REFERENCES [Session]([Id])
 )
