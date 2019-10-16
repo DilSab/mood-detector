@@ -1,10 +1,7 @@
 ﻿using Controller.Service;
 using Model;
 using Model.Entity;
-using System;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Collections.Generic;
 
 namespace WindowsFormsUI
 {
@@ -36,7 +33,9 @@ namespace WindowsFormsUI
                 MessageSeen = 0
                 
             };
-            SessionForm sessionForm = new SessionForm(sessionInfo, _moodService, userForm);
+
+            int sessionId = _moodService.AddClassMood(sessionInfo);
+            SessionForm sessionForm = new SessionForm(sessionId, _moodService, userForm);
             sessionForm.Show();
             this.Close();
         }

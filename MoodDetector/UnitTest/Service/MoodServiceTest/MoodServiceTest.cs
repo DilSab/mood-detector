@@ -21,8 +21,8 @@ namespace UnitTest.Service.MoodServiceTest
             mockContext.Setup(m => m.Moods).Returns(mockSet.Object);
 
             var service = new MoodService(mockContext.Object);
-            AddMood mood = CreateAddMood();
-            service.AddClassMood(mood);
+            SessionInfo sessionInfo = CreateSessionInfo();
+            service.AddClassMood(sessionInfo);
 
             mockSet.Verify(m => m.Add(It.IsAny<Mood>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
@@ -101,7 +101,7 @@ namespace UnitTest.Service.MoodServiceTest
             Assert.Equal(50, moodCollection.Joy);
         }
 
-        private AddMood CreateAddMood()
+        private SessionInfo CreateSessionInfo()
         {
             DateTime dateTime = new DateTime(2019, 10, 13);
             SessionInfo sessionInfo = new SessionInfo()
@@ -112,25 +112,8 @@ namespace UnitTest.Service.MoodServiceTest
                 Comments = "Test comment",
                 DateTime = dateTime,
             };
-            MoodCollection moodCollection = new MoodCollection()
-            {
-                Anger = 100,
-                Contempt = 100,
-                Disgust = 100,
-                Engagement = 100,
-                Fear = 100,
-                Joy = 100,
-                Sadness = 100,
-                Suprise = 100,
-                Valence = 100,
-            };
-            AddMood addMood = new AddMood()
-            {
-                MoodCollection = moodCollection,
-                SessionInfo = sessionInfo,
-            };
 
-            return addMood;
+            return sessionInfo;
         }
 
         private User GetSampleUser(int id, string firstname, string lastname, string accessRights)

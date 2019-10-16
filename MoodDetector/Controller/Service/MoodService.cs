@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Diagnostics;
 
 namespace Controller.Service
 {
@@ -17,19 +16,29 @@ namespace Controller.Service
             _context = context;
         }
 
-        public void AddClassMood(AddMood addMood)
+        public int AddClassMood(SessionInfo sessionInfo)
+        {
+            var classMood = new ClassMood()
+            {
+                UserId = sessionInfo.User.Id,
+                Subject = sessionInfo.Subject,
+                Class = sessionInfo.Class,
+                DateTime = sessionInfo.DateTime,
+                Comments = sessionInfo.Comments,
+                MessageSeen = sessionInfo.MessageSeen
+            };
+
+            _context.ClassMoods.Add(classMood);
+            _context.SaveChanges();
+
+            return classMood.Id;
+        }
+
+        public void AddMood(int sessionId, AddMood addMood)
         {
             var mood = new Mood()
             {
-                ClassMood = new ClassMood()
-                {
-                    UserId = addMood.SessionInfo.User.Id,
-                    Subject = addMood.SessionInfo.Subject,
-                    Class = addMood.SessionInfo.Class,
-                    DateTime = addMood.SessionInfo.DateTime,
-                    Comments = addMood.SessionInfo.Comments,
-                    MessageSeen = addMood.SessionInfo.MessageSeen
-                },
+                ClassMoodId = sessionId,
                 Anger = addMood.MoodCollection.Anger,
                 Joy = addMood.MoodCollection.Joy,
                 Contempt = addMood.MoodCollection.Contempt,
@@ -40,9 +49,11 @@ namespace Controller.Service
                 Suprise = addMood.MoodCollection.Suprise,
                 Valence = addMood.MoodCollection.Valence,
             };
+
             _context.Moods.Add(mood);
             _context.SaveChanges();
         }
+
 
         public List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null)
         {

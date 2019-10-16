@@ -8,15 +8,15 @@ namespace WindowsFormsUI
 {
     public partial class SessionForm : Form
     {
-        private SessionInfo sessionInfo;
+        private int sessionId;
         private IMoodService _moodService;
         private AffectivaService _affectivaService;
         private UserForm userForm;
 
-        public SessionForm(SessionInfo sessionInfo, IMoodService moodService, UserForm userForm)
+        public SessionForm(int sessionId, IMoodService moodService, UserForm userForm)
         {
             this.userForm = userForm;
-            this.sessionInfo = sessionInfo;
+            this.sessionId = sessionId;
             _moodService = moodService;
             _affectivaService = new AffectivaService();
             _affectivaService.StartDetector();
@@ -40,10 +40,9 @@ namespace WindowsFormsUI
                     AddMood addMood = new AddMood
                     {
                         MoodCollection = _affectivaService.GetMoodCollection(),
-                        SessionInfo = this.sessionInfo
                     };
 
-                    _moodService.AddClassMood(addMood);
+                    _moodService.AddMood(sessionId, addMood);
                 }
             }
             MessageBox.Show("Photo uploaded successfully!");
