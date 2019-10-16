@@ -85,7 +85,7 @@ namespace Controller.Service
                                                 where m.UserId == user.Id
                                                 select m);
             if (!classMoods.Any()) return mood;
-            ClassMood classmood = classMoods.OrderByDescending(x => x.DateTime).First();
+            ClassMood classmood = classMoods.OrderByDescending(x => x.Id).First();
             if (GetSessionMessageStatus(classmood.Id, mask) > 0) return mood;
             MoodCollection moodCollection = GetMoodAverage(classmood.Moods.ToList());
             mood = _context.Moods.First(x => x.ClassMoodId == classmood.Id);
