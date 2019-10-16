@@ -26,6 +26,7 @@ namespace Model
         public string Class { get; set; }
         public System.DateTime DateTime { get; set; }
         public string Comments { get; set; }
+        public int MessageSeen { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

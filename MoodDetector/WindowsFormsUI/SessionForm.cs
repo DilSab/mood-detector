@@ -11,9 +11,11 @@ namespace WindowsFormsUI
         private SessionInfo sessionInfo;
         private IMoodService _moodService;
         private AffectivaService _affectivaService;
+        private UserForm userForm;
 
-        public SessionForm(SessionInfo sessionInfo, IMoodService moodService)
+        public SessionForm(SessionInfo sessionInfo, IMoodService moodService, UserForm userForm)
         {
+            this.userForm = userForm;
             this.sessionInfo = sessionInfo;
             _moodService = moodService;
             _affectivaService = new AffectivaService();
@@ -50,6 +52,7 @@ namespace WindowsFormsUI
         private void endButton_Click(object sender, EventArgs e)
         {
             _affectivaService.StopDetector();
+            userForm.LoadMessages();
             this.Close();
         }
     }

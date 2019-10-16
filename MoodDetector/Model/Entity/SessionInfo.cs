@@ -9,5 +9,6 @@ namespace Model.Entity
         public string Subject { get; set; }
         public string Comments { get; set; }
         public DateTime DateTime { get; set; }
+        public int MessageSeen { get; set; }
     }
 }
