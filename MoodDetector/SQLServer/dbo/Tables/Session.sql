@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ClassMood]
+﻿CREATE TABLE [dbo].[Session]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [UserId] INT NOT NULL, 
@@ -7,5 +7,5 @@
 	[DateTime] DATETIME Not NULL, 
     [Comments] TEXT NOT NULL, 
     [MessageSeen] INT NOT NULL , 
-    CONSTRAINT [FK_ClassMood_User] FOREIGN KEY ([UserId]) REFERENCES [User]([Id]), 
+    CONSTRAINT [FK_Session_User] FOREIGN KEY ([UserId]) REFERENCES [User]([Id]), 
 )

@@ -12,10 +12,10 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class ClassMood
+    public partial class Session
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ClassMood()
+        public Session()
         {
             this.Moods = new HashSet<Mood>();
         }
@@ -28,8 +28,8 @@ namespace Model
         public string Comments { get; set; }
         public int MessageSeen { get; set; }
     
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mood> Moods { get; set; }
+        public virtual User User { get; set; }
     }
 }

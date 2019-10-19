@@ -18,7 +18,7 @@ namespace Model
         public User()
         {
             this.LoginInfoes = new HashSet<LoginInfo>();
-            this.ClassMoods = new HashSet<ClassMood>();
+            this.Sessions = new HashSet<Session>();
         }
     
         public int Id { get; set; }
@@ -29,6 +29,6 @@ namespace Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoginInfo> LoginInfoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassMood> ClassMoods { get; set; }
+        public virtual ICollection<Session> Sessions { get; set; }
     }
 }

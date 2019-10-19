@@ -7,7 +7,8 @@ namespace Controller.Service
 {
     public interface IMoodService
     {
-        void AddClassMood(AddMood addMood);
+        int AddSession(SessionInfo sessionInfo);
+        void AddMood(int sessionId, MoodCollection moodCollection);
         List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null);
         Mood GetLastClassMood(User user, int mask);
         void UpdateSessionMessageStatus(int classmoodId, int mask);

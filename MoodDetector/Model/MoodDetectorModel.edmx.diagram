@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="dcfd1cf7207443a4b94a42ca784bfc24" Name="Diagram1">
-        <EntityTypeShape EntityType="MoodDetectorDBModel.LoginInfo" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoodDetectorDBModel.User" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <AssociationConnector Association="MoodDetectorDBModel.FK_LoginInfo_User" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MoodDetectorDBModel.C__RefactorLog" Width="1.5" PointX="5.375" PointY="5.75" />
-        <EntityTypeShape EntityType="MoodDetectorDBModel.ClassMood" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="MoodDetectorDBModel.Mood" Width="1.5" PointX="5.25" PointY="9.125" />
-        <AssociationConnector Association="MoodDetectorDBModel.FK_ClassMood_User" />
-        <AssociationConnector Association="MoodDetectorDBModel.FK_Mood_ClassMood" />
-        </Diagram>
+        <EntityTypeShape EntityType="MoodDetectorDBModel.C__RefactorLog" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MoodDetectorDBModel.LoginInfo" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="MoodDetectorDBModel.Mood" Width="1.5" PointX="5.25" PointY="4" />
+        <EntityTypeShape EntityType="MoodDetectorDBModel.Session" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="MoodDetectorDBModel.User" Width="1.5" PointX="0.75" PointY="3.125" />
+        <AssociationConnector Association="MoodDetectorDBModel.FK_LoginInfo_User" />
+        <AssociationConnector Association="MoodDetectorDBModel.FK_Mood_Session" />
+        <AssociationConnector Association="MoodDetectorDBModel.FK_Session_User" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
