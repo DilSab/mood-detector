@@ -1,19 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Controller.Service;
 using Controller;
+using System;
+using System.Collections.Generic;
 
 namespace WebApplication.Controllers
 {
-    public class AffectivaTestController : Controller
+    [Route("api/[controller]")]
+    public class AffectivaTestController
     {
-        public class AffectivaTestPage
+        [HttpGet("[action]")]
+        public Moods CheckPhoto()
         {
-            public void checkPhoto()
-            {
+            return new Moods { Joy = 99.9, Anger = 10.5 };
+        }
 
-            }
-
-
+        public class Moods
+        {
+            public double Joy { get; set;}
+            public double Anger { get; set; }
         }
     }
 }
