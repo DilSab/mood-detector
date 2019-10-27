@@ -15,7 +15,6 @@ export class AffectivaTest extends Component {
         fetch('api/AffectivaTest/CheckPhoto')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 this.setState({ moods: data, loading: false });
             });
     }
@@ -26,7 +25,7 @@ export class AffectivaTest extends Component {
                 <h1>Upload photo:</h1>
                 <ul>
                     {this.state.moods.map(mood =>
-                        <li>Joy {mood.joy}; Anger {mood.anger}</li>
+                        <li key={mood.id}>Joy {mood.joy}; Anger {mood.anger}</li>
                     )}
                 </ul>
                 <input id="file" type="file" />

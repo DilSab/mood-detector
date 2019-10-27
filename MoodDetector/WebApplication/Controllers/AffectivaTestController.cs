@@ -14,15 +14,16 @@ namespace WebApplication.Controllers
         {
             return new List<Moods>
             {
-                new Moods { Joy = 99.9, Anger = 10.5 },
-                new Moods { Joy = 21.9, Anger = 78.7 },
-                new Moods { Joy = 31.4, Anger = 22.3 },
+                new Moods { Id = 1, Joy = 99.9, Anger = 10.5 },
+                new Moods { Id = 2, Joy = 21.9, Anger = 78.7 },
+                new Moods { Id = 3, Joy = 31.4, Anger = 22.3 },
             };
         }
 
         public class Moods
         {
-            public double Joy { get; set;}
+            public int Id { get; set; }
+            public double Joy { get; set; }
             public double Anger { get; set; }
         }
     }
