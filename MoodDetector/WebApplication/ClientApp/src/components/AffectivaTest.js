@@ -6,13 +6,25 @@ export class AffectivaTest extends Component {
     constructor(props) {
         super(props);
         this.state = { moods: [], loading: false };
-
-        
     }
 
     componentWillMount() {
         this.setState({ loading: true });
         fetch('api/AffectivaTest/CheckPhoto')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ moods: data, loading: false });
+            });
+    }
+
+    sendPhoto() {
+        var formData = new FormData();
+        formData.append("file", document.getElementById('file').value);
+        this.setState({ loading: true });
+        fetch('api/AffectivaTest/CheckPhoto', {
+            method: 'POST',
+            body: formData
+        })
             .then(response => response.json())
             .then(data => {
                 this.setState({ moods: data, loading: false });
@@ -29,7 +41,7 @@ export class AffectivaTest extends Component {
                     )}
                 </ul>
                 <input id="file" type="file" />
-                <input type="submit" onClick={this.sayHello} />
+                <input type="submit" onClick={this.sendPhoto} />
 
             </div>
         );
