@@ -10,9 +10,14 @@ namespace WebApplication.Controllers
     public class AffectivaTestController
     {
         [HttpGet("[action]")]
-        public Moods CheckPhoto()
+        public List<Moods> CheckPhoto()
         {
-            return new Moods { Joy = 99.9, Anger = 10.5 };
+            return new List<Moods>
+            {
+                new Moods { Joy = 99.9, Anger = 10.5 },
+                new Moods { Joy = 21.9, Anger = 78.7 },
+                new Moods { Joy = 31.4, Anger = 22.3 },
+            };
         }
 
         public class Moods

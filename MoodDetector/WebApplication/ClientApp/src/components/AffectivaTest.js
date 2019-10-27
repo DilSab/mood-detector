@@ -5,39 +5,33 @@ export class AffectivaTest extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { moods: [], loading: true };
+        this.state = { moods: [], loading: false };
 
         
     }
 
-    static renderMoodsDisplay(moods) {
-
+    componentWillMount() {
+        this.setState({ loading: true });
         fetch('api/AffectivaTest/CheckPhoto')
             .then(response => response.json())
             .then(data => {
-                console.log("Blahhhhhhhhhh");
+                console.log(data);
                 this.setState({ moods: data, loading: false });
             });
-
-        return (
-            <div>
-                <p>Joy: {moods.Joy}</p>
-                <p>Anger: {moods.Anger}</p>
-            </div>
-        );
     }
 
     render() {
-        let contents = this.state.loading
-            ? <p> Loading...</p>
-            : AffectivaTest.renderMoodsDisplay(this.state.moods);
-
         return (
             <div>
                 <h1>Upload photo:</h1>
+                <ul>
+                    {this.state.moods.map(mood =>
+                        <li>Joy {mood.joy}; Anger {mood.anger}</li>
+                    )}
+                </ul>
                 <input id="file" type="file" />
                 <input type="submit" onClick={this.sayHello} />
-                {contents}
+
             </div>
         );
     }
