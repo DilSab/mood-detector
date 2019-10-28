@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
@@ -38,11 +37,12 @@ namespace WebApplication
             }
             else
             {
+                app.UseHttpsRedirection();
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
@@ -60,6 +60,7 @@ namespace WebApplication
                 if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:5000");
                 }
             });
         }
