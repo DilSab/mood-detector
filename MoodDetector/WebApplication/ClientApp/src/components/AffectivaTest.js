@@ -19,15 +19,16 @@ export class AffectivaTest extends Component {
 
     sendPhoto() {
         var formData = new FormData();
-        formData.append("file", document.getElementById('file').value);
-        this.setState({ loading: true });
+        formData.append('name', 'Blaaaaaaaaah');
+        formData.append('surname', 'Chaaaaaaaaaaa');
         fetch('api/AffectivaTest/CheckPhoto', {
-            method: 'POST',
+            method: "post",
             body: formData
         })
             .then(response => response.json())
             .then(data => {
                 this.setState({ moods: data, loading: false });
+                console.log(this.state.moods);
             });
     }
 
@@ -42,7 +43,6 @@ export class AffectivaTest extends Component {
                 </ul>
                 <input id="file" type="file" />
                 <input type="submit" onClick={this.sendPhoto} />
-
             </div>
         );
     }
