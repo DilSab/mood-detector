@@ -11,8 +11,8 @@ export class Layout extends Component {
     return (
       <Grid fluid>
         <Row>
-          <Col sm={3}>
-            <NavMenuWelcome />
+                <Col sm={3}>
+                    <NavMenuTeacher />
           </Col>
           <Col sm={9}>
             {this.props.children}

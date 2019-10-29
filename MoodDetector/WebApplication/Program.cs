@@ -14,6 +14,7 @@ namespace WebApplication
     {
         public static void Main(string[] args)
         {
+            var container = ContainerConfig.Configure();
             CreateWebHostBuilder(args).Build().Run();
         }
 

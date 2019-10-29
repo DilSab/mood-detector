@@ -20,6 +20,7 @@ namespace Model
         public MoodDetectorDBEntities()
             : base("name=MoodDetectorDBEntities")
         {
+            var ensureDllIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
