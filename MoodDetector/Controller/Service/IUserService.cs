@@ -1,7 +1,7 @@
 ﻿using Model;
 using Model.Entity;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public interface IUserService
     {

@@ -2,7 +2,7 @@
 using Model.Entity;
 using System.Linq;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public class UserService : IUserService
     {

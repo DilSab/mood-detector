@@ -139,9 +139,9 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Controller\Controller.csproj">
+    <ProjectReference Include="..\Controller\ControllerProject.csproj">
       <Project>{b9cb1c28-e01f-423a-9569-e7523c186915}</Project>
-      <Name>Controller</Name>
+      <Name>ControllerProject</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{9846cc1b-56f7-414a-aa4b-e4dadd3f11ad}</Project>

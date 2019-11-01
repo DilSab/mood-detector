@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Model.Entity;
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public interface IRegisterAuthenticator
     {

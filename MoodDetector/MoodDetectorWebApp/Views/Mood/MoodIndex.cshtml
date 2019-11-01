@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "MoodIndex";
+}
+
+<h2>Here you can view lists</h2>
+User ID
+<br />
+<input type="text" id="user-id-input">
+<a href="#" class="btn btn-primary" id="show-moodlist-btn">Show the list of moods</a>
+
+<script>
+$(function () {
+    $("#show-moodlist-btn").click(function (event) {
+        event.preventDefault();
+        inputValue = $("#user-id-input").val();
+        if ($.isNumeric(inputValue)) {
+            window.location.href = "@Url.Action("GetMoodList", "Mood")" + "/" + $("#user-id-input").val();
+        }
+    });
+});
+</script>

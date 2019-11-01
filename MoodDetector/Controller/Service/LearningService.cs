@@ -1,7 +1,7 @@
 ﻿using System;
 using Model;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public class LearningService : ILearningService
     {

@@ -1,6 +1,6 @@
-﻿using Controller.Service;
+﻿using ControllerProject.Service;
 
-namespace Controller
+namespace ControllerProject
 {
     public class LoginProcessor : ILoginProcessor
     {

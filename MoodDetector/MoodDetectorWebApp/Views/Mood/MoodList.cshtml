@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "MoodList";
+}
+<h2>MoodList</h2>
+@if (Model != null)
+{
+    foreach (Model.Mood item in Model)
+    {
+        <ul>
+            <li>Joy:   @item.Joy</li>
+            <li>Anger: @item.Anger</li>
+            <li>Contempt: @item.Contempt</li>
+            <li>Disgust: @item.Disgust</li>
+            <li>Engagement: @item.Engagement</li>
+            <li>Fear: @item.Fear</li>
+            <li>Sadness: @item.Sadness</li>
+            <li>Suprise: @item.Suprise</li>
+            <li>Valence: @item.Valence</li>
+        </ul>
+    }
+}
+else
+{
+    <p>List for this user is empty</p>
+}

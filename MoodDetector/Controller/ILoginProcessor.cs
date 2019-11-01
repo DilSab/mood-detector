@@ -1,4 +1,4 @@
-﻿namespace Controller
+﻿namespace ControllerProject
 {
     public interface ILoginProcessor
     {

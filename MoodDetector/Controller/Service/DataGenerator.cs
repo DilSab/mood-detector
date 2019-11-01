@@ -1,7 +1,7 @@
 ﻿using Model.Entity;
 using System;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public class DataGenerator : IDataGenerator
     {

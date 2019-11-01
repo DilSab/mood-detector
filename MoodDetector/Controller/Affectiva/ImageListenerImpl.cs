@@ -1,7 +1,7 @@
 ﻿using Affdex;
 using System.Collections.Generic;
 
-namespace Controller.Affectiva
+namespace ControllerProject.Affectiva
 {
     public class ImageListenerImpl : ImageListener
     {

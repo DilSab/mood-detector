@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using Controller.Service;
+using ControllerProject.Service;
 using Model.Entity;
 
 namespace WindowsFormsUI

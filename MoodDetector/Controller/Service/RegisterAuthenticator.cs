@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public class RegisterAuthenticator : IRegisterAuthenticator
     {

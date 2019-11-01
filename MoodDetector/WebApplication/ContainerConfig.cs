@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
-using Controller;
+using ControllerProject;
 
 namespace WebApplication
 {
@@ -23,7 +23,7 @@ namespace WebApplication
                 .Where(t => t.Namespace.Contains("Service"))
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
 
-            builder.RegisterAssemblyTypes(Assembly.Load(nameof(Controller)))
+            builder.RegisterAssemblyTypes(Assembly.Load(nameof(ControllerProject)))
                 .Where(t => t.Namespace.Contains("Service"))
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
 

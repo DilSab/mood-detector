@@ -1,4 +1,4 @@
-﻿namespace Controller.Service
+﻿namespace ControllerProject.Service
 {
     public interface ILoginAuthenticator
     {

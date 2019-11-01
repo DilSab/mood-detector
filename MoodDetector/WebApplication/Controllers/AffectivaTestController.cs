@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Controller.Service;
-using Controller;
+using ControllerProject.Service;
+using ControllerProject;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;

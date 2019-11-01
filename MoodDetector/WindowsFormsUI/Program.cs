@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using Autofac;
-using Controller;
-using Controller.Service;
+using ControllerProject;
+using ControllerProject.Service;
 
 namespace WindowsFormsUI
 {

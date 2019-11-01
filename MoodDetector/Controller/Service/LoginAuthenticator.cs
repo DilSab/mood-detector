@@ -1,7 +1,7 @@
 ﻿using Model;
 using System.Linq;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public class LoginAuthenticator : ILoginAuthenticator
     {

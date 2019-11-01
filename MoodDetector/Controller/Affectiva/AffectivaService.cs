@@ -2,7 +2,7 @@
 using Model.Entity;
 using System.Collections.Generic;
 
-namespace Controller.Affectiva
+namespace ControllerProject.Affectiva
 {
     public class AffectivaService
     {

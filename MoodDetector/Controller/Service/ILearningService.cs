@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public interface ILearningService
     {

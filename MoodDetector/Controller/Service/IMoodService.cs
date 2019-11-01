@@ -3,7 +3,7 @@ using Model.Entity;
 using System;
 using System.Collections.Generic;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public interface IMoodService
     {

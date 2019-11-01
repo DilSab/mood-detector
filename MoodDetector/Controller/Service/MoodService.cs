@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace Controller.Service
+namespace ControllerProject.Service
 {
     public class MoodService : IMoodService
     {
