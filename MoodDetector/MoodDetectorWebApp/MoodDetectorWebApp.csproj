@@ -168,7 +168,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Controller\ControllerProject.csproj">
+    <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">
       <Project>{B9CB1C28-E01F-423A-9569-E7523C186915}</Project>
       <Name>ControllerProject</Name>
     </ProjectReference>

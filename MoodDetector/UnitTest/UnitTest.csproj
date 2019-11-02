@@ -124,7 +124,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Affectiva\AffectivaServiceTest\AffectivaServiceTest.cs" />
     <Compile Include="Service\LoginAuthenticatorTest\LoginAuthenticatorTest.cs" />
     <Compile Include="Service\MoodServiceTest\MoodServiceTest.cs" />
     <Compile Include="Service\RegisterAuthenticatorTest\RegisterAuthenticatorTest.cs" />
@@ -139,7 +138,7 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Controller\ControllerProject.csproj">
+    <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">
       <Project>{b9cb1c28-e01f-423a-9569-e7523c186915}</Project>
       <Name>ControllerProject</Name>
     </ProjectReference>

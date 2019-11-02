@@ -201,7 +201,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Controller\ControllerProject.csproj">
+    <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">
       <Project>{b9cb1c28-e01f-423a-9569-e7523c186915}</Project>
       <Name>ControllerProject</Name>
     </ProjectReference>

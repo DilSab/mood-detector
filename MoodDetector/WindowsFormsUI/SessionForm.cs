@@ -1,6 +1,4 @@
 ﻿using ControllerProject.Service;
-using ControllerProject.Affectiva;
-using Model.Entity;
 using System;
 using System.Windows.Forms;
 
@@ -8,18 +6,17 @@ namespace WindowsFormsUI
 {
     public partial class SessionForm : Form
     {
-        private int sessionId;
-        private IMoodService _moodService;
-        private AffectivaService _affectivaService;
-        private UserForm userForm;
+        private readonly int sessionId;
+        private readonly IMoodService _moodService;
+        private readonly IDataGenerator _dataGenerator;
+        private readonly UserForm userForm;
 
         public SessionForm(int sessionId, IMoodService moodService, UserForm userForm)
         {
             this.userForm = userForm;
             this.sessionId = sessionId;
             _moodService = moodService;
-            _affectivaService = new AffectivaService();
-            _affectivaService.StartDetector();
+            _dataGenerator = new DataGenerator();
             InitializeComponent();
         }
 
@@ -35,9 +32,7 @@ namespace WindowsFormsUI
                 {
                     string selectedFileName = openFileDialog.FileName;
 
-                    _affectivaService.ProcessPhoto(selectedFileName);
-
-                    _moodService.AddMood(sessionId, _affectivaService.GetMoodCollection());
+                    _moodService.AddMood(sessionId, _dataGenerator.GetRandomMoodCollection());
                 }
             }
             MessageBox.Show("Photo uploaded successfully!");
@@ -45,7 +40,6 @@ namespace WindowsFormsUI
 
         private void endButton_Click(object sender, EventArgs e)
         {
-            _affectivaService.StopDetector();
             userForm.LoadMessages();
             this.Close();
         }
