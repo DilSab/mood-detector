@@ -1,6 +1,4 @@
 ﻿using Autofac;
-using System.Web;
-using System.Web.Optimization;
 using ControllerProject;
 using Model;
 using System.Reflection;
