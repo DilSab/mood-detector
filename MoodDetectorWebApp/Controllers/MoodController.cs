@@ -7,7 +7,12 @@ namespace MoodDetectorWebApp.Controllers
 {
     public class MoodController : Controller
     {
-        MoodService moodService = new MoodService(new Model.MoodDetectorDBEntities());
+        IMoodService _moodService;
+
+        public MoodController(IMoodService moodService)
+        {
+            _moodService = moodService;
+        }
 
         // GET: Mood/Mood/
         public ActionResult MoodIndex()
@@ -18,7 +23,7 @@ namespace MoodDetectorWebApp.Controllers
         // GET: Mood/MoodList/
         public ActionResult GetMoodList(int id)
         {
-            List<Mood> moods = moodService.GetMoodsByDate(new User() { Id = id });
+            List<Mood> moods = _moodService.GetMoodsByDate(new User() { Id = id });
             
             return View("MoodList", moods);
         }
