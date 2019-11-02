@@ -12,3 +12,4 @@
 **/affdex-native.dll
 **/opencv_ffmpeg248_64.dll
 **/tensorflow.dll
+bin/
