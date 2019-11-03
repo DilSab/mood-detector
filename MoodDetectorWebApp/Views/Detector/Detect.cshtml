@@ -1,0 +1,21 @@
+﻿@using MoodDetectorWebApp.Models
+
+@model DetectViewModel
+
+@using (Html.BeginForm())
+{
+    <div class="row mt-5 mb-3">
+        <div class="col-lg-1 col-sm-2 col-3">Class:</div>
+        <div class="col-lg-11 col-sm-10 col-9">@Html.TextBoxFor(s => s.Class)</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-lg-1 col-sm-2 col-3">Subject:</div>
+        <div class="col-lg-11 col-sm-10 col-9">@Html.TextBoxFor(s => s.Subject)</div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-lg-1 col-sm-2 col-3">Comments:</div>
+        <div class="col-lg-11 col-sm-10 col-9">@Html.TextBoxFor(s => s.Comments)</div>
+    </div>
+    <input type="submit" value="Start detection" />
+}
+

@@ -1,6 +1,7 @@
 ﻿//Construct a PhotoDetector
 var detector = new affdex.PhotoDetector();
-
+var imageCount = 1;
+var detectionId;
 //Enable detection of all Expressions, Emotions and Emojis classifiers.
 detector.detectAllEmotions();
 detector.detectAllExpressions();
@@ -17,21 +18,18 @@ detector.addEventListener("onInitializeSuccess", function () {
 //Add a callback to receive the results from processing an image.
 //The faces object contains the list of the faces detected in an image.
 //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
-detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
+detector.addEventListener("onImageResultsSuccess", function (faces, image) {
     drawImage(image);
     $('#results').html("");
-    log('#results', "Timestamp: " + timestamp.toFixed(2));
-    log('#results', "Number of faces found: " + faces.length);
     if (faces.length > 0) {
-        log('#results', "Appearance: " + JSON.stringify(faces[0].appearance));
-        log('#results', "Emotions: " + JSON.stringify(faces[0].emotions, function (key, val) {
-            return val.toFixed ? Number(val.toFixed(0)) : val;
-        }));
-        log('#results', "Expressions: " + JSON.stringify(faces[0].expressions, function (key, val) {
-            return val.toFixed ? Number(val.toFixed(0)) : val;
-        }));
-        log('#results', "Emoji: " + faces[0].emojis.dominantEmoji);
-        drawFeaturePoints(image, faces[0].featurePoints);
+        $.ajax({
+            type: "POST",
+            url: "/Detector/PostMoods",
+            data: { detectionId: this.detectionId, moods: JSON.stringify(faces[0].emotions) },
+            dataType: "json"
+        });
+        log('#results', "Image number " + imageCount + " uploaded successfully");
+        imageCount += 1;
     }
 });
 
@@ -60,7 +58,8 @@ function imageLoaded(event) {
 }
 
 //Load the selected image
-function loadFile(event) {
+function loadFile(event, detectionId) {
+    this.detectionId = detectionId;
     $('#results').html("");
     var img = new Image();
     var reader = new FileReader();

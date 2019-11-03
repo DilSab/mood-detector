@@ -1,10 +1,20 @@
-﻿<div class="container-fluid">
+﻿@using MoodDetectorWebApp.Models
+
+@model DetectionStartViewModel
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Session ID: @Model.DetectionId</h3>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-10" id="affdex_elements" style="width:680px;height:480px;">
             <canvas id="image_canvas" />
         </div>
         <div class="col-md-4">
-            <div style="height:25em;">
+            <div style="height:5em;">
                 <strong>EMOTION TRACKING RESULTS</strong>
                 <div id="results" style="word-wrap:break-word;"></div>
             </div>
@@ -15,7 +25,7 @@
         </div>
     </div>
     <div>
-        <input id="upload_button" type="file" accept="image/*" onchange="loadFile(event)" style="visibility: hidden;">
+        <input id="upload_button" type="file" accept="image/*" onchange="loadFile(event, @Model.DetectionId)" style="visibility: hidden;">
         <h3>Affectiva JS SDK PhotoDetector to track different emotions.</h3>
         <p>
             <strong>Instructions</strong>
