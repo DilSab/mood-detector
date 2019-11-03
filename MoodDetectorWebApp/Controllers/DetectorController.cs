@@ -26,25 +26,30 @@ namespace MoodDetectorWebApp.Controllers
 
         // POST: Detector
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Detect(DetectViewModel model)
         {
-            SessionInfo sessionInfo = new SessionInfo()
-            {
-                User = new User() { Id = 3 },
-                Class = model.Class,
-                Comments = model.Comments,
-                Subject = model.Subject,
-                DateTime = DateTime.Now,
-                MessageSeen = 0,
-            };
+            if (ModelState.IsValid) {
+                SessionInfo sessionInfo = new SessionInfo()
+                {
+                    User = new User() { Id = 3 },
+                    Class = model.Class,
+                    Comments = model.Comments,
+                    Subject = model.Subject,
+                    DateTime = DateTime.Now,
+                    MessageSeen = 0,
+                };
 
-            int detectionId =_moodService.AddSession(sessionInfo);
-            DetectionStartViewModel detectionStartViewModel = new DetectionStartViewModel()
-            {
-                DetectionId = detectionId,
-            };
+                int detectionId =_moodService.AddSession(sessionInfo);
+                DetectionStartViewModel detectionStartViewModel = new DetectionStartViewModel()
+                {
+                    DetectionId = detectionId,
+                };
 
-            return View("~/Views/Detector/Start.cshtml", detectionStartViewModel);
+                return View("~/Views/Detector/Start.cshtml", detectionStartViewModel);
+            }
+
+            return View();
         }
 
         // POST: Detector/PostMoods/
