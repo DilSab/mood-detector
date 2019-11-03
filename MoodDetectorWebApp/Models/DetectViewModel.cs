@@ -17,7 +17,8 @@ namespace MoodDetectorWebApp.Models
         [Required]
         [StringLength(30, MinimumLength = 2)]
         public string Subject { get; set; }
-
+		
+        [Required]
         public string Comments { get; set; }
     }
 }
