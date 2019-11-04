@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Model;
+using Model.Entity;
+using System.Diagnostics;
+using System;
+using Newtonsoft.Json;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -30,6 +34,11 @@ namespace MoodDetectorWebApp.Controllers
 
         // GET: Mood/Details/5
         public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        public ActionResult StartSession()
         {
             return View();
         }
