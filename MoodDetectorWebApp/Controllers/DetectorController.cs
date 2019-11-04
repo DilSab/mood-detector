@@ -19,15 +19,15 @@ namespace MoodDetectorWebApp.Controllers
 
         // GET: Detector
         [HttpGet]
-        public ActionResult Detect()
+        public ActionResult NewSession()
         {
-            return View(new DetectViewModel());
+            return View(new NewSessionModel());
         }
 
         // POST: Detector
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Detect(DetectViewModel model)
+        public ActionResult NewSession(NewSessionModel model)
         {
             if (ModelState.IsValid) {
                 SessionInfo sessionInfo = new SessionInfo()

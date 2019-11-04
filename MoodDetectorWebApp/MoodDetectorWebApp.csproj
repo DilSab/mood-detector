@@ -132,14 +132,23 @@
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddTeacherController.cs" />
     <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\EditDeleteTeacherController.cs" />
+    <Compile Include="Controllers\ImportantInfoController.cs" />
+    <Compile Include="Controllers\LearningsController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\MoodController.cs" />
+    <Compile Include="Controllers\MyProfileAdminController.cs" />
+    <Compile Include="Controllers\MyProfileTeacherController.cs" />
+    <Compile Include="Controllers\SendInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DetectionStartViewModel.cs" />
-    <Compile Include="Models\DetectViewModel.cs" />
+    <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +174,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Detector\Start.cshtml" />
-    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Mood\MoodList.cshtml" />
     <Content Include="Views\Mood\MoodIndex.cshtml" />
   </ItemGroup>
@@ -181,7 +189,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Views\Detector\Detect.cshtml" />
+    <Content Include="Views\Detector\NewSession.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\AddTeacher\AddTeacher.cshtml" />
+    <Content Include="Views\EditDeleteTeacher\EditDeletTeacher.cshtml" />
+    <Content Include="Views\SendInfo\SendInfo.cshtml" />
+    <Content Include="Views\Logout\Logout.cshtml" />
+    <Content Include="Views\MyProfileAdmin\MyProfileAdmin.cshtml" />
+    <Content Include="Views\MyProfileTeacher\MyProfileTeacher.cshtml" />
+    <Content Include="Views\ImportantInfo\ImportantInfo.cshtml" />
+    <Content Include="Views\Learnings\Learnings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">
