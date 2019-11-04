@@ -19,6 +19,8 @@ namespace MoodDetectorWebApp
                 "~/Assets/js/lib/popper.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Assets/js/lib/bootstrap.js"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
