@@ -20,12 +20,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Mood Detector", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Mood Detector", "Index", "About", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("About", "Index", "About")</li>
                     <li>@Html.ActionLink("Detector", "Detect", "Detector")</li>
                     <li>@Html.ActionLink("Mood", "MoodIndex", "Mood")</li>
                 </ul>
