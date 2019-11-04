@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Entity;
+using System.Collections.Generic;
 
 namespace ControllerProject.Service
 {
@@ -8,5 +9,7 @@ namespace ControllerProject.Service
         void AddNewUser(AddUser addUser);
 
         User GetUser(string username);
+
+        List<User> GetUsers();
     }
 }

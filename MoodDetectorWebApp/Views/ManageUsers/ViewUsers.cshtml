@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "ViewTeachers";
+}
+
+<h2>ViewTeachers</h2>
+
+<table class="table">
+    
+
+    @foreach (Model.User item in Model)
+    {
+        if (item.AccessRights == "Teacher")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

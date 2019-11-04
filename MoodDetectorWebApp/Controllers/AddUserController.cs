@@ -2,10 +2,10 @@
 
 namespace MoodDetectorWebApp.Controllers
 {
-    public class AddTeacherController : Controller
+    public class AddUserController : Controller
     {
-        // GET: AddTeacher
-        public ActionResult AddTeacher()
+        // GET: AddUser
+        public ActionResult AddUser()
         {
             return View();
         }

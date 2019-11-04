@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Entity;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ControllerProject.Service
@@ -41,6 +42,17 @@ namespace ControllerProject.Service
                         select u).FirstOrDefault<User>();
 
             return user;
+        }
+
+        public List<User> GetUsers()
+        {
+            List<User> usersList = new List<User>();
+            IQueryable<User> users = (from u in _context.Users select u);
+            foreach (User user in users)
+            {
+                usersList.Add(user);
+            }
+            return usersList;
         }
     }
 }

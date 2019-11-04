@@ -26,7 +26,7 @@
                 <ul class="nav navbar-nav">
                     @*TODO: show based on users AccessRights or if not logged on*@
                     @{ 
-                        var AccessRights = "teacher";
+                        var AccessRights = "admin";
                     }
                     @*For everyone*@
                     <li>@Html.ActionLink("About", "About", "About")</li>
@@ -47,8 +47,8 @@
                     @*For admin*@
                     @if (AccessRights == "admin")
                     {
-                        <li>@Html.ActionLink("Add teacher", "AddTeacher", "AddTeacher")</li>
-                        <li>@Html.ActionLink("Edit or delete teacher", "EditDeleteTeacher", "EditDeleteTeacher")</li>
+                        <li>@Html.ActionLink("Add user", "AddUser", "AddUser")</li>
+                        <li>@Html.ActionLink("Manage users", "ViewUsers", "ManageUsers")</li>
                         <li>@Html.ActionLink("Send info", "SendInfo", "SendInfo")</li>
                         <li>@Html.ActionLink("My profile", "MyProfileAdmin", "MyProfileAdmin")</li>
                     }
