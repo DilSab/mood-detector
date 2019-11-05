@@ -1,38 +1,41 @@
 ﻿@using MoodDetectorWebApp.Models
 
 @model DetectionStartViewModel
+<link href="~/Assets/css/detector-start.css" rel="stylesheet" type="text/css">
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row pb-5">
+        <div class="detection-label col-md-12">
             <h3>Session ID: @Model.DetectionId</h3>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-10" id="affdex_elements" style="width:680px;height:480px;">
+        <div class="col-md-10" id="affdex_elements" style="width:680px;height:480px;display:none">
             <canvas id="image_canvas" />
         </div>
-        <div class="col-md-4">
-            <div style="height:5em;">
-                <strong>EMOTION TRACKING RESULTS</strong>
-                <div id="results" style="word-wrap:break-word;"></div>
-            </div>
-            <div>
-                <strong>DETECTOR LOG MSGS</strong>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-7">
+            <h4 class="bold">LOGS</h4>
             <div id="logs"></div>
+        </div>
+        <div class="col-5 mb-5">
+            <h4 class="bold">STATUS</h4>
+            <div id="results" style="word-wrap:break-word;"></div>
         </div>
     </div>
     <div>
         <input id="upload_button" type="file" accept="image/*" onchange="loadFile(event, @Model.DetectionId)" style="visibility: hidden;">
-        <h3>Affectiva JS SDK PhotoDetector to track different emotions.</h3>
+        <h3>Mood detection</h3>
         <p>
             <strong>Instructions</strong>
             <br />
-            Once the detector is initialized, the "choose file" button will be visible. Choose file to upload a file.
-            <br /> When a face is detected, the probabilities of the different emotions are written to the DOM.
+            You can upload multiple photos which will be analyzed by the detector and received mood information will be stored to database.
             <br />
         </p>
     </div>
 </div>
+
+<script type="text/javascript" src="https://download.affectiva.com/js/3.2.1/affdex.js"></script>
+<script type="text/javascript" src="~/Assets/js/detector.js"></script>
