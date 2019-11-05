@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MoodDetectorWebApp.Models
 {
-    public class DetectViewModel
+    public class NewSessionModel
     {
         public User User { get; set; }
         public DateTime DateTime { get; set; }

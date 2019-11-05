@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Model;
-using Model.Entity;
-using System.Diagnostics;
-using System;
-using Newtonsoft.Json;
 
 namespace MoodDetectorWebApp.Controllers
 {

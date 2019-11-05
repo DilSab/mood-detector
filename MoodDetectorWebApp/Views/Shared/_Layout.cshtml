@@ -20,14 +20,42 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Mood Detector", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Mood Detector", "About", "About", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Detector", "Detect", "Detector")</li>
-                    <li>@Html.ActionLink("Mood", "MoodIndex", "Mood")</li>
+                    @*TODO: show based on users AccessRights or if not logged on*@
+                    @{ 
+                        var AccessRights = "admin";
+                    }
+                    @*For everyone*@
+                    <li>@Html.ActionLink("About", "About", "About")</li>
+                    @*For logged out*@
+                    @if (AccessRights == "logged out")
+                    {
+                        <li>@Html.ActionLink("Log in", "Login", "Login")</li>
+                    }
+                    @*For teacher*@
+                    @if (AccessRights == "teacher")
+                    {
+                        <li>@Html.ActionLink("Important info", "ImportantInfo", "ImportantInfo")</li>
+                        <li>@Html.ActionLink("New session", "NewSession", "Detector")</li>
+                        <li>@Html.ActionLink("View session moods", "MoodIndex", "Mood")</li>
+                        <li>@Html.ActionLink("Learnings", "Learnings", "Learnings")</li>
+                        <li>@Html.ActionLink("My profile", "MyProfileTeacher", "MyProfileTeacher")</li>
+                    }
+                    @*For admin*@
+                    @if (AccessRights == "admin")
+                    {
+                        <li>@Html.ActionLink("Manage users", "ViewUsers", "ManageUsers")</li>
+                        <li>@Html.ActionLink("Send info", "SendInfo", "SendInfo")</li>
+                        <li>@Html.ActionLink("My profile", "MyProfileAdmin", "MyProfileAdmin")</li>
+                    }
+                    @*For logged in*@
+                    @if (AccessRights == "admin" || AccessRights == "teacher")
+                    {
+                        <li>@Html.ActionLink("Log out", "Logout", "Logout")</li>
+                    }
                 </ul>
             </div>
         </div>

@@ -2,13 +2,8 @@
 
 namespace MoodDetectorWebApp.Controllers
 {
-    public class HomeController : Controller
+    public class AboutController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "This project uses emotion recognition to give teachers feedback about their lectures by analyzing students' mood.";
