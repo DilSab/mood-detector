@@ -132,7 +132,6 @@
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ImportantInfoController.cs" />
@@ -191,7 +190,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Detector\NewSession.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\AddUser\AddUser.cshtml" />
+    <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
     <Content Include="Views\SendInfo\SendInfo.cshtml" />
     <Content Include="Views\Logout\Logout.cshtml" />

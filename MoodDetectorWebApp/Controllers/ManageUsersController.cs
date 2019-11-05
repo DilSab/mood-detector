@@ -21,6 +21,12 @@ namespace MoodDetectorWebApp.Controllers
             return View("ViewUsers", users);
         }
 
+        // GET: AddUser
+        public ActionResult AddUser()
+        {
+            return View();
+        }
+
         // GET: EditUser
         public ActionResult EditUser()
         {
