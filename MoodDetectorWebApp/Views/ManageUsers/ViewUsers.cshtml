@@ -3,12 +3,7 @@
 }
 
 <h2>View users</h2>
-@using (Html.BeginForm("AddUser", "ManageUsers"))
-{
-    <div>
-        <input type="submit" value="Add user" />
-    </div>
-}
+@Html.ActionLink("Add user", "AddUser", "ManageUsers")
 
 <table class="table">
 

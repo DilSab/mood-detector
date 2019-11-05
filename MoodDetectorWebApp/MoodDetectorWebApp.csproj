@@ -146,6 +146,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddUserModel.cs" />
     <Compile Include="Models\DetectionStartViewModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -190,7 +191,6 @@
     <None Include="packages.config" />
     <Content Include="Views\Detector\NewSession.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
     <Content Include="Views\SendInfo\SendInfo.cshtml" />
     <Content Include="Views\Logout\Logout.cshtml" />
@@ -200,6 +200,8 @@
     <Content Include="Views\Learnings\Learnings.cshtml" />
     <Content Include="Views\ManageUsers\ViewUsers.cshtml" />
     <Content Include="Views\ManageUsers\DeleteUser.cshtml" />
+    <Content Include="Views\ManageUsers\AddUser.cshtml" />
+    <Content Include="Views\ManageUsers\SuccessfulAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">
