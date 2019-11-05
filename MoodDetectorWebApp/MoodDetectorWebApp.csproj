@@ -151,6 +151,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\detector-start.css" />
     <Content Include="Assets\css\lib\bootstrap-grid.css" />
     <Content Include="Assets\css\lib\bootstrap-reboot.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
