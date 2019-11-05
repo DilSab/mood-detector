@@ -24,7 +24,6 @@ namespace MoodDetectorWebApp.Controllers
             List <User> users = _userService.GetUsers();
             return View("ViewUsers", users);
         }
-
         
         public ActionResult AddUser()
         {

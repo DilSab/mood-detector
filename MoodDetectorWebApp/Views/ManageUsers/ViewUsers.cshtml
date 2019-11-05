@@ -3,14 +3,19 @@
 }
 
 <h2>View users</h2>
-@Html.ActionLink("Add user", "AddUser", "ManageUsers")
+@using (@Html.BeginForm("AddUser", "ManageUsers", FormMethod.Get)) 
+{
+    <div>
+        <input type="submit" value="Add user"/>
+    </div>
+}
 
 <table class="table">
 
     @foreach (Model.User item in Model)
+{
+    if (item.AccessRights != "Admin")
     {
-        if (item.AccessRights != "Admin")
-        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Firstname)
