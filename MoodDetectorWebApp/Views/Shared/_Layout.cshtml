@@ -10,8 +10,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
-    <script type="text/javascript" src="https://download.affectiva.com/js/3.2.1/affdex.js"></script>
-    <script type="text/javascript" src="~/Assets/js/detector.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -27,7 +25,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*TODO: show based on users AccessRights or if not logged on*@
-
+                    @{ 
+                        var AccessRights = "teacher";
+                    }
+                 
                     @*For everyone*@
                     <li>@Html.ActionLink("About", "About", "About")</li>
                     @*For logged out*@
