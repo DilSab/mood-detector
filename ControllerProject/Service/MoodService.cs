@@ -111,6 +111,7 @@ namespace ControllerProject.Service
 
         public void UpdateSessionMessageStatus(int classmoodId, int mask)
         {
+            if (!_context.Sessions.Any(x => x.Id == classmoodId)) return;
             var classmood = _context.Sessions.First(x => x.Id == classmoodId);
             classmood.MessageSeen |= mask;   
             

@@ -1,7 +1,42 @@
-﻿
+﻿@using MoodDetectorWebApp.Models
+
 @{
     ViewBag.Title = "Learnings";
 }
+<h2>Assigned learnings</h2>
+@if (Model != null)
+{
+    List<Tuple<string, int, int>> learnings = Model;
+    int cnt = 0;
+    for (int i = 0; i < 2; i++)
+    {
+        if (learnings[i].Item1 == "")
+        {
+            continue;
+        }
+        cnt++;
+        <p>@learnings[i].Item1 @Html.ActionLink("Link","RemoveLearning", new { a = learnings[i].Item2, b =learnings[i].Item3 }, new { id = "myLink" + i })</p>
+        <script>
+                $("#myLink"+@i).click(function (event) {
+                    event.preventDefault();
+                    $.ajax({
 
-<h2>Learnings</h2>
+                        url:$(this).attr("href"), 
 
+                    });
+                    $("p").remove(":contains('@learnings[i].Item1')")
+
+                });
+        </script>
+
+    }
+    if (cnt == 0)
+    {
+        <p>List for this user is empty</p>
+    }
+
+}
+else
+{
+    <p>List for this user is emptybb</p>
+}

@@ -17,7 +17,7 @@ namespace ControllerProject.Service
         public Tuple<string, int, int> GetAngerMessage()
         {
             Mood mood = _moodService.GetLastClassMood(user, 1);
-            if (mood.Anger < 0.8) return new Tuple<string, int, int>("", mood.SessionId, 1);
+            if (mood.Anger < 0.02) return new Tuple<string, int, int>("", mood.SessionId, 1);
             string mess = "Anger levels are too high in your classes! You have a learning assigned";
             return new Tuple<string, int, int>(mess, mood.SessionId, 1);
         }

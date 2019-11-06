@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "LearningsIndex";
+}
+<h2>Here you can view your learnings</h2>
+User ID
+<br />
+<input type="text" id="user-id-input">
+<a href="#" class="btn btn-primary" id="show-learnings-btn">Show learnings</a>
+
+<script>
+$(function () {
+    $("#show-learnings-btn").click(function (event) {
+        event.preventDefault();
+        inputValue = $("#user-id-input").val();
+        if ($.isNumeric(inputValue)) {
+            window.location.href = "@Url.Action("GetLearnings", "Learnings")" + "/" + $("#user-id-input").val();
+        }
+    });
+});
+</script>
+
