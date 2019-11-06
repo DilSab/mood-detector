@@ -9,36 +9,22 @@
     @Html.AntiForgeryToken()
 
     <head>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     </head>
 
+    <div class="row mt-5 mb-3">
+        
+        <div class="col-lg-11 col-sm-10 col-9">@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = "Username", @class = "form-control" } })</div>
+    </div>
+    <div class="row mb-3">
+      
+        <div class="col-lg-11 col-sm-10 col-9">@Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "form-control" } })</div>
+    </div>
+    
+    <input type="submit" value="Login" />
 
-    <body>
-        <div class="container">
 
-            <div class="row">
-                <div class="col-md-4 offset-md-4">
-                    <div class="card text-center card  bg-default mb-3">
-                        <div class="card-header">
-                            LOGIN
-                        </div>
-                        <div class="card-body">
-                            <label>User Name</label>
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = "Username", @class = "form-control" } })
-                            <br />
-                            <label>Password</label>
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "form-control" } })
-
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#" class="btn btn-secondary">LOGIN</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
 }

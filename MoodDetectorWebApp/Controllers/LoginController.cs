@@ -30,7 +30,7 @@ namespace MoodDetectorWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            bool loginCorrect = _loginProcessor.ProcessLogin(model.UserName, model.LoginInfo.Password);
+            bool loginCorrect = _loginProcessor.ProcessLogin(model.UserName, model.Password);
 
             if (loginCorrect) {
                 var user = _userService.GetUser(model.UserName);
@@ -40,7 +40,7 @@ namespace MoodDetectorWebApp.Controllers
                         return View("~/Views/MyProfileAdmin/MyProfileAdmin.cshtml");
                        
                     case "Teacher":
-                        return View("~/Views/MyProfileTeacher/MyProfileTeacher.csthml");                        
+                        return View("~/Views/MyProfileTeacher/MyProfileTeacher.cshtml");                        
                 }
             }
 
