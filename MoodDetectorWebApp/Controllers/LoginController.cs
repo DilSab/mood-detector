@@ -43,6 +43,8 @@ namespace MoodDetectorWebApp.Controllers
                         return View("~/Views/MyProfileTeacher/MyProfileTeacher.cshtml");                        
                 }
             }
+            else
+                 return View("~/Views/Login/Login.cshtml");
 
             return View();
         }
