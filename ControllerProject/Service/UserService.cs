@@ -33,6 +33,26 @@ namespace ControllerProject.Service
             _context.SaveChanges();
         }
 
+        public void EditUser(AddUser addUser, int id)
+        {
+            var user = new User()
+            {
+                Firstname = addUser.Firstname,
+                Lastname = addUser.Lastname,
+                AccessRights = addUser.AccessRights
+            };
+            _context.LoginInfoes.Find(id).User = user;
+            _context.LoginInfoes.Find(id).Username = addUser.Username;
+            _context.LoginInfoes.Find(id).Password = addUser.Password;
+            _context.LoginInfoes.Find(id).Email = addUser.Email;
+            _context.SaveChanges();
+        }
+
+        public string FindUsernameById(int id)
+        {
+            return _context.LoginInfoes.Find(id).Username;
+        }
+
         public User GetUser(string username)
         {
             var user = (from u in _context.Users
@@ -42,6 +62,24 @@ namespace ControllerProject.Service
                         select u).FirstOrDefault<User>();
 
             return user;
+        }
+
+        public AddUser GetAddUser(int id)
+        {
+            var loginInfo = (from l in _context.LoginInfoes
+                        where l.Id == id
+                        select l).FirstOrDefault<LoginInfo>();
+            var user = GetUser(FindUsernameById(id));
+            AddUser addUser = new AddUser(
+                loginInfo.Username,
+                loginInfo.Password,
+                loginInfo.Email,
+                user.Firstname,
+                user.Lastname,
+                user.AccessRights
+            );
+
+            return addUser;
         }
 
         public List<User> GetUsers()

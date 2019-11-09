@@ -25,6 +25,7 @@ namespace MoodDetectorWebApp.Controllers
             return View("ViewUsers", users);
         }
         
+        [HttpGet]
         public ActionResult AddUser()
         {
             return View("AddUser");
@@ -49,10 +50,30 @@ namespace MoodDetectorWebApp.Controllers
             return View("SuccessfulAdd");
         }
 
-        // GET: EditUser
-        public ActionResult EditUser()
+        [HttpGet]
+        public ActionResult EditUser(int id)
         {
-            return View();
+            var user = _userService.GetAddUser(id);
+            return View("EditUser", user);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(AddUserModel addUserModel, int id)
+        {
+            AddUser addUser = new AddUser(
+                addUserModel.Username,
+                addUserModel.Password,
+                addUserModel.Email,
+                addUserModel.Firstname,
+                addUserModel.Lastname,
+                addUserModel.AccessRights
+                );
+            /*if (!_registerAuthenticator.IsRegisterDataCorrect(addUser))
+            {
+                return View("DeleteUser");
+            }*/
+            _userService.EditUser(addUser, id);
+            return View("SuccessfulAdd");
         }
 
         // GET: DeleteUser
