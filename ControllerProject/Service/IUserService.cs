@@ -10,7 +10,11 @@ namespace ControllerProject.Service
 
         void EditUser(AddUser addUser, int id);
 
+        void DeleteUser(int id);
+
         string FindUsernameById(int id);
+
+        int FindLoginInfoesIdByUserId(int id);
 
         User GetUser(string username);
 

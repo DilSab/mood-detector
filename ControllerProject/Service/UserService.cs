@@ -35,22 +35,36 @@ namespace ControllerProject.Service
 
         public void EditUser(AddUser addUser, int id)
         {
-            var user = new User()
-            {
-                Firstname = addUser.Firstname,
-                Lastname = addUser.Lastname,
-                AccessRights = addUser.AccessRights
-            };
-            _context.LoginInfoes.Find(id).User = user;
-            _context.LoginInfoes.Find(id).Username = addUser.Username;
-            _context.LoginInfoes.Find(id).Password = addUser.Password;
-            _context.LoginInfoes.Find(id).Email = addUser.Email;
+            var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
+            loginInfo.User.Firstname = addUser.Firstname;
+            loginInfo.User.Lastname = addUser.Lastname;
+            loginInfo.User.AccessRights = addUser.AccessRights;
+            loginInfo.Username = addUser.Username;
+            loginInfo.Password = addUser.Password;
+            loginInfo.Email = addUser.Email;
+            _context.SaveChanges();
+        }
+
+        public void DeleteUser(int id)
+        {
+            var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
+            var user = _context.Users.Find(id);
+            _context.LoginInfoes.Remove(loginInfo);
+            _context.Users.Remove(user);
             _context.SaveChanges();
         }
 
         public string FindUsernameById(int id)
         {
-            return _context.LoginInfoes.Find(id).Username;
+            return _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id)).Username;
+        }
+
+        public int FindLoginInfoesIdByUserId(int id)
+        {
+            var loginInfoes = (from l in _context.LoginInfoes
+                          where l.UserId == id
+                          select l).FirstOrDefault<LoginInfo>();
+            return loginInfoes.Id;
         }
 
         public User GetUser(string username)
@@ -66,8 +80,9 @@ namespace ControllerProject.Service
 
         public AddUser GetAddUser(int id)
         {
+            var loginInfoId = FindLoginInfoesIdByUserId(id);
             var loginInfo = (from l in _context.LoginInfoes
-                        where l.Id == id
+                        where l.Id == loginInfoId
                         select l).FirstOrDefault<LoginInfo>();
             var user = GetUser(FindUsernameById(id));
             AddUser addUser = new AddUser(
