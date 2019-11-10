@@ -20,16 +20,16 @@ namespace UnitTest.Service.UserServiceTest
             mockContext.Setup(m => m.LoginInfoes).Returns(mockSet.Object);
 
             var service = new UserService(mockContext.Object);
-            AddUser user = CreateAddUser();
+            UserWithLogin user = CreateAddUser();
             service.AddNewUser(user);
 
             mockSet.Verify(m => m.Add(It.IsAny<LoginInfo>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
         }
 
-        private AddUser CreateAddUser()
+        private UserWithLogin CreateAddUser()
         {
-            AddUser addUser = new AddUser()
+            UserWithLogin addUser = new UserWithLogin()
             {
                 Firstname = "James",
                 Lastname = "Smith",
