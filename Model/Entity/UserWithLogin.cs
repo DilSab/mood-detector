@@ -1,6 +1,6 @@
 ﻿namespace Model.Entity
 {
-    public struct AddUser
+    public struct UserWithLogin
     {
         public string Username;
         public string Password;
@@ -9,7 +9,7 @@
         public string Lastname;
         public string AccessRights;
 
-        public AddUser(
+        public UserWithLogin(
             string username,
             string password,
             string email,

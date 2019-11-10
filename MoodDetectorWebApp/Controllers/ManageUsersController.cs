@@ -34,7 +34,7 @@ namespace MoodDetectorWebApp.Controllers
         [HttpPost]
         public ActionResult AddUser(AddUserModel addUserModel)
         {
-            AddUser addUser = new AddUser(
+            UserWithLogin addUser = new UserWithLogin(
                 addUserModel.Username,
                 addUserModel.Password,
                 addUserModel.Email,
@@ -53,14 +53,14 @@ namespace MoodDetectorWebApp.Controllers
         [HttpGet]
         public ActionResult EditUser(int id)
         {
-            var user = _userService.GetAddUser(id);
+            var user = _userService.GetUserWithLogin(id);
             return View("EditUser", user);
         }
 
         [HttpPost]
         public ActionResult EditUser(AddUserModel addUserModel, int id)
         {
-            AddUser addUser = new AddUser(
+            UserWithLogin editUser = new UserWithLogin(
                 addUserModel.Username,
                 addUserModel.Password,
                 addUserModel.Email,
@@ -72,7 +72,7 @@ namespace MoodDetectorWebApp.Controllers
             {
                 return View("DeleteUser");
             }*/
-            _userService.EditUser(addUser, id);
+            _userService.EditUser(editUser, id);
             return View("SuccessfulAdd");
         }
 
@@ -82,7 +82,7 @@ namespace MoodDetectorWebApp.Controllers
             return View("DeleteUser", _userService.GetUser(_userService.FindUsernameById(id)));
         }
 
-        public ActionResult DeleteUserPost(AddUserModel addUserModel, int id)
+        public ActionResult DeleteUserPost(int id)
         {
             _userService.DeleteUser(id);
             return View("SuccessfulAdd");

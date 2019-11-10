@@ -6,9 +6,9 @@ namespace ControllerProject.Service
 {
     public interface IUserService
     {
-        void AddNewUser(AddUser addUser);
+        void AddNewUser(UserWithLogin addUser);
 
-        void EditUser(AddUser addUser, int id);
+        void EditUser(UserWithLogin addUser, int id);
 
         void DeleteUser(int id);
 
@@ -18,7 +18,7 @@ namespace ControllerProject.Service
 
         User GetUser(string username);
 
-        AddUser GetAddUser(int id);
+        UserWithLogin GetUserWithLogin(int id);
 
         List<User> GetUsers();
     }

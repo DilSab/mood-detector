@@ -14,7 +14,7 @@ namespace ControllerProject.Service
             _context = context;
         }
 
-        public void AddNewUser(AddUser addUser)
+        public void AddNewUser(UserWithLogin addUser)
         {
             var loginInfo = new LoginInfo()
             {
@@ -33,7 +33,7 @@ namespace ControllerProject.Service
             _context.SaveChanges();
         }
 
-        public void EditUser(AddUser addUser, int id)
+        public void EditUser(UserWithLogin addUser, int id)
         {
             var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
             loginInfo.User.Firstname = addUser.Firstname;
@@ -48,9 +48,8 @@ namespace ControllerProject.Service
         public void DeleteUser(int id)
         {
             var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
-            var user = _context.Users.Find(id);
+            var user = loginInfo.User;
             _context.LoginInfoes.Remove(loginInfo);
-            _context.SaveChanges();
             _context.Users.Remove(user);
             _context.SaveChanges();
         }
@@ -79,14 +78,14 @@ namespace ControllerProject.Service
             return user;
         }
 
-        public AddUser GetAddUser(int id)
+        public UserWithLogin GetUserWithLogin(int id)
         {
             var loginInfoId = FindLoginInfoesIdByUserId(id);
             var loginInfo = (from l in _context.LoginInfoes
                         where l.Id == loginInfoId
                         select l).FirstOrDefault<LoginInfo>();
             var user = GetUser(FindUsernameById(id));
-            AddUser addUser = new AddUser(
+            UserWithLogin userWithLogin = new UserWithLogin(
                 loginInfo.Username,
                 loginInfo.Password,
                 loginInfo.Email,
@@ -95,7 +94,7 @@ namespace ControllerProject.Service
                 user.AccessRights
             );
 
-            return addUser;
+            return userWithLogin;
         }
 
         public List<User> GetUsers()

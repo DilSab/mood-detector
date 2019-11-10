@@ -99,7 +99,7 @@
     <Compile Include="C__RefactorLog.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\AddUser.cs" />
+    <Compile Include="Entity\UserWithLogin.cs" />
     <Compile Include="Entity\MoodCollection.cs" />
     <Compile Include="Entity\SessionInfo.cs" />
     <Compile Include="LoginInfo.cs">
