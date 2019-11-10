@@ -2,7 +2,6 @@
 using Model;
 using Model.Entity;
 using MoodDetectorWebApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -22,10 +21,10 @@ namespace MoodDetectorWebApp.Controllers
         [HttpGet]
         public ActionResult ViewUsers()
         {
-            List <User> users = _userService.GetUsers();
+            List<User> users = _userService.GetUsers();
             return View("ViewUsers", users);
         }
-        
+
         [HttpGet]
         public ActionResult AddUser()
         {
@@ -83,8 +82,7 @@ namespace MoodDetectorWebApp.Controllers
             return View("DeleteUser", _userService.GetUser(_userService.FindUsernameById(id)));
         }
 
-        [HttpPost]
-        public ActionResult DeleteUserPost(int id)
+        public ActionResult DeleteUserPost(AddUserModel addUserModel, int id)
         {
             _userService.DeleteUser(id);
             return View("SuccessfulAdd");

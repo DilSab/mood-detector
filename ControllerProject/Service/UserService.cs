@@ -50,6 +50,7 @@ namespace ControllerProject.Service
             var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
             var user = _context.Users.Find(id);
             _context.LoginInfoes.Remove(loginInfo);
+            _context.SaveChanges();
             _context.Users.Remove(user);
             _context.SaveChanges();
         }
