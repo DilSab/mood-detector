@@ -10,6 +10,8 @@ namespace MoodDetectorWebApp.Controllers
         private ILoginProcessor _loginProcessor;
         private IUserService _userService;
         private IMoodService _moodService;
+
+        public static string AccessRights = "logged out";
         
         public LoginController(ILoginProcessor loginProcessor, IUserService userService, IMoodService moodService)
         {
@@ -32,19 +34,25 @@ namespace MoodDetectorWebApp.Controllers
         {
             bool loginCorrect = _loginProcessor.ProcessLogin(model.UserName, model.Password);
 
-            if (loginCorrect) {
+            if (loginCorrect)
+            {
                 var user = _userService.GetUser(model.UserName);
                 switch (user.AccessRights)
                 {
                     case "Admin":
+                        LoginController.AccessRights = "admin";
                         return View("~/Views/MyProfileAdmin/MyProfileAdmin.cshtml");
-                       
+
                     case "Teacher":
-                        return View("~/Views/MyProfileTeacher/MyProfileTeacher.cshtml");                        
+                        LoginController.AccessRights = "teacher";
+                        return View("~/Views/MyProfileTeacher/MyProfileTeacher.cshtml");
                 }
             }
             else
-                 return View("~/Views/Login/Login.cshtml");
+            {
+                LoginController.AccessRights = "logged out";
+                return View("~/Views/Login/Login.cshtml");
+            }
 
             return View();
             

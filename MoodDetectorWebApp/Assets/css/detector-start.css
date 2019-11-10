@@ -1,0 +1,9 @@
+﻿.detection-label {
+    border-bottom: solid 2px #eee;
+    border-top: solid 2px #eee;
+    background-color: #f7f7f7;
+}
+
+.bold {
+    font-weight: bold;
+}
