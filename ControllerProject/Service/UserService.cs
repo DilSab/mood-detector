@@ -36,12 +36,12 @@ namespace ControllerProject.Service
         public void EditUser(UserWithLogin editUser, int id)
         {
             var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
-            loginInfo.User.Firstname = addUser.Firstname;
-            loginInfo.User.Lastname = addUser.Lastname;
-            loginInfo.User.AccessRights = addUser.AccessRights;
-            loginInfo.Username = addUser.Username;
-            loginInfo.Password = addUser.Password;
-            loginInfo.Email = addUser.Email;
+            loginInfo.User.Firstname = editUser.Firstname;
+            loginInfo.User.Lastname = editUser.Lastname;
+            loginInfo.User.AccessRights = editUser.AccessRights;
+            loginInfo.Username = editUser.Username;
+            loginInfo.Password = editUser.Password;
+            loginInfo.Email = editUser.Email;
             _context.SaveChanges();
         }
 
