@@ -8,7 +8,7 @@ namespace ControllerProject.Service
     {
         void AddNewUser(UserWithLogin addUser);
 
-        void EditUser(UserWithLogin addUser, int id);
+        void EditUser(UserWithLogin editUser, int id);
 
         void DeleteUser(int id);
 

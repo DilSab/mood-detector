@@ -33,7 +33,7 @@ namespace ControllerProject.Service
             _context.SaveChanges();
         }
 
-        public void EditUser(UserWithLogin addUser, int id)
+        public void EditUser(UserWithLogin editUser, int id)
         {
             var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
             loginInfo.User.Firstname = addUser.Firstname;
