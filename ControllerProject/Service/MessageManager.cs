@@ -1,6 +1,4 @@
 ﻿using Model;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
 
 namespace ControllerProject.Service
 {
@@ -17,23 +15,7 @@ namespace ControllerProject.Service
         {
             _context.GlobalMessages.Add(message);
 
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var errors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in errors.ValidationErrors)
-                    {
-                        // get the error message 
-                        Debug.Write(validationError.ErrorMessage);
-                    }
-                }
-            }
-
-            return 1;
+            return _context.SaveChanges();
         }
     }
 }
