@@ -96,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILoginProcessor.cs" />
+    <Compile Include="Service\IMessageManager.cs" />
+    <Compile Include="Service\MessageManager.cs" />
+    <Compile Include="Messaging\Messenger.cs" />
     <Compile Include="Service\DataGenerator.cs" />
     <Compile Include="Service\IDataGenerator.cs" />
     <Compile Include="Service\IMoodService.cs" />

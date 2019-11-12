@@ -48,10 +48,12 @@
                         <li>@Html.ActionLink("Manage users", "ViewUsers", "ManageUsers")</li>
                         <li>@Html.ActionLink("Send info", "SendInfo", "SendInfo")</li>
                         <li>@Html.ActionLink("My profile", "MyProfileAdmin", "MyProfileAdmin")</li>
+                        <li>@Html.ActionLink("Messages", "GlobalMessage", "Messenger")</li>
                     }
                     @*For logged in*@
                     @if (AccessRights == "admin" || AccessRights == "teacher")
                     {
+                        <li>@Html.ActionLink("Log out", "Logout", "Logout")</li>
                         <li>@Html.ActionLink("Log out", "Logout", "Logout")</li>
                     }
                 </ul>
