@@ -12,6 +12,7 @@ namespace ControllerProject.Service
         List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null);
         Mood GetLastClassMood(User user, int mask);
         void UpdateSessionMessageStatus(int classmoodId, int mask);
+        int GetSessionMessageStatus(int classmoodId, int mask);
         MoodCollection GetMoodAverage(List<Mood> moods);
     }
 }

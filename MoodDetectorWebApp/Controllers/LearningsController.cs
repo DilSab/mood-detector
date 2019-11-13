@@ -23,16 +23,14 @@ namespace MoodDetectorWebApp.Controllers
         }
         public ActionResult GetLearnings(int id)
         {
-            List<Tuple<string, int, int>> learnings = new List<Tuple<string, int, int>>();
+            
             LearningService learningService = new LearningService(new User() { Id = id }, _moodService);
-            learnings.Add(learningService.GetJoyMessage());
-            learnings.Add(learningService.GetAngerMessage());
+            List<Message> learnings = learningService.GetMessages();
             return View("Learnings",learnings);
         }
         public ActionResult RemoveLearning(int a, int b)
         {
             _moodService.UpdateSessionMessageStatus(a, b);
-            Debug.WriteLine(a);
             return new EmptyResult();
         }
     }
