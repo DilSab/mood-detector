@@ -203,6 +203,9 @@
     <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\SuccessfulAdd.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
+    <Content Include="Views\Mood\SessionMood.cshtml" />
+    <Content Include="Views\Mood\SessionIndex.cshtml" />
+    <Content Include="Views\Mood\MoodChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

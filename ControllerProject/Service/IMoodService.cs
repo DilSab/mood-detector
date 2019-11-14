@@ -9,6 +9,8 @@ namespace ControllerProject.Service
     {
         int AddSession(SessionInfo sessionInfo);
         void AddMood(int sessionId, MoodCollection moodCollection);
+        MoodCollection GetMoodsBySessionId(int id);
+        Dictionary<string, double> GetDominantMoods(MoodCollection moodCollection);
         List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null);
         Mood GetLastClassMood(User user, int mask);
         void UpdateSessionMessageStatus(int classmoodId, int mask);

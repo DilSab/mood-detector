@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "SessionIndex";
+}
+
+<h2>Here you session's mood average</h2>
+Session ID
+<br />
+<input type="text" id="session-id-input">
+<a href="#" class="btn btn-primary" id="show-sessionmood-btn">Show the average mood</a>
+
+<script>
+$(function () {
+    $("#show-sessionmood-btn").click(function (event) {
+        event.preventDefault();
+        inputValue = $("#session-id-input").val();
+        if ($.isNumeric(inputValue)) {
+            window.location.href = "@Url.Action("GetSessionMoodAverage", "Mood")" + "/" + $("#session-id-input").val();
+        }
+    });
+});
+</script>
+
+

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Model;
+using Model.Entity;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -20,12 +21,24 @@ namespace MoodDetectorWebApp.Controllers
             return View();
         }
 
+        public ActionResult SessionIndex()
+        {
+            return View("SessionIndex");
+        }
+
         // GET: Mood/MoodList/
         public ActionResult GetMoodList(int id)
         {
             List<Mood> moods = _moodService.GetMoodsByDate(new User() { Id = id });
             
             return View("MoodList", moods);
+        }
+
+        public ActionResult GetSessionMoodAverage(int id)
+        {
+            MoodCollection mood = _moodService.GetMoodsBySessionId(id);
+            Dictionary<string, double> dominantMoods = _moodService.GetDominantMoods(mood);
+            return View("SessionMood", dominantMoods);
         }
 
         // GET: Mood/Details/5

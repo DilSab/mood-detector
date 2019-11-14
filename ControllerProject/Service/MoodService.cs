@@ -54,6 +54,46 @@ namespace ControllerProject.Service
             _context.SaveChanges();
         }
 
+        public MoodCollection GetMoodsBySessionId(int id)
+        {
+            int idExists = (from i in _context.Sessions
+                            where i.Id == id
+                            select i).Count();
+            if (idExists == 0)
+            {
+                throw new ArgumentException("Session with id " + id + " doesn't exist!");
+            }
+            List<Mood> moods = (from m in _context.Moods
+                                where m.SessionId == id
+                                select m).ToList();
+            MoodCollection mood = GetMoodAverage(moods);
+            
+            return mood;
+        }
+
+        public Dictionary<string, double> GetDominantMoods(MoodCollection moodCollection)
+        {
+            Dictionary<string, double> moods = new Dictionary<string, double>();
+            moods.Add("Joy", moodCollection.Joy);
+            moods.Add("Anger", moodCollection.Anger);
+            moods.Add("Contempt", moodCollection.Contempt);
+            moods.Add("Disgust", moodCollection.Disgust);
+            moods.Add("Engagement", moodCollection.Engagement);
+            moods.Add("Fear", moodCollection.Fear);
+            moods.Add("Sadness", moodCollection.Sadness);
+            moods.Add("Suprise", moodCollection.Suprise);
+            moods.Add("Valence", moodCollection.Valence);
+
+            var sortedMoods = from entry in moods orderby entry.Value descending select entry;
+
+            Dictionary<string, double> dominantMoods = new Dictionary<string, double>();
+            dominantMoods.Add(sortedMoods.ElementAt(0).Key, sortedMoods.ElementAt(0).Value);
+            dominantMoods.Add(sortedMoods.ElementAt(1).Key, sortedMoods.ElementAt(1).Value);
+            dominantMoods.Add(sortedMoods.ElementAt(2).Key, sortedMoods.ElementAt(2).Value);
+
+            return dominantMoods;
+        }
+
 
         public List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null)
         {
