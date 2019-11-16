@@ -34,7 +34,6 @@ namespace MoodDetectorWebApp
                         using (MoodDetectorDBEntities entities = new MoodDetectorDBEntities())
                         {
                             LoginInfo user = entities.LoginInfoes.SingleOrDefault(u => u.Username == username);
-
                             roles = user.User.AccessRights;
                         }
                   
@@ -44,12 +43,10 @@ namespace MoodDetectorWebApp
                     }
                     catch (Exception)
                     {
-                       
+                        // Sugalvot kaip patenkinti reikalavima (Exceptions and dealing with them in a meaningfull way.)
                     }
                 }
             }
         }
-
     }
-
 }

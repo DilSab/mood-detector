@@ -22,7 +22,6 @@ namespace MoodDetectorWebApp.Controllers
             _moodService = moodService;
         }
 
-
         // GET: Login
         public ActionResult Login()
         {
@@ -60,11 +59,8 @@ namespace MoodDetectorWebApp.Controllers
                 return View("Login");
             }
 
-            return View();
-            
-        }
-
-
+            return View();            
+        }        
     }
 }
 // **

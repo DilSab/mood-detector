@@ -36,7 +36,7 @@ namespace MoodDetectorWebApp.Controllers
         public ActionResult NewSession(NewSessionModel model)
         {
             // Randamas dabartinis vartotojas is prisijungimo metu sukurto cookio.
-            var currentUser = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
+            User currentUser = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
 
             if (ModelState.IsValid) {
                 SessionInfo sessionInfo = new SessionInfo()
