@@ -19,7 +19,7 @@ namespace WindowsFormsUI
 
         private void AddUserButton_Click(object sender, EventArgs e)
         {
-            var addUser = new AddUser(
+            var addUser = new UserWithLogin(
                 usernameTextBox.Text,
                 passwordTextBox.Text,
                 emailTextBox.Text,

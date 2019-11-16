@@ -9,6 +9,6 @@ namespace ControllerProject.Service
 {
     public interface IRegisterAuthenticator
     {
-        bool IsRegisterDataCorrect(AddUser addUser);
+        bool IsRegisterDataCorrect(UserWithLogin addUser);
     }
 }

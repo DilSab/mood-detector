@@ -193,7 +193,6 @@
     <None Include="packages.config" />
     <Content Include="Views\Detector\NewSession.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\ManageUsers\EditUser.cshtml" />
     <Content Include="Views\SendInfo\SendInfo.cshtml" />
     <Content Include="Views\Logout\Logout.cshtml" />
     <Content Include="Views\MyProfileAdmin\MyProfileAdmin.cshtml" />
@@ -204,6 +203,7 @@
     <Content Include="Views\ManageUsers\DeleteUser.cshtml" />
     <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\SuccessfulAdd.cshtml" />
+    <Content Include="Views\ManageUsers\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

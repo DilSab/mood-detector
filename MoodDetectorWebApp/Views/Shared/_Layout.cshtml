@@ -1,6 +1,4 @@
-﻿@using MoodDetectorWebApp.Controllers
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,18 +24,17 @@
                 <ul class="nav navbar-nav">
                     @*TODO: show based on users AccessRights or if not logged on*@
                     @{ 
-                        var AccessRights = "";
+                        var AccessRights = "admin";
                     }
-                 
                     @*For everyone*@
                     <li>@Html.ActionLink("About", "About", "About")</li>
                     @*For logged out*@
-                    @if (LoginController.AccessRights == "logged out")
+                    @if (AccessRights == "logged out")
                     {
                         <li>@Html.ActionLink("Log in", "Login", "Login")</li>
                     }
                     @*For teacher*@
-                    @if (LoginController.AccessRights == "teacher")
+                    @if (AccessRights == "teacher")
                     {
                         <li>@Html.ActionLink("Important info", "ImportantInfo", "ImportantInfo")</li>
                         <li>@Html.ActionLink("New session", "NewSession", "Detector")</li>
@@ -46,14 +43,14 @@
                         <li>@Html.ActionLink("My profile", "MyProfileTeacher", "MyProfileTeacher")</li>
                     }
                     @*For admin*@
-                    @if (LoginController.AccessRights == "admin")
+                    @if (AccessRights == "admin")
                     {
                         <li>@Html.ActionLink("Manage users", "ViewUsers", "ManageUsers")</li>
                         <li>@Html.ActionLink("Send info", "SendInfo", "SendInfo")</li>
                         <li>@Html.ActionLink("My profile", "MyProfileAdmin", "MyProfileAdmin")</li>
                     }
                     @*For logged in*@
-                    @if (LoginController.AccessRights == "admin" || LoginController.AccessRights == "teacher")
+                    @if (AccessRights == "admin" || AccessRights == "teacher")
                     {
                         <li>@Html.ActionLink("Log out", "Logout", "Logout")</li>
                     }
