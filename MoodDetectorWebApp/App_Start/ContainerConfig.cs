@@ -18,7 +18,7 @@ namespace MoodDetectorWebApp
             builder.RegisterModelBinders(Assembly.GetExecutingAssembly());
             builder.RegisterModelBinderProvider();
 
-            builder.RegisterType<LoginProcessor>().As<ILoginProcessor>().SingleInstance();
+            builder.RegisterType<LoginProcessor>().As<ILoginProcessor>().InstancePerRequest();
             builder.RegisterType<MoodDetectorDBEntities>().As<MoodDetectorDBEntities>().SingleInstance();
 
             builder.RegisterAssemblyTypes(Assembly.Load(nameof(Model)))

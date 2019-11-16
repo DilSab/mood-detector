@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-
+using System.Web.Security;
 namespace MoodDetectorWebApp.Controllers
 {
     public class LogoutController : Controller
@@ -7,7 +7,9 @@ namespace MoodDetectorWebApp.Controllers
         // GET: Logout
         public ActionResult Logout()
         {
-            return View();
+            FormsAuthentication.SignOut();
+            LoginController.AccessRights = "logged out";
+            return RedirectToAction("About", "About");
         }
     }
 }
