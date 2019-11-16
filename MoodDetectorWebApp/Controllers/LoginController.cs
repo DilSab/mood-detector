@@ -2,6 +2,8 @@
 using ControllerProject;
 using ControllerProject.Service;
 using MoodDetectorWebApp.Models;
+using System.Web.Security;
+using System.Security.Principal;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -30,33 +32,39 @@ namespace MoodDetectorWebApp.Controllers
         // POST: Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             bool loginCorrect = _loginProcessor.ProcessLogin(model.UserName, model.Password);
 
             if (loginCorrect)
             {
-                var user = _userService.GetUser(model.UserName);
+                var user = _userService.GetUser(model.UserName);              
+
                 switch (user.AccessRights)
                 {
-                    case "Admin":
+                    case "Admin":                        
+                        FormsAuthentication.SetAuthCookie(model.UserName, false);                       
                         LoginController.AccessRights = "admin";
-                        return View("~/Views/MyProfileAdmin/MyProfileAdmin.cshtml");
+                        return RedirectToAction("MyProfileAdmin", "MyProfileAdmin");
 
                     case "Teacher":
+                        FormsAuthentication.SetAuthCookie(model.UserName, false);                        
                         LoginController.AccessRights = "teacher";
-                        return View("~/Views/MyProfileTeacher/MyProfileTeacher.cshtml");
+                        return RedirectToAction("MyProfileTeacher", "MyProfileTeacher");
                 }
             }
             else
             {
                 LoginController.AccessRights = "logged out";
-                return View("~/Views/Login/Login.cshtml");
+                ModelState.AddModelError("CustomError", "Incorrect username and/or password");                
+                return View("Login");
             }
 
             return View();
             
         }
+
+
     }
 }
 // **
