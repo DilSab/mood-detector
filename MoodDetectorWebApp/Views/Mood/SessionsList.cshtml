@@ -1,0 +1,38 @@
+﻿@using MoodDetectorWebApp.Models
+@{
+    ViewBag.Title = "SessionsList";
+
+}
+
+<h2>List of all your sessions</h2>
+<table class="table">
+    @foreach (SessionSummary item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.studentClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.emoji)
+            </td>
+            <td>
+                @Html.ActionLink("View mood chart", "GetSessionMoodAverage", new { id = item.id })
+            </td>
+        </tr>
+    }
+</table>
+
+
+

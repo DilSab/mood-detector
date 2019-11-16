@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Model;
 using Model.Entity;
+using MoodDetectorWebApp.Models;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -23,6 +24,26 @@ namespace MoodDetectorWebApp.Controllers
         public ActionResult SessionIndex()
         {
             return View("SessionIndex");
+        }
+
+        public ActionResult SessionsList()
+        {
+            int userId = 3; // change with Paulius' implementation
+            List<SessionSummary> sessions = new List<SessionSummary>();
+            List<int> sessionsIds = _moodService.GetAllSessionsIds(userId);
+            foreach (int id in sessionsIds)
+            {
+                Session session = _moodService.GetSession(id);
+                SessionSummary sessionSummary = new SessionSummary();
+                sessionSummary.id = id;
+                sessionSummary.date = session.DateTime;
+                sessionSummary.studentClass = session.Class;
+                sessionSummary.subject = session.Subject;
+                sessionSummary.comment = session.Comments;
+                sessionSummary.emoji = ":)"; // get emoji from affdex, saving needed
+                sessions.Add(sessionSummary);
+            }
+            return View("SessionsList", sessions);
         }
 
         public ActionResult GetMoodList(int id)

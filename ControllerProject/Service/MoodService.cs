@@ -71,6 +71,22 @@ namespace ControllerProject.Service
             return mood;
         }
 
+        public List<int> GetAllSessionsIds(int userId)
+        {
+            List<int> ids = (from s in _context.Sessions
+                             where s.UserId == userId
+                             select s.Id).ToList();
+            return ids;
+        }
+
+        public Session GetSession(int id)
+        {
+            Session session = (from s in _context.Sessions
+                               where s.Id == id
+                               select s).FirstOrDefault();
+            return session;
+        }
+
         public Dictionary<string, double> GetDominantMoods(MoodCollection moodCollection)
         {
             Dictionary<string, double> moods = MoodCollectionToDict(moodCollection);
