@@ -48,6 +48,7 @@ namespace ControllerProject.Service
                 Sadness = moodCollection.Sadness,
                 Suprise = moodCollection.Suprise,
                 Valence = moodCollection.Valence,
+                Emoji = moodCollection.Emoji
             };
 
             _context.Moods.Add(mood);
