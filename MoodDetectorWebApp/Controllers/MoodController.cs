@@ -41,7 +41,6 @@ namespace MoodDetectorWebApp.Controllers
                 sessionSummary.studentClass = session.Class;
                 sessionSummary.subject = session.Subject;
                 sessionSummary.comment = session.Comments;
-                sessionSummary.emoji = ":)"; // get emoji from affdex, saving needed
                 sessions.Add(sessionSummary);
             }
             return View("SessionsList", sessions);
@@ -64,7 +63,7 @@ namespace MoodDetectorWebApp.Controllers
             }
             catch (ArgumentException ex)
             {
-                return View("ErrorMessage", ex.Message);
+                return View("ErrorMessage", model: ex.Message);
             }
         }
     }

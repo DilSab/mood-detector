@@ -17,5 +17,6 @@ namespace ControllerProject.Service
         Mood GetLastClassMood(User user, int mask);
         void UpdateSessionMessageStatus(int classmoodId, int mask);
         MoodCollection GetMoodAverage(List<Mood> moods);
+        string GetAverageEmoji(MoodCollection moodCollection);
     }
 }

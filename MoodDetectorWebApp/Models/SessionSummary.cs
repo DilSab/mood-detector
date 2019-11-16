@@ -9,6 +9,5 @@ namespace MoodDetectorWebApp.Models
         public string studentClass { get; set; }
         public string subject { get; set; }
         public string comment { get; set; }
-        public string emoji { get; set; }
     }
 }

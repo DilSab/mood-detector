@@ -206,7 +206,6 @@
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
     <Content Include="Views\Mood\SessionMood.cshtml" />
     <Content Include="Views\Mood\SessionIndex.cshtml" />
-    <Content Include="Views\Mood\MoodChart.cshtml" />
     <Content Include="Views\Mood\SessionsList.cshtml" />
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
   </ItemGroup>
