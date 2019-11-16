@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Model;
 using Model.Entity;
 using MoodDetectorWebApp.Models;
+using System;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -55,9 +56,16 @@ namespace MoodDetectorWebApp.Controllers
 
         public ActionResult GetSessionMoodAverage(int id)
         {
-            MoodCollection mood = _moodService.GetMoodsBySessionId(id);
-            Dictionary<string, double> dominantMoods = _moodService.GetDominantMoods(mood);
-            return View("SessionMood", dominantMoods);
+            try
+            {
+                MoodCollection mood = _moodService.GetMoodsBySessionId(id);
+                Dictionary<string, double> dominantMoods = _moodService.GetDominantMoods(mood);
+                return View("SessionMood", dominantMoods);
+            }
+            catch (ArgumentException ex)
+            {
+                return View("ErrorMessage", ex.Message);
+            }
         }
     }
 }
