@@ -73,6 +73,19 @@ namespace ControllerProject.Service
 
         public Dictionary<string, double> GetDominantMoods(MoodCollection moodCollection)
         {
+            Dictionary<string, double> moods = MoodCollectionToDict(moodCollection);
+            var sortedMoods = from entry in moods orderby entry.Value descending select entry;
+            Dictionary<string, double> dominantMoods = new Dictionary<string, double>();
+            for (int i = 0; i < 3; i++)
+            {
+                dominantMoods.Add(sortedMoods.ElementAt(i).Key, sortedMoods.ElementAt(i).Value);
+            }
+
+            return dominantMoods;
+        }
+
+        public Dictionary<string, double> MoodCollectionToDict(MoodCollection moodCollection)
+        {
             Dictionary<string, double> moods = new Dictionary<string, double>();
             moods.Add("Joy", moodCollection.Joy);
             moods.Add("Anger", moodCollection.Anger);
@@ -84,16 +97,8 @@ namespace ControllerProject.Service
             moods.Add("Suprise", moodCollection.Suprise);
             moods.Add("Valence", moodCollection.Valence);
 
-            var sortedMoods = from entry in moods orderby entry.Value descending select entry;
-
-            Dictionary<string, double> dominantMoods = new Dictionary<string, double>();
-            dominantMoods.Add(sortedMoods.ElementAt(0).Key, sortedMoods.ElementAt(0).Value);
-            dominantMoods.Add(sortedMoods.ElementAt(1).Key, sortedMoods.ElementAt(1).Value);
-            dominantMoods.Add(sortedMoods.ElementAt(2).Key, sortedMoods.ElementAt(2).Value);
-
-            return dominantMoods;
+            return moods;
         }
-
 
         public List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null)
         {
