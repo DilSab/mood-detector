@@ -31,7 +31,8 @@ namespace MoodDetectorWebApp.Controllers
         // POST: Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
+
+        public ActionResult Login(LoginModel model)
         {
             bool loginCorrect = _loginProcessor.ProcessLogin(model.UserName, model.Password);
 
