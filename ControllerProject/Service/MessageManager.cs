@@ -1,4 +1,5 @@
 ﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,13 +21,36 @@ namespace ControllerProject.Service
             return _context.SaveChanges();
         }
 
-        public List<GlobalMessage> GetGlobalMessagesByUser(User user)
+        public int GetGlobalMessageCountByUser(User user)
         {
-            var globalMessages = (from g in _context.GlobalMessages
-                                  where g.UserId == user.Id
-                                  select g).ToList();
+            int messageCount;
+            if (user.AccessRights == "Admin")
+            {
+                messageCount = (from g in _context.GlobalMessages
+                                select g).Count();
+            }
+            else
+            {
+                messageCount = (from g in _context.GlobalMessages
+                                  where (g.RecipientType == user.AccessRights
+                                     || g.RecipientType == "All")
+                                  && (g.ExpirationDate != null && (g.ExpirationDate.Value > DateTime.Now)
+                                      || (g.ExpirationDate == null))
+                                  select g).Count();
+            }
 
-            return globalMessages;
+            return messageCount;
+        }
+
+        public int GetGlobalMessageRecipientsAllCount()
+        {
+            int messageCount = (from g in _context.GlobalMessages
+                                where g.RecipientType == "All"
+                                && (g.ExpirationDate != null && (g.ExpirationDate.Value > DateTime.Now)
+                                      || (g.ExpirationDate == null))
+                                select g).Count();
+
+            return messageCount;
         }
 
         public int DeleteGlobalMessageById(int id)
@@ -42,10 +66,32 @@ namespace ControllerProject.Service
 
         public List<GlobalMessage> GetRecipientGlobalMessages(User user)
         {
-            var globalMessages = (from g in _context.GlobalMessages
-                                  where g.RecipientType == user.AccessRights
-                                     || g.RecipientType == "All"
-                                  select g).ToList();
+            List<GlobalMessage> globalMessages;
+            if (user.AccessRights == "Admin")
+            {
+                globalMessages = (from g in _context.GlobalMessages
+                                      select g).ToList();
+            }
+            else
+            {
+                globalMessages = (from g in _context.GlobalMessages
+                                      where (g.RecipientType == user.AccessRights
+                                         || g.RecipientType == "All")
+                                      && (g.ExpirationDate != null && ( g.ExpirationDate.Value > DateTime.Now )
+                                          || (g.ExpirationDate == null))
+                                      select g).ToList();
+            }
+
+            return globalMessages;
+        }
+
+        public List<GlobalMessage> GetRecipientsAllGlobalMessages()
+        {
+            List<GlobalMessage> globalMessages = (from g in _context.GlobalMessages
+                                                  where g.RecipientType == "All"
+                                                  && (g.ExpirationDate != null && (g.ExpirationDate.Value > DateTime.Now)
+                                                      || (g.ExpirationDate == null))
+                                                  select g).ToList();
 
             return globalMessages;
         }

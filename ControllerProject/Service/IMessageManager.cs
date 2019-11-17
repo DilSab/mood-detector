@@ -6,8 +6,10 @@ namespace ControllerProject.Service
     public interface IMessageManager
     {
         int AddGlobalMessage(GlobalMessage message);
-        List<GlobalMessage> GetGlobalMessagesByUser(User user);
+        int GetGlobalMessageCountByUser(User user);
+        int GetGlobalMessageRecipientsAllCount();
         int DeleteGlobalMessageById(int id);
         List<GlobalMessage> GetRecipientGlobalMessages(User user);
+        List<GlobalMessage> GetRecipientsAllGlobalMessages();
     }
 }

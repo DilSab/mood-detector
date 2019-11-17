@@ -19,8 +19,6 @@ namespace Model
         {
             this.LoginInfoes = new HashSet<LoginInfo>();
             this.Sessions = new HashSet<Session>();
-            this.Messages = new HashSet<Message>();
-            this.Messages1 = new HashSet<Message>();
             this.GlobalMessages = new HashSet<GlobalMessage>();
         }
     
@@ -33,10 +31,6 @@ namespace Model
         public virtual ICollection<LoginInfo> LoginInfoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Session> Sessions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Message> Messages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Message> Messages1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GlobalMessage> GlobalMessages { get; set; }
     }

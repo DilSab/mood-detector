@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    setInterval("updateMessage()", 5000);
+    setInterval("updateMessage()", 10000);
     updateMessage();
 });
 
@@ -7,8 +7,8 @@ function updateMessage() {
     $.ajax({
         type: "POST",
         async: true,
-        contentType: "application/json; charset=utf-8",
         url: "/Messenger/LoadRecipientGlobalMessages",
+        dataType: "json",
         success: updateCounter
     });
 }
@@ -16,6 +16,7 @@ function updateMessage() {
 function updateCounter(data) {
     var counter = document.getElementById('message-counter');
     if (counter) {
+        messageCount = data.count;
         counter.innerHTML = '(' + data.count + ')';
     }
 }

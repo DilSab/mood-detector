@@ -25,17 +25,21 @@
                 <ul class="navbar-nav">
                     @*TODO: show based on users AccessRights or if not logged on*@
                     @{
-                        var AccessRights = "teacher";
+                        var accessRights = LoginController.AccessRights;
+                        Session["AccessRights"] = accessRights;
+
                     }
                     @*For everyone*@
-                    <li class="nav-item active">@Html.ActionLink("About", "About", "About", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("About", "About", "About", null, new { @class = "nav-link" })</li>
                     @*For logged out*@
-                    @if (LoginController.AccessRights == "logged out")
+                    @if (accessRights == "logged out")
                     {
+                        <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item"><sup id="message-counter"></sup></li>
                         <li class="nav-item">@Html.ActionLink("Log in", "Login", "Login", null, new { @class = "nav-link" })</li>
                     }
                     @*For teacher*@
-                    @if (LoginController.AccessRights == "teacher")
+                    @if (accessRights == "teacher")
                     {
                         <li class="nav-item">@Html.ActionLink("Important info", "ImportantInfo", "ImportantInfo", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("New session", "NewSession", "Detector", null, new { @class = "nav-link" })</li>
@@ -46,15 +50,16 @@
                         <li class="nav-item"><sup id="message-counter"></sup></li>
                     }
                     @*For admin*@
-                    @if (LoginController.AccessRights == "admin")
+                    @if (accessRights == "admin")
                     {
                         <li class="nav-item">@Html.ActionLink("Manage users", "ViewUsers", "ManageUsers", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Send info", "SendInfo", "SendInfo", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("My profile", "MyProfileAdmin", "MyProfileAdmin", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item"><sup id="message-counter"></sup></li>
                     }
                     @*For logged in*@
-                    @if (LoginController.AccessRights == "admin" || LoginController.AccessRights == "teacher")
+                    @if (accessRights == "admin" || accessRights == "teacher")
                     {
                         <li class="nav-item">@Html.ActionLink("Log out", "Logout", "Logout", null, new { @class = "nav-link" })</li>
                     }
@@ -64,9 +69,10 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
+        </div>
         <hr />
         <footer>
-            <p>@DateTime.Now.Year Mood Detector</p>
+            <p class="ml-5">@DateTime.Now.Year Mood Detector</p>
         </footer>
     </div>
 

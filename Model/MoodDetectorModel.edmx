@@ -33,17 +33,6 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Messages">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="SenderUserId" Type="int" Nullable="false" />
-          <Property Name="ReceiverUserId" Type="int" Nullable="false" />
-          <Property Name="DateSent" Type="datetime" Nullable="false" />
-          <Property Name="Content" Type="text" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Mood">
           <Key>
             <PropertyRef Name="Id" />
@@ -106,30 +95,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Messages_ReceiverUser">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Messages">
-              <PropertyRef Name="ReceiverUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Messages_SenderUser">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Messages">
-              <PropertyRef Name="SenderUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Mood_Session">
           <End Role="Session" Type="Self.Session" Multiplicity="1" />
           <End Role="Mood" Type="Self.Mood" Multiplicity="*" />
@@ -159,7 +124,6 @@
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GlobalMessage" EntityType="Self.GlobalMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginInfo" EntityType="Self.LoginInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mood" EntityType="Self.Mood" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -170,14 +134,6 @@
           <AssociationSet Name="FK_LoginInfo_User" Association="Self.FK_LoginInfo_User">
             <End Role="User" EntitySet="User" />
             <End Role="LoginInfo" EntitySet="LoginInfo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Messages_ReceiverUser" Association="Self.FK_Messages_ReceiverUser">
-            <End Role="User" EntitySet="User" />
-            <End Role="Messages" EntitySet="Messages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Messages_SenderUser" Association="Self.FK_Messages_SenderUser">
-            <End Role="User" EntitySet="User" />
-            <End Role="Messages" EntitySet="Messages" />
           </AssociationSet>
           <AssociationSet Name="FK_Mood_Session" Association="Self.FK_Mood_Session">
             <End Role="Session" EntitySet="Session" />
@@ -210,15 +166,6 @@
           <AssociationSet Name="FK_Session_User" Association="MoodDetectorDBModel.FK_Session_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Session" EntitySet="Sessions" />
-          </AssociationSet>
-          <EntitySet Name="Messages" EntityType="MoodDetectorDBModel.Message" />
-          <AssociationSet Name="FK_Messages_ReceiverUser" Association="MoodDetectorDBModel.FK_Messages_ReceiverUser">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Message" EntitySet="Messages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Messages_SenderUser" Association="MoodDetectorDBModel.FK_Messages_SenderUser">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Message" EntitySet="Messages" />
           </AssociationSet>
           <EntitySet Name="GlobalMessages" EntityType="MoodDetectorDBModel.GlobalMessage" />
           <AssociationSet Name="FK_GlobalMessage_User" Association="MoodDetectorDBModel.FK_GlobalMessage_User">
@@ -285,8 +232,6 @@
           <Property Name="AccessRights" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LoginInfoes" Relationship="MoodDetectorDBModel.FK_LoginInfo_User" FromRole="User" ToRole="LoginInfo" />
           <NavigationProperty Name="Sessions" Relationship="MoodDetectorDBModel.FK_Session_User" FromRole="User" ToRole="Session" />
-          <NavigationProperty Name="Messages" Relationship="MoodDetectorDBModel.FK_Messages_ReceiverUser" FromRole="User" ToRole="Message" />
-          <NavigationProperty Name="Messages1" Relationship="MoodDetectorDBModel.FK_Messages_SenderUser" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="GlobalMessages" Relationship="MoodDetectorDBModel.FK_GlobalMessage_User" FromRole="User" ToRole="GlobalMessage" />
         </EntityType>
         <Association Name="FK_LoginInfo_User">
@@ -322,43 +267,6 @@
             </Principal>
             <Dependent Role="Session">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="SenderUserId" Type="Int32" Nullable="false" />
-          <Property Name="ReceiverUserId" Type="Int32" Nullable="false" />
-          <Property Name="DateSent" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="MoodDetectorDBModel.FK_Messages_ReceiverUser" FromRole="Message" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="MoodDetectorDBModel.FK_Messages_SenderUser" FromRole="Message" ToRole="User" />
-        </EntityType>
-        <Association Name="FK_Messages_ReceiverUser">
-          <End Type="MoodDetectorDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="MoodDetectorDBModel.Message" Role="Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Message">
-              <PropertyRef Name="ReceiverUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Messages_SenderUser">
-          <End Type="MoodDetectorDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="MoodDetectorDBModel.Message" Role="Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Message">
-              <PropertyRef Name="SenderUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -449,18 +357,6 @@
                 <ScalarProperty Name="AccessRights" ColumnName="AccessRights" />
                 <ScalarProperty Name="Lastname" ColumnName="Lastname" />
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Messages">
-            <EntityTypeMapping TypeName="MoodDetectorDBModel.Message">
-              <MappingFragment StoreEntitySet="Messages">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="DateSent" ColumnName="DateSent" />
-                <ScalarProperty Name="ReceiverUserId" ColumnName="ReceiverUserId" />
-                <ScalarProperty Name="SenderUserId" ColumnName="SenderUserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

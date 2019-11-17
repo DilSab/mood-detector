@@ -108,9 +108,6 @@
     <Compile Include="LoginInfo.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Message.cs">
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Mood.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>

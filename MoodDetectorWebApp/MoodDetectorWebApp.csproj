@@ -210,11 +210,8 @@
     <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\SuccessfulAdd.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
-    <Content Include="Views\Messenger\Messages.cshtml" />
-    <Content Include="Views\Messenger\MessagesCount.cshtml" />
     <Content Include="Views\Messenger\GlobalMessage.cshtml" />
     <Content Include="Views\Messenger\Sidebar.cshtml" />
-    <Content Include="Views\Messenger\Messenger.cshtml" />
     <Content Include="Views\Mood\SessionMood.cshtml" />
     <Content Include="Views\Mood\SessionIndex.cshtml" />
     <Content Include="Views\Mood\SessionsList.cshtml" />

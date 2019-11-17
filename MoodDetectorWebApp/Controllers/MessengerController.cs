@@ -43,7 +43,7 @@ namespace MoodDetectorWebApp.Controllers
         public ActionResult LoadUserGlobalMessages()
         {
             User user = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
-            var globalMessages = _messageManager.GetGlobalMessagesByUser(user);
+            var globalMessages = user == null ? _messageManager.GetRecipientsAllGlobalMessages() : _messageManager.GetRecipientGlobalMessages(user);
 
             return PartialView("~/Views/Messenger/Sidebar.cshtml", globalMessages);
         }
@@ -51,9 +51,10 @@ namespace MoodDetectorWebApp.Controllers
         public object LoadRecipientGlobalMessages()
         {
             User user = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
-            var globalMessages = _messageManager.GetRecipientGlobalMessages(user);
 
-            return Json(new { success = true, count = globalMessages.Count }, JsonRequestBehavior.AllowGet);
+            int messageCount = user == null ? _messageManager.GetGlobalMessageRecipientsAllCount() : _messageManager.GetGlobalMessageCountByUser(user);
+
+            return Json(new { success = true, count = messageCount }, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "admin")]

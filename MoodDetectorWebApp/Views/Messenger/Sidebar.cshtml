@@ -15,12 +15,15 @@
             <p class="card-text message-content">@globalMessage.Content</p>
             <div class="message-expiration">@GlobalMessageModel.GetExpirationMessage(globalMessage.ExpirationDate)</div>
         </div>
-        <div class="card-footer text-muted">
-            @using (Html.BeginForm("DeleteGlobalMessage", "Messenger", new { globalMessage.Id }))
+        @if (Session["AccessRights"].ToString() == "admin")
+        {
+            using (Html.BeginForm("DeleteGlobalMessage", "Messenger", new { globalMessage.Id }))
             {
                 @Html.AntiForgeryToken()
-                <input type="submit" value="Delete" onclick="return confirm('Are you sure about this?')" />
+                <div class="card-footer text-muted">
+                    <input type="submit" value="Delete" onclick="return confirm('Are you sure about this?')" />
+                </div>
             }
-        </div>
+        }
     </div>
 }
