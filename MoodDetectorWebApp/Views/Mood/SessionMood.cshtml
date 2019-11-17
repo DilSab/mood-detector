@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "SessionMood";
+}
+
+@{
+    string[] x = new string[3];
+    double[] y = new double[3];
+    int i = 0;
+    foreach (KeyValuePair<string, double> mood in Model)
+    {
+        x[i] = mood.Key;
+        y[i] = mood.Value;
+        i++;
+    }
+    var moodChart = new Chart(width: 600, height: 400)
+        .AddTitle("Session Mood")
+        .AddSeries(
+            name: "Mood",
+            chartType: "Pie",
+            xValue: x,
+            yValues: y)
+        .Write();
+}
+

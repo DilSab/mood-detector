@@ -25,6 +25,7 @@ namespace Model
         public double Sadness { get; set; }
         public double Suprise { get; set; }
         public double Valence { get; set; }
+        public string Emoji { get; set; }
     
         public virtual Session Session { get; set; }
     }

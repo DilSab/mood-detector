@@ -150,6 +150,7 @@
     <Compile Include="Models\DetectionStartViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
+    <Compile Include="Models\SessionSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +205,10 @@
     <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\SuccessfulAdd.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
+    <Content Include="Views\Mood\SessionMood.cshtml" />
+    <Content Include="Views\Mood\SessionIndex.cshtml" />
+    <Content Include="Views\Mood\SessionsList.cshtml" />
+    <Content Include="Views\Shared\ErrorMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

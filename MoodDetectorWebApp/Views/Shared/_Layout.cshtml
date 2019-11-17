@@ -25,8 +25,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*TODO: show based on users AccessRights or if not logged on*@
-                    @{
-                        var AccessRights = "admin";
+                    @{ 
+                        var AccessRights = "teacher";
                     }
                     @*For everyone*@
                     <li>@Html.ActionLink("About", "About", "About")</li>
@@ -40,7 +40,7 @@
                     {
                         <li>@Html.ActionLink("Important info", "ImportantInfo", "ImportantInfo")</li>
                         <li>@Html.ActionLink("New session", "NewSession", "Detector")</li>
-                        <li>@Html.ActionLink("View session moods", "MoodIndex", "Mood")</li>
+                        <li>@Html.ActionLink("View sessions", "SessionsList", "Mood")</li>
                         <li>@Html.ActionLink("Learnings", "Learnings", "Learnings")</li>
                         <li>@Html.ActionLink("My profile", "MyProfileTeacher", "MyProfileTeacher")</li>
                     }
