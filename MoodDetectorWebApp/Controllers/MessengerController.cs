@@ -1,20 +1,28 @@
-﻿using ControllerProject.Service;
+﻿using ControllerProject.Logger;
+using ControllerProject.Service;
 using Model;
 using MoodDetectorWebApp.Models;
 using System;
-using System.Text;
 using System.Web.Mvc;
-using System.Web.Services;
 
 namespace MoodDetectorWebApp.Controllers
 {
     public class MessengerController : Controller
     {
+        private IMessenger _messenger;
+        private IMessageLogger _messageLogger;
         private IMessageManager _messageManager;
         private IUserService _userService;
 
-        public MessengerController(IMessageManager messageManager, IUserService userService)
+        public MessengerController(
+            IMessageLogger messageLogger,
+            IMessenger messenger,
+            IMessageManager messageManager,
+            IUserService userService
+            )
         {
+            _messageLogger = messageLogger;
+            _messenger = messenger;
             _messageManager = messageManager;
             _userService = userService;
         }
@@ -45,7 +53,7 @@ namespace MoodDetectorWebApp.Controllers
             User user = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
             var globalMessages = _messageManager.GetRecipientGlobalMessages(user);
 
-            return Json(new { success = true, count = globalMessages.Count }, JsonRequestBehavior.AllowGet); ;
+            return Json(new { success = true, count = globalMessages.Count }, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "admin")]
@@ -78,7 +86,9 @@ namespace MoodDetectorWebApp.Controllers
                     RecipientType = model.RecipientType
                 };
 
-                _messageManager.AddGlobalMessage(message);
+                _messenger.MessagePosted += _messageLogger.OnMessagePosted;
+
+                _messenger.PostMessage(message);
             }
 
             return RedirectToAction("GlobalMessage");
