@@ -59,6 +59,7 @@
           <Property Name="Sadness" Type="float" Nullable="false" />
           <Property Name="Suprise" Type="float" Nullable="false" />
           <Property Name="Valence" Type="float" Nullable="false" />
+          <Property Name="Emoji" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -258,6 +259,7 @@
           <Property Name="Suprise" Type="Double" Nullable="false" />
           <Property Name="Valence" Type="Double" Nullable="false" />
           <NavigationProperty Name="Session" Relationship="MoodDetectorDBModel.FK_Mood_Session" FromRole="Mood" ToRole="Session" />
+          <Property Name="Emoji" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -413,6 +415,7 @@
           <EntitySetMapping Name="Moods">
             <EntityTypeMapping TypeName="MoodDetectorDBModel.Mood">
               <MappingFragment StoreEntitySet="Mood">
+                <ScalarProperty Name="Emoji" ColumnName="Emoji" />
                 <ScalarProperty Name="Valence" ColumnName="Valence" />
                 <ScalarProperty Name="Suprise" ColumnName="Suprise" />
                 <ScalarProperty Name="Sadness" ColumnName="Sadness" />

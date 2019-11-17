@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ControllerProject.Service
 {
@@ -47,13 +48,80 @@ namespace ControllerProject.Service
                 Fear = moodCollection.Fear,
                 Sadness = moodCollection.Sadness,
                 Suprise = moodCollection.Suprise,
-                Valence = moodCollection.Valence,
+                Valence = moodCollection.Valence
             };
 
             _context.Moods.Add(mood);
             _context.SaveChanges();
         }
 
+        public MoodCollection GetMoodsBySessionId(int id)
+        {
+            int idExists = (from i in _context.Sessions
+                            where i.Id == id
+                            select i).Count();
+            if (idExists == 0)
+            {
+                throw new ArgumentException("Session with id " + id + " doesn't exist!");
+            }
+            List<Mood> moods = (from m in _context.Moods
+                                where m.SessionId == id
+                                select m).ToList();
+            try
+            {
+                MoodCollection mood = GetMoodAverage(moods);
+                return mood;
+            }
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+        }
+
+        public List<int> GetAllSessionsIds(int userId)
+        {
+            List<int> ids = (from s in _context.Sessions
+                             where s.UserId == userId
+                             select s.Id).ToList();
+            return ids;
+        }
+
+        public Session GetSession(int id)
+        {
+            Session session = (from s in _context.Sessions
+                               where s.Id == id
+                               select s).FirstOrDefault();
+            return session;
+        }
+
+        public Dictionary<string, double> GetDominantMoods(MoodCollection moodCollection)
+        {
+            Dictionary<string, double> moods = MoodCollectionToDict(moodCollection);
+            var sortedMoods = from entry in moods orderby entry.Value descending select entry;
+            Dictionary<string, double> dominantMoods = new Dictionary<string, double>();
+            for (int i = 0; i < 3; i++)
+            {
+                dominantMoods.Add(sortedMoods.ElementAt(i).Key, sortedMoods.ElementAt(i).Value);
+            }
+
+            return dominantMoods;
+        }
+
+        public Dictionary<string, double> MoodCollectionToDict(MoodCollection moodCollection)
+        {
+            Dictionary<string, double> moods = new Dictionary<string, double>();
+            moods.Add("Joy", moodCollection.Joy);
+            moods.Add("Anger", moodCollection.Anger);
+            moods.Add("Contempt", moodCollection.Contempt);
+            moods.Add("Disgust", moodCollection.Disgust);
+            moods.Add("Engagement", moodCollection.Engagement);
+            moods.Add("Fear", moodCollection.Fear);
+            moods.Add("Sadness", moodCollection.Sadness);
+            moods.Add("Suprise", moodCollection.Suprise);
+            moods.Add("Valence", moodCollection.Valence);
+
+            return moods;
+        }
 
         public List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null)
         {
@@ -133,18 +201,46 @@ namespace ControllerProject.Service
 
         public MoodCollection GetMoodAverage(List<Mood> moods)
         {
-            return new MoodCollection()
+            if (moods.Count() == 0)
             {
-                Anger = moods.Average(emotion => emotion.Anger),
-                Contempt = moods.Average(emotion => emotion.Contempt),
-                Disgust = moods.Average(emotion => emotion.Disgust),
-                Engagement = moods.Average(emotion => emotion.Engagement),
-                Fear = moods.Average(emotion => emotion.Fear),
-                Joy = moods.Average(emotion => emotion.Joy),
-                Sadness = moods.Average(emotion => emotion.Sadness),
-                Suprise = moods.Average(emotion => emotion.Suprise),
-                Valence = moods.Average(emotion => emotion.Valence)
-            };
+                throw new ArgumentException("There are no moods for this session!");
+            } else
+            {
+                return new MoodCollection()
+                {
+                    Anger = moods.Average(emotion => emotion.Anger),
+                    Contempt = moods.Average(emotion => emotion.Contempt),
+                    Disgust = moods.Average(emotion => emotion.Disgust),
+                    Engagement = moods.Average(emotion => emotion.Engagement),
+                    Fear = moods.Average(emotion => emotion.Fear),
+                    Joy = moods.Average(emotion => emotion.Joy),
+                    Sadness = moods.Average(emotion => emotion.Sadness),
+                    Suprise = moods.Average(emotion => emotion.Suprise),
+                    Valence = moods.Average(emotion => emotion.Valence)
+                };
+            }
+        }
+
+        public string GetAverageEmoji(MoodCollection moodCollection)
+        {
+            Dictionary<string, string> emojis = new Dictionary<string, string>();
+            emojis.Add("smiling", ":)");
+            emojis.Add("sad", ":(");
+            emojis.Add("neutral", ":|");
+
+            Dictionary<string, double> moods = MoodCollectionToDict(moodCollection);
+            var sortedMoods = from entry in moods orderby entry.Value descending select entry;
+            var firstKey = sortedMoods.ElementAt(0).Key;
+            if (firstKey == "Joy" || firstKey == "Engagement" || firstKey == "Valence")
+            {
+                return emojis["smiling"];
+            } else if (firstKey == "Sadness" || firstKey == "Anger" || firstKey == "Contempt" || firstKey == "Disgust" || firstKey == "Fear")
+            {
+                return emojis["sad"];
+            } else
+            {
+                return emojis["neutral"];
+            }
         }
     }
 }

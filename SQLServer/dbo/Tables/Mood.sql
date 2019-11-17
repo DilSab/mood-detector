@@ -11,5 +11,6 @@
 	[Sadness] FLOAT NOT NULL, 
 	[Suprise] FLOAT NOT NULL, 
 	[Valence] FLOAT NOT NULL, 
+	[Emoji] VARCHAR(5),
     CONSTRAINT [FK_Mood_Session] FOREIGN KEY ([SessionId]) REFERENCES [Session]([Id])
 )

@@ -15,4 +15,6 @@ BEGIN
 	INSERT INTO LoginInfo (UserId, Username, Password, Email) VALUES ((SELECT SCOPE_IDENTITY()), 'william1', 'passwilliam1', 'william@mooddetector.com');
 	INSERT INTO [User] (Firstname, Lastname, AccessRights) VALUES ('Elizabeth', 'Miller', 'Teacher');
 	INSERT INTO LoginInfo (UserId, Username, Password, Email) VALUES ((SELECT SCOPE_IDENTITY()), 'elizabeth1', 'passelizabeth1', 'elizabeth@mooddetector.com');
+	INSERT INTO [User] (Firstname, Lastname, AccessRights) VALUES ('Bla', 'Cha', 'Teacher');
+	INSERT INTO LoginInfo (UserId, Username, Password, Email) VALUES ((SELECT SCOPE_IDENTITY()), 'blacha', 'Haha888?', 'blacha@mooddetector.com');
 END

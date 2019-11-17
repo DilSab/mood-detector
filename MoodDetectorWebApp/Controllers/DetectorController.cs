@@ -4,17 +4,22 @@ using Model.Entity;
 using MoodDetectorWebApp.Models;
 using Newtonsoft.Json;
 using System;
+using System.Web;
+using System.Security.Principal;
 using System.Web.Mvc;
+
 
 namespace MoodDetectorWebApp.Controllers
 {
     public class DetectorController : Controller
     {
         private IMoodService _moodService;
+        private IUserService _userService;
 
-        public DetectorController(IMoodService moodService)
+        public DetectorController(IMoodService moodService, IUserService userService)
         {
             _moodService = moodService;
+            _userService = userService;
         }
 
         // GET: Detector
@@ -27,12 +32,16 @@ namespace MoodDetectorWebApp.Controllers
         // POST: Detector
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult NewSession(NewSessionModel model)
         {
+            // Randamas dabartinis vartotojas is prisijungimo metu sukurto cookio.
+            User currentUser = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
+
             if (ModelState.IsValid) {
                 SessionInfo sessionInfo = new SessionInfo()
                 {
-                    User = new User() { Id = 3 },
+                    User = currentUser,
                     Class = model.Class,
                     Comments = model.Comments,
                     Subject = model.Subject,

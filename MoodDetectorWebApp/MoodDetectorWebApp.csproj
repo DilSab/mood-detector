@@ -150,7 +150,9 @@
     <Compile Include="Models\AddUserModel.cs" />
     <Compile Include="Models\DetectionStartViewModel.cs" />
     <Compile Include="Models\GlobalMessageModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
+    <Compile Include="Models\SessionSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +216,10 @@
     <Content Include="Views\Messenger\GlobalMessage.cshtml" />
     <Content Include="Views\Messenger\Sidebar.cshtml" />
     <Content Include="Views\Messenger\Messenger.cshtml" />
+    <Content Include="Views\Mood\SessionMood.cshtml" />
+    <Content Include="Views\Mood\SessionIndex.cshtml" />
+    <Content Include="Views\Mood\SessionsList.cshtml" />
+    <Content Include="Views\Shared\ErrorMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

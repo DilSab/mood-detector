@@ -1,7 +1,21 @@
-﻿
-@{
-    ViewBag.Title = "Login";
+﻿@using MoodDetectorWebApp.Models
+
+@model LoginModel
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row mt-5 mb-3">
+        <div class="col-lg-11 col-sm-10 col-9">@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = "Username", @class = "form-control" } })</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-lg-11 col-sm-10 col-9">@Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "form-control" } })</div>
+    </div>
+    <input type="submit" value="Login" />
+
+    @Html.ValidationMessage("CustomError")
+
 }
-
-<h2>Login</h2>
-
