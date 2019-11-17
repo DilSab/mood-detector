@@ -31,6 +31,8 @@
                     }
                     @*For everyone*@
                     <li class="nav-item">@Html.ActionLink("About", "About", "About", null, new { @class = "nav-link" })</li>
+					<li class="nav-item">@Html.ActionLink("Threading", "Index", "Threading", null, new { @class = "nav-link" })</li>
+					
                     @*For logged out*@
                     @if (accessRights == "logged out")
                     {

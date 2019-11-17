@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Threading";
+}
+
+<h2>Threading vs synchronous example</h2>
+@using (@Html.BeginForm("WithThreading", "Threading", FormMethod.Get))
+{
+    <div>
+        <input type="submit" value="With threading" />
+    </div>
+}
+@using (@Html.BeginForm("WithoutThreading", "Threading", FormMethod.Get))
+{
+    <div>
+        <input type="submit" value="Without threading" />
+    </div>
+}
+

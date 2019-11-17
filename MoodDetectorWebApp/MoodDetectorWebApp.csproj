@@ -144,6 +144,7 @@
     <Compile Include="Controllers\MyProfileTeacherController.cs" />
     <Compile Include="Controllers\SendInfoController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
+    <Compile Include="Controllers\ThreadingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +217,8 @@
     <Content Include="Views\Mood\SessionIndex.cshtml" />
     <Content Include="Views\Mood\SessionsList.cshtml" />
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
+    <Content Include="Views\Threading\Index.cshtml" />
+    <Content Include="Views\Threading\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">
