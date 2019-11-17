@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace MoodDetectorWebApp.Controllers
@@ -39,7 +40,7 @@ namespace MoodDetectorWebApp.Controllers
             return View("Results", new { elapsedMs });
         }
 
-        public static void SwapingTakesTime<T>(ref T a, ref T b)
+        private void SwapingTakesTime<T>(ref T a, ref T b)
         {
             T temp;
             temp = a;
