@@ -135,6 +135,7 @@
     <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ImportantInfoController.cs" />
+    <Compile Include="Controllers\JoinSessionController.cs" />
     <Compile Include="Controllers\LearningsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
@@ -148,6 +149,7 @@
     </Compile>
     <Compile Include="Models\AddUserModel.cs" />
     <Compile Include="Models\DetectionStartViewModel.cs" />
+    <Compile Include="Models\JoinSessionModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Models\SessionSummary.cs" />
@@ -209,6 +211,7 @@
     <Content Include="Views\Mood\SessionIndex.cshtml" />
     <Content Include="Views\Mood\SessionsList.cshtml" />
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
+    <Content Include="Views\JoinSession\JoinSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

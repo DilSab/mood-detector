@@ -25,7 +25,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*TODO: show based on users AccessRights or if not logged on*@
-                    @{ 
+                    @{
                         var AccessRights = "teacher";
                     }
                     @*For everyone*@
@@ -34,6 +34,7 @@
                     @if (LoginController.AccessRights == "logged out")
                     {
                         <li>@Html.ActionLink("Log in", "Login", "Login")</li>
+                        <li>@Html.ActionLink("Join Session", "JoinSession", "JoinSession")</li>
                     }
                     @*For teacher*@
                     @if (LoginController.AccessRights == "teacher")
