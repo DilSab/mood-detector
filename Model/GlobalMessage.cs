@@ -20,7 +20,7 @@ namespace Model
         public string Content { get; set; }
         public System.DateTime PostedDate { get; set; }
         public Nullable<System.DateTime> ExpirationDate { get; set; }
-        public int RecipientType { get; set; }
+        public string RecipientType { get; set; }
     
         public virtual User User { get; set; }
     }

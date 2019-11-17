@@ -21,7 +21,7 @@
           <Property Name="Content" Type="text" Nullable="false" />
           <Property Name="PostedDate" Type="datetime" Nullable="false" />
           <Property Name="ExpirationDate" Type="datetime" />
-          <Property Name="RecipientType" Type="int" Nullable="false" />
+          <Property Name="RecipientType" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="LoginInfo">
           <Key>
@@ -370,7 +370,7 @@
           <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PostedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
-          <Property Name="RecipientType" Type="Int32" Nullable="false" />
+          <Property Name="RecipientType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="MoodDetectorDBModel.FK_GlobalMessage_User" FromRole="GlobalMessage" ToRole="User" />
         </EntityType>
         <Association Name="FK_GlobalMessage_User">

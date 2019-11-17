@@ -10,12 +10,12 @@
 <h2>GlobalMessageView</h2>
 <div class="row">
     <div class="col-5">
-
+        @{Html.RenderAction("LoadUserGlobalMessages", "Messenger"); }
     </div>
     <div class="col-7">
         <div class="row">
             <div class="col">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("PostGlobalMessage", "Messenger"))
                 {
                     @Html.AntiForgeryToken()
                     <div class="row mt-5 mb-3">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="row mb-5">
                         <div class="col-4">@Html.LabelFor(m => m.Content)</div>
-                        <div class="col-8">@Html.TextBoxFor(m => m.Content, new { @class= "content-field", maxlength = 500 }) @Html.ValidationMessageFor(m => m.Content, "", new { @style = "color:red" })</div>
+                        <div class="col-8">@Html.TextBoxFor(m => m.Content, new { @class = "content-field", maxlength = 500 }) @Html.ValidationMessageFor(m => m.Content, "", new { @style = "color:red" })</div>
                     </div>
                     <input type="submit" value="Post message" />
                 }

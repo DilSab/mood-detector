@@ -8,6 +8,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Assets/js/messenger-update.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,8 +24,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*TODO: show based on users AccessRights or if not logged on*@
-                    @{ 
-                        var AccessRights = "admin";
+                    @{
+                        var AccessRights = "teacher";
                     }
                     @*For everyone*@
                     <li>@Html.ActionLink("About", "About", "About")</li>
@@ -41,6 +42,7 @@
                         <li>@Html.ActionLink("View session moods", "MoodIndex", "Mood")</li>
                         <li>@Html.ActionLink("Learnings", "Learnings", "Learnings")</li>
                         <li>@Html.ActionLink("My profile", "MyProfileTeacher", "MyProfileTeacher")</li>
+                        <li>@Html.ActionLink("Messages", "GlobalMessage", "Messenger")<sup id="message-counter"></sup></li>
                     }
                     @*For admin*@
                     @if (AccessRights == "admin")
@@ -53,7 +55,6 @@
                     @*For logged in*@
                     @if (AccessRights == "admin" || AccessRights == "teacher")
                     {
-                        <li>@Html.ActionLink("Log out", "Logout", "Logout")</li>
                         <li>@Html.ActionLink("Log out", "Logout", "Logout")</li>
                     }
                 </ul>

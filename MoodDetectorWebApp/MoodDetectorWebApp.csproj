@@ -159,9 +159,11 @@
     <Content Include="Assets\css\lib\bootstrap-grid.css" />
     <Content Include="Assets\css\lib\bootstrap-reboot.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
+    <Content Include="Assets\css\messenger-sidebar.css" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
     <Content Include="Assets\js\lib\popper.js" />
+    <Content Include="Assets\js\messenger-update.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -210,6 +212,8 @@
     <Content Include="Views\Messenger\Messages.cshtml" />
     <Content Include="Views\Messenger\MessagesCount.cshtml" />
     <Content Include="Views\Messenger\GlobalMessage.cshtml" />
+    <Content Include="Views\Messenger\Sidebar.cshtml" />
+    <Content Include="Views\Messenger\Messenger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

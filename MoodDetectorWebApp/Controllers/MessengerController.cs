@@ -3,6 +3,7 @@ using Model;
 using MoodDetectorWebApp.Models;
 using System;
 using System.Web.Mvc;
+using System.Web.Services;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -28,10 +29,34 @@ namespace MoodDetectorWebApp.Controllers
             return View(new GlobalMessageModel());
         }
 
+        public ActionResult LoadUserGlobalMessages()
+        {
+            var globalMessages = _messageManager.GetGlobalMessagesByUser(new User() { Id = 1 });
+
+            return PartialView("~/Views/Messenger/Sidebar.cshtml", globalMessages);
+        }
+
+        public object LoadRecipientGlobalMessages()
+        {
+            var globalMessages = _messageManager.GetRecipientGlobalMessages(new User() { Id = 3 });
+
+            return Json(new { success = true, count = globalMessages.Count }, JsonRequestBehavior.AllowGet); ;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteGlobalMessage(int id)
+        {
+            _messageManager.DeleteGlobalMessageById(id);
+
+            return RedirectToAction("GlobalMessage");
+        }
+
+
         // POST: Detector
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GlobalMessage(GlobalMessageModel model)
+        public ActionResult PostGlobalMessage(GlobalMessageModel model)
         {
             if (ModelState.IsValid)
             {
@@ -42,13 +67,13 @@ namespace MoodDetectorWebApp.Controllers
                     UserId = 1,
                     Content = model.Content,
                     ExpirationDate = model.ExpirationDate,
-                    RecipientType = (int)Enum.Parse(typeof(GlobalMessageModel.RecipientTypes), model.RecipientType)
+                    RecipientType = model.RecipientType
                 };
 
                 _messageManager.AddGlobalMessage(message);
             }
 
-            return View();
+            return RedirectToAction("GlobalMessage");
         }
     }
 }

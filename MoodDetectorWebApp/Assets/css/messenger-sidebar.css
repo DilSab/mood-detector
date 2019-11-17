@@ -1,0 +1,15 @@
+﻿html {
+    font-weight: bold
+}
+
+message-recipient {
+    font-weight: bold
+}
+
+message-title {
+    font-style: italic;
+}
+
+message-content {
+    word-break: break-all;
+}

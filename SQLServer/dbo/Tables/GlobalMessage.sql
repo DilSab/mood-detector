@@ -6,6 +6,6 @@
     [Content] TEXT NOT NULL, 
     [PostedDate] DATETIME NOT NULL, 
     [ExpirationDate] DATETIME NULL, 
-    [RecipientType] INT NOT NULL, 
+    [RecipientType] NVARCHAR(10) NOT NULL, 
     CONSTRAINT [FK_GlobalMessage_User] FOREIGN KEY ([UserId]) REFERENCES [User]([Id])
 )
