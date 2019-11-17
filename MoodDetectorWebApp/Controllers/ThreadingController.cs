@@ -17,7 +17,7 @@ namespace MoodDetectorWebApp.Controllers
             int b = 15;
             string str = "string";
             Thread thread1 = new Thread(() => SwapingTakesTime<int>(ref a, ref b));
-            Thread thread2 = new Thread(() => ChangingStringTakesTime(ref str));
+            Thread thread2 = new Thread(delegate() { ChangingStringTakesTime(ref str); });
             thread1.Start();
             thread2.Start();
             while (thread1.IsAlive || thread2.IsAlive) { }
