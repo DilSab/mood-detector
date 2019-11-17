@@ -13,7 +13,7 @@
         </div>
         <div class="message-body">
             <p class="card-text message-content">@globalMessage.Content</p>
-            <div class="message-expiration">Expires: @globalMessage.ExpirationDate.ToString()</div>
+            <div class="message-expiration">@GlobalMessageModel.GetExpirationMessage(globalMessage.ExpirationDate)</div>
         </div>
         <div class="card-footer text-muted">
             @using (Html.BeginForm("DeleteGlobalMessage", "Messenger", new { globalMessage.Id }))

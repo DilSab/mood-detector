@@ -9,8 +9,6 @@ namespace MoodDetectorWebApp
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/bundles/css").Include(
-                      "~/Assets/css/lib/bootstrap-grid.css",
-                      "~/Assets/css/lib/bootstrap-reboot.css",
                       "~/Assets/css/lib/bootstrap.css",
                       "~/Assets/css/site.css"));
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(

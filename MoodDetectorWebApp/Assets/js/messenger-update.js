@@ -9,13 +9,13 @@ function updateMessage() {
         async: true,
         contentType: "application/json; charset=utf-8",
         url: "/Messenger/LoadRecipientGlobalMessages",
-        success: dataReceived
+        success: updateCounter
     });
 }
 
-// callback function is called, when data is recevied
-function dataReceived(data, textStatus, jqXHR) {
-    // your data is in data.d
+function updateCounter(data) {
     var counter = document.getElementById('message-counter');
-    counter.innerHTML = '(' + data.count + ')';
+    if (counter) {
+        counter.innerHTML = '(' + data.count + ')';
+    }
 }

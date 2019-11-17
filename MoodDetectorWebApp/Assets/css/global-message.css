@@ -2,3 +2,14 @@
     width: 30vmax;
     height: 10vmax;
 }
+
+.sidebar {
+    max-height: 92vh;
+    overflow-y: scroll;
+}
+
+@media only screen and (min-width: 1000px) {
+    .form-control {
+        max-width: 40vw;
+    }
+}

@@ -43,9 +43,8 @@ namespace ControllerProject.Service
         public List<GlobalMessage> GetRecipientGlobalMessages(User user)
         {
             var globalMessages = (from g in _context.GlobalMessages
-                                  where (g.RecipientType == user.AccessRights
-                                     || g.RecipientType == "All")
-                                  && g.UserId != user.Id
+                                  where g.RecipientType == user.AccessRights
+                                     || g.RecipientType == "All"
                                   select g).ToList();
 
             return globalMessages;

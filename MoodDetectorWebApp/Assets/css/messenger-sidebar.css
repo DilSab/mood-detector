@@ -1,15 +1,16 @@
-﻿html {
+﻿.message-recipient {
     font-weight: bold
 }
 
-message-recipient {
-    font-weight: bold
-}
-
-message-title {
+.message-title {
     font-style: italic;
+    font-weight: 500;
 }
 
-message-content {
+.message-content {
     word-break: break-all;
+}
+
+.message-expiration {
+    color: #5b0000
 }

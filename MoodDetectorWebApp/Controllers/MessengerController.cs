@@ -2,6 +2,7 @@
 using Model;
 using MoodDetectorWebApp.Models;
 using System;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Services;
 
@@ -10,10 +11,12 @@ namespace MoodDetectorWebApp.Controllers
     public class MessengerController : Controller
     {
         private IMessageManager _messageManager;
+        private IUserService _userService;
 
-        public MessengerController(IMessageManager messageManager)
+        public MessengerController(IMessageManager messageManager, IUserService userService)
         {
             _messageManager = messageManager;
+            _userService = userService;
         }
 
         // GET: Message
@@ -31,18 +34,21 @@ namespace MoodDetectorWebApp.Controllers
 
         public ActionResult LoadUserGlobalMessages()
         {
-            var globalMessages = _messageManager.GetGlobalMessagesByUser(new User() { Id = 1 });
+            User user = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
+            var globalMessages = _messageManager.GetGlobalMessagesByUser(user);
 
             return PartialView("~/Views/Messenger/Sidebar.cshtml", globalMessages);
         }
 
         public object LoadRecipientGlobalMessages()
         {
-            var globalMessages = _messageManager.GetRecipientGlobalMessages(new User() { Id = 3 });
+            User user = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
+            var globalMessages = _messageManager.GetRecipientGlobalMessages(user);
 
             return Json(new { success = true, count = globalMessages.Count }, JsonRequestBehavior.AllowGet); ;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteGlobalMessage(int id)
@@ -54,17 +60,19 @@ namespace MoodDetectorWebApp.Controllers
 
 
         // POST: Detector
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PostGlobalMessage(GlobalMessageModel model)
         {
             if (ModelState.IsValid)
             {
+                User user = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
                 GlobalMessage message = new GlobalMessage()
                 {
                     Title = model.Title,
                     PostedDate = DateTime.Now,
-                    UserId = 1,
+                    UserId = user.Id,
                     Content = model.Content,
                     ExpirationDate = model.ExpirationDate,
                     RecipientType = model.RecipientType
