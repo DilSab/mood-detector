@@ -5,16 +5,19 @@ using Model;
 using Model.Entity;
 using MoodDetectorWebApp.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace MoodDetectorWebApp.Controllers
 {
     public class MoodController : Controller
     {
         IMoodService _moodService;
+        IUserService _userService;
 
-        public MoodController(IMoodService moodService)
+        public MoodController(IMoodService moodService, IUserService userService)
         {
             _moodService = moodService;
+            _userService = userService;
         }
 
         public ActionResult MoodIndex()
@@ -29,7 +32,7 @@ namespace MoodDetectorWebApp.Controllers
 
         public ActionResult SessionsList()
         {
-            int userId = 3; // change with Paulius' implementation
+            int userId = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name).Id;
             List<SessionSummary> sessions = new List<SessionSummary>();
             List<int> sessionsIds = _moodService.GetAllSessionsIds(userId);
             foreach (int id in sessionsIds)

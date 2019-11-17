@@ -11,10 +11,12 @@ namespace MoodDetectorWebApp.Controllers
     public class DetectorController : Controller
     {
         private IMoodService _moodService;
+        private IUserService _userService;
 
-        public DetectorController(IMoodService moodService)
+        public DetectorController(IMoodService moodService, IUserService userService)
         {
             _moodService = moodService;
+            _userService = userService;
         }
 
         // GET: Detector
@@ -29,10 +31,11 @@ namespace MoodDetectorWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult NewSession(NewSessionModel model)
         {
+            int userId = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name).Id;
             if (ModelState.IsValid) {
                 SessionInfo sessionInfo = new SessionInfo()
                 {
-                    User = new User() { Id = 3 },
+                    User = new User() { Id = userId },
                     Class = model.Class,
                     Comments = model.Comments,
                     Subject = model.Subject,
