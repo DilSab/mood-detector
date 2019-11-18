@@ -160,9 +160,11 @@
     <Content Include="Assets\css\lib\bootstrap-grid.css" />
     <Content Include="Assets\css\lib\bootstrap-reboot.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
+    <Content Include="Assets\css\liveDetector-session.css" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
     <Content Include="Assets\js\lib\popper.js" />
+    <Content Include="Assets\js\liveDetector.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -211,6 +213,7 @@
     <Content Include="Views\Mood\SessionIndex.cshtml" />
     <Content Include="Views\Mood\SessionsList.cshtml" />
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
+    <Content Include="Views\JoinSession\Session.cshtml" />
     <Content Include="Views\JoinSession\JoinSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
