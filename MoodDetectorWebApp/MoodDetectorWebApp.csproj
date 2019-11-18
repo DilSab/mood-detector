@@ -138,6 +138,7 @@
     <Compile Include="Controllers\LearningsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
+    <Compile Include="Controllers\MessengerController.cs" />
     <Compile Include="Controllers\MoodController.cs" />
     <Compile Include="Controllers\MyProfileAdminController.cs" />
     <Compile Include="Controllers\MyProfileTeacherController.cs" />
@@ -149,6 +150,7 @@
     </Compile>
     <Compile Include="Models\AddUserModel.cs" />
     <Compile Include="Models\DetectionStartViewModel.cs" />
+    <Compile Include="Models\GlobalMessageModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Models\SessionSummary.cs" />
@@ -156,12 +158,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\detector-start.css" />
-    <Content Include="Assets\css\lib\bootstrap-grid.css" />
-    <Content Include="Assets\css\lib\bootstrap-reboot.css" />
+    <Content Include="Assets\css\global-message.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
+    <Content Include="Assets\css\messenger-sidebar.css" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
     <Content Include="Assets\js\lib\popper.js" />
+    <Content Include="Assets\js\messenger-update.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -185,7 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Logs\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -206,6 +211,8 @@
     <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\SuccessfulAdd.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
+    <Content Include="Views\Messenger\GlobalMessage.cshtml" />
+    <Content Include="Views\Messenger\Sidebar.cshtml" />
     <Content Include="Views\Mood\SessionMood.cshtml" />
     <Content Include="Views\Mood\SessionIndex.cshtml" />
     <Content Include="Views\Mood\SessionsList.cshtml" />

@@ -11,15 +11,13 @@ namespace MoodDetectorWebApp.Controllers
     {
         private ILoginProcessor _loginProcessor;
         private IUserService _userService;
-        private IMoodService _moodService;
 
         public static string AccessRights = "logged out";
         
-        public LoginController(ILoginProcessor loginProcessor, IUserService userService, IMoodService moodService)
+        public LoginController(ILoginProcessor loginProcessor, IUserService userService)
         {
             _loginProcessor = loginProcessor;
             _userService = userService;
-            _moodService = moodService;
         }
 
         // GET: Login
@@ -31,7 +29,6 @@ namespace MoodDetectorWebApp.Controllers
         // POST: Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public ActionResult Login(LoginModel model)
         {
             bool loginCorrect = _loginProcessor.ProcessLogin(model.UserName, model.Password);
@@ -44,18 +41,18 @@ namespace MoodDetectorWebApp.Controllers
                 {
                     case "Admin":                        
                         FormsAuthentication.SetAuthCookie(model.UserName, false);                       
-                        LoginController.AccessRights = "admin";
+                        AccessRights = "admin";
                         return RedirectToAction("MyProfileAdmin", "MyProfileAdmin");
 
                     case "Teacher":
                         FormsAuthentication.SetAuthCookie(model.UserName, false);                        
-                        LoginController.AccessRights = "teacher";
+                        AccessRights = "teacher";
                         return RedirectToAction("MyProfileTeacher", "MyProfileTeacher");
                 }
             }
             else
             {
-                LoginController.AccessRights = "logged out";
+                AccessRights = "logged out";
                 ModelState.AddModelError("CustomError", "Incorrect username and/or password");                
                 return View("Login");
             }

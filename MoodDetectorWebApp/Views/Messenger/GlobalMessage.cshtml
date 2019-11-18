@@ -1,0 +1,51 @@
+﻿@using MoodDetectorWebApp.Models
+
+@model GlobalMessageModel
+<link href="~/Assets/css/global-message.css" rel="stylesheet" type="text/css">
+
+@{
+    ViewBag.Title = "GlobalMessageView";
+}
+
+<h3>Messages</h3>
+
+<div class="row">
+    <div class="@(Session["AccessRights"].ToString() == "admin" ? "col-xl-4 col-5" : "col-12") sidebar">
+        @{Html.RenderAction("LoadUserGlobalMessages", "Messenger");}
+    </div>
+    <div class="col-xl-8 col-7">
+        <div class="row">
+            <div class="col">
+                @if (Session["AccessRights"].ToString() == "admin")
+                {
+                    using (Html.BeginForm("PostGlobalMessage", "Messenger"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row mt-5 mb-3">
+                            <div class="col-xl-2 col-sm-4">@Html.LabelFor(m => m.Title)</div>
+                            <div class="w-100 d-sm-none"></div>
+                            <div class="col-xl-10 col-sm-8">@Html.TextBoxFor(m => m.Title, new { @class = "form-control", maxlength = 50 }) @Html.ValidationMessageFor(m => m.Title, "", new { @style = "color:red" })</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-xl-2 col-sm-4">@Html.LabelFor(m => m.ExpirationDate)</div>
+                            <div class="w-100 d-sm-none"></div>
+                            <div class="col-xl-10 col-sm-8">@Html.EditorFor(m => m.ExpirationDate, @Html.ValidationMessageFor(m => m.ExpirationDate, "", new { @style = "color:red" }))</div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-xl-2 col-sm-4">@Html.LabelFor(m => m.RecipientType)</div>
+                            <div class="w-100 d-sm-none"></div>
+                            <div class="col-xl-10 col-sm-8">@Html.DropDownListFor(m => m.RecipientType, new SelectList(GlobalMessageModel.GetAllRecipientTypes()))</div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-xl-2 col-sm-4">@Html.LabelFor(m => m.Content)</div>
+                            <div class="w-100 d-sm-none"></div>
+                            <div class="col-xl-10 col-sm-8">@Html.TextAreaFor(m => m.Content, new { @class = "form-control", @rows = 5, maxlength = 500 }) @Html.ValidationMessageFor(m => m.Content, "", new { @style = "color:red" })</div>
+                        </div>
+                        <input type="submit" value="Post message" />
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

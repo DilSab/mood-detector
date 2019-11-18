@@ -14,4 +14,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DateTime" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="5bbf28cc-f26a-43f1-855e-5f22af70d0f5" ChangeDateTime="11/10/2019 18:53:29">
+    <Property Name="ElementName" Value="[dbo].[Messages].[Reciever]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Messages]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Receiver" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f54e57c4-3e0f-490d-bc93-fbb8e5e57dfc" ChangeDateTime="11/10/2019 18:53:56">
+    <Property Name="ElementName" Value="[dbo].[Messages].[Sender]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Messages]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SenderUserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0781d7aa-89e9-40cd-8e0d-c2b38b5412b2" ChangeDateTime="11/10/2019 18:54:04">
+    <Property Name="ElementName" Value="[dbo].[Messages].[Receiver]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Messages]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReceiverUserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c02ccad2-c557-40d5-a5c1-38f23303837c" ChangeDateTime="11/12/2019 18:09:23">
+    <Property Name="ElementName" Value="[dbo].[GlobalMessage].[DatePosted]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[GlobalMessage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PostedDate" />
+  </Operation>
 </Operations>

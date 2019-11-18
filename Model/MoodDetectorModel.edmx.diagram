@@ -13,6 +13,8 @@
         <AssociationConnector Association="MoodDetectorDBModel.FK_LoginInfo_User" />
         <AssociationConnector Association="MoodDetectorDBModel.FK_Mood_Session" />
         <AssociationConnector Association="MoodDetectorDBModel.FK_Session_User" />
+        <EntityTypeShape EntityType="MoodDetectorDBModel.GlobalMessage" Width="1.5" PointX="3" PointY="12.25" />
+        <AssociationConnector Association="MoodDetectorDBModel.FK_GlobalMessage_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
