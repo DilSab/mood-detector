@@ -42,10 +42,10 @@ namespace MoodDetectorWebApp.Controllers
                 addUserModel.Lastname,
                 addUserModel.AccessRights
                 );
-            /*if (!_registerAuthenticator.IsRegisterDataCorrect(addUser))
+            if (!_registerAuthenticator.IsRegisterDataCorrect(addUser))
             {
-                return View("DeleteUser");
-            }*/
+                return View("ErrorMessage", model: "Check entered data");
+            }
             _userService.AddNewUser(addUser);
             return View("SuccessfulAdd");
         }
