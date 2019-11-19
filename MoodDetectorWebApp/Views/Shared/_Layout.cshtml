@@ -23,12 +23,12 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    @*TODO: show based on users AccessRights or if not logged on*@
                     @{
                         var accessRights = LoginController.AccessRights;
                         Session["AccessRights"] = accessRights;
 
                     }
+
                     @*For everyone*@
                     <li class="nav-item">@Html.ActionLink("About", "About", "About", null, new { @class = "nav-link" })</li>
 					<li class="nav-item">@Html.ActionLink("Threading", "Index", "Threading", null, new { @class = "nav-link" })</li>
@@ -51,6 +51,7 @@
                         <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
                         <li class="nav-item"><sup id="message-counter"></sup></li>
                     }
+
                     @*For admin*@
                     @if (accessRights == "admin")
                     {
@@ -60,6 +61,7 @@
                         <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
                         <li class="nav-item"><sup id="message-counter"></sup></li>
                     }
+
                     @*For logged in*@
                     @if (accessRights == "admin" || accessRights == "teacher")
                     {
@@ -71,7 +73,6 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        </div>
         <hr />
         <footer>
             <p class="ml-5">@DateTime.Now.Year Mood Detector</p>
