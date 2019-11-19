@@ -3,7 +3,6 @@ using ControllerProject;
 using ControllerProject.Service;
 using MoodDetectorWebApp.Models;
 using System.Web.Security;
-using System.Security.Principal;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -61,4 +60,3 @@ namespace MoodDetectorWebApp.Controllers
         }        
     }
 }
-// **

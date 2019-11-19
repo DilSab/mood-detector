@@ -4,13 +4,11 @@ using Model.Entity;
 using MoodDetectorWebApp.Models;
 using Newtonsoft.Json;
 using System;
-using System.Web;
-using System.Security.Principal;
 using System.Web.Mvc;
-
 
 namespace MoodDetectorWebApp.Controllers
 {
+    [Authorize(Roles = "teacher")]
     public class DetectorController : Controller
     {
         private IMoodService _moodService;
@@ -32,7 +30,6 @@ namespace MoodDetectorWebApp.Controllers
         // POST: Detector
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult NewSession(NewSessionModel model)
         {
             // Randamas dabartinis vartotojas is prisijungimo metu sukurto cookio.

@@ -5,10 +5,10 @@ using Model;
 using Model.Entity;
 using MoodDetectorWebApp.Models;
 using System;
-using System.Threading.Tasks;
 
 namespace MoodDetectorWebApp.Controllers
 {
+    [Authorize(Roles = "teacher")]
     public class MoodController : Controller
     {
         IMoodService _moodService;
