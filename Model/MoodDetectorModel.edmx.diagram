@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dcfd1cf7207443a4b94a42ca784bfc24" Name="Diagram1">
+      <Diagram DiagramId="dcfd1cf7207443a4b94a42ca784bfc24" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="MoodDetectorDBModel.C__RefactorLog" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="MoodDetectorDBModel.LoginInfo" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="MoodDetectorDBModel.Mood" Width="1.5" PointX="5.25" PointY="4" />
@@ -13,6 +13,11 @@
         <AssociationConnector Association="MoodDetectorDBModel.FK_LoginInfo_User" />
         <AssociationConnector Association="MoodDetectorDBModel.FK_Mood_Session" />
         <AssociationConnector Association="MoodDetectorDBModel.FK_Session_User" />
+        <EntityTypeShape EntityType="MoodDetectorDBModel.JoinSession" Width="1.5" PointX="9.5" PointY="1.375" />
+        <AssociationConnector Association="MoodDetectorDBModel.FK_JoinSession_Session" />
+        <EntityTypeShape EntityType="MoodDetectorDBModel.Student" Width="1.5" PointX="7.625" PointY="4.625" />
+        <EntityTypeShape EntityType="MoodDetectorDBModel.MoodLive" Width="1.5" PointX="11.625" PointY="1.375" />
+        <AssociationConnector Association="MoodDetectorDBModel.FK_MoodLive_JoinSession" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

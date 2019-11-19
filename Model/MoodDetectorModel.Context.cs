@@ -32,6 +32,9 @@ namespace Model
         public virtual DbSet<Mood> Moods { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<JoinSession> JoinSessions { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<MoodLive> MoodLives { get; set; }
     
         public virtual int addUsers()
         {

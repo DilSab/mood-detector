@@ -102,6 +102,9 @@
     <Compile Include="Entity\UserWithLogin.cs" />
     <Compile Include="Entity\MoodCollection.cs" />
     <Compile Include="Entity\SessionInfo.cs" />
+    <Compile Include="JoinSession.cs">
+      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoginInfo.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>
@@ -123,7 +126,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MoodDetectorModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MoodLive.cs">
+      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Session.cs">
+      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Student.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

@@ -12,27 +12,21 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Session
+    public partial class JoinSession
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Session()
+        public JoinSession()
         {
-            this.Moods = new HashSet<Mood>();
-            this.JoinSessions = new HashSet<JoinSession>();
+            this.MoodLives = new HashSet<MoodLive>();
         }
     
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public string Subject { get; set; }
-        public string Class { get; set; }
-        public System.DateTime DateTime { get; set; }
-        public string Comments { get; set; }
-        public int MessageSeen { get; set; }
+        public int JoinSessionId { get; set; }
+        public string JoinId { get; set; }
+        public Nullable<int> StudentID { get; set; }
     
+        public virtual Session Session { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mood> Moods { get; set; }
-        public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JoinSession> JoinSessions { get; set; }
+        public virtual ICollection<MoodLive> MoodLives { get; set; }
     }
 }

@@ -11,6 +11,15 @@
           </Key>
           <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="JoinSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JoinSessionId" Type="int" Nullable="false" />
+          <Property Name="JoinId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="StudentID" Type="int" />
+        </EntityType>
         <EntityType Name="LoginInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -38,6 +47,23 @@
           <Property Name="Valence" Type="float" Nullable="false" />
           <Property Name="Emoji" Type="varchar" MaxLength="5" />
         </EntityType>
+        <EntityType Name="MoodLive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JoinSessionId" Type="int" Nullable="false" />
+          <Property Name="Anger" Type="float" Nullable="false" />
+          <Property Name="Joy" Type="float" Nullable="false" />
+          <Property Name="Contempt" Type="float" Nullable="false" />
+          <Property Name="Disgust" Type="float" Nullable="false" />
+          <Property Name="Engagement" Type="float" Nullable="false" />
+          <Property Name="Fear" Type="float" Nullable="false" />
+          <Property Name="Sadness" Type="float" Nullable="false" />
+          <Property Name="Suprise" Type="float" Nullable="false" />
+          <Property Name="Valence" Type="float" Nullable="false" />
+          <Property Name="Emoji" Type="varchar" MaxLength="5" />
+        </EntityType>
         <EntityType Name="Session">
           <Key>
             <PropertyRef Name="Id" />
@@ -50,6 +76,16 @@
           <Property Name="Comments" Type="text" Nullable="false" />
           <Property Name="MessageSeen" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -59,6 +95,18 @@
           <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AccessRights" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_JoinSession_Session">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="JoinSession" Type="Self.JoinSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JoinSession">
+              <PropertyRef Name="JoinSessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LoginInfo_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="LoginInfo" Type="Self.LoginInfo" Multiplicity="*" />
@@ -83,6 +131,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MoodLive_JoinSession">
+          <End Role="JoinSession" Type="Self.JoinSession" Multiplicity="1" />
+          <End Role="MoodLive" Type="Self.MoodLive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JoinSession">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoodLive">
+              <PropertyRef Name="JoinSessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Session_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Session" Type="Self.Session" Multiplicity="*" />
@@ -98,10 +158,17 @@
         <Function Name="addUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MoodDetectorDBModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JoinSession" EntityType="Self.JoinSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginInfo" EntityType="Self.LoginInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mood" EntityType="Self.Mood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MoodLive" EntityType="Self.MoodLive" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_JoinSession_Session" Association="Self.FK_JoinSession_Session">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="JoinSession" EntitySet="JoinSession" />
+          </AssociationSet>
           <AssociationSet Name="FK_LoginInfo_User" Association="Self.FK_LoginInfo_User">
             <End Role="User" EntitySet="User" />
             <End Role="LoginInfo" EntitySet="LoginInfo" />
@@ -109,6 +176,10 @@
           <AssociationSet Name="FK_Mood_Session" Association="Self.FK_Mood_Session">
             <End Role="Session" EntitySet="Session" />
             <End Role="Mood" EntitySet="Mood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoodLive_JoinSession" Association="Self.FK_MoodLive_JoinSession">
+            <End Role="JoinSession" EntitySet="JoinSession" />
+            <End Role="MoodLive" EntitySet="MoodLive" />
           </AssociationSet>
           <AssociationSet Name="FK_Session_User" Association="Self.FK_Session_User">
             <End Role="User" EntitySet="User" />
@@ -137,6 +208,17 @@
           <AssociationSet Name="FK_Session_User" Association="MoodDetectorDBModel.FK_Session_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <EntitySet Name="JoinSessions" EntityType="MoodDetectorDBModel.JoinSession" />
+          <AssociationSet Name="FK_JoinSession_Session" Association="MoodDetectorDBModel.FK_JoinSession_Session">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="JoinSession" EntitySet="JoinSessions" />
+          </AssociationSet>
+          <EntitySet Name="Students" EntityType="MoodDetectorDBModel.Student" />
+          <EntitySet Name="MoodLives" EntityType="MoodDetectorDBModel.MoodLive" />
+          <AssociationSet Name="FK_MoodLive_JoinSession" Association="MoodDetectorDBModel.FK_MoodLive_JoinSession">
+            <End Role="JoinSession" EntitySet="JoinSessions" />
+            <End Role="MoodLive" EntitySet="MoodLives" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__RefactorLog">
@@ -187,6 +269,7 @@
           <Property Name="MessageSeen" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Moods" Relationship="MoodDetectorDBModel.FK_Mood_Session" FromRole="Session" ToRole="Mood" />
           <NavigationProperty Name="User" Relationship="MoodDetectorDBModel.FK_Session_User" FromRole="Session" ToRole="User" />
+          <NavigationProperty Name="JoinSessions" Relationship="MoodDetectorDBModel.FK_JoinSession_Session" FromRole="Session" ToRole="JoinSession" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -232,6 +315,69 @@
             </Principal>
             <Dependent Role="Session">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JoinSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JoinSessionId" Type="Int32" Nullable="false" />
+          <Property Name="JoinId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Session" Relationship="MoodDetectorDBModel.FK_JoinSession_Session" FromRole="JoinSession" ToRole="Session" />
+          <Property Name="StudentID" Type="Int32" />
+          <NavigationProperty Name="MoodLives" Relationship="MoodDetectorDBModel.FK_MoodLive_JoinSession" FromRole="JoinSession" ToRole="MoodLive" />
+        </EntityType>
+        <Association Name="FK_JoinSession_Session">
+          <End Type="MoodDetectorDBModel.Session" Role="Session" Multiplicity="1" />
+          <End Type="MoodDetectorDBModel.JoinSession" Role="JoinSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JoinSession">
+              <PropertyRef Name="JoinSessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MoodLive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JoinSessionId" Type="Int32" Nullable="false" />
+          <Property Name="Anger" Type="Double" Nullable="false" />
+          <Property Name="Joy" Type="Double" Nullable="false" />
+          <Property Name="Contempt" Type="Double" Nullable="false" />
+          <Property Name="Disgust" Type="Double" Nullable="false" />
+          <Property Name="Engagement" Type="Double" Nullable="false" />
+          <Property Name="Fear" Type="Double" Nullable="false" />
+          <Property Name="Sadness" Type="Double" Nullable="false" />
+          <Property Name="Suprise" Type="Double" Nullable="false" />
+          <Property Name="Valence" Type="Double" Nullable="false" />
+          <Property Name="Emoji" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JoinSession" Relationship="MoodDetectorDBModel.FK_MoodLive_JoinSession" FromRole="MoodLive" ToRole="JoinSession" />
+        </EntityType>
+        <Association Name="FK_MoodLive_JoinSession">
+          <End Type="MoodDetectorDBModel.JoinSession" Role="JoinSession" Multiplicity="1" />
+          <End Type="MoodDetectorDBModel.MoodLive" Role="MoodLive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JoinSession">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoodLive">
+              <PropertyRef Name="JoinSessionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -297,6 +443,45 @@
                 <ScalarProperty Name="AccessRights" ColumnName="AccessRights" />
                 <ScalarProperty Name="Lastname" ColumnName="Lastname" />
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JoinSessions">
+            <EntityTypeMapping TypeName="MoodDetectorDBModel.JoinSession">
+              <MappingFragment StoreEntitySet="JoinSession">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="JoinId" ColumnName="JoinId" />
+                <ScalarProperty Name="JoinSessionId" ColumnName="JoinSessionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="MoodDetectorDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MoodLives">
+            <EntityTypeMapping TypeName="MoodDetectorDBModel.MoodLive">
+              <MappingFragment StoreEntitySet="MoodLive">
+                <ScalarProperty Name="Emoji" ColumnName="Emoji" />
+                <ScalarProperty Name="Valence" ColumnName="Valence" />
+                <ScalarProperty Name="Suprise" ColumnName="Suprise" />
+                <ScalarProperty Name="Sadness" ColumnName="Sadness" />
+                <ScalarProperty Name="Fear" ColumnName="Fear" />
+                <ScalarProperty Name="Engagement" ColumnName="Engagement" />
+                <ScalarProperty Name="Disgust" ColumnName="Disgust" />
+                <ScalarProperty Name="Contempt" ColumnName="Contempt" />
+                <ScalarProperty Name="Joy" ColumnName="Joy" />
+                <ScalarProperty Name="Anger" ColumnName="Anger" />
+                <ScalarProperty Name="JoinSessionId" ColumnName="JoinSessionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

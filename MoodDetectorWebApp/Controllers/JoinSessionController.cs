@@ -11,11 +11,13 @@ namespace MoodDetectorWebApp.Controllers
     {
             private IMoodService _moodService;
             private IUserService _userService;
+            private MoodDetectorDBEntities _context;
 
-            public JoinSessionController(IMoodService moodService, IUserService userService)
-            {
-                _moodService = moodService;
-                _userService = userService;
+            public JoinSessionController(IMoodService moodService, IUserService userService, MoodDetectorDBEntities context)
+                {
+                    _moodService = moodService;
+                    _userService = userService;
+                    _context = context;
             }
       
         
@@ -29,15 +31,27 @@ namespace MoodDetectorWebApp.Controllers
            // POST: JoinSession
            [HttpPost]
            public ActionResult JoinSession(JoinSessionModel model)
-           {
+           {           
+                if (ModelState.IsValid)
+                {
+                    if (_moodService.GetSession(model.DetectionId) != null)
+                    {
 
-            // Link with database
-            
-            if (ModelState.IsValid)
-            {
-                return View("~/Views/JoinSession/Session.cshtml", model);
-            }
-            return View();
+                        JoinSession join = new JoinSession()
+                        {
+                            JoinSessionId = model.DetectionId,
+                            JoinId = model.JoinId,
+                        };
+
+                        _context.JoinSessions.Add(join);
+                        _context.SaveChanges();
+
+
+                    return View("~/Views/JoinSession/Session.cshtml", model);
+                    }
+                }
+
+                return View();
            }          
     }
 }
