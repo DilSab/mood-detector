@@ -11,20 +11,22 @@ namespace MoodDetectorWebApp.Controllers
     public class LearningsController : Controller
     {
         IMoodService _moodService;
-        public LearningsController(IMoodService moodService)
+        IUserService _userService;
+        public LearningsController(IMoodService moodService, IUserService userService)
         {
             _moodService = moodService;
+            _userService = userService;
         }
 
         // GET: Learnings
-        public ActionResult LearningsIndex()
+        public ActionResult Learnings()
         {
-            return View();
+            return GetLearnings();
         }
-        public ActionResult GetLearnings(int id)
+        public ActionResult GetLearnings()
         {
-            
-            LearningService learningService = new LearningService(new User() { Id = id }, _moodService);
+            User currentUser = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
+            LearningService learningService = new LearningService(new User() { Id = currentUser.Id }, _moodService);
             List<LearningMessage> learnings = learningService.GetMessages();
             return View("Learnings",learnings);
         }
