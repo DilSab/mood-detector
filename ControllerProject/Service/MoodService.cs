@@ -3,6 +3,7 @@ using Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ControllerProject.Service
@@ -152,40 +153,63 @@ namespace ControllerProject.Service
 
             return null;
         }
+        private IQueryable<Session> getUserSessions(int userId)
+        {
+            return (from m in _context.Sessions
+                    where m.UserId == userId 
+                    select m).OrderByDescending(x => x.Id);
+        }
 
         public Mood GetLastClassMood(User user, int mask)
         {
+            
             Mood mood = new Mood();
             mood.Anger = 0;
-            mood.Joy = 1;
+            mood.Sadness = 0;
+            mood.Disgust = 0;
+            mood.Fear = 0;
+            mood.Session = new Session() { DateTime = DateTime.Now, Id = -1 };
             if (!_context.Sessions.Any()) return mood;
-            IQueryable<Session> sessions = (from m in _context.Sessions
-                                                where m.UserId == user.Id
-                                                select m);
+            IQueryable<Session> sessions = getUserSessions(user.Id);
 
             if (!sessions.Any()) return mood;
 
-            Session session = sessions.OrderByDescending(x => x.Id).First();
-            if (GetSessionMessageStatus(session.Id, mask) > 0) return mood;
+            foreach(Session session in sessions)
+            {
+                if (!session.Moods.Any()||GetSessionMessageStatus(session.Id, mask) > 0) continue;
 
-            MoodCollection moodCollection = GetMoodAverage(session.Moods.ToList());
-            mood = _context.Moods.First(x => x.SessionId == session.Id);
-            mood.Anger = moodCollection.Anger;
-            mood.Joy = moodCollection.Joy;
+                MoodCollection moodCollection = GetMoodAverage(session.Moods.ToList());
+                
+                mood = _context.Moods.First(x => x.SessionId == session.Id);
+                Debug.WriteLine(mood.Session.DateTime.ToString());
+                mood.Anger = moodCollection.Anger;
+                mood.Sadness = moodCollection.Sadness;
+                mood.Disgust = moodCollection.Disgust;
+                mood.Fear = moodCollection.Fear;
+                return mood;
+            }
+
 
             return mood;
         }
 
         public void UpdateSessionMessageStatus(int classmoodId, int mask)
         {
+            if (!_context.Sessions.Any(x => x.Id == classmoodId)) return;
             var classmood = _context.Sessions.First(x => x.Id == classmoodId);
-            classmood.MessageSeen |= mask;   
-            
-            _context.Entry(classmood).State = EntityState.Modified;
+            IQueryable<Session> sessions = getUserSessions(classmood.UserId);
+            foreach (Session session in sessions)
+            {
+                if((session.MessageSeen & mask) == 0)
+                {
+                    session.MessageSeen |= mask;
+                    _context.Entry(session).State = EntityState.Modified;
+                }
+            }         
             _context.SaveChanges();
         }
 
-        private int GetSessionMessageStatus(int classmoodId, int mask)
+        public int GetSessionMessageStatus(int classmoodId, int mask)
         {
             Session session = _context.Sessions.First(x => x.Id == classmoodId);
 

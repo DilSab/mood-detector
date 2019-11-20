@@ -205,9 +205,9 @@
     <Content Include="Views\MyProfileAdmin\MyProfileAdmin.cshtml" />
     <Content Include="Views\MyProfileTeacher\MyProfileTeacher.cshtml" />
     <Content Include="Views\ImportantInfo\ImportantInfo.cshtml" />
-    <Content Include="Views\Learnings\Learnings.cshtml" />
     <Content Include="Views\ManageUsers\ViewUsers.cshtml" />
     <Content Include="Views\ManageUsers\DeleteUser.cshtml" />
+    <Content Include="Views\Learnings\Learnings.cshtml" />
     <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\SuccessfulAdd.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
