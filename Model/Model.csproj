@@ -105,7 +105,7 @@
     <Compile Include="LoginInfo.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Message.cs" />
+    <Compile Include="LearningMessage.cs" />
     <Compile Include="Mood.cs">
       <DependentUpon>MoodDetectorModel.tt</DependentUpon>
     </Compile>

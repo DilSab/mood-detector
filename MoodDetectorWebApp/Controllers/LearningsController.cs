@@ -25,7 +25,7 @@ namespace MoodDetectorWebApp.Controllers
         {
             
             LearningService learningService = new LearningService(new User() { Id = id }, _moodService);
-            List<Message> learnings = learningService.GetMessages();
+            List<LearningMessage> learnings = learningService.GetMessages();
             return View("Learnings",learnings);
         }
         public ActionResult RemoveLearning(int a, int b)

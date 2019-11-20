@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Message
+    public class LearningMessage
     {
         public string Text { get; set; }
         public int SessionId { get; set; }

@@ -8,7 +8,7 @@
 <h2>Assigned learnings</h2>
 @if (Model != null)
 {
-    List<Message> learnings = Model;
+    List<LearningMessage> learnings = Model;
     int cnt = 0;
     for (int i = 0; i < learnings.Count; i++)
     {
@@ -34,7 +34,8 @@
                         url:$(this).attr("href"),
 
                     });
-                    $("p").remove(":contains('@learnings[i].Text')")
+                    $("p").remove(":contains('@learnings[i].Text')");
+                    window.open('@learnings[i].Link', "_blank");
 
                 });
         </script>
@@ -58,14 +59,20 @@
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Output the result in an element with id="demo"
-                document.getElementById('demo'+@i).innerHTML = days + "d " + hours + "h "
-                    + minutes + "m " + seconds + "s ";
+                // Output the result in an element with id="demo(i)"
+                if (days == 0) {
+                    document.getElementById('demo' +@i).innerHTML = "! " + days + "d " + hours + "h "
+                        + minutes + "m " + seconds + "s !";
+                }
+                else {
+                    document.getElementById('demo' +@i).innerHTML = days + "d " + hours + "h "
+                        + minutes + "m " + seconds + "s ";
+                }
 
                 // If the count down is over, write some text
                 if (distance < 0) {
                     clearInterval(x);
-                    $("#myLink"+@i).trigger("click");
+                    document.getElementById('demo'+@i).innerHTML = "EXPIRED";
                 }
             }, 1000);
         </script>

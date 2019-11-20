@@ -89,7 +89,7 @@ namespace ControllerProject.Service
         private IQueryable<Session> getUserSessions(int userId)
         {
             return (from m in _context.Sessions
-                    where m.UserId == userId && DbFunctions.DiffDays(m.DateTime, DateTime.Now) < 7
+                    where m.UserId == userId 
                     select m).OrderByDescending(x => x.Id);
         }
 
@@ -133,8 +133,11 @@ namespace ControllerProject.Service
             IQueryable<Session> sessions = getUserSessions(classmood.UserId);
             foreach (Session session in sessions)
             {
-                session.MessageSeen |= mask;
-                _context.Entry(session).State = EntityState.Modified;
+                if((session.MessageSeen & mask) == 0)
+                {
+                    session.MessageSeen |= mask;
+                    _context.Entry(session).State = EntityState.Modified;
+                }
             }         
             _context.SaveChanges();
         }

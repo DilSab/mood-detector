@@ -9,6 +9,6 @@ namespace ControllerProject.Service
 {
     public interface ILearningService
     {
-        List<Message> GetMessages();
+        List<LearningMessage> GetMessages();
     }
 }

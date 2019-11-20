@@ -15,15 +15,23 @@ namespace ControllerProject.Service
             this.user = user;
             _moodService = moodService;
         }
-
-        private Message GetMessage(Mood mood, string text, int mask)
+        private string GetLinkValue(int mask)
         {
-            return new Message()
+            if (mask == 1) return "https://blog.brookespublishing.com/8-anger-management-tips-for-your-students/";
+            if (mask == 4) return "https://www.psychologytoday.com/us/blog/smell-life/201202/taking-control-disgust";
+            if (mask == 8) return "https://www.facultyfocus.com/articles/teaching-and-learning/strategies-for-addressing-student-fear-in-the-classroom/";
+            if (mask == 16) return "https://www.wikihow.com/Overcome-Sadness";
+            return "";
+        }
+        private LearningMessage GetMessage(Mood mood, string text, int mask)
+        {
+            return new LearningMessage()
             {
                 Text = text,
                 SessionId = mood.SessionId,
                 Mask = mask,
-                SessionTime = mood.Session.DateTime.AddDays(7).Ticks
+                SessionTime = mood.Session.DateTime.AddDays(7).Ticks,
+                Link = GetLinkValue(mask)
             };
         }
         private double GetEmotionValue(Mood mood, int mask)
@@ -34,7 +42,8 @@ namespace ControllerProject.Service
             if (mask == 16) return mood.Sadness;
             return -1;
         }
-        private Message GetEmotionMessage(string emotion, int mask)
+
+        private LearningMessage GetEmotionMessage(string emotion, int mask)
         {
             Mood mood = _moodService.GetLastClassMood(user, mask);
             double emotionValue = GetEmotionValue(mood, mask);
@@ -48,12 +57,13 @@ namespace ControllerProject.Service
                 return GetMessage(mood, "", mask);
             }
             string mess = emotion+" levels are too high in your classes! You have a learning assigned";
+
             return GetMessage(mood, mess, mask);
         }
 
-        public List<Message> GetMessages()
+        public List<LearningMessage> GetMessages()
         {
-            List<Message> messages = new List<Message>();
+            List<LearningMessage> messages = new List<LearningMessage>();
             messages.Add(GetEmotionMessage("Anger",1));
             messages.Add(GetEmotionMessage("Disgust",4));
             messages.Add(GetEmotionMessage("Fear",8));
