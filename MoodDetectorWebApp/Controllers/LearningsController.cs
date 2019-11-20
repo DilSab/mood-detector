@@ -21,10 +21,6 @@ namespace MoodDetectorWebApp.Controllers
         // GET: Learnings
         public ActionResult Learnings()
         {
-            return GetLearnings();
-        }
-        public ActionResult GetLearnings()
-        {
             User currentUser = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
             LearningService learningService = new LearningService(new User() { Id = currentUser.Id }, _moodService);
             List<LearningMessage> learnings = learningService.GetMessages();
