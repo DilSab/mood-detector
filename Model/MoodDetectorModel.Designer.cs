@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Dilanas\Desktop\mood-detector\MoodDetector\Model\MoodDetectorModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Dilanas\Documents\Projects\mood-detector\Model\MoodDetectorModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 using ControllerProject.Service;
 using Model.Entity;
 
@@ -21,7 +19,7 @@ namespace WindowsFormsUI
 
         private void AddUserButton_Click(object sender, EventArgs e)
         {
-            var addUser = new AddUser(
+            var addUser = new UserWithLogin(
                 usernameTextBox.Text,
                 passwordTextBox.Text,
                 emailTextBox.Text,

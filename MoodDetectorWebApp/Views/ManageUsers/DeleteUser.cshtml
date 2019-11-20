@@ -1,7 +1,10 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "DeleteUser";
 }
 
 <h2>DeleteUser</h2>
+<p>Are you sure you want to permanently delete user @Model.Firstname @Model.Lastname ?</p>
 
+<input type="button"
+       value="Delete"
+       onclick="location.href='@Url.Action("DeleteUserPost", "ManageUsers", new { id = Model.Id })'" />

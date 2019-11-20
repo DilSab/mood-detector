@@ -11,6 +11,18 @@
           </Key>
           <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="GlobalMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="text" Nullable="false" />
+          <Property Name="PostedDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="RecipientType" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="LoginInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -36,6 +48,7 @@
           <Property Name="Sadness" Type="float" Nullable="false" />
           <Property Name="Suprise" Type="float" Nullable="false" />
           <Property Name="Valence" Type="float" Nullable="false" />
+          <Property Name="Emoji" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -58,6 +71,18 @@
           <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AccessRights" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_GlobalMessage_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GlobalMessage" Type="Self.GlobalMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GlobalMessage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LoginInfo_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="LoginInfo" Type="Self.LoginInfo" Multiplicity="*" />
@@ -97,10 +122,15 @@
         <Function Name="addUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MoodDetectorDBModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GlobalMessage" EntityType="Self.GlobalMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginInfo" EntityType="Self.LoginInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mood" EntityType="Self.Mood" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GlobalMessage_User" Association="Self.FK_GlobalMessage_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="GlobalMessage" EntitySet="GlobalMessage" />
+          </AssociationSet>
           <AssociationSet Name="FK_LoginInfo_User" Association="Self.FK_LoginInfo_User">
             <End Role="User" EntitySet="User" />
             <End Role="LoginInfo" EntitySet="LoginInfo" />
@@ -137,6 +167,11 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Session" EntitySet="Sessions" />
           </AssociationSet>
+          <EntitySet Name="GlobalMessages" EntityType="MoodDetectorDBModel.GlobalMessage" />
+          <AssociationSet Name="FK_GlobalMessage_User" Association="MoodDetectorDBModel.FK_GlobalMessage_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GlobalMessage" EntitySet="GlobalMessages" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__RefactorLog">
           <Key>
@@ -171,6 +206,7 @@
           <Property Name="Suprise" Type="Double" Nullable="false" />
           <Property Name="Valence" Type="Double" Nullable="false" />
           <NavigationProperty Name="Session" Relationship="MoodDetectorDBModel.FK_Mood_Session" FromRole="Mood" ToRole="Session" />
+          <Property Name="Emoji" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -196,6 +232,7 @@
           <Property Name="AccessRights" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LoginInfoes" Relationship="MoodDetectorDBModel.FK_LoginInfo_User" FromRole="User" ToRole="LoginInfo" />
           <NavigationProperty Name="Sessions" Relationship="MoodDetectorDBModel.FK_Session_User" FromRole="User" ToRole="Session" />
+          <NavigationProperty Name="GlobalMessages" Relationship="MoodDetectorDBModel.FK_GlobalMessage_User" FromRole="User" ToRole="GlobalMessage" />
         </EntityType>
         <Association Name="FK_LoginInfo_User">
           <End Type="MoodDetectorDBModel.User" Role="User" Multiplicity="1" />
@@ -233,6 +270,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="GlobalMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="RecipientType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="MoodDetectorDBModel.FK_GlobalMessage_User" FromRole="GlobalMessage" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_GlobalMessage_User">
+          <End Type="MoodDetectorDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="MoodDetectorDBModel.GlobalMessage" Role="GlobalMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GlobalMessage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -261,6 +323,7 @@
           <EntitySetMapping Name="Moods">
             <EntityTypeMapping TypeName="MoodDetectorDBModel.Mood">
               <MappingFragment StoreEntitySet="Mood">
+                <ScalarProperty Name="Emoji" ColumnName="Emoji" />
                 <ScalarProperty Name="Valence" ColumnName="Valence" />
                 <ScalarProperty Name="Suprise" ColumnName="Suprise" />
                 <ScalarProperty Name="Sadness" ColumnName="Sadness" />
@@ -294,6 +357,19 @@
                 <ScalarProperty Name="AccessRights" ColumnName="AccessRights" />
                 <ScalarProperty Name="Lastname" ColumnName="Lastname" />
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GlobalMessages">
+            <EntityTypeMapping TypeName="MoodDetectorDBModel.GlobalMessage">
+              <MappingFragment StoreEntitySet="GlobalMessage">
+                <ScalarProperty Name="RecipientType" ColumnName="RecipientType" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

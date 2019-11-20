@@ -10,7 +10,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
     {
         [Theory]
         [ClassData(typeof(TestAddUserData))]
-        public void TestInputFromClassData(AddUser addUser, bool expectedResult)
+        public void TestInputFromClassData(UserWithLogin addUser, bool expectedResult)
         {
             var service = new RegisterAuthenticator();
 
@@ -23,7 +23,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
         private readonly List<object[]> _data = new List<object[]>
         {
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "James",
                     Lastname = "Smith",
@@ -35,7 +35,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 true, // 1) Correct input
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -47,7 +47,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 true, // 2) Correct input
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -59,7 +59,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 3) Invalid rights
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -71,7 +71,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 4) Password must contain at least one number
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -83,7 +83,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 5) Password must contain at least one uppercase character
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -95,7 +95,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 6) Invalid email
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -107,7 +107,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 7) Invalid email
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "",
                     Lastname = "Williams",
@@ -119,7 +119,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 8) Input is empty
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "",
@@ -131,7 +131,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 9) Input is empty
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -143,7 +143,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 10) Input is empty
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -155,7 +155,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 11) Input is empty
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -167,7 +167,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 12) Input is empty
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",
@@ -179,7 +179,7 @@ namespace UnitTest.Service.RegisterAuthenticatorTest
                 false, // 13) Input is empty
             },
             new object[] {
-                new AddUser()
+                new UserWithLogin()
                 {
                     Firstname = "Linda",
                     Lastname = "Williams",

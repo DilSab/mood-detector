@@ -2,25 +2,55 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Model;
+using Model.Entity;
+using MoodDetectorWebApp.Models;
+using System;
 
 namespace MoodDetectorWebApp.Controllers
 {
+    [Authorize(Roles = "teacher")]
     public class MoodController : Controller
     {
         IMoodService _moodService;
+        IUserService _userService;
 
-        public MoodController(IMoodService moodService)
+        public MoodController(IMoodService moodService, IUserService userService)
         {
             _moodService = moodService;
+            _userService = userService;
         }
 
-        // GET: Mood/Mood/
         public ActionResult MoodIndex()
         {
             return View();
         }
 
-        // GET: Mood/MoodList/
+        public ActionResult SessionIndex()
+        {
+            return View("SessionIndex");
+        }
+
+        public ActionResult SessionsList()
+        {
+            int userId = _userService.GetUser(System.Web.HttpContext.Current.User.Identity.Name).Id;
+            List<SessionSummary> sessions = new List<SessionSummary>();
+            List<int> sessionsIds = _moodService.GetAllSessionsIds(userId);
+            foreach (int id in sessionsIds)
+            {
+                Session session = _moodService.GetSession(id);
+                SessionSummary sessionSummary = new SessionSummary
+                {
+                    id = id,
+                    date = session.DateTime,
+                    studentClass = session.Class,
+                    subject = session.Subject,
+                    comment = session.Comments
+                };
+                sessions.Add(sessionSummary);
+            }
+            return View("SessionsList", sessions);
+        }
+
         public ActionResult GetMoodList(int id)
         {
             List<Mood> moods = _moodService.GetMoodsByDate(new User() { Id = id });
@@ -28,80 +58,17 @@ namespace MoodDetectorWebApp.Controllers
             return View("MoodList", moods);
         }
 
-        // GET: Mood/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        public ActionResult StartSession()
-        {
-            return View();
-        }
-
-        // GET: Mood/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Mood/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult GetSessionMoodAverage(int id)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                MoodCollection mood = _moodService.GetMoodsBySessionId(id);
+                Dictionary<string, double> dominantMoods = _moodService.GetDominantMoods(mood);
+                return View("SessionMood", dominantMoods);
             }
-            catch
+            catch (ArgumentException ex)
             {
-                return View();
-            }
-        }
-
-        // GET: Mood/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Mood/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Mood/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Mood/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                return View("ErrorMessage", model: ex.Message);
             }
         }
     }

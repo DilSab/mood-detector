@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model.Entity
+﻿namespace Model.Entity
 {
-    public struct AddUser
+    public struct UserWithLogin
     {
         public string Username;
         public string Password;
@@ -15,7 +9,7 @@ namespace Model.Entity
         public string Lastname;
         public string AccessRights;
 
-        public AddUser(
+        public UserWithLogin(
             string username,
             string password,
             string email,

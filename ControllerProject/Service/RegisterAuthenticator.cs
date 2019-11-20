@@ -6,7 +6,7 @@ namespace ControllerProject.Service
 {
     public class RegisterAuthenticator : IRegisterAuthenticator
     {
-        public bool IsRegisterDataCorrect(AddUser addUser)
+        public bool IsRegisterDataCorrect(UserWithLogin addUser)
         {
             Regex regex;
             regex = new Regex(@"^[a-z0-9][-a-z0-9._]+@([-a-z0-9]+[.])+[a-z]{2,5}$");

@@ -20,7 +20,6 @@ namespace Model
         public MoodDetectorDBEntities()
             : base("name=MoodDetectorDBEntities")
         {
-            var ensureDllIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -33,6 +32,7 @@ namespace Model
         public virtual DbSet<Mood> Moods { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<GlobalMessage> GlobalMessages { get; set; }
     
         public virtual int addUsers()
         {

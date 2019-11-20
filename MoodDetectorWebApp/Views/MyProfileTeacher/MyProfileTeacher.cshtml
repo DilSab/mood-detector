@@ -1,7 +1,28 @@
-﻿
-@{
-    ViewBag.Title = "MyProfileTeacher";
-}
+﻿@using Model.Entity
 
-<h2>MyProfileTeacher</h2>
+@model UserWithLogin
+
+<h2>User Info:</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row mt-5 mb-3">
+        <div class="col-md-10">
+            @Html.Label("First name:") @Model.Firstname
+        </div>
+        <div class="col-md-10">
+            @Html.Label("Last name:") @Model.Lastname
+        </div>
+        <div class="col-md-10">
+            @Html.Label("Username:") @Model.Username
+        </div>
+        <div class="col-md-10">
+            @Html.Label("Email:") @Model.Email
+        </div>
+        <div class="col-md-10">
+            @Html.Label("Access Rights:")  @Model.AccessRights
+        </div>
+    </div>
+ }
+
 
