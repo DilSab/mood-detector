@@ -15,7 +15,7 @@ detector.detectAllAppearance();
 
 //Add a callback to notify when the detector is initialized and ready for runing.
 detector.addEventListener("onInitializeSuccess", function () {
-    log('#logs', "The detector reports initialized");
+   // log('#logs', "The detector reports initialized");
     //Display canvas instead of video feed because we want to draw the feature points on it
     $("#face_video_canvas").css("display", "block");
     $("#face_video").css("display", "none");
@@ -29,50 +29,53 @@ function log(node_name, msg) {
 function onStart() {
     if (detector && !detector.isRunning) {
         $("#logs").html("");
-        detector.start();
+        detector.start();      
+        
     }
-    log('#logs', "Clicked the start button");
+  // log('#logs', "Clicked the start button");
 }
 
 //function executes when the Stop button is pushed.
 function onStop() {
-    log('#logs', "Clicked the stop button");
+   // log('#logs', "Clicked the stop button");
     if (detector && detector.isRunning) {
         detector.removeEventListener();
-        detector.stop();
+        detector.stop();        
     }
 };
 
 //function executes when the Reset button is pushed.
 function onReset() {
-    log('#logs', "Clicked the reset button");
+   // log('#logs', "Clicked the reset button");
     if (detector && detector.isRunning) {
         detector.reset();
-
         $('#results').html("");
     }
 };
 
 //Add a callback to notify when camera access is allowed
 detector.addEventListener("onWebcamConnectSuccess", function () {
-    log('#logs', "Webcam access allowed");
+   // log('#logs', "Webcam access allowed");
 });
 
 //Add a callback to notify when camera access is denied
 detector.addEventListener("onWebcamConnectFailure", function () {
     log('#logs', "webcam denied");
-    console.log("Webcam access denied");
+   // console.log("Webcam access denied");
 });
 
 //Add a callback to notify when detector is stopped
 detector.addEventListener("onStopSuccess", function () {
-    log('#logs', "The detector reports stopped");
+   // log('#logs', "The detector reports stopped");
     $("#results").html("");
 });
 
 //Add a callback to receive the results from processing an image.
 //The faces object contains the list of the faces detected in an image.
 //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
+
+var newTimestamp;////////////////////////////////////
+
 detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
     $('#results').html("");
     log('#results', "Timestamp: " + timestamp.toFixed(2));
@@ -85,9 +88,22 @@ detector.addEventListener("onImageResultsSuccess", function (faces, image, times
         log('#results', "Expressions: " + JSON.stringify(faces[0].expressions, function (key, val) {
             return val.toFixed ? Number(val.toFixed(0)) : val;
         }));
-        log('#results', "Emoji: " + faces[0].emojis.dominantEmoji);
+       // log('#results', "Emoji: " + faces[0].emojis.dominantEmoji);
         if ($('#face_video_canvas')[0] != null)
             drawFeaturePoints(image, faces[0].featurePoints);
+        /////////////////////////////////////////////////////////////////////
+        var intTimestamp = Math.floor(timestamp);        
+        if (intTimestamp % 2 === 0 && (intTimestamp !== newTimestamp)) {
+
+            newTimestamp = intTimestamp;
+            log('#logs', "Timestamp:   " + intTimestamp);
+
+            photodetector.process(image, 0);
+            log('#logs', "photodetector is running:   ");
+           
+
+        /////////////////////////////////////////////////////////////////////
+        }
     }
 });
 
@@ -108,3 +124,41 @@ function drawFeaturePoints(img, featurePoints) {
 
     }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+var photodetector = new affdex.PhotoDetector();
+var imageCount = 1;
+var joinsessionId;
+//Enable detection of all Expressions, Emotions and Emojis classifiers.
+photodetector.detectAllEmotions();
+photodetector.detectAllExpressions();
+photodetector.detectAllEmojis();
+photodetector.detectAllAppearance();
+
+
+
+//Add a callback to notify when the detector is initialized and ready for runing.
+photodetector.addEventListener("onInitializeSuccess", function () {
+    //log('#logs', "The detector reports initialized");  
+});
+
+photodetector.addEventListener("onImageResultsSuccess", function (faces, image) {        
+
+    log('#logs', "onImageResultsSuccess happened");
+
+    if (faces.length > 0) {
+      
+        log('#logs', "faces.length > 0");
+        
+    }
+});
+
+//Add a callback to notify if failed receive the results from processing an image.
+photodetector.addEventListener("onImageResultsFailure", function (image, timestamp, error) {
+    log('#logs', 'Failed to process image err=' + error);
+});
+
+//Initialize the emotion detector
+//log("#logs", "Starting the detector .. please wait");
+photodetector.start();

@@ -4,6 +4,7 @@ using MoodDetectorWebApp.Models;
 using System;
 using Model.Entity;
 using Model;
+using Newtonsoft.Json;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -43,6 +44,8 @@ namespace MoodDetectorWebApp.Controllers
                             JoinId = model.JoinId,
                         };
 
+                        int joinSessionId = join.JoinSessionId;
+
                         _context.JoinSessions.Add(join);
                         _context.SaveChanges();
 
@@ -52,6 +55,12 @@ namespace MoodDetectorWebApp.Controllers
                 }
 
                 return View();
-           }          
+           }
+
+        // POST: Detector/PostMoods/
+        public void PostMoods(int joinSessionId, string moods)
+        {
+            _moodService.AddMoodLive(joinSessionId, JsonConvert.DeserializeObject<MoodCollection>(moods));
+        }
     }
 }

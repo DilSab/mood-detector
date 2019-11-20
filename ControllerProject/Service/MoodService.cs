@@ -55,6 +55,28 @@ namespace ControllerProject.Service
             _context.SaveChanges();
         }
 
+        public void AddMoodLive(int joinSessionId, MoodCollection moodCollection)
+        {
+            var mood = new MoodLive()
+            {
+                JoinSessionId = joinSessionId,
+                Anger = moodCollection.Anger,
+                Joy = moodCollection.Joy,
+                Contempt = moodCollection.Contempt,
+                Disgust = moodCollection.Disgust,
+                Engagement = moodCollection.Engagement,
+                Fear = moodCollection.Fear,
+                Sadness = moodCollection.Sadness,
+                Suprise = moodCollection.Suprise,
+                Valence = moodCollection.Valence
+            };
+
+            _context.MoodLives.Add(mood);
+            _context.SaveChanges();
+        }
+
+
+
         public MoodCollection GetMoodsBySessionId(int id)
         {
             int idExists = (from i in _context.Sessions
