@@ -144,12 +144,20 @@ photodetector.addEventListener("onInitializeSuccess", function () {
 });
 
 photodetector.addEventListener("onImageResultsSuccess", function (faces, image) {        
-
+    
     log('#logs', "onImageResultsSuccess happened");
 
-    if (faces.length > 0) {
-      
+    if (faces.length > 0 && faces.emotions !== null) {       
+        
         log('#logs', "faces.length > 0");
+
+
+        $.ajax({
+            type: "POST",
+            url: "/JoinSession/PostMoods",
+            data: {moods: JSON.stringify(faces[0].emotions) },
+            dataType: "json"
+        });
         
     }
 });
@@ -162,3 +170,5 @@ photodetector.addEventListener("onImageResultsFailure", function (image, timesta
 //Initialize the emotion detector
 //log("#logs", "Starting the detector .. please wait");
 photodetector.start();
+
+

@@ -57,9 +57,12 @@ namespace MoodDetectorWebApp.Controllers
                 return View();
            }
 
-        // POST: Detector/PostMoods/
-        public void PostMoods(int joinSessionId, string moods)
+        // POST: JoinSession/PostMoods/
+        public void PostMoods(string moods)
         {
+            System.Diagnostics.Debug.WriteLine("Atejo iki cia");            
+
+            int joinSessionId = 3002;
             _moodService.AddMoodLive(joinSessionId, JsonConvert.DeserializeObject<MoodCollection>(moods));
         }
     }
