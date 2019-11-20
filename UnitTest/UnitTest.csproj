@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Service\LoginAuthenticatorTest\LoginAuthenticatorTest.cs" />
+    <Compile Include="Service\MessageManagerTest\MessageManagerTest.cs" />
     <Compile Include="Service\MoodServiceTest\MoodServiceTest.cs" />
     <Compile Include="Service\RegisterAuthenticatorTest\RegisterAuthenticatorTest.cs" />
     <Compile Include="Service\UserServiceTest\UserServiceTest.cs" />
