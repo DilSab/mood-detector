@@ -61,7 +61,7 @@ namespace MoodDetectorWebApp.Controllers
                     DetectionId = detectionId,
                 };
 
-                return View("~/Views/Detector/Start.cshtml", detectionStartViewModel);
+                return View("~/Views/Session/Start.cshtml", detectionStartViewModel);
             }
 
             return View();
