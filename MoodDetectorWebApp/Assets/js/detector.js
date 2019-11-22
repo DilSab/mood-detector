@@ -24,7 +24,7 @@ detector.addEventListener("onImageResultsSuccess", function (faces, image) {
     if (faces.length > 0) {
         $.ajax({
             type: "POST",
-            url: "/Detector/PostMoods",
+            url: "/Session/PostMoods",
             data: { detectionId: this.detectionId, moods: JSON.stringify(faces[0].emotions) },
             dataType: "json"
         });

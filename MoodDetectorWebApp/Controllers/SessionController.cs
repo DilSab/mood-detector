@@ -28,14 +28,14 @@ namespace MoodDetectorWebApp.Controllers
 
         //CREATE NEW SESSION/////////////////////////////////
 
-        // GET: Detector
+        // GET: Session
         [HttpGet]
         public ActionResult NewSession()
         {
             return View(new NewSessionModel());
         }
 
-        // POST: Detector
+        // POST: Session
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult NewSession(NewSessionModel model)
@@ -67,7 +67,7 @@ namespace MoodDetectorWebApp.Controllers
             return View();
         }
 
-        // POST: Detector/PostMoods/
+        // POST: Session/PostMoods/
         public void PostMoods(int detectionId, string moods)
         {
             _moodService.AddMood(detectionId, JsonConvert.DeserializeObject<MoodCollection>(moods));
