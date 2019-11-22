@@ -2,7 +2,6 @@
 using ControllerProject;
 using Model;
 using System.Reflection;
-using System.Linq;
 using Autofac.Integration.Mvc;
 using System.Web.Mvc;
 
@@ -19,15 +18,13 @@ namespace MoodDetectorWebApp
             builder.RegisterModelBinderProvider();
 
             builder.RegisterType<LoginProcessor>().As<ILoginProcessor>().InstancePerRequest();
-            builder.RegisterType<MoodDetectorDBEntities>().As<MoodDetectorDBEntities>().SingleInstance();
+            builder.RegisterType<MoodDetectorDbContext>().As<MoodDetectorDbContext>().InstancePerRequest();
 
             builder.RegisterAssemblyTypes(Assembly.Load(nameof(Model)))
-                .Where(t => t.Namespace.Contains("Service"))
-                .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name)).InstancePerRequest();
+                .AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(Assembly.Load(nameof(ControllerProject)))
-                .Where(t => t.Namespace.Contains("Service"))
-                .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name)).InstancePerRequest();
+                .AsImplementedInterfaces();
 
             var container = builder.Build();
 

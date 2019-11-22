@@ -7,9 +7,9 @@ namespace ControllerProject.Service
 {
     public class UserService : IUserService
     {
-        private MoodDetectorDBEntities _context;
+        private MoodDetectorDbContext _context;
 
-        public UserService(MoodDetectorDBEntities context)
+        public UserService(MoodDetectorDbContext context)
         {
             _context = context;
         }

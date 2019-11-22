@@ -16,7 +16,7 @@ namespace UnitTest.Service.UserServiceTest
         {
             var mockSet = new Mock<DbSet<LoginInfo>>();
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(m => m.LoginInfoes).Returns(mockSet.Object);
 
             var service = new UserService(mockContext.Object);
@@ -25,6 +25,82 @@ namespace UnitTest.Service.UserServiceTest
 
             mockSet.Verify(m => m.Add(It.IsAny<LoginInfo>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [Fact]
+        public void TestGetUser()
+        {
+            var users = new List<User>
+            {
+                new User { Id = 1, Firstname = "James", Lastname = "Smith", AccessRights = "Teacher" },
+            }.AsQueryable();
+
+            var mockSet = GetUserMockSet(users);
+
+            var loginData = new List<LoginInfo>
+            {
+                new LoginInfo { Id = 1, UserId = 1, Username = "smith123", Email = "james.smith@email.com", Password = "Password123" },
+            }.AsQueryable();
+
+            var loginMockSet = GetLoginMockSet(loginData);
+            
+            var mockContext = new Mock<MoodDetectorDbContext>();
+            mockContext.Setup(c => c.Users).Returns(mockSet.Object);
+            mockContext.Setup(c => c.LoginInfoes).Returns(loginMockSet.Object);
+
+            var service = new UserService(mockContext.Object);
+            
+            var user = service.GetUser("smith123");
+
+            Assert.Equal(1, user.Id);
+            Assert.Equal("James", user.Firstname);
+            Assert.Equal("Smith", user.Lastname);
+            Assert.Equal("Teacher", user.AccessRights);
+        }
+
+        [Fact]
+        public void TestGetUsers()
+        {
+            var users = new List<User>
+            {
+                new User { Id = 1, Firstname = "James", Lastname = "Smith", AccessRights = "Teacher" },
+                new User { Id = 2, Firstname = "John", Lastname = "Williams", AccessRights = "Admin" },
+                new User { Id = 3, Firstname = "Linda", Lastname = "Johnson", AccessRights = "Teacher" },
+            }.AsQueryable();
+
+            var mockSet = GetUserMockSet(users);
+
+            var mockContext = new Mock<MoodDetectorDbContext>();
+            mockContext.Setup(c => c.Users).Returns(mockSet.Object);
+
+            var service = new UserService(mockContext.Object);
+
+            var result = service.GetUsers();
+
+            Assert.Equal(3, result.Count);
+            Assert.True(result.Exists(f => f.Firstname == "John"));
+        }
+
+        private Mock<DbSet<LoginInfo>> GetLoginMockSet(IQueryable<LoginInfo> logins)
+        {
+            var mockSet = new Mock<DbSet<LoginInfo>>();
+            mockSet.As<IQueryable<LoginInfo>>().Setup(m => m.Provider).Returns(logins.Provider);
+            mockSet.As<IQueryable<LoginInfo>>().Setup(m => m.Expression).Returns(logins.Expression);
+            mockSet.As<IQueryable<LoginInfo>>().Setup(m => m.ElementType).Returns(logins.ElementType);
+            mockSet.As<IQueryable<LoginInfo>>().Setup(m => m.GetEnumerator()).Returns(logins.GetEnumerator());
+
+            return mockSet;
+        }
+
+        private Mock<DbSet<User>> GetUserMockSet(IQueryable<User> users)
+        {
+            var mockSet = new Mock<DbSet<User>>();
+            mockSet.As<IQueryable<User>>().Setup(m => m.Provider).Returns(users.Provider);
+            mockSet.As<IQueryable<User>>().Setup(m => m.Expression).Returns(users.Expression);
+            mockSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(users.ElementType);
+            mockSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(users.GetEnumerator());
+
+            return mockSet;
         }
 
         private UserWithLogin CreateAddUser()
@@ -40,45 +116,6 @@ namespace UnitTest.Service.UserServiceTest
             };
 
             return addUser;
-        }
-
-        [Fact]
-        public void TestGetUser()
-        {
-            var userData = new List<User>
-            {
-                new User { Id = 1, Firstname = "James", Lastname = "Smith", AccessRights = "Teacher" },
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<User>>();
-            mockSet.As<IQueryable<User>>().Setup(m => m.Provider).Returns(userData.Provider);
-            mockSet.As<IQueryable<User>>().Setup(m => m.Expression).Returns(userData.Expression);
-            mockSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(userData.ElementType);
-            mockSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(userData.GetEnumerator());
-
-            var loginData = new List<LoginInfo>
-            {
-                new LoginInfo { Id = 1, UserId = 1, Username = "smith123", Email = "james.smith@email.com", Password = "Password123" },
-            }.AsQueryable();
-
-            var loginMockSet = new Mock<DbSet<LoginInfo>>();
-            loginMockSet.As<IQueryable<LoginInfo>>().Setup(m => m.Provider).Returns(loginData.Provider);
-            loginMockSet.As<IQueryable<LoginInfo>>().Setup(m => m.Expression).Returns(loginData.Expression);
-            loginMockSet.As<IQueryable<LoginInfo>>().Setup(m => m.ElementType).Returns(loginData.ElementType);
-            loginMockSet.As<IQueryable<LoginInfo>>().Setup(m => m.GetEnumerator()).Returns(loginData.GetEnumerator());
-            
-            var mockContext = new Mock<MoodDetectorDBEntities>();
-            mockContext.Setup(c => c.Users).Returns(mockSet.Object);
-            mockContext.Setup(c => c.LoginInfoes).Returns(loginMockSet.Object);
-
-            var service = new UserService(mockContext.Object);
-            
-            var user = service.GetUser("smith123");
-
-            Assert.Equal(1, user.Id);
-            Assert.Equal("James", user.Firstname);
-            Assert.Equal("Smith", user.Lastname);
-            Assert.Equal("Teacher", user.AccessRights);
         }
     }
 }

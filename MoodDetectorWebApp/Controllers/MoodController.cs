@@ -5,10 +5,10 @@ using Model;
 using Model.Entity;
 using MoodDetectorWebApp.Models;
 using System;
-using System.Threading.Tasks;
 
 namespace MoodDetectorWebApp.Controllers
 {
+    [Authorize(Roles = "teacher")]
     public class MoodController : Controller
     {
         IMoodService _moodService;
@@ -38,12 +38,14 @@ namespace MoodDetectorWebApp.Controllers
             foreach (int id in sessionsIds)
             {
                 Session session = _moodService.GetSession(id);
-                SessionSummary sessionSummary = new SessionSummary();
-                sessionSummary.id = id;
-                sessionSummary.date = session.DateTime;
-                sessionSummary.studentClass = session.Class;
-                sessionSummary.subject = session.Subject;
-                sessionSummary.comment = session.Comments;
+                SessionSummary sessionSummary = new SessionSummary
+                {
+                    id = id,
+                    date = session.DateTime,
+                    studentClass = session.Class,
+                    subject = session.Subject,
+                    comment = session.Comments
+                };
                 sessions.Add(sessionSummary);
             }
             return View("SessionsList", sessions);

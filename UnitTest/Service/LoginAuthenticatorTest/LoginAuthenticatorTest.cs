@@ -25,7 +25,7 @@ namespace UnitTest.Service.LoginAuthenticatorTest
             loginMockSet.As<IQueryable<LoginInfo>>().Setup(m => m.ElementType).Returns(loginData.ElementType);
             loginMockSet.As<IQueryable<LoginInfo>>().Setup(m => m.GetEnumerator()).Returns(loginData.GetEnumerator());
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.LoginInfoes).Returns(loginMockSet.Object);
 
             var service = new LoginAuthenticator(mockContext.Object);

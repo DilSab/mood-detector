@@ -1,0 +1,29 @@
+﻿@using Model;
+@using MoodDetectorWebApp.Models;
+
+@model List<GlobalMessage>
+<link href="~/Assets/css/messenger-sidebar.css" rel="stylesheet" />
+
+@foreach (GlobalMessage globalMessage in Model)
+{
+    <div class="message text-left mb-3">
+        <div class="message-header">
+            <span class="message-recipient"> To: @globalMessage.RecipientType</span>
+            <span class="message-title">Title: @globalMessage.Title</span>
+        </div>
+        <div class="message-body">
+            <p class="card-text message-content">@globalMessage.Content</p>
+            <div class="message-expiration">@GlobalMessageModel.GetExpirationMessage(globalMessage.ExpirationDate)</div>
+        </div>
+        @if (Session["AccessRights"].ToString() == "admin")
+        {
+            using (Html.BeginForm("DeleteGlobalMessage", "Messenger", new { globalMessage.Id }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="card-footer text-muted">
+                    <input type="submit" value="Delete" onclick="return confirm('Are you sure about this?')" />
+                </div>
+            }
+        }
+    </div>
+}
