@@ -132,18 +132,17 @@
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ImportantInfoController.cs" />
     <Compile Include="Controllers\LearningsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\MessengerController.cs" />
-    <Compile Include="Controllers\MoodController.cs" />
     <Compile Include="Controllers\MyProfileAdminController.cs" />
     <Compile Include="Controllers\MyProfileTeacherController.cs" />
     <Compile Include="Controllers\SendInfoController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\ThreadingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -154,6 +153,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Models\SessionSummary.cs" />
+    <Compile Include="Models\SessionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,10 +181,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Detector\Start.cshtml" />
     <Content Include="Views\About\About.cshtml" />
-    <Content Include="Views\Mood\MoodList.cshtml" />
-    <Content Include="Views\Mood\MoodIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -198,7 +195,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Views\Detector\NewSession.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\SendInfo\SendInfo.cshtml" />
     <Content Include="Views\Logout\Logout.cshtml" />
@@ -213,12 +209,17 @@
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
     <Content Include="Views\Messenger\GlobalMessage.cshtml" />
     <Content Include="Views\Messenger\Sidebar.cshtml" />
-    <Content Include="Views\Mood\SessionMood.cshtml" />
-    <Content Include="Views\Mood\SessionIndex.cshtml" />
-    <Content Include="Views\Mood\SessionsList.cshtml" />
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
     <Content Include="Views\Threading\Index.cshtml" />
     <Content Include="Views\Threading\Results.cshtml" />
+    <Content Include="Views\Session\Session.cshtml" />
+    <Content Include="Views\Session\MoodIndex.cshtml" />
+    <Content Include="Views\Session\MoodList.cshtml" />
+    <Content Include="Views\Session\SessionIndex.cshtml" />
+    <Content Include="Views\Session\SessionMood.cshtml" />
+    <Content Include="Views\Session\SessionsList.cshtml" />
+    <Content Include="Views\Session\NewSession.cshtml" />
+    <Content Include="Views\Session\Start.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

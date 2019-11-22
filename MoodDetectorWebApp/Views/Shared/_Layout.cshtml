@@ -31,8 +31,8 @@
 
                     @*For everyone*@
                     <li class="nav-item">@Html.ActionLink("About", "About", "About", null, new { @class = "nav-link" })</li>
-					<li class="nav-item">@Html.ActionLink("Threading", "Index", "Threading", null, new { @class = "nav-link" })</li>
-					
+                    <li class="nav-item">@Html.ActionLink("Threading", "Index", "Threading", null, new { @class = "nav-link" })</li>
+
                     @*For logged out*@
                     @if (accessRights == "logged out")
                     {
@@ -44,8 +44,7 @@
                     @if (accessRights == "teacher")
                     {
                         <li class="nav-item">@Html.ActionLink("Important info", "ImportantInfo", "ImportantInfo", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("New session", "NewSession", "Detector", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("View sessions", "SessionsList", "Mood", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Sessions", "Session", "Session", null, new { @class = "nav-link" })</li>                        
                         <li class="nav-item">@Html.ActionLink("Learnings", "Learnings", "Learnings", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("My profile", "MyProfileTeacher", "MyProfileTeacher", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
