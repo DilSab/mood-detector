@@ -25,7 +25,7 @@ namespace MoodDetectorWebApp.Controllers
             return View();
         }
 
-        //NEW SESSION
+        //CREATE NEW SESSION/////////////////////////////////
 
         // GET: Detector
         [HttpGet]
@@ -72,7 +72,7 @@ namespace MoodDetectorWebApp.Controllers
             _moodService.AddMood(detectionId, JsonConvert.DeserializeObject<MoodCollection>(moods));
         }
 
-        //EXISTING SESSIONS
+        //VIEW EXISTING SESSIONS////////////////////////////
 
         public ActionResult MoodIndex()
         {
