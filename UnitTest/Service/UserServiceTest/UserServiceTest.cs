@@ -16,7 +16,7 @@ namespace UnitTest.Service.UserServiceTest
         {
             var mockSet = new Mock<DbSet<LoginInfo>>();
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(m => m.LoginInfoes).Returns(mockSet.Object);
 
             var service = new UserService(mockContext.Object);
@@ -44,7 +44,7 @@ namespace UnitTest.Service.UserServiceTest
 
             var loginMockSet = GetLoginMockSet(loginData);
             
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.Users).Returns(mockSet.Object);
             mockContext.Setup(c => c.LoginInfoes).Returns(loginMockSet.Object);
 
@@ -70,7 +70,7 @@ namespace UnitTest.Service.UserServiceTest
 
             var mockSet = GetUserMockSet(users);
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.Users).Returns(mockSet.Object);
 
             var service = new UserService(mockContext.Object);

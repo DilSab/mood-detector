@@ -7,9 +7,9 @@ namespace ControllerProject.Service
 {
     public class MessageManager : IMessageManager
     {
-        private MoodDetectorDBEntities _context;
+        private MoodDetectorDbContext _context;
 
-        public MessageManager(MoodDetectorDBEntities context)
+        public MessageManager(MoodDetectorDbContext context)
         {
             _context = context;
         }

@@ -10,9 +10,9 @@ namespace ControllerProject.Service
 {
     public class MoodService : IMoodService
     {
-        private MoodDetectorDBEntities _context;
+        private MoodDetectorDbContext _context;
 
-        public MoodService(MoodDetectorDBEntities context)
+        public MoodService(MoodDetectorDbContext context)
         {
             _context = context;
         }
@@ -109,16 +109,18 @@ namespace ControllerProject.Service
 
         public Dictionary<string, double> MoodCollectionToDict(MoodCollection moodCollection)
         {
-            Dictionary<string, double> moods = new Dictionary<string, double>();
-            moods.Add("Joy", moodCollection.Joy);
-            moods.Add("Anger", moodCollection.Anger);
-            moods.Add("Contempt", moodCollection.Contempt);
-            moods.Add("Disgust", moodCollection.Disgust);
-            moods.Add("Engagement", moodCollection.Engagement);
-            moods.Add("Fear", moodCollection.Fear);
-            moods.Add("Sadness", moodCollection.Sadness);
-            moods.Add("Suprise", moodCollection.Suprise);
-            moods.Add("Valence", moodCollection.Valence);
+            Dictionary<string, double> moods = new Dictionary<string, double>
+            {
+                { "Joy", moodCollection.Joy },
+                { "Anger", moodCollection.Anger },
+                { "Contempt", moodCollection.Contempt },
+                { "Disgust", moodCollection.Disgust },
+                { "Engagement", moodCollection.Engagement },
+                { "Fear", moodCollection.Fear },
+                { "Sadness", moodCollection.Sadness },
+                { "Suprise", moodCollection.Suprise },
+                { "Valence", moodCollection.Valence }
+            };
 
             return moods;
         }
@@ -153,7 +155,7 @@ namespace ControllerProject.Service
 
             return null;
         }
-        private IQueryable<Session> getUserSessions(int userId)
+        private IQueryable<Session> GetUserSessions(int userId)
         {
             return (from m in _context.Sessions
                     where m.UserId == userId 
@@ -162,15 +164,17 @@ namespace ControllerProject.Service
 
         public Mood GetLastClassMood(User user, int mask)
         {
-            
-            Mood mood = new Mood();
-            mood.Anger = 0;
-            mood.Sadness = 0;
-            mood.Disgust = 0;
-            mood.Fear = 0;
-            mood.Session = new Session() { DateTime = DateTime.Now, Id = -1 };
+
+            Mood mood = new Mood
+            {
+                Anger = 0,
+                Sadness = 0,
+                Disgust = 0,
+                Fear = 0,
+                Session = new Session() { DateTime = DateTime.Now, Id = -1 }
+            };
             if (!_context.Sessions.Any()) return mood;
-            IQueryable<Session> sessions = getUserSessions(user.Id);
+            IQueryable<Session> sessions = GetUserSessions(user.Id);
 
             if (!sessions.Any()) return mood;
 
@@ -197,7 +201,7 @@ namespace ControllerProject.Service
         {
             if (!_context.Sessions.Any(x => x.Id == classmoodId)) return;
             var classmood = _context.Sessions.First(x => x.Id == classmoodId);
-            IQueryable<Session> sessions = getUserSessions(classmood.UserId);
+            IQueryable<Session> sessions = GetUserSessions(classmood.UserId);
             foreach (Session session in sessions)
             {
                 if((session.MessageSeen & mask) == 0)
@@ -246,10 +250,12 @@ namespace ControllerProject.Service
 
         public string GetAverageEmoji(MoodCollection moodCollection)
         {
-            Dictionary<string, string> emojis = new Dictionary<string, string>();
-            emojis.Add("smiling", ":)");
-            emojis.Add("sad", ":(");
-            emojis.Add("neutral", ":|");
+            Dictionary<string, string> emojis = new Dictionary<string, string>
+            {
+                { "smiling", ":)" },
+                { "sad", ":(" },
+                { "neutral", ":|" }
+            };
 
             Dictionary<string, double> moods = MoodCollectionToDict(moodCollection);
             var sortedMoods = from entry in moods orderby entry.Value descending select entry;

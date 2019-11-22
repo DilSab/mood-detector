@@ -96,70 +96,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C__RefactorLog.cs">
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entity\UserWithLogin.cs" />
     <Compile Include="Entity\MoodCollection.cs" />
     <Compile Include="Entity\SessionInfo.cs" />
-    <Compile Include="GlobalMessage.cs">
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LoginInfo.cs">
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="GlobalMessage.cs" />
     <Compile Include="LearningMessage.cs" />
-    <Compile Include="Mood.cs">
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
+    <Compile Include="LoginInfo.cs" />
+    <Compile Include="Migrations\201911211904322_Initial.cs" />
+    <Compile Include="Migrations\201911211904322_Initial.designer.cs">
+      <DependentUpon>201911211904322_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="MoodDetectorModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoodDetectorModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MoodDetectorModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MoodDetectorModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoodDetectorModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Session.cs">
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>MoodDetectorModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Mood.cs" />
+    <Compile Include="MoodDetectorDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="MoodDetectorModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MoodDetectorModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="MoodDetectorModel.edmx.diagram">
-      <DependentUpon>MoodDetectorModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MoodDetectorModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MoodDetectorModel.edmx</DependentUpon>
-      <LastGenOutput>MoodDetectorModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="MoodDetectorModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MoodDetectorModel.edmx</DependentUpon>
-      <LastGenOutput>MoodDetectorModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <EmbeddedResource Include="Migrations\201911211904322_Initial.resx">
+      <DependentUpon>201911211904322_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

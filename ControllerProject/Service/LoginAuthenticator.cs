@@ -5,9 +5,9 @@ namespace ControllerProject.Service
 {
     public class LoginAuthenticator : ILoginAuthenticator
     {
-        private MoodDetectorDBEntities _context;
+        private MoodDetectorDbContext _context;
 
-        public LoginAuthenticator(MoodDetectorDBEntities context)
+        public LoginAuthenticator(MoodDetectorDbContext context)
         {
             _context = context;
         }

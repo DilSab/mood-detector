@@ -31,7 +31,7 @@ namespace MoodDetectorWebApp
                         string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
                         string roles = string.Empty;
 
-                        using (MoodDetectorDBEntities entities = new MoodDetectorDBEntities())
+                        using (MoodDetectorDbContext entities = new MoodDetectorDbContext())
                         {
                             LoginInfo user = entities.LoginInfoes.SingleOrDefault(u => u.Username == username);
                             roles = user.User.AccessRights;

@@ -43,12 +43,6 @@ namespace WindowsFormsUI
         {
             cleanMessages();
             ILearningService _learningService = new LearningService(user, _moodService);
-
-            Tuple<string, int, int> joyMessage = _learningService.GetJoyMessage();
-            if (joyMessage.Item1 != "") PrintMessage(joyMessage);
-
-            Tuple<string, int, int> angerMessage = _learningService.GetAngerMessage();
-            if (angerMessage.Item1 != "") PrintMessage(angerMessage);
         }
 
         private void cleanMessages()

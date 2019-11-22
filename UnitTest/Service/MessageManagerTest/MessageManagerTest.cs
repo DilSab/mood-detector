@@ -16,7 +16,7 @@ namespace UnitTest.Service.MessageManagerTest
         {
             var mockSet = new Mock<DbSet<GlobalMessage>>();
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(m => m.GlobalMessages).Returns(mockSet.Object);
 
             var service = new MessageManager(mockContext.Object);
@@ -39,7 +39,7 @@ namespace UnitTest.Service.MessageManagerTest
 
             var mockSet = GetMockSet(messages);
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.GlobalMessages).Returns(mockSet.Object);
 
             var service = new MessageManager(mockContext.Object);
@@ -65,7 +65,7 @@ namespace UnitTest.Service.MessageManagerTest
 
             var mockSet = GetMockSet(messages);
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.GlobalMessages).Returns(mockSet.Object);
 
             var service = new MessageManager(mockContext.Object);
@@ -85,7 +85,7 @@ namespace UnitTest.Service.MessageManagerTest
             }.AsQueryable();
 
             var mockSet = GetMockSet(messages);
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.GlobalMessages).Returns(mockSet.Object);
 
             var service = new MessageManager(mockContext.Object);
@@ -110,7 +110,7 @@ namespace UnitTest.Service.MessageManagerTest
             }.AsQueryable();
 
             var mockSet = GetMockSet(messages);
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.GlobalMessages).Returns(mockSet.Object);
 
             var service = new MessageManager(mockContext.Object);
@@ -130,7 +130,7 @@ namespace UnitTest.Service.MessageManagerTest
             }.AsQueryable();
 
             var mockSet = GetMockSet(messages);
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.GlobalMessages).Returns(mockSet.Object);
 
             var service = new MessageManager(mockContext.Object);

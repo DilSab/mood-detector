@@ -17,7 +17,7 @@ namespace UnitTest.Service.MoodServiceTest
         {
             var mockSet = new Mock<DbSet<Session>>();
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(m => m.Sessions).Returns(mockSet.Object);
 
             var service = new MoodService(mockContext.Object);
@@ -33,7 +33,7 @@ namespace UnitTest.Service.MoodServiceTest
         {
             var mockSet = new Mock<DbSet<Mood>>();
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(m => m.Moods).Returns(mockSet.Object);
 
             var service = new MoodService(mockContext.Object);
@@ -73,7 +73,7 @@ namespace UnitTest.Service.MoodServiceTest
             sessionMockSet.As<IQueryable<Session>>().Setup(m => m.GetEnumerator()).Returns(sessionData.GetEnumerator());
 
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.Moods).Returns(moodMockSet.Object);
             mockContext.Setup(c => c.Sessions).Returns(sessionMockSet.Object);
 
@@ -108,7 +108,7 @@ namespace UnitTest.Service.MoodServiceTest
         {
             List<Mood> moods = GetSampleMoods();
 
-            var mockContext = new Mock<MoodDetectorDBEntities>();
+            var mockContext = new Mock<MoodDetectorDbContext>();
             var service = new MoodService(mockContext.Object);
 
             var moodCollection = service.GetMoodAverage(moods);
