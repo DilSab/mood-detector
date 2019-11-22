@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 
 namespace MoodDetectorWebApp.Controllers
 {
+    [Authorize(Roles = "teacher")]
     public class SessionController : Controller
     {
         IMoodService _moodService;
