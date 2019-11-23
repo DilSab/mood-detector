@@ -29,7 +29,7 @@ namespace ControllerProject.Service
             byte[] saltBytes = Convert.FromBase64String(salt);
             byte[] saltedHashBytes = Convert.FromBase64String(saltedHash);
 
-            return SlowEquals(SaltHash(password, saltBytes), saltedHashBytes);
+            return ByteEquals(SaltHash(password, saltBytes), saltedHashBytes);
         }
 
         private byte[] SaltHash(string password, byte[] salt)
@@ -43,7 +43,7 @@ namespace ControllerProject.Service
             return hashBytes;
         }
 
-        private bool SlowEquals(byte[] a, byte[] b)
+        private bool ByteEquals(byte[] a, byte[] b)
         {
             var diff = (uint)a.Length ^ (uint)b.Length;
             for (int i = 0; i < a.Length && i < b.Length; i++)
