@@ -21,7 +21,7 @@ namespace UnitTest.Service.UserServiceTest
 
             var service = new UserService(mockContext.Object);
             UserWithLogin user = CreateAddUser();
-            service.AddNewUser(user);
+            service.AddNewUser(user, new Hash("salt", "saltedHash"));
 
             mockSet.Verify(m => m.Add(It.IsAny<LoginInfo>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
@@ -39,7 +39,7 @@ namespace UnitTest.Service.UserServiceTest
 
             var loginData = new List<LoginInfo>
             {
-                new LoginInfo { Id = 1, UserId = 1, Username = "smith123", Email = "james.smith@email.com", Password = "Password123" },
+                new LoginInfo { Id = 1, UserId = 1, Username = "smith123", Email = "james.smith@email.com", Salt = "salt", Hash = "saltedHash" },
             }.AsQueryable();
 
             var loginMockSet = GetLoginMockSet(loginData);
@@ -112,7 +112,6 @@ namespace UnitTest.Service.UserServiceTest
                 AccessRights = "Teacher",
                 Email = "james.smith@email.com",
                 Username = "smith123",
-                Password = "Password123"
             };
 
             return addUser;

@@ -15,8 +15,8 @@ namespace UnitTest.Service.LoginAuthenticatorTest
         {
             var loginData = new List<LoginInfo>
             {
-                new LoginInfo { Id = 1, UserId = 1, Username = "smith123", Email = "james.smith@email.com", Password = "Password123" },
-                new LoginInfo { Id = 2, UserId = 2, Username = "linda1", Email = "linda.williams@email.com", Password = "Password12" },
+                new LoginInfo { Id = 1, UserId = 1, Username = "smith123", Email = "james.smith@email.com", Salt = "salt", Hash = "hash" },
+                new LoginInfo { Id = 2, UserId = 2, Username = "linda1", Email = "linda.williams@email.com", Salt = "salt", Hash = "hash" },
             }.AsQueryable();
 
             var loginMockSet = new Mock<DbSet<LoginInfo>>();
@@ -28,16 +28,16 @@ namespace UnitTest.Service.LoginAuthenticatorTest
             var mockContext = new Mock<MoodDetectorDbContext>();
             mockContext.Setup(c => c.LoginInfoes).Returns(loginMockSet.Object);
 
-            var service = new LoginAuthenticator(mockContext.Object);
+            var mockEncryptor = new Mock<IEncryptor>();
+            mockEncryptor.Setup(c => c.IsHashMathing("hash", "Password123", "salt")).Returns(true);
+
+            var service = new LoginAuthenticator(mockContext.Object, mockEncryptor.Object);
 
             Assert.False(service.IsLoginCorrect("", ""));
             Assert.False(service.IsLoginCorrect("smith123", ""));
             Assert.False(service.IsLoginCorrect("", "Password123"));
-            Assert.False(service.IsLoginCorrect("smith123", "Password12"));
-            Assert.False(service.IsLoginCorrect("linda1", "Password123"));
 
             Assert.True(service.IsLoginCorrect("smith123", "Password123"));
-            Assert.True(service.IsLoginCorrect("linda1", "Password12"));
         }
     }
 }

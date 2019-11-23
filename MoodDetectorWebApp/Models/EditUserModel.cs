@@ -1,19 +1,18 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MoodDetectorWebApp.Models
 {
-    public class AddUserModel
+    public class EditUserModel
     {
         [Required]
         [StringLength(50, MinimumLength = 4)]
         public string Username { get; set; }
 
-        [Required]
+        [Display(Name = "New password")]
         [StringLength(100, MinimumLength = 8)]
         [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$")]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string Password { get; set; } = "";
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -28,19 +27,5 @@ namespace MoodDetectorWebApp.Models
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string Lastname { get; set; }
-
-        [Required]
-        public string AccessRights { get; set; }
-
-        public enum AccessRightsTypes
-        {
-            Admin = 0,
-            Teacher = 1,
-        }
-
-        public static string[] GetAllAccessRightsTypes()
-        {
-            return Enum.GetNames(typeof(AccessRightsTypes));
-        }
     }
 }

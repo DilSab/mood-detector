@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201911211904322_Initial.designer.cs">
       <DependentUpon>201911211904322_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911230924022_Hash.cs" />
+    <Compile Include="Migrations\201911230924022_Hash.designer.cs">
+      <DependentUpon>201911230924022_Hash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mood.cs" />
     <Compile Include="MoodDetectorDbContext.cs" />
@@ -123,6 +127,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911211904322_Initial.resx">
       <DependentUpon>201911211904322_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911230924022_Hash.resx">
+      <DependentUpon>201911230924022_Hash.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

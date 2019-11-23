@@ -90,9 +90,11 @@ namespace MoodDetectorWebApp.Controllers
                 _messenger.MessagePosted += _messageLogger.OnMessagePosted;
 
                 _messenger.PostMessage(message);
+
+                return RedirectToAction("GlobalMessage");
             }
 
-            return RedirectToAction("GlobalMessage");
+            return View("~/Views/Messenger/GlobalMessage.cshtml", model);
         }
     }
 }

@@ -50,7 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AccessRights, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AccessRights, new { htmlAttributes = new { @class = "form-control", placeholder = "Admin or Teacher"} })
+                @Html.DropDownListFor(model => model.AccessRights, new SelectList(AddUserModel.GetAllAccessRightsTypes()))
                 @Html.ValidationMessageFor(model => model.AccessRights, "", new { @class = "text-danger" })
             </div>
         </div>

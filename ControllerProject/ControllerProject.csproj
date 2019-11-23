@@ -109,6 +109,8 @@
     <Compile Include="Logger\BaseLogger.cs" />
     <Compile Include="Logger\IBaseLogger.cs" />
     <Compile Include="Logger\IMessageLogger.cs" />
+    <Compile Include="Service\Encryptor.cs" />
+    <Compile Include="Service\IEncryptor.cs" />
     <Compile Include="Service\IMessageManager.cs" />
     <Compile Include="Logger\MessageLogger.cs" />
     <Compile Include="Service\IMessenger.cs" />
@@ -118,10 +120,8 @@
     <Compile Include="Service\IDataGenerator.cs" />
     <Compile Include="Service\IMoodService.cs" />
     <Compile Include="Service\ILearningService.cs" />
-    <Compile Include="Service\IRegisterAuthenticator.cs" />
     <Compile Include="Service\LearningService.cs" />
     <Compile Include="Service\MoodService.cs" />
-    <Compile Include="Service\RegisterAuthenticator.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\ILoginAuthenticator.cs" />

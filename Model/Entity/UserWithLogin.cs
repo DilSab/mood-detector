@@ -3,7 +3,6 @@
     public struct UserWithLogin
     {
         public string Username;
-        public string Password;
         public string Email;
         public string Firstname;
         public string Lastname;
@@ -11,19 +10,17 @@
 
         public UserWithLogin(
             string username,
-            string password,
             string email,
             string firstname,
             string lastname,
-            string accessRights
+            string accessRights = "Teacher"
         )
         {
-            this.Username = username;
-            this.Password = password;
-            this.Email = email;
-            this.Firstname = firstname;
-            this.Lastname = lastname;
-            this.AccessRights = accessRights;
+            Username = username;
+            Email = email;
+            Firstname = firstname;
+            Lastname = lastname;
+            AccessRights = accessRights;
         }
     }
 }
