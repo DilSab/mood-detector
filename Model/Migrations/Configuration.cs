@@ -19,12 +19,12 @@ namespace Model.Migrations
                 new User() { Id = 5, Firstname = "Robert", Lastname = "Brown", AccessRights = "Teacher" }
             );
 
-            context.LoginInfoes.AddOrUpdate(l => l.Id,
-                new LoginInfo() { Id = 1, UserId = 1, Username = "admin", Password = "Password123", Email = "admin@mooddetector.com"},
-                new LoginInfo() { Id = 2, UserId = 2, Username = "james", Password = "Password123", Email = "james@mooddetector.com"},
-                new LoginInfo() { Id = 3, UserId = 3, Username = "patricia", Password = "Password123", Email = "patricia@mooddetector.com"},
-                new LoginInfo() { Id = 4, UserId = 4, Username = "linda", Password = "Password123", Email = "linda@mooddetector.com"},
-                new LoginInfo() { Id = 5, UserId = 5, Username = "robert", Password = "Password123", Email = "robert@mooddetector.com"}
+            context.LoginInfoes.AddOrUpdate(l => l.Id,   // Password: Password123
+                new LoginInfo() { Id = 1, UserId = 1, Username = "admin", Salt = "6hOaWaLZ5jq0CKf0U7fo2VnLMbp+kEiLB5+DeQ==", Hash = "Ko9m+nAQ1w6HdRY7/WVHkGDERrZZr5VD9i461LLGRy1TpBT/fVa5UlfFl2vGarSpb2IjSFwhKjbTRoCC5bjRcA==", Email = "admin@mooddetector.com"},
+                new LoginInfo() { Id = 2, UserId = 2, Username = "james", Salt = "6hOaWaLZ5jq0CKf0U7fo2VnLMbp+kEiLB5+DeQ==", Hash = "Ko9m+nAQ1w6HdRY7/WVHkGDERrZZr5VD9i461LLGRy1TpBT/fVa5UlfFl2vGarSpb2IjSFwhKjbTRoCC5bjRcA==", Email = "james@mooddetector.com"},
+                new LoginInfo() { Id = 3, UserId = 3, Username = "patricia", Salt = "6hOaWaLZ5jq0CKf0U7fo2VnLMbp+kEiLB5+DeQ==", Hash = "Ko9m+nAQ1w6HdRY7/WVHkGDERrZZr5VD9i461LLGRy1TpBT/fVa5UlfFl2vGarSpb2IjSFwhKjbTRoCC5bjRcA==", Email = "patricia@mooddetector.com"},
+                new LoginInfo() { Id = 4, UserId = 4, Username = "linda", Salt = "6hOaWaLZ5jq0CKf0U7fo2VnLMbp+kEiLB5+DeQ==", Hash = "Ko9m+nAQ1w6HdRY7/WVHkGDERrZZr5VD9i461LLGRy1TpBT/fVa5UlfFl2vGarSpb2IjSFwhKjbTRoCC5bjRcA==", Email = "linda@mooddetector.com"},
+                new LoginInfo() { Id = 5, UserId = 5, Username = "robert", Salt = "6hOaWaLZ5jq0CKf0U7fo2VnLMbp+kEiLB5+DeQ==", Hash = "Ko9m+nAQ1w6HdRY7/WVHkGDERrZZr5VD9i461LLGRy1TpBT/fVa5UlfFl2vGarSpb2IjSFwhKjbTRoCC5bjRcA==", Email = "robert@mooddetector.com"}
             );
         }
     }

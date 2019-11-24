@@ -14,7 +14,7 @@ namespace ControllerProject.Service
             _context = context;
         }
 
-        public void AddNewUser(UserWithLogin addUser)
+        public void AddNewUser(UserWithLogin addUser, Hash hash)
         {
             var loginInfo = new LoginInfo()
             {
@@ -25,7 +25,8 @@ namespace ControllerProject.Service
                     AccessRights = addUser.AccessRights
                 },
                 Username = addUser.Username,
-                Password = addUser.Password,
+                Salt = hash.Salt,
+                Hash = hash.SaltedHash,
                 Email = addUser.Email
             };
 
@@ -40,8 +41,22 @@ namespace ControllerProject.Service
             loginInfo.User.Lastname = editUser.Lastname;
             loginInfo.User.AccessRights = editUser.AccessRights;
             loginInfo.Username = editUser.Username;
-            loginInfo.Password = editUser.Password;
             loginInfo.Email = editUser.Email;
+
+            _context.SaveChanges();
+        }
+
+        public void EditUser(UserWithLogin editUser, int id, Hash hash)
+        {
+            var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
+            loginInfo.User.Firstname = editUser.Firstname;
+            loginInfo.User.Lastname = editUser.Lastname;
+            loginInfo.User.AccessRights = editUser.AccessRights;
+            loginInfo.Username = editUser.Username;
+            loginInfo.Salt = hash.Salt;
+            loginInfo.Hash = hash.SaltedHash;
+            loginInfo.Email = editUser.Email;
+
             _context.SaveChanges();
         }
 
@@ -87,7 +102,6 @@ namespace ControllerProject.Service
             var user = GetUser(FindUsernameById(id));
             UserWithLogin userWithLogin = new UserWithLogin(
                 loginInfo.Username,
-                loginInfo.Password,
                 loginInfo.Email,
                 user.Firstname,
                 user.Lastname,
