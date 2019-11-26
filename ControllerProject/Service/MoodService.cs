@@ -55,7 +55,7 @@ namespace ControllerProject.Service
             _context.SaveChanges();
         }
 
-        public void AddMoodLive(int joinSessionId, MoodCollection moodCollection)
+      /*  public void AddMoodLive(int joinSessionId, MoodCollection moodCollection)
         {
             var mood = new MoodLive()
             {
@@ -74,6 +74,7 @@ namespace ControllerProject.Service
             _context.MoodLives.Add(mood);
             _context.SaveChanges();
         }
+        */
 
 
 

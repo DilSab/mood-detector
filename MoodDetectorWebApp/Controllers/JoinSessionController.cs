@@ -12,9 +12,9 @@ namespace MoodDetectorWebApp.Controllers
     {
             private IMoodService _moodService;
             private IUserService _userService;
-            private MoodDetectorDBEntities _context;
+            private MoodDetectorDbContext _context;
 
-            public JoinSessionController(IMoodService moodService, IUserService userService, MoodDetectorDBEntities context)
+            public JoinSessionController(IMoodService moodService, IUserService userService, MoodDetectorDbContext context)
                 {
                     _moodService = moodService;
                     _userService = userService;
@@ -40,11 +40,9 @@ namespace MoodDetectorWebApp.Controllers
 
                         JoinSession join = new JoinSession()
                         {
-                            JoinSessionId = model.DetectionId,
-                            JoinId = model.JoinId,
-                        };
-
-                        int joinSessionId = join.JoinSessionId;
+                            SessionId = model.DetectionId,
+                            JoinName = model.JoinName,
+                        };                        
 
                         _context.JoinSessions.Add(join);
                         _context.SaveChanges();
@@ -62,8 +60,8 @@ namespace MoodDetectorWebApp.Controllers
         {
             System.Diagnostics.Debug.WriteLine("Atejo iki cia");            
 
-            int joinSessionId = 3002;
-            _moodService.AddMoodLive(joinSessionId, JsonConvert.DeserializeObject<MoodCollection>(moods));
+            //int joinSessionId = 3002;
+           // _moodService.AddMoodLive(joinSessionId, JsonConvert.DeserializeObject<MoodCollection>(moods));
         }
     }
 }

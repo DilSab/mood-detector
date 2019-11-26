@@ -10,7 +10,7 @@ namespace ControllerProject.Service
     {
         int AddSession(SessionInfo sessionInfo);
         void AddMood(int sessionId, MoodCollection moodCollection);
-        void AddMoodLive(int joinSessionId, MoodCollection moodCollection);
+        //void AddMoodLive(int joinSessionId, MoodCollection moodCollection);
         MoodCollection GetMoodsBySessionId(int id);
         List<int> GetAllSessionsIds(int userId);
         Session GetSession(int id);

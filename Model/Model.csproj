@@ -100,11 +100,16 @@
     <Compile Include="Entity\MoodCollection.cs" />
     <Compile Include="Entity\SessionInfo.cs" />
     <Compile Include="GlobalMessage.cs" />
+    <Compile Include="JoinSession.cs" />
     <Compile Include="LearningMessage.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="Migrations\201911211904322_Initial.cs" />
     <Compile Include="Migrations\201911211904322_Initial.designer.cs">
       <DependentUpon>201911211904322_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911262040276_AddedJoinSession.cs" />
+    <Compile Include="Migrations\201911262040276_AddedJoinSession.designer.cs">
+      <DependentUpon>201911262040276_AddedJoinSession.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mood.cs" />
@@ -123,6 +128,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911211904322_Initial.resx">
       <DependentUpon>201911211904322_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911262040276_AddedJoinSession.resx">
+      <DependentUpon>201911262040276_AddedJoinSession.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

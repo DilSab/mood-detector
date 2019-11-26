@@ -31,14 +31,15 @@
 
                     @*For everyone*@
                     <li class="nav-item">@Html.ActionLink("About", "About", "About", null, new { @class = "nav-link" })</li>
-					<li class="nav-item">@Html.ActionLink("Threading", "Index", "Threading", null, new { @class = "nav-link" })</li>
-					
+                    <li class="nav-item">@Html.ActionLink("Threading", "Index", "Threading", null, new { @class = "nav-link" })</li>
+
                     @*For logged out*@
                     @if (accessRights == "logged out")
                     {
                         <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
                         <li class="nav-item"><sup id="message-counter"></sup></li>
                         <li class="nav-item">@Html.ActionLink("Log in", "Login", "Login", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Join Session", "JoinSession", "JoinSession", null, new { @class = "nav-link" })</li>
                     }
                     @*For teacher*@
                     @if (accessRights == "teacher")
