@@ -17,6 +17,7 @@ namespace Model
         public System.DateTime DateTime { get; set; }
         public string Comments { get; set; }
         public int MessageSeen { get; set; }
+        public string VideoId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mood> Moods { get; set; }

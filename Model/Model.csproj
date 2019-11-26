@@ -111,6 +111,10 @@
     <Compile Include="Migrations\201911262040276_AddedJoinSession.designer.cs">
       <DependentUpon>201911262040276_AddedJoinSession.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911262108477_Updated_Session_with_VideoId.cs" />
+    <Compile Include="Migrations\201911262108477_Updated_Session_with_VideoId.designer.cs">
+      <DependentUpon>201911262108477_Updated_Session_with_VideoId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mood.cs" />
     <Compile Include="MoodDetectorDbContext.cs" />
@@ -131,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911262040276_AddedJoinSession.resx">
       <DependentUpon>201911262040276_AddedJoinSession.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911262108477_Updated_Session_with_VideoId.resx">
+      <DependentUpon>201911262108477_Updated_Session_with_VideoId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

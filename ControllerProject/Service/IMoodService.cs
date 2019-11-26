@@ -21,5 +21,6 @@ namespace ControllerProject.Service
         int GetSessionMessageStatus(int classmoodId, int mask);
         MoodCollection GetMoodAverage(List<Mood> moods);
         string GetAverageEmoji(MoodCollection moodCollection);
+        void AddVideoToSession(int sessionId, string videoId);
     }
 }

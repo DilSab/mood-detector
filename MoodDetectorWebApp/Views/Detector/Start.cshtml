@@ -35,6 +35,33 @@
             <br />
         </p>
     </div>
+
+    <div>
+        <strong>Upload a Youtube video</strong>
+        <br />
+            Copy Youtube vide link below:
+        <br />
+        <br>
+            <input type="text" id="videoId" />
+            <input type="button" value="Upload Youtube Link" id="uploadYoutube" />
+
+            <script type="text/javascript">
+
+                            $("#uploadYoutube").click(function () {
+
+                                var videoIdInput = document.getElementById("videoId").value;
+
+                                    $.ajax({
+                                        url: "/Detector/AddYoutube",
+                                        data: { detectionId: @Model.DetectionId, videoId: videoIdInput},
+                                        type: "post",
+
+                                    });
+                            });
+            </script>
+        <br />
+    </div>
+
 </div>
 
 <script type="text/javascript" src="https://download.affectiva.com/js/3.2.1/affdex.js"></script>

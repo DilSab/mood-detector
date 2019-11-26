@@ -294,5 +294,14 @@ namespace ControllerProject.Service
                 return emojis["neutral"];
             }
         }
+
+        public void AddVideoToSession(int sessionId, string videoId)
+        {
+            var currentSession = _context.Sessions.First(x => x.Id == sessionId);
+            currentSession.VideoId = videoId;
+            _context.Entry(currentSession).State = EntityState.Modified;
+            _context.SaveChanges();
+
+        }
     }
 }
