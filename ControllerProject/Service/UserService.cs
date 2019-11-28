@@ -1,7 +1,11 @@
 ﻿using Model;
 using Model.Entity;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 
 namespace ControllerProject.Service
 {
@@ -114,12 +118,29 @@ namespace ControllerProject.Service
         public List<User> GetUsers()
         {
             List<User> usersList = new List<User>();
-            IQueryable<User> users = (from u in _context.Users select u);
-            foreach (User user in users)
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MoodDetectorDB"].ConnectionString))
             {
-                usersList.Add(user);
+                string command = "SELECT * FROM Users";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                foreach (DataRow row in table.Rows)
+                {
+                    User user = new User()
+                    {
+                        Id = Convert.ToInt32(row["Id"].ToString()),
+                        Firstname = row["Firstname"].ToString(),
+                        Lastname = row["Lastname"].ToString(),
+                        AccessRights = row["AccessRights"].ToString(),
+                    };
+
+                    usersList.Add(user);
+                }
+
+                return usersList;
             }
-            return usersList;
         }
     }
 }
