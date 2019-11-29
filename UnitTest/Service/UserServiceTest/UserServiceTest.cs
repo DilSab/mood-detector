@@ -58,29 +58,6 @@ namespace UnitTest.Service.UserServiceTest
             Assert.Equal("Teacher", user.AccessRights);
         }
 
-        [Fact]
-        public void TestGetUsers()
-        {
-            var users = new List<User>
-            {
-                new User { Id = 1, Firstname = "James", Lastname = "Smith", AccessRights = "Teacher" },
-                new User { Id = 2, Firstname = "John", Lastname = "Williams", AccessRights = "Admin" },
-                new User { Id = 3, Firstname = "Linda", Lastname = "Johnson", AccessRights = "Teacher" },
-            }.AsQueryable();
-
-            var mockSet = GetUserMockSet(users);
-
-            var mockContext = new Mock<MoodDetectorDbContext>();
-            mockContext.Setup(c => c.Users).Returns(mockSet.Object);
-
-            var service = new UserService(mockContext.Object);
-
-            var result = service.GetUsers();
-
-            Assert.Equal(3, result.Count);
-            Assert.True(result.Exists(f => f.Firstname == "John"));
-        }
-
         private Mock<DbSet<LoginInfo>> GetLoginMockSet(IQueryable<LoginInfo> logins)
         {
             var mockSet = new Mock<DbSet<LoginInfo>>();
