@@ -32,13 +32,49 @@
         <div>
             <button id="start" onclick="onStart()">Start</button>
             <button id="stop" onclick="onStop()">Stop</button>
-            <button id="reset" onclick="onReset()">Reset</button>            
+            <button id="reset" onclick="onReset()">Reset</button>
             <p>
-                
+
             </p>
         </div>
+    </div>
+    <div>
+        <div id="player"></div>
+        <h3> @Model.VideoId</h3>
+
+        <script>
+            var player, playing = false;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    height: '360',
+                    width: '640',
+                    videoId: '@Model.VideoId',
+                    events: {
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+
+            function onPlayerStateChange(event) {
+
+                if (event.data == YT.PlayerState.PLAYING) {
+
+                    onStart();
+                    playing = true;
+                }
+
+                else if (event.data == YT.PlayerState.PAUSED) {
+
+                    playing = false;
+                }
+            }
+        </script>
+
+
+
     </div>
 </body>
 
 <script type="text/javascript" src="https://download.affectiva.com/js/3.2.1/affdex.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script type="text/javascript" src="~/Assets/js/liveDetector.js"></script>

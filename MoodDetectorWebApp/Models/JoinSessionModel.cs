@@ -10,5 +10,7 @@ namespace MoodDetectorWebApp.Models
         [Required(ErrorMessage = "Enter your name to join. Name should be 2-15 letters long")]
         [StringLength(15, MinimumLength = 2)]
         public string JoinName { get; set; }
+
+        public string VideoId { get; set; }
     }
 }

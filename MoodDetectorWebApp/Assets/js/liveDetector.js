@@ -74,7 +74,7 @@ detector.addEventListener("onStopSuccess", function () {
 //The faces object contains the list of the faces detected in an image.
 //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
 
-var newTimestamp;////////////////////////////////////
+
 
 detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
     $('#results').html("");
@@ -90,21 +90,9 @@ detector.addEventListener("onImageResultsSuccess", function (faces, image, times
         }));
        // log('#results', "Emoji: " + faces[0].emojis.dominantEmoji);
         if ($('#face_video_canvas')[0] != null)
-            drawFeaturePoints(image, faces[0].featurePoints);
-        /////////////////////////////////////////////////////////////////////
-        var intTimestamp = Math.floor(timestamp);        
-        if (intTimestamp % 2 === 0 && (intTimestamp !== newTimestamp)) {
+            drawFeaturePoints(image, faces[0].featurePoints);        
+    }  
 
-            newTimestamp = intTimestamp;
-            log('#logs', "Timestamp:   " + intTimestamp);
-
-            photodetector.process(image, 0);
-            log('#logs', "photodetector is running:   ");
-           
-
-        /////////////////////////////////////////////////////////////////////
-        }
-    }
 });
 
 //Draw the detected facial feature points on the image
@@ -124,51 +112,5 @@ function drawFeaturePoints(img, featurePoints) {
 
     }
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-var photodetector = new affdex.PhotoDetector();
-var imageCount = 1;
-var joinsessionId;
-//Enable detection of all Expressions, Emotions and Emojis classifiers.
-photodetector.detectAllEmotions();
-photodetector.detectAllExpressions();
-photodetector.detectAllEmojis();
-photodetector.detectAllAppearance();
-
-
-
-//Add a callback to notify when the detector is initialized and ready for runing.
-photodetector.addEventListener("onInitializeSuccess", function () {
-    //log('#logs', "The detector reports initialized");  
-});
-
-photodetector.addEventListener("onImageResultsSuccess", function (faces, image) {        
-    
-    log('#logs', "onImageResultsSuccess happened");
-
-    if (faces.length > 0 && faces.emotions !== null) {       
-        
-        log('#logs', "faces.length > 0");
-
-
-        $.ajax({
-            type: "POST",
-            url: "/JoinSession/PostMoods",
-            data: {moods: JSON.stringify(faces[0].emotions) },
-            dataType: "json"
-        });
-        
-    }
-});
-
-//Add a callback to notify if failed receive the results from processing an image.
-photodetector.addEventListener("onImageResultsFailure", function (image, timestamp, error) {
-    log('#logs', 'Failed to process image err=' + error);
-});
-
-//Initialize the emotion detector
-//log("#logs", "Starting the detector .. please wait");
-photodetector.start();
 
 

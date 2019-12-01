@@ -5,6 +5,7 @@ using System;
 using Model.Entity;
 using Model;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -47,7 +48,10 @@ namespace MoodDetectorWebApp.Controllers
                         _context.JoinSessions.Add(join);
                         _context.SaveChanges();
 
-
+                        Session session = _moodService.GetSession(model.DetectionId);
+                        model.VideoId = session.VideoId.Replace("https://www.youtube.com/watch?v=", "");
+                    
+                    
                     return View("~/Views/JoinSession/Session.cshtml", model);
                     }
                 }
