@@ -20,11 +20,16 @@ namespace MoodDetectorWebApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewUsers()
+        public ActionResult ViewUsers(UsersPaginationModel pagination, int page = 1)
         {
-            List<User> users = _userService.GetUsers();
+            pagination.CurrentPage = page;
+            pagination.Users = _userService.GetUsersPaginated(pagination.CurrentPage, pagination.UsersPerPage);
+            if (!pagination.UsersCount.HasValue)
+            {
+                pagination.UsersCount = _userService.GetUsersCount();
+            }
 
-            return View("ViewUsers", users);
+            return View("ViewUsers", pagination);
         }
 
         [HttpGet]
