@@ -65,6 +65,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -157,6 +158,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Models\SessionSummary.cs" />
+    <Compile Include="Models\UsersPaginationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

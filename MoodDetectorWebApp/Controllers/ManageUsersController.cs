@@ -1,9 +1,8 @@
 ﻿using ControllerProject.Service;
-using Model;
 using Model.Entity;
 using MoodDetectorWebApp.Models;
-using System.Collections.Generic;
 using System.Web.Mvc;
+using System;
 
 namespace MoodDetectorWebApp.Controllers
 {
@@ -20,11 +19,19 @@ namespace MoodDetectorWebApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewUsers()
+        public ActionResult ViewUsers(UsersPaginationModel pagination, int page = 1)
         {
-            List<User> users = _userService.GetUsers();
+            pagination.CurrentPage = page;
+            pagination.Users = _userService.GetUsersPaginated(pagination.CurrentPage, pagination.UsersPerPage);
+            int? usersCount = System.Web.HttpRuntime.Cache["users-count"] as int?;
+            if (usersCount == null)
+            {
+                usersCount = _userService.GetUsersCount();
+                System.Web.HttpRuntime.Cache.Insert("users-count", usersCount.Value, null, DateTime.Now.AddSeconds(60), System.Web.Caching.Cache.NoSlidingExpiration);
+            }
+            pagination.UsersCount = usersCount;
 
-            return View("ViewUsers", users);
+            return View("ViewUsers", pagination);
         }
 
         [HttpGet]

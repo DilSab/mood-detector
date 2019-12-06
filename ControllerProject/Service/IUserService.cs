@@ -15,5 +15,7 @@ namespace ControllerProject.Service
         User GetUser(string username);
         UserWithLogin GetUserWithLogin(int id);
         List<User> GetUsers();
+        List<User> GetUsersPaginated(int currentPage, int usersPerPage);
+        int GetUsersCount();
     }
 }

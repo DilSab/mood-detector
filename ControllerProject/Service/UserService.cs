@@ -3,6 +3,7 @@ using Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -140,6 +141,28 @@ namespace ControllerProject.Service
 
                 return usersList;
             }
+        }
+
+        public List<User> GetUsersPaginated(int currentPage, int usersPerPage)
+        {
+            var users = (from u in _context.Users
+                         where u.AccessRights != "Admin"
+                         orderby u.Id ascending
+                         select u)
+                         .Skip((currentPage - 1) * usersPerPage)
+                         .Take(usersPerPage)
+                         .ToList();
+
+            return users;
+        }
+
+        public int GetUsersCount()
+        {
+            var count = (from u in _context.Users
+                         where u.AccessRights != "Admin"
+                         select u).Count();
+
+            return count;
         }
     }
 }
