@@ -5,76 +5,77 @@
 }
 
 
-<link href="~/Assets/css/liveDetector-session.css" rel="stylesheet" type="text/css">
+<link href="~/Assets/css/youtube.css" rel="stylesheet" type="text/css">         
 
-<body>
-    <div class="container-fluid">
-        <div class="row pb-5">
-            <div class="session-label col-md-12">
-                <h3>Session ID: @Model.DetectionId</h3>
-                <h3>Joined as:  @Model.JoinName</h3>
-            </div>
-        </div>
+        <html>
+        <head>                                
+                    
+            <script src="https://d3js.org/d3.v5.min.js"></script>            
+            <script defer src="~/Assets/js/kahootDetector.js"></script>
+            
+        </head>
 
-        <div class="row">
-            <div class="col-md-8" id="affdex_elements" style="width:680px;height:480px; display:none"></div>
-            <div class="col-md-4">
-                <div style="height:25em;">
-                    <strong>EMOTION TRACKING RESULTS</strong>
-                    <div id="results" style="word-wrap:break-word;"></div>
+        <body>
+            <div class="row pb-5">
+                <div class="session-label col-md-12">
+                    <h3>Session ID: @Model.DetectionId</h3>
+                    <h3>Joined as:  @Model.JoinName</h3>
+                    <h3>VideoID: @Model.VideoId</h3>
                 </div>
-                <div>
-                    <strong>DETECTOR LOG MSGS</strong>
-                </div>
-                <div id="logs"></div>
             </div>
-        </div>
-        <div>
-            <button id="start" onclick="onStart()">Start</button>
-            <button id="stop" onclick="onStop()">Stop</button>
-            <button id="reset" onclick="onReset()">Reset</button>
-            <p>
+            <script>
+                var video='@Model.VideoId'
+            </script>
+                               
 
-            </p>
-        </div>
-    </div>
-    <div>
-        <div id="player"></div>
-        <h3> @Model.VideoId</h3>
+            <div id="text-width"></div>
+            <div id="lightbox"></div>
+            <div id="facevideo-node" style="display: none;"></div>
 
-        <script>
-            var player, playing = false;
-            function onYouTubeIframeAPIReady() {
-                player = new YT.Player('player', {
-                    height: '360',
-                    width: '640',
-                    videoId: '@Model.VideoId',
-                    events: {
-                        'onStateChange': onPlayerStateChange
-                    }
-                });
-            }
+            <div class="row d-none align-items-center flex-fill" id="demo-setup">
+                <div class="col-md-8 offset-md-2"id="instructions">
+                    <div class="card my-3">
+                        <div class="card-body">
+                            <div class="row justify-content-center no-gutters" id="example-container">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="row full-height align-items-center" id="video-container">
+                <div class="col text-center">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div id="video-wrapper">
+                                <div id="player" style="pointer-events: none"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="svg-container">
+                        <div class="col-lg-2">
+                            <ul class="nav d-flex flex-lg-column justify-content-center">
+                                <li class="nav-item all buttons all-box box-squared selected" id="all"><p> Show all</p></li>
+                                <li class="nav-item joy buttons joy-box box-squared" id="joy"><p>Joy</p></li>
+                                <li class="nav-item anger buttons angry-face anger-box box-squared" id="anger"><span> Anger</span></li>
+                                <li class="nav-item disgust buttons disgusted-face disgust-box box-squared" id="disgust"><span> Disgust</span></li>
+                                <li class="nav-item contempt buttons contempt-face contempt-box box-squared" id="contempt"><span> Contempt</span></li>
+                                <li class="nav-item surprise buttons surprise-face surprise-box box-squared" id="surprise"><span> Surprise</span></li>
+                            </ul>
+                        </div>
+                        <div id="svg-wrapper" class="col-lg-8 text-center" >
+                            <svg id="svg-curve"></svg>
+                        </div>
 
-            function onPlayerStateChange(event) {
+                    </div>
+                </div>
+            </div>
 
-                if (event.data == YT.PlayerState.PLAYING) {
-
-                    onStart();
-                    playing = true;
-                }
-
-                else if (event.data == YT.PlayerState.PAUSED) {
-
-                    playing = false;
-                }
-            }
-        </script>
-
-
-
-    </div>
-</body>
+        </body>
+        </html>    
 
 <script type="text/javascript" src="https://download.affectiva.com/js/3.2.1/affdex.js"></script>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script type="text/javascript" src="~/Assets/js/liveDetector.js"></script>
+
+
+

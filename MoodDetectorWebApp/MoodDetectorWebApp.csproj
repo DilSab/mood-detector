@@ -164,7 +164,10 @@
     <Content Include="Assets\css\lib\bootstrap.css" />
     <Content Include="Assets\css\liveDetector-session.css" />
     <Content Include="Assets\css\messenger-sidebar.css" />
+    <Content Include="Assets\css\youtube.css" />
+    <Content Include="Assets\js\kahootDetector.js" />
     <Content Include="Assets\js\lib\bootstrap.js" />
+    <Content Include="Assets\js\lib\d3.v5.min.js" />
     <Content Include="Assets\js\lib\jquery.js" />
     <Content Include="Assets\js\lib\popper.js" />
     <Content Include="Assets\js\liveDetector.js" />
