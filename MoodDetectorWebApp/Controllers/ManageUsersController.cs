@@ -22,7 +22,7 @@ namespace MoodDetectorWebApp.Controllers
         public ActionResult ViewUsers(UsersPaginationModel pagination, int page = 1)
         {
             pagination.CurrentPage = page;
-            pagination.Users = _userService.GetUsersPaginated(pagination.CurrentPage, pagination.UsersPerPage);
+            pagination.UserListItems = _userService.GetUsersPaginated(pagination.CurrentPage, pagination.UsersPerPage);
             int? usersCount = System.Web.HttpRuntime.Cache["users-count"] as int?;
             if (usersCount == null)
             {

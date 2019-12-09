@@ -1,4 +1,5 @@
 ﻿@using MoodDetectorWebApp.Models
+@using Model.Entity;
 
 @model UsersPaginationModel
 
@@ -15,20 +16,23 @@
 }
 
 <table class="table">
-    @foreach (Model.User item in Model.Users)
+    @foreach (UserListItem item in Model.UserListItems)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </td>
-            <td>
-                @Html.ActionLink("Details/Edit", "EditUser", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td>
+            @Html.ActionLink("Details/Edit", "EditUser", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+        </td>
+    </tr>
     }
 </table>
 <div class="row justify-content-center">
