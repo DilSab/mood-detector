@@ -166,6 +166,7 @@
     <Content Include="Assets\css\global-message.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
     <Content Include="Assets\css\messenger-sidebar.css" />
+    <Content Include="Assets\css\view-users.css" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
     <Content Include="Assets\js\lib\popper.js" />
