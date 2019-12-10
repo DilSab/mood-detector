@@ -34,7 +34,6 @@
                     {
                         <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
                         <li class="nav-item"><sup id="message-counter"></sup></li>
-                        <li class="nav-item">@Html.ActionLink("Log in", "Login", "Login", null, new { @class = "nav-link" })</li>
                     }
                     @*For teacher*@
                     @if (accessRights == "teacher")
@@ -51,7 +50,6 @@
                     @if (accessRights == "admin")
                     {
                         <li class="nav-item">@Html.ActionLink("Manage users", "ViewUsers", "ManageUsers", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("Send info", "SendInfo", "SendInfo", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("My profile", "MyProfileAdmin", "MyProfileAdmin", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
                         <li class="nav-item"><sup id="message-counter"></sup></li>

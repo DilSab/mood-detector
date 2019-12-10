@@ -144,7 +144,6 @@
     <Compile Include="Controllers\MoodController.cs" />
     <Compile Include="Controllers\MyProfileAdminController.cs" />
     <Compile Include="Controllers\MyProfileTeacherController.cs" />
-    <Compile Include="Controllers\SendInfoController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\SessionRedirectController.cs" />
     <Compile Include="Controllers\ThreadingController.cs" />
@@ -191,7 +190,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Detector\Start.cshtml" />
-    <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Mood\MoodList.cshtml" />
     <Content Include="Views\Mood\MoodIndex.cshtml" />
   </ItemGroup>
@@ -209,7 +207,6 @@
     <None Include="packages.config" />
     <Content Include="Views\Detector\NewSession.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\SendInfo\SendInfo.cshtml" />
     <Content Include="Views\MyProfileAdmin\MyProfileAdmin.cshtml" />
     <Content Include="Views\MyProfileTeacher\MyProfileTeacher.cshtml" />
     <Content Include="Views\ImportantInfo\ImportantInfo.cshtml" />
