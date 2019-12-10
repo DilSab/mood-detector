@@ -29,7 +29,7 @@
     </div>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
         <div class="row mt-5 mb-3 justify-content-center">
