@@ -17,5 +17,10 @@ namespace MoodDetectorWebApp.Controllers
 
             return View();
         }
+
+        public ActionResult FancyAbout()
+        {
+            return View();
+        }
     }
 }

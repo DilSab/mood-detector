@@ -176,6 +176,9 @@
     <Content Include="Global.asax" />
     <Content Include="Assets\css\site.css" />
     <Content Include="Assets\js\detector.js" />
+    <Content Include="Images\a.jpg" />
+    <Content Include="Images\b.jpg" />
+    <Content Include="Images\c.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -207,7 +210,6 @@
     <Content Include="Views\Detector\NewSession.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\SendInfo\SendInfo.cshtml" />
-    <Content Include="Views\Logout\Logout.cshtml" />
     <Content Include="Views\MyProfileAdmin\MyProfileAdmin.cshtml" />
     <Content Include="Views\MyProfileTeacher\MyProfileTeacher.cshtml" />
     <Content Include="Views\ImportantInfo\ImportantInfo.cshtml" />
@@ -226,6 +228,7 @@
     <Content Include="Views\Threading\Index.cshtml" />
     <Content Include="Views\Threading\Results.cshtml" />
     <Content Include="Views\SessionRedirect\SessionRedirect.cshtml" />
+    <Content Include="Views\About\FancyAbout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

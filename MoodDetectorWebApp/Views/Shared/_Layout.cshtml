@@ -19,7 +19,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.ActionLink("Mood Detector", "About", "About", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Mood Detector", "FancyAbout", "About", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -28,10 +28,6 @@
                         Session["AccessRights"] = accessRights;
 
                     }
-
-                    @*For everyone*@
-                    <li class="nav-item">@Html.ActionLink("About", "About", "About", null, new { @class = "nav-link" })</li>
-					<li class="nav-item">@Html.ActionLink("Threading", "Index", "Threading", null, new { @class = "nav-link" })</li>
 					
                     @*For logged out*@
                     @if (accessRights == "logged out")
