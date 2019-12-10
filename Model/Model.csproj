@@ -96,6 +96,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\AccessRightsCount.cs" />
     <Compile Include="Entity\UserListItem.cs" />
     <Compile Include="Entity\UserWithLogin.cs" />
     <Compile Include="Entity\MoodCollection.cs" />

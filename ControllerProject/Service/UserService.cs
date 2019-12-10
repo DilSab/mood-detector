@@ -167,5 +167,18 @@ namespace ControllerProject.Service
 
             return count;
         }
+
+        public List<AccessRightsCount> GetUsersCountGroupByAccessRights()
+        {
+            var counts = _context.Users
+                .GroupBy(u => u.AccessRights)
+                .Select(u => new AccessRightsCount { 
+                    AccessRights = u.Key,
+                    UsersCount = u.Count()
+                })
+                .ToList();
+
+            return counts;
+        }
     }
 }

@@ -58,6 +58,34 @@ namespace UnitTest.Service.UserServiceTest
             Assert.Equal("Teacher", user.AccessRights);
         }
 
+        [Fact]
+        public void TestGetUsersCountGroupByAccessRights()
+        {
+            var users = new List<User>
+            {
+                new User { Id = 1, Firstname = "Melinda", Lastname = "Chapman", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Micos", Lastname = "Taro", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Linda", Lastname = "Williams", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Robert", Lastname = "Brown", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Michael", Lastname = "Young", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Johnny", Lastname = "Walker", AccessRights = "Admin" },
+                new User { Id = 1, Firstname = "Rosalee", Lastname = "Barrett", AccessRights = "Admin" },
+                new User { Id = 1, Firstname = "Janelle", Lastname = "Leigh", AccessRights = "Admin" },
+            }.AsQueryable();
+
+            var mockSet = GetUserMockSet(users);
+
+            var mockContext = new Mock<MoodDetectorDbContext>();
+            mockContext.Setup(c => c.Users).Returns(mockSet.Object);
+
+            var service = new UserService(mockContext.Object);
+
+            var counts = service.GetUsersCountGroupByAccessRights();
+
+            Assert.Equal(3, counts.Find(c => c.AccessRights == "Admin").UsersCount);
+            Assert.Equal(5, counts.Find(c => c.AccessRights == "Teacher").UsersCount);
+        }
+
         private Mock<DbSet<LoginInfo>> GetLoginMockSet(IQueryable<LoginInfo> logins)
         {
             var mockSet = new Mock<DbSet<LoginInfo>>();
