@@ -1,6 +1,7 @@
 ﻿using Model;
 using Model.Entity;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -138,17 +139,19 @@ namespace ControllerProject.Service
 
                     usersList.Add(user);
                 }
+                adapter.Dispose();
 
                 return usersList;
             }
         }
 
-        public List<User> GetUsersPaginated(int currentPage, int usersPerPage)
+        public List<UserListItem> GetUsersPaginated(int currentPage, int usersPerPage)
         {
             var users = (from u in _context.Users
+                         join l in _context.LoginInfoes on u.Id equals l.UserId
                          where u.AccessRights != "Admin"
                          orderby u.Id ascending
-                         select u)
+                         select new UserListItem { Id = u.Id, Username = l.Username, Firstname = u.Firstname, Lastname = u.Lastname })
                          .Skip((currentPage - 1) * usersPerPage)
                          .Take(usersPerPage)
                          .ToList();

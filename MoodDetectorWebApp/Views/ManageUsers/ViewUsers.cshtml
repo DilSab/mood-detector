@@ -1,34 +1,51 @@
 ﻿@using MoodDetectorWebApp.Models
+@using Model.Entity;
 
 @model UsersPaginationModel
+<link href="~/Assets/css/view-users.css" rel="stylesheet" type="text/css">
 
-@{
-    ViewBag.Title = "ViewUsers";
-}
-
-<h2>View users</h2>
-@using (@Html.BeginForm("AddUser", "ManageUsers", FormMethod.Get))
-{
-    <div>
-        <input type="submit" value="Add user" />
-    </div>
-}
+<div class="row">
+    <h3 class="mr-3 ml-3 mb-5">Users</h3>
+    @using (@Html.BeginForm("AddUser", "ManageUsers", FormMethod.Get))
+    {
+        <div>
+            <input class="btn btn-outline-dark" type="submit" value="Add user" />
+        </div>
+    }
+</div>
 
 <table class="table">
-    @foreach (Model.User item in Model.Users)
-    {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </td>
-            <td>
-                @Html.ActionLink("Details/Edit", "EditUser", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
-            </td>
+            <td>Number</td>
+            <td>Username</td>
+            <td>Firstname</td>
+            <td>Lastname</td>
+            <td>Actions</td>
         </tr>
+    </thead>
+    @{ int itemNumber = Model.CurrentPage * Model.UsersPerPage - Model.UsersPerPage + 1; }
+    @foreach (UserListItem item in Model.UserListItems)
+    {
+    <tr>
+        <td class="column-number">
+            @itemNumber
+        </td>
+        <td class="column-user-info">
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td class="column-user-info">
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td class="column-user-info">
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td class="column-action">
+            @Html.ActionLink("Details/Edit", "EditUser", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+        </td>
+    </tr>
+        itemNumber++;
     }
 </table>
 <div class="row justify-content-center">

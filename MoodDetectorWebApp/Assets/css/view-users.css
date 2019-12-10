@@ -1,0 +1,15 @@
+﻿thead {
+    background-color: #eee;
+}
+
+.column-number {
+    width: 10%;
+}
+
+.column-user-info {
+    width: 20%;
+}
+
+.column-action {
+    width: 30%;
+}

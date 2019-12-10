@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Entity;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ControllerProject.Service
@@ -15,7 +16,7 @@ namespace ControllerProject.Service
         User GetUser(string username);
         UserWithLogin GetUserWithLogin(int id);
         List<User> GetUsers();
-        List<User> GetUsersPaginated(int currentPage, int usersPerPage);
+        List<UserListItem> GetUsersPaginated(int currentPage, int usersPerPage);
         int GetUsersCount();
     }
 }
