@@ -18,5 +18,6 @@ namespace ControllerProject.Service
         List<User> GetUsers();
         List<UserListItem> GetUsersPaginated(int currentPage, int usersPerPage);
         int GetUsersCount();
+        List<AccessRightsCount> GetUsersCountGroupByAccessRights();
     }
 }
