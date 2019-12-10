@@ -1,6 +1,5 @@
 ﻿using Model;
 using Model.Entity;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace ControllerProject.Service
