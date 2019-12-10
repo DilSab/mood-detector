@@ -146,7 +146,6 @@
     <Compile Include="Controllers\MyProfileTeacherController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\SessionRedirectController.cs" />
-    <Compile Include="Controllers\ThreadingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -164,6 +163,7 @@
     <Content Include="Assets\css\detector-start.css" />
     <Content Include="Assets\css\global-message.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
+    <Content Include="Assets\css\Logo.css" />
     <Content Include="Assets\css\messenger-sidebar.css" />
     <Content Include="Assets\css\view-users.css" />
     <Content Include="Assets\js\lib\bootstrap.js" />
@@ -222,8 +222,6 @@
     <Content Include="Views\Mood\SessionIndex.cshtml" />
     <Content Include="Views\Mood\SessionsList.cshtml" />
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
-    <Content Include="Views\Threading\Index.cshtml" />
-    <Content Include="Views\Threading\Results.cshtml" />
     <Content Include="Views\SessionRedirect\SessionRedirect.cshtml" />
     <Content Include="Views\About\FancyAbout.cshtml" />
   </ItemGroup>

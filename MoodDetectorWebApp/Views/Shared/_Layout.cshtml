@@ -11,6 +11,7 @@
     @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Assets/js/messenger-update.js"></script>
+    <link href="~/Assets/css/Logo.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
@@ -68,7 +69,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p class="ml-5">@DateTime.Now.Year Mood Detector</p>
+            <p class="ml-5 logo text-center">Super Mood Detector @DateTime.Now.Year</p>
         </footer>
     </div>
 
