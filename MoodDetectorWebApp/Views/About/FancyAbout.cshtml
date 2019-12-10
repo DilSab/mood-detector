@@ -32,18 +32,19 @@
 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-        <div class="row mt-5 mb-3 justify-content-center">
-            <div>@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = "Username", @class = "form-control" } })</div>
-        </div>
-        <div class="row mb-3 justify-content-center">
-            <div>@Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "form-control" } })</div>
-        </div>
-        <div class="text-center">
-            <input class="btn btn-primary" type="submit" value="Login" />
-            <p class="mb-3 mt-5"><i>New or forgot your login credentials? Contact your system administrator.</i></p>
-        </div>
+    <div class="mt-5 mb-3 text-danger text-center">
+        @Html.ValidationMessage("CustomError")
+    </div>
+    <div class="row mt-5 mb-3 justify-content-center">
+        <div>@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = "Username", @class = "form-control" } })</div>
+    </div>
+    <div class="row mb-3 justify-content-center">
+        <div>@Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "form-control" } })</div>
+    </div>
 
-    @Html.ValidationMessage("CustomError")
-
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Login" />
+        <p class="mb-3 mt-5"><i>New or forgot your login credentials? Contact your system administrator.</i></p>
+    </div>
 }
 
