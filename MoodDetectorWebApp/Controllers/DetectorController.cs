@@ -63,5 +63,13 @@ namespace MoodDetectorWebApp.Controllers
         {
             _moodService.AddMood(detectionId, JsonConvert.DeserializeObject<MoodCollection>(moods));
         }
+
+        [HttpPost]
+        public ActionResult AddYoutube(int detectionId, string videoId)
+        {
+            _moodService.AddVideoToSession(detectionId, videoId);
+
+            return new EmptyResult();
+        }
     }
 }

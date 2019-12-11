@@ -137,6 +137,7 @@
     <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ImportantInfoController.cs" />
+    <Compile Include="Controllers\JoinSessionController.cs" />
     <Compile Include="Controllers\LearningsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
@@ -153,6 +154,8 @@
     <Compile Include="Models\DetectionStartViewModel.cs" />
     <Compile Include="Models\EditUserModel.cs" />
     <Compile Include="Models\GlobalMessageModel.cs" />
+    <Compile Include="Models\JoinSessionModel.cs" />
+    <Compile Include="Models\JoinSessionSummary.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Models\SessionSummary.cs" />
@@ -164,11 +167,19 @@
     <Content Include="Assets\css\global-message.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
     <Content Include="Assets\css\Logo.css" />
+    <Content Include="Assets\css\liveDetector-session.css" />
     <Content Include="Assets\css\messenger-sidebar.css" />
+
+    <Content Include="Assets\css\youtube.css" />
+    <Content Include="Assets\js\JoinSessionDetector.js" />
+
     <Content Include="Assets\css\view-users.css" />
+
     <Content Include="Assets\js\lib\bootstrap.js" />
+    <Content Include="Assets\js\lib\d3.v5.min.js" />
     <Content Include="Assets\js\lib\jquery.js" />
     <Content Include="Assets\js\lib\popper.js" />
+    <Content Include="Assets\js\liveDetector.js" />
     <Content Include="Assets\js\messenger-update.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -224,6 +235,10 @@
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
     <Content Include="Views\SessionRedirect\SessionRedirect.cshtml" />
     <Content Include="Views\About\FancyAbout.cshtml" />
+    <Content Include="Views\JoinSession\JoinSessionConnect.cshtml" />
+    <Content Include="Views\JoinSession\JoinSession.cshtml" />
+    <Content Include="Views\JoinSession\JoinSessionList.cshtml" />
+    <Content Include="Views\JoinSession\JoinSessionDiagram.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

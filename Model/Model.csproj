@@ -102,6 +102,7 @@
     <Compile Include="Entity\MoodCollection.cs" />
     <Compile Include="Entity\SessionInfo.cs" />
     <Compile Include="GlobalMessage.cs" />
+    <Compile Include="JoinSession.cs" />
     <Compile Include="LearningMessage.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="Migrations\201911211904322_Initial.cs" />
@@ -111,6 +112,10 @@
     <Compile Include="Migrations\201911230924022_Hash.cs" />
     <Compile Include="Migrations\201911230924022_Hash.designer.cs">
       <DependentUpon>201911230924022_Hash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912111055178_JoinSession + Session.VideoID.cs" />
+    <Compile Include="Migrations\201912111055178_JoinSession + Session.VideoID.designer.cs">
+      <DependentUpon>201912111055178_JoinSession + Session.VideoID.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mood.cs" />
@@ -132,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911230924022_Hash.resx">
       <DependentUpon>201911230924022_Hash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912111055178_JoinSession + Session.VideoID.resx">
+      <DependentUpon>201912111055178_JoinSession + Session.VideoID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

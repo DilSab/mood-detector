@@ -71,5 +71,10 @@ namespace MoodDetectorWebApp.Controllers
                 return View("ErrorMessage", model: ex.Message);
             }
         }
+
+        public ActionResult RedirectToJoinSessionList (int id)
+        {            
+            return RedirectToAction("JoinSessionList", "JoinSession", new { sessionId = id });           
+        }
     }
 }
