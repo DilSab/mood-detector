@@ -159,7 +159,7 @@ namespace ControllerProject.Service
         {
             return (from m in _context.Sessions
                     where m.UserId == userId 
-                    select m).OrderByDescending(x => x.Id);
+                    select m).OrderBy(d => d.DateTime);
         }
 
         public Mood GetLastClassMood(User user, int mask)
@@ -174,7 +174,8 @@ namespace ControllerProject.Service
                 Session = new Session() { DateTime = DateTime.Now, Id = -1 }
             };
             if (!_context.Sessions.Any()) return mood;
-            IQueryable<Session> sessions = GetUserSessions(user.Id);
+            if (user == null) return mood;
+            List<Session> sessions = GetUserSessions(user.Id).ToList();
 
             if (!sessions.Any()) return mood;
 

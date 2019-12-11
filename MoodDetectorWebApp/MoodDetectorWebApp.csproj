@@ -137,7 +137,9 @@
     <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ImportantInfoController.cs" />
+    <Compile Include="Controllers\LearningsAdminController.cs" />
     <Compile Include="Controllers\LearningsController.cs" />
+    <Compile Include="Controllers\LearningsRedirectController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\MessengerController.cs" />
@@ -153,8 +155,11 @@
     </Compile>
     <Compile Include="Models\AddUserModel.cs" />
     <Compile Include="Models\DetectionStartViewModel.cs" />
+    <Compile Include="Models\EditLearningModel.cs" />
     <Compile Include="Models\EditUserModel.cs" />
+    <Compile Include="Models\FeedbackModel.cs" />
     <Compile Include="Models\GlobalMessageModel.cs" />
+    <Compile Include="Models\LearningsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Models\SessionSummary.cs" />
@@ -166,6 +171,8 @@
     <Content Include="Assets\css\global-message.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
     <Content Include="Assets\css\messenger-sidebar.css" />
+    <Content Include="Assets\js\learnings-counter.js" />
+    <Content Include="Assets\js\learnings-pop-up.js" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
     <Content Include="Assets\js\lib\popper.js" />
@@ -225,6 +232,13 @@
     <Content Include="Views\Threading\Index.cshtml" />
     <Content Include="Views\Threading\Results.cshtml" />
     <Content Include="Views\SessionRedirect\SessionRedirect.cshtml" />
+    <Content Include="Views\LearningsAdmin\LearningsAdmin.cshtml" />
+    <Content Include="Views\LearningsAdmin\EditLearning.cshtml" />
+    <Content Include="Views\LearningsAdmin\SuccessfulAdd.cshtml" />
+    <Content Include="Views\LearningsRedirect\Redirect.cshtml" />
+    <Content Include="Views\LearningsAdmin\LateTeachers.cshtml" />
+    <Content Include="Views\Learnings\Feedback.cshtml" />
+    <Content Include="Views\LearningsAdmin\ShowFeedbacks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

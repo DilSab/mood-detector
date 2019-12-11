@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "LearningsAdmin";
+}
+
+<h2>LearningsAdmin</h2>
+
+<table class="table">
+    @foreach (Model.Learning item in Model.Learnings)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmotionName)
+            </td>
+            <td>
+                @Html.ActionLink("Details/Edit", "EditLearning", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+

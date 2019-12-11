@@ -4,9 +4,10 @@
     {
         public int Id { get; set; }
         public string Text { get; set; }
-        public int SessionId { get; set; }
+        public Session session { get; set; }
         public int Mask { get; set; }
         public string Link { get; set; }
-        public long SessionTime { get; set; }
+        public int SessionTime { get; set; }
+        public string EmotionName { get; set; }
     }
 }

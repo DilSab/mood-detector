@@ -14,6 +14,9 @@ namespace Model
         public virtual DbSet<Mood> Moods { get; set; }
         public virtual DbSet<GlobalMessage> GlobalMessages { get; set; }
         public virtual DbSet<LearningMessage> LearningMessages { get; set; }
+        public virtual DbSet<Learning> Learnings { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

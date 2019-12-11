@@ -96,11 +96,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Feedback.cs" />
+    <Compile Include="Learning.cs" />
     <Compile Include="Entity\UserWithLogin.cs" />
     <Compile Include="Entity\MoodCollection.cs" />
     <Compile Include="Entity\SessionInfo.cs" />
     <Compile Include="GlobalMessage.cs" />
     <Compile Include="LearningMessage.cs" />
+    <Compile Include="LearningsLate.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="Migrations\201911211904322_Initial.cs" />
     <Compile Include="Migrations\201911211904322_Initial.designer.cs">
@@ -109,6 +112,22 @@
     <Compile Include="Migrations\201911230924022_Hash.cs" />
     <Compile Include="Migrations\201911230924022_Hash.designer.cs">
       <DependentUpon>201911230924022_Hash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912101847045_LearningsTable.cs" />
+    <Compile Include="Migrations\201912101847045_LearningsTable.designer.cs">
+      <DependentUpon>201912101847045_LearningsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912110731171_LearningsUpdate.cs" />
+    <Compile Include="Migrations\201912110731171_LearningsUpdate.designer.cs">
+      <DependentUpon>201912110731171_LearningsUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912110825108_LearningsUpdate2.cs" />
+    <Compile Include="Migrations\201912110825108_LearningsUpdate2.designer.cs">
+      <DependentUpon>201912110825108_LearningsUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912111221551_FeedbackTable.cs" />
+    <Compile Include="Migrations\201912111221551_FeedbackTable.designer.cs">
+      <DependentUpon>201912111221551_FeedbackTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mood.cs" />
@@ -130,6 +149,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911230924022_Hash.resx">
       <DependentUpon>201911230924022_Hash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912101847045_LearningsTable.resx">
+      <DependentUpon>201912101847045_LearningsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912110731171_LearningsUpdate.resx">
+      <DependentUpon>201912110731171_LearningsUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912110825108_LearningsUpdate2.resx">
+      <DependentUpon>201912110825108_LearningsUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912111221551_FeedbackTable.resx">
+      <DependentUpon>201912111221551_FeedbackTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

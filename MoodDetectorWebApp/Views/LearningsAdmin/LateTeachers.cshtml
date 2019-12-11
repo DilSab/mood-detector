@@ -1,0 +1,17 @@
+﻿@using Model;
+@{
+    ViewBag.Title = "LateTeachers";
+}
+
+<h2>Late Teachers</h2>
+
+@if (Model != null)
+{
+    List<LearningsLate> learnings = Model;
+    foreach(LearningsLate i in learnings)
+    {
+        <p>
+            Teacher <b>@i.Teacher.Firstname @i.Teacher.Lastname</b> is late with @i.EmotionName learning for <b>@i.Days days</b>!
+        </p>
+    }
+}

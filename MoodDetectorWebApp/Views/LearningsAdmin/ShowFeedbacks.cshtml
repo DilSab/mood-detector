@@ -1,0 +1,34 @@
+﻿@using MoodDetectorWebApp.Models
+@using Model;
+@using System.Diagnostics;
+
+@{
+    ViewBag.Title = "ShowFeedbacks";
+}
+<h2>Feedbacks</h2>
+@if (Model != null)
+{
+    List<Feedback> feedbacks = Model;
+    int cnt = 0;
+    foreach(Feedback i in feedbacks)
+    {
+        cnt++;
+        <p>
+            <b>User </b>@i.User.Firstname @i.User.Lastname<br>
+            <b>Comments</b><br>
+            @i.Comments
+        </p>
+        
+
+
+    }
+    if (cnt == 0)
+    {
+        <p>List for this user is empty</p>
+    }
+
+}
+else
+{
+    <p>List for this user is empty</p>
+}

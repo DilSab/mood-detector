@@ -1,0 +1,22 @@
+﻿@using MoodDetectorWebApp.Models
+@using System
+
+@model FeedbackModel
+
+<h2>Feedback</h2>
+@if (Model != null)
+{
+    string emotion = ((FeedbackModel)Model).EmotionName;
+
+
+
+    using (Html.BeginForm("Feedback", "Learnings", FormMethod.Post, new { model = Model, emotion = emotion }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row mb-5">
+            <div class="col-lg-1 col-sm-2 col-3">@Html.LabelFor(s => s.Comments)</div>
+            <div class="col-lg-11 col-sm-10 col-9">@Html.TextBoxFor(s => s.Comments, new { maxlength = 1000 }) @Html.ValidationMessageFor(s => s.Comments, "", new { @style = "color:red" })</div>
+        </div>
+        <input type="submit" value="Submit" />
+    }
+}
