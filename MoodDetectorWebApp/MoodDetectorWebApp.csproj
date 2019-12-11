@@ -153,6 +153,7 @@
     <Compile Include="Models\DetectionStartViewModel.cs" />
     <Compile Include="Models\GlobalMessageModel.cs" />
     <Compile Include="Models\JoinSessionModel.cs" />
+    <Compile Include="Models\JoinSessionSummary.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewSessionModel.cs" />
     <Compile Include="Models\SessionSummary.cs" />
@@ -165,7 +166,7 @@
     <Content Include="Assets\css\liveDetector-session.css" />
     <Content Include="Assets\css\messenger-sidebar.css" />
     <Content Include="Assets\css\youtube.css" />
-    <Content Include="Assets\js\kahootDetector.js" />
+    <Content Include="Assets\js\JoinSessionDetector.js" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\d3.v5.min.js" />
     <Content Include="Assets\js\lib\jquery.js" />
@@ -226,8 +227,10 @@
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
     <Content Include="Views\Threading\Index.cshtml" />
     <Content Include="Views\Threading\Results.cshtml" />
+    <Content Include="Views\JoinSession\JoinSessionConnect.cshtml" />
     <Content Include="Views\JoinSession\JoinSession.cshtml" />
-    <Content Include="Views\JoinSession\Session.cshtml" />
+    <Content Include="Views\JoinSession\JoinSessionList.cshtml" />
+    <Content Include="Views\JoinSession\JoinSessionDiagram.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">

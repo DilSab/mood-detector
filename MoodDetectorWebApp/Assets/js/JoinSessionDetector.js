@@ -5,15 +5,14 @@ d3.selection.prototype.moveToFront = function () {
     });
 };
 
-// Initialize Demo
-let kahoot = null;
+let joinSessionDetector = null;
 $(document).ready(() => {
-    kahoot = new Kahoot();
-    kahoot.start();
+    joinSessionDetector = new JoinSessionDetector();
+    joinSessionDetector.start();
 });
 
 
-function Kahoot() {
+function JoinSessionDetector() {
     const self = this;  
         
     this.States = {
@@ -43,9 +42,8 @@ function Kahoot() {
     let graph = new Graph("#svg-curve");
     let video_ids = [video];
 
-    /** ==============================================================
-     *                      Pubilc Methods
-     *  ============================================================== */
+/*  ==============================================================
+  *  ============================================================== */
 
     this.state = () => state;
    
@@ -64,9 +62,8 @@ function Kahoot() {
         $("#lightbox").fadeIn(alert_transition_delay_in);      
     };
 
-    /** ==============================================================
-     *   Load - methods associated with the LOADING phase
-     *  ============================================================== */
+/*  ==============================================================
+ *  ============================================================== */
 
     const loadYTPlayer = () => {
         return new Promise((resolve, reject) => {
@@ -148,9 +145,8 @@ function Kahoot() {
         }
     };
 
-    /** ==============================================================
-     *   Search - methods associated with the SEARCHING phase
-     *  ============================================================== */
+/*  ==============================================================
+ *  ============================================================== */
 
     const transitionToSearching = () => {
         
@@ -236,7 +232,6 @@ function Kahoot() {
        
 
     /*  ==============================================================
-     *   Record - methods associated with the RECORDING phase
      *  ============================================================== */
    
      
@@ -305,9 +300,8 @@ function Kahoot() {
     
          
 
-    /*  ==============================================================
-     *                      UTILITIES AND ALERTS
-     *  ============================================================== */
+/*  ==============================================================
+  *  ============================================================== */
     
     const ignore = () => { };
    
@@ -334,14 +328,34 @@ function Kahoot() {
         $("#lightbox").fadeOut(alert_transition_delay_out);
     };
 
-   
+    const transitionToPlayback = () => {
+
+        detector.stop(); 
+
+        var svgNode = d3.select('svg').node();
+        var svg = new XMLSerializer().serializeToString(svgNode);
+        var svgbtoa = btoa(svg);      
+      
+        //  var imgsrc = 'data:image/svg+xml;base64,' + btoa(html);
+        //  var img = '<img src="' + imgsrc + '">';   
+        
+        //  d3.select("#console322").html(atob(testsvg));
+
+        $.ajax({
+
+            type: "POST",
+            url: "/JoinSession/AddSVG",
+            data: { joinSessionId: joinSessionId, svg: svgbtoa },
+            
+        });     
+    };
 }
 
 function Graph(id) {
     
     let self = this;
 
-    // private members
+    
     const curveBox = d3.select(id);
     let cursor = null;
     let cursor_text = null;
@@ -358,22 +372,21 @@ function Graph(id) {
         .x((d, i) => x_scale(d[0]))
         .y((d, i) => y_scale(d[1]));
 
-    // For data nulling
     let processed_frames = [[[], [], [], [], []]];
     let currentCurvesIdx = 0;
     let wasNil = false;
-    let gray_boxes = [[]]; // This is an array of intervals that will maintain the timestamps of grayed out data.
+    let gray_boxes = [[]]; 
     let last_box = null;
-    // public members
-    this.emotions = ["joy", "anger", "disgust", "contempt", "surprise"];
-    //private methods
 
+
+    this.emotions = ["joy", "anger", "disgust", "contempt", "surprise"];
+   
     
     const textTime = (time_sec) => {
         return Math.floor(time_sec / 60) + ":" + ((time_sec % 60 < 10) ? ("0" + time_sec % 60) : time_sec % 60);
     };
 
-    //public methods
+  
 
     this.setXScale = (start_time, video_duration_ms) => {
         x_scale = d3.scaleLinear().domain([start_time, start_time + video_duration_ms]).range([0, svg_width]);
@@ -388,14 +401,17 @@ function Graph(id) {
     this.getCurves = () => {
         return curveBox.selectAll("path.curve");
     };
- 
+
+
     this.resetSelectedEmotionButton = (emotion) => {
-        // If the selected_emotion is not the one that was just clicked, then toggle the current one
+        
         if (selected_emotion !== emotion) {
+
             $("#" + selected_emotion).removeClass("selected");
             $("#" + emotion).addClass("selected");
             selected_emotion = emotion;
         }
+
 
         return self;
     };
@@ -409,9 +425,7 @@ function Graph(id) {
             .attr("stroke-opacity", 1.0);
     };
 
-    /** Button Handler Generator for the rest of the emotions
-     *  Just call `$(button).click(graph.EmotionButtonClickHandler(emotion));` to use
-     * @param {string} emotion - name of the emotion to highlight. */
+    /* Button Handler Generator for the rest of the emotions */
     this.EmotionButtonClickHandler = (emotion) => {
         return () => {
             self
@@ -457,10 +471,7 @@ function Graph(id) {
         wasNil = true;
     };
 
-    /** updates the plot to have up to date information
-     * @param {string:float} emotionTable - this is a dictionary that maps each emotion to a floating point number
-     * @param {float} timestamp - this is the timestamp in the video (effectively the x coordinate). */
-
+    /* updates the plot to have up to date information */
 
     this.updatePlot = (emotionTable, timestamp) => {
         if (wasNil) {
@@ -628,7 +639,7 @@ function Graph(id) {
 
 function AsyncPlayer() {
     let player = null;
-    const VIDEO_VOLUME = 50;
+    const VIDEO_VOLUME = 0;
     const VIDEO_LENGTH_THRESHOLD = 5;
 
     let invokerState = (e) => current_state_change_handle(e);
@@ -708,6 +719,7 @@ function AsyncPlayer() {
                 cb("resume", null);
             }
         } else if (status === YT.PlayerState.ENDED) {
+            
             has_ended = true;
             cb("ended", null);
         } else if (status === YT.PlayerState.PAUSED) {

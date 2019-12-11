@@ -13,7 +13,9 @@ namespace ControllerProject.Service
         //void AddMoodLive(int joinSessionId, MoodCollection moodCollection);
         MoodCollection GetMoodsBySessionId(int id);
         List<int> GetAllSessionsIds(int userId);
+        List<int> GetAllJoinSessionIds(int sessionId);
         Session GetSession(int id);
+        JoinSession GetJoinSession(int id);
         Dictionary<string, double> GetDominantMoods(MoodCollection moodCollection);
         List<Mood> GetMoodsByDate(User user, DateTime? dateTime = null);
         Mood GetLastClassMood(User user, int mask);
@@ -22,5 +24,6 @@ namespace ControllerProject.Service
         MoodCollection GetMoodAverage(List<Mood> moods);
         string GetAverageEmoji(MoodCollection moodCollection);
         void AddVideoToSession(int sessionId, string videoId);
+        void AddSVGToJoinSession(int joinSessionId, string SVG);
     }
 }

@@ -115,6 +115,14 @@
     <Compile Include="Migrations\201911262108477_Updated_Session_with_VideoId.designer.cs">
       <DependentUpon>201911262108477_Updated_Session_with_VideoId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912071347465_Added SessionSVG to JoinSession model.cs" />
+    <Compile Include="Migrations\201912071347465_Added SessionSVG to JoinSession model.designer.cs">
+      <DependentUpon>201912071347465_Added SessionSVG to JoinSession model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912101747541_Added Date field to JoinSession.cs" />
+    <Compile Include="Migrations\201912101747541_Added Date field to JoinSession.designer.cs">
+      <DependentUpon>201912101747541_Added Date field to JoinSession.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mood.cs" />
     <Compile Include="MoodDetectorDbContext.cs" />
@@ -138,6 +146,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911262108477_Updated_Session_with_VideoId.resx">
       <DependentUpon>201911262108477_Updated_Session_with_VideoId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912071347465_Added SessionSVG to JoinSession model.resx">
+      <DependentUpon>201912071347465_Added SessionSVG to JoinSession model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912101747541_Added Date field to JoinSession.resx">
+      <DependentUpon>201912101747541_Added Date field to JoinSession.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

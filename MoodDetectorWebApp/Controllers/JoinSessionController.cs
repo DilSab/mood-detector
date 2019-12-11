@@ -1,71 +1,95 @@
 ﻿using System.Web.Mvc;
+using System.Collections.Generic;
 using ControllerProject.Service;
 using MoodDetectorWebApp.Models;
 using System;
-using Model.Entity;
+
 using Model;
-using Newtonsoft.Json;
-using System.Text.RegularExpressions;
+
 
 namespace MoodDetectorWebApp.Controllers
 {
     public class JoinSessionController : Controller
     {
-            private IMoodService _moodService;
-            private IUserService _userService;
-            private MoodDetectorDbContext _context;
+        private IMoodService _moodService;      
+        private MoodDetectorDbContext _context;
 
-            public JoinSessionController(IMoodService moodService, IUserService userService, MoodDetectorDbContext context)
-                {
-                    _moodService = moodService;
-                    _userService = userService;
-                    _context = context;
-            }
-      
-        
-           // GET: JoinSession
-           public ActionResult JoinSession ()
-           {
-               return View(new JoinSessionModel());
-           }
-
-           
-           // POST: JoinSession
-           [HttpPost]
-           public ActionResult JoinSession(JoinSessionModel model)
-           {           
-                if (ModelState.IsValid)
-                {
-                    if (_moodService.GetSession(model.DetectionId) != null)
-                    {
-
-                        JoinSession join = new JoinSession()
-                        {
-                            SessionId = model.DetectionId,
-                            JoinName = model.JoinName,
-                        };                        
-
-                        _context.JoinSessions.Add(join);
-                        _context.SaveChanges();
-
-                        Session session = _moodService.GetSession(model.DetectionId);
-                        model.VideoId = session.VideoId.Replace("https://www.youtube.com/watch?v=", "");
-                    
-                    
-                    return View("~/Views/JoinSession/Session.cshtml", model);
-                    }
-                }
-
-                return View();
-           }
-
-        // POST: JoinSession/PostMoods/
-        public void PostMoods(string moods)
+        public JoinSessionController(IMoodService moodService, MoodDetectorDbContext context)
         {
-            System.Diagnostics.Debug.WriteLine("Atejo iki cia");            
+            _moodService = moodService;            
+            _context = context;
+        }        
+  
+        public ActionResult JoinSessionConnect ()
+        {
+            return View(new JoinSessionModel());
+        }       
+ 
+        [HttpPost]
+        public ActionResult JoinSessionConnect(JoinSessionModel model)
+        {           
+            if (ModelState.IsValid)
+            {
+                if (_moodService.GetSession(model.DetectionId) != null)
+                {
+                    JoinSession join = new JoinSession()
+                    {
+                        SessionId = model.DetectionId,
+                        JoinName = model.JoinName,
+                        DateTime = DateTime.Now,
+                    };                        
 
-            //int joinSessionId = 3002;
-           // _moodService.AddMoodLive(joinSessionId, JsonConvert.DeserializeObject<MoodCollection>(moods));
+                    _context.JoinSessions.Add(join);
+                    _context.SaveChanges();
+
+                    Session session = _moodService.GetSession(model.DetectionId);
+                    model.VideoId = session.VideoId.Replace("https://www.youtube.com/watch?v=", "");
+                    model.JoinSessionId = join.Id;                       
+                  
+                return View("~/Views/JoinSession/JoinSession.cshtml", model);
+                }
+            }
+
+            return View();
+        }
+
+        public ActionResult JoinSessionList(int sessionId)
+        {                        
+            List<JoinSessionSummary> joinSessions = new List<JoinSessionSummary>();
+            List<int> joinSessionsIds = _moodService.GetAllJoinSessionIds(sessionId);
+            foreach (int id in joinSessionsIds)
+            {
+                JoinSession joinSession = _moodService.GetJoinSession(id);
+                JoinSessionSummary joinSessionSummary = new JoinSessionSummary
+                {
+                    Id = id,
+                    JoinName = joinSession.JoinName,
+                    Date = joinSession.DateTime,
+      
+                };
+                joinSessions.Add(joinSessionSummary);
+            }
+            return View("JoinSessionList", joinSessions);
+        }
+
+        public ActionResult GetJoinSessionDiagram(int id)
+        {
+
+            JoinSession joinSession = _moodService.GetJoinSession(id);
+            JoinSessionSummary joinSessionSummary = new JoinSessionSummary
+            {
+                Id = id,
+                JoinName = joinSession.JoinName,
+                Date = joinSession.DateTime,
+                SessionSVG = joinSession.JoinSessionSVG,
+            };
+
+            return View("JoinSessionDiagram", joinSessionSummary);           
+        }
+     
+        public void AddSVG(int joinSessionId, string svg)
+        {
+            _moodService.AddSVGToJoinSession(joinSessionId, svg);            
         }
     }
 }
