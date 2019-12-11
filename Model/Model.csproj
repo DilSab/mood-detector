@@ -96,7 +96,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="Feedback.cs" />
     <Compile Include="Learning.cs" />
     <Compile Include="Entity\AccessRightsCount.cs" />
@@ -132,10 +131,10 @@
     <Compile Include="Migrations\201912111221551_FeedbackTable.cs" />
     <Compile Include="Migrations\201912111221551_FeedbackTable.designer.cs">
       <DependentUpon>201912111221551_FeedbackTable.cs</DependentUpon>
-
-    <Compile Include="Migrations\201912111055178_JoinSession + Session.VideoID.cs" />
-    <Compile Include="Migrations\201912111055178_JoinSession + Session.VideoID.designer.cs">
-      <DependentUpon>201912111055178_JoinSession + Session.VideoID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912111719019_JoinSessionVideoID.cs" />
+    <Compile Include="Migrations\201912111719019_JoinSessionVideoID.designer.cs">
+      <DependentUpon>201912111719019_JoinSessionVideoID.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mood.cs" />
@@ -169,8 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912111221551_FeedbackTable.resx">
       <DependentUpon>201912111221551_FeedbackTable.cs</DependentUpon>
-    <EmbeddedResource Include="Migrations\201912111055178_JoinSession + Session.VideoID.resx">
-      <DependentUpon>201912111055178_JoinSession + Session.VideoID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912111719019_JoinSessionVideoID.resx">
+      <DependentUpon>201912111719019_JoinSessionVideoID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
