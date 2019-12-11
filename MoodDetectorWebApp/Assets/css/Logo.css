@@ -1,0 +1,27 @@
+﻿.logo {
+    font-size: 50px;
+    background: -webkit-linear-gradient(#ffd800, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: Gradient 5s infinite;
+}
+
+@-webkit-keyframes Gradient {
+    0% {
+        background: -webkit-linear-gradient(#ffd800, #ff0000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    50% {
+        background: -webkit-linear-gradient(#ffd800, #808080);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    100% {
+        background: -webkit-linear-gradient(#ffd800, #ff0000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}

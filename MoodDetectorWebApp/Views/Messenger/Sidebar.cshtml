@@ -4,8 +4,11 @@
 @model List<GlobalMessage>
 <link href="~/Assets/css/messenger-sidebar.css" rel="stylesheet" />
 
+@{ var countMessages = 0;}
+
 @foreach (GlobalMessage globalMessage in Model)
 {
+    countMessages++;
     <div class="message text-left mb-3">
         <div class="message-header">
             <span class="message-recipient"> To: @globalMessage.RecipientType</span>
@@ -26,4 +29,9 @@
             }
         }
     </div>
+}
+
+@if(countMessages == 0)
+{
+    <div>There are no global messages.</div>
 }

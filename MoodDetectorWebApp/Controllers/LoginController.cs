@@ -53,7 +53,7 @@ namespace MoodDetectorWebApp.Controllers
             {
                 AccessRights = "logged out";
                 ModelState.AddModelError("CustomError", "Incorrect username and/or password");                
-                return View("Login");
+                return View("~/Views/About/FancyAbout.cshtml");
             }
 
             return View();            
