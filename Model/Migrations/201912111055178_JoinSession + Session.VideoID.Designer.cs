@@ -7,13 +7,13 @@ namespace Model.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.3.0")]
-    public sealed partial class AddedJoinSession : IMigrationMetadata
+    public sealed partial class JoinSessionSessionVideoID : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedJoinSession));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(JoinSessionSessionVideoID));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911262040276_AddedJoinSession"; }
+            get { return "201912111055178_JoinSession + Session.VideoID"; }
         }
         
         string IMigrationMetadata.Source
