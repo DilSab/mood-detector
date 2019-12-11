@@ -9,7 +9,7 @@ namespace MoodDetectorWebApp.Controllers
         {
             FormsAuthentication.SignOut();
             LoginController.AccessRights = "logged out";
-            return RedirectToAction("About", "About");
+            return RedirectToAction("FancyAbout", "About");
         }
     }
 }

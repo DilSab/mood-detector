@@ -145,10 +145,8 @@
     <Compile Include="Controllers\MoodController.cs" />
     <Compile Include="Controllers\MyProfileAdminController.cs" />
     <Compile Include="Controllers\MyProfileTeacherController.cs" />
-    <Compile Include="Controllers\SendInfoController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\SessionRedirectController.cs" />
-    <Compile Include="Controllers\ThreadingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -168,6 +166,7 @@
     <Content Include="Assets\css\detector-start.css" />
     <Content Include="Assets\css\global-message.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
+    <Content Include="Assets\css\Logo.css" />
     <Content Include="Assets\css\liveDetector-session.css" />
     <Content Include="Assets\css\messenger-sidebar.css" />
 
@@ -187,6 +186,9 @@
     <Content Include="Global.asax" />
     <Content Include="Assets\css\site.css" />
     <Content Include="Assets\js\detector.js" />
+    <Content Include="Images\a.jpg" />
+    <Content Include="Images\b.jpg" />
+    <Content Include="Images\c.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -199,7 +201,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Detector\Start.cshtml" />
-    <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Mood\MoodList.cshtml" />
     <Content Include="Views\Mood\MoodIndex.cshtml" />
   </ItemGroup>
@@ -217,8 +218,6 @@
     <None Include="packages.config" />
     <Content Include="Views\Detector\NewSession.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\SendInfo\SendInfo.cshtml" />
-    <Content Include="Views\Logout\Logout.cshtml" />
     <Content Include="Views\MyProfileAdmin\MyProfileAdmin.cshtml" />
     <Content Include="Views\MyProfileTeacher\MyProfileTeacher.cshtml" />
     <Content Include="Views\ImportantInfo\ImportantInfo.cshtml" />
@@ -234,16 +233,12 @@
     <Content Include="Views\Mood\SessionIndex.cshtml" />
     <Content Include="Views\Mood\SessionsList.cshtml" />
     <Content Include="Views\Shared\ErrorMessage.cshtml" />
-    <Content Include="Views\Threading\Index.cshtml" />
-    <Content Include="Views\Threading\Results.cshtml" />
-
+    <Content Include="Views\SessionRedirect\SessionRedirect.cshtml" />
+    <Content Include="Views\About\FancyAbout.cshtml" />
     <Content Include="Views\JoinSession\JoinSessionConnect.cshtml" />
     <Content Include="Views\JoinSession\JoinSession.cshtml" />
     <Content Include="Views\JoinSession\JoinSessionList.cshtml" />
     <Content Include="Views\JoinSession\JoinSessionDiagram.cshtml" />
-
-    <Content Include="Views\SessionRedirect\SessionRedirect.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">
