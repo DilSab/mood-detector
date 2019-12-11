@@ -7,6 +7,7 @@ namespace Model
         public Session()
         {
             this.Moods = new HashSet<Mood>();
+          
         }
 
         public int Id { get; set; }
@@ -16,9 +17,10 @@ namespace Model
         public System.DateTime DateTime { get; set; }
         public string Comments { get; set; }
         public int MessageSeen { get; set; }
+        public string VideoId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mood> Moods { get; set; }
-        public virtual User User { get; set; }
+        public virtual User User { get; set; }              
     }
 }

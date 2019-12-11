@@ -1,0 +1,33 @@
+﻿@using MoodDetectorWebApp.Models
+
+
+<h2>List of all your sessions</h2>
+<table class="table">
+    <tr>
+        <th>Join Session id</th>
+        <th>Join Id</th>
+        <th>Date</th>
+        <th>Details</th>
+
+    </tr>
+    @foreach (JoinSessionSummary item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JoinName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("View mood diagram", "GetJoinSessionDiagram", new { id = item.Id })
+            </td>
+
+        </tr>
+    }
+</table>
+
+

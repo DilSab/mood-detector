@@ -54,7 +54,7 @@ namespace ControllerProject.Service
             _context.Moods.Add(mood);
             _context.SaveChanges();
         }
-
+        
         public MoodCollection GetMoodsBySessionId(int id)
         {
             int idExists = (from i in _context.Sessions
@@ -86,12 +86,28 @@ namespace ControllerProject.Service
             return ids;
         }
 
+        public List <int> GetAllJoinSessionIds(int sessionId)
+        {
+            List<int> ids = (from j in _context.JoinSessions
+                             where j.SessionId == sessionId
+                             select j.Id).ToList();
+            return ids;
+        }
+
         public Session GetSession(int id)
         {
             Session session = (from s in _context.Sessions
                                where s.Id == id
                                select s).FirstOrDefault();
             return session;
+        }
+
+        public JoinSession GetJoinSession(int id)
+        {
+            JoinSession joinSession = (from s in _context.JoinSessions
+                               where s.Id == id
+                               select s).FirstOrDefault();
+            return joinSession;
         }
 
         public Dictionary<string, double> GetDominantMoods(MoodCollection moodCollection)
@@ -271,6 +287,22 @@ namespace ControllerProject.Service
             {
                 return emojis["neutral"];
             }
+        }
+
+        public void AddVideoToSession(int sessionId, string videoId)
+        {
+            var currentSession = _context.Sessions.First(x => x.Id == sessionId);
+            currentSession.VideoId = videoId;
+            _context.Entry(currentSession).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void AddSVGToJoinSession(int joinSessionId, string SVG )
+        {
+            var currentJoinSession = _context.JoinSessions.First(x => x.Id == joinSessionId);
+            currentJoinSession.JoinSessionSVG = SVG;
+            _context.Entry(currentJoinSession).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
