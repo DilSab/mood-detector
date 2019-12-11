@@ -1,0 +1,41 @@
+﻿@model MoodDetectorWebApp.Models.JoinSessionSummary
+
+<link href="~/Assets/css/youtube.css" rel="stylesheet" type="text/css">
+
+<html>
+
+    <head>
+
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    </head>
+
+    <body>
+
+        <div class="row" id="svg-container">
+            <div class="col-lg-2">
+                <ul class="nav d-flex flex-lg-column justify-content-center">
+                    <li class="nav-item joy buttons joy-box box-squared" id="joy"><p>Joy</p></li>
+                    <li class="nav-item anger buttons angry-face anger-box box-squared" id="anger"><span> Anger</span></li>
+                    <li class="nav-item disgust buttons disgusted-face disgust-box box-squared" id="disgust"><span> Disgust</span></li>
+                    <li class="nav-item contempt buttons contempt-face contempt-box box-squared" id="contempt"><span> Contempt</span></li>
+                    <li class="nav-item surprise buttons surprise-face surprise-box box-squared" id="surprise"><span> Surprise</span></li>
+                </ul>
+            </div>
+
+            <div id="svg-wrapper" class="col-lg-8 text-center">
+                <div id="svg-curve"></div>
+            </div>
+        </div>
+
+        <script>
+
+            var svg = '@Model.SessionSVG';
+            var atobSVG = atob(svg);
+            d3.select("#svg-curve").html(atobSVG);
+
+        </script>
+    </body>
+
+</html>
+

@@ -13,6 +13,7 @@
         <th>Subject</th>
         <th>Comments</th>
         <th>Details</th>
+        <th>Join Sessions</th>
     </tr>
     @foreach (SessionSummary item in Model)
     {
@@ -34,6 +35,9 @@
             </td>
             <td>
                 @Html.ActionLink("View mood chart", "GetSessionMoodAverage", new { id = item.id })
+            </td>
+            <td>
+                @Html.ActionLink("View Join Session info", "RedirectToJoinSessionList", new { id = item.id })
             </td>
         </tr>
     }
