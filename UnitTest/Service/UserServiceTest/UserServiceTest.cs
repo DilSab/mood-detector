@@ -21,7 +21,7 @@ namespace UnitTest.Service.UserServiceTest
 
             var service = new UserService(mockContext.Object);
             UserWithLogin user = CreateAddUser();
-            service.AddNewUser(user);
+            service.AddNewUser(user, new Hash("salt", "saltedHash"));
 
             mockSet.Verify(m => m.Add(It.IsAny<LoginInfo>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
@@ -39,7 +39,7 @@ namespace UnitTest.Service.UserServiceTest
 
             var loginData = new List<LoginInfo>
             {
-                new LoginInfo { Id = 1, UserId = 1, Username = "smith123", Email = "james.smith@email.com", Password = "Password123" },
+                new LoginInfo { Id = 1, UserId = 1, Username = "smith123", Email = "james.smith@email.com", Salt = "salt", Hash = "saltedHash" },
             }.AsQueryable();
 
             var loginMockSet = GetLoginMockSet(loginData);
@@ -59,13 +59,18 @@ namespace UnitTest.Service.UserServiceTest
         }
 
         [Fact]
-        public void TestGetUsers()
+        public void TestGetUsersCountGroupByAccessRights()
         {
             var users = new List<User>
             {
-                new User { Id = 1, Firstname = "James", Lastname = "Smith", AccessRights = "Teacher" },
-                new User { Id = 2, Firstname = "John", Lastname = "Williams", AccessRights = "Admin" },
-                new User { Id = 3, Firstname = "Linda", Lastname = "Johnson", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Melinda", Lastname = "Chapman", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Micos", Lastname = "Taro", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Linda", Lastname = "Williams", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Robert", Lastname = "Brown", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Michael", Lastname = "Young", AccessRights = "Teacher" },
+                new User { Id = 1, Firstname = "Johnny", Lastname = "Walker", AccessRights = "Admin" },
+                new User { Id = 1, Firstname = "Rosalee", Lastname = "Barrett", AccessRights = "Admin" },
+                new User { Id = 1, Firstname = "Janelle", Lastname = "Leigh", AccessRights = "Admin" },
             }.AsQueryable();
 
             var mockSet = GetUserMockSet(users);
@@ -75,10 +80,10 @@ namespace UnitTest.Service.UserServiceTest
 
             var service = new UserService(mockContext.Object);
 
-            var result = service.GetUsers();
+            var counts = service.GetUsersCountGroupByAccessRights();
 
-            Assert.Equal(3, result.Count);
-            Assert.True(result.Exists(f => f.Firstname == "John"));
+            Assert.Equal(3, counts.Find(c => c.AccessRights == "Admin").UsersCount);
+            Assert.Equal(5, counts.Find(c => c.AccessRights == "Teacher").UsersCount);
         }
 
         private Mock<DbSet<LoginInfo>> GetLoginMockSet(IQueryable<LoginInfo> logins)
@@ -112,7 +117,6 @@ namespace UnitTest.Service.UserServiceTest
                 AccessRights = "Teacher",
                 Email = "james.smith@email.com",
                 Username = "smith123",
-                Password = "Password123"
             };
 
             return addUser;

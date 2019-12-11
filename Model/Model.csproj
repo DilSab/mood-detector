@@ -96,6 +96,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\AccessRightsCount.cs" />
+    <Compile Include="Entity\UserListItem.cs" />
     <Compile Include="Entity\UserWithLogin.cs" />
     <Compile Include="Entity\MoodCollection.cs" />
     <Compile Include="Entity\SessionInfo.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Migrations\201911211904322_Initial.designer.cs">
       <DependentUpon>201911211904322_Initial.cs</DependentUpon>
     </Compile>
+
     <Compile Include="Migrations\201911262040276_AddedJoinSession.cs" />
     <Compile Include="Migrations\201911262040276_AddedJoinSession.designer.cs">
       <DependentUpon>201911262040276_AddedJoinSession.cs</DependentUpon>
@@ -122,6 +125,11 @@
     <Compile Include="Migrations\201912101747541_Added Date field to JoinSession.cs" />
     <Compile Include="Migrations\201912101747541_Added Date field to JoinSession.designer.cs">
       <DependentUpon>201912101747541_Added Date field to JoinSession.cs</DependentUpon>
+
+    <Compile Include="Migrations\201911230924022_Hash.cs" />
+    <Compile Include="Migrations\201911230924022_Hash.designer.cs">
+      <DependentUpon>201911230924022_Hash.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mood.cs" />
@@ -141,6 +149,7 @@
     <EmbeddedResource Include="Migrations\201911211904322_Initial.resx">
       <DependentUpon>201911211904322_Initial.cs</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="Migrations\201911262040276_AddedJoinSession.resx">
       <DependentUpon>201911262040276_AddedJoinSession.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,6 +161,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912101747541_Added Date field to JoinSession.resx">
       <DependentUpon>201912101747541_Added Date field to JoinSession.cs</DependentUpon>
+
+    <EmbeddedResource Include="Migrations\201911230924022_Hash.resx">
+      <DependentUpon>201911230924022_Hash.cs</DependentUpon>
+
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

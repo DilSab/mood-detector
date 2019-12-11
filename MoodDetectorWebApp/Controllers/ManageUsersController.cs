@@ -1,29 +1,37 @@
 ﻿using ControllerProject.Service;
-using Model;
 using Model.Entity;
 using MoodDetectorWebApp.Models;
-using System.Collections.Generic;
 using System.Web.Mvc;
+using System;
 
 namespace MoodDetectorWebApp.Controllers
 {
     [Authorize(Roles = "admin")]
     public class ManageUsersController : Controller
     {
-        IUserService _userService;
-        IRegisterAuthenticator _registerAuthenticator;
+        private IUserService _userService;
+        private IEncryptor _encryptor;
 
-        public ManageUsersController(IUserService userService, IRegisterAuthenticator registerAuthenticator)
+        public ManageUsersController(IUserService userService, IEncryptor encryptor)
         {
             _userService = userService;
-            _registerAuthenticator = registerAuthenticator;
+            _encryptor = encryptor;
         }
 
         [HttpGet]
-        public ActionResult ViewUsers()
+        public ActionResult ViewUsers(UsersPaginationModel pagination, int page = 1)
         {
-            List<User> users = _userService.GetUsers();
-            return View("ViewUsers", users);
+            pagination.CurrentPage = page;
+            pagination.UserListItems = _userService.GetUsersPaginated(pagination.CurrentPage, pagination.UsersPerPage);
+            int? usersCount = System.Web.HttpRuntime.Cache["users-count"] as int?;
+            if (usersCount == null)
+            {
+                usersCount = _userService.GetUsersCount();
+                System.Web.HttpRuntime.Cache.Insert("users-count", usersCount.Value, null, DateTime.Now.AddSeconds(60), System.Web.Caching.Cache.NoSlidingExpiration);
+            }
+            pagination.UsersCount = usersCount;
+
+            return View("ViewUsers", pagination);
         }
 
         [HttpGet]
@@ -33,48 +41,65 @@ namespace MoodDetectorWebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddUser(AddUserModel addUserModel)
         {
-            UserWithLogin addUser = new UserWithLogin(
-                addUserModel.Username,
-                addUserModel.Password,
-                addUserModel.Email,
-                addUserModel.Firstname,
-                addUserModel.Lastname,
-                addUserModel.AccessRights
-                );
-            if (!_registerAuthenticator.IsRegisterDataCorrect(addUser))
+            if (ModelState.IsValid)
             {
-                return View("ErrorMessage", model: "Check entered data");
+                UserWithLogin addUser = new UserWithLogin(
+                    addUserModel.Username,
+                    addUserModel.Email,
+                    addUserModel.Firstname,
+                    addUserModel.Lastname,
+                    addUserModel.AccessRights
+                );
+
+                _userService.AddNewUser(addUser, _encryptor.GetHash(addUserModel.Password));
+
+                return View("SuccessfulAdd");
             }
-            _userService.AddNewUser(addUser);
-            return View("SuccessfulAdd");
+
+            return View("~/Views/ManageUsers/AddUser.cshtml", addUserModel);
         }
 
         [HttpGet]
         public ActionResult EditUser(int id)
         {
             var user = _userService.GetUserWithLogin(id);
-            return View("EditUser", user);
+            EditUserModel editUserModel = new EditUserModel()
+            {
+                Username = user.Username,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Email = user.Email
+            };
+
+            return View("EditUser", editUserModel);
         }
 
         [HttpPost]
-        public ActionResult EditUser(AddUserModel addUserModel, int id)
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUser(EditUserModel editUserModel, int id)
         {
-            UserWithLogin editUser = new UserWithLogin(
-                addUserModel.Username,
-                addUserModel.Password,
-                addUserModel.Email,
-                addUserModel.Firstname,
-                addUserModel.Lastname,
-                addUserModel.AccessRights
-                );
-            if (!_registerAuthenticator.IsRegisterDataCorrect(editUser))
+            if (ModelState.IsValid)
             {
-                return View("ErrorMessage", model: "Check entered data");
+                UserWithLogin editUser = new UserWithLogin(
+                    editUserModel.Username,
+                    editUserModel.Email,
+                    editUserModel.Firstname,
+                    editUserModel.Lastname
+                );
+                if (editUserModel.Password != null && editUserModel.Password.Trim() != "")
+                {
+                    var hash = _encryptor.GetHash(editUserModel.Password);
+                    _userService.EditUser(editUser, id, hash);
+                }
+                _userService.EditUser(editUser, id);
+                
+                return View("SuccessfulAdd");
             }
-            _userService.EditUser(editUser, id);
-            return View("SuccessfulAdd");
+
+            return View("~/Views/ManageUsers/AddUser.cshtml", editUserModel);
         }
 
         [HttpGet]
@@ -86,6 +111,7 @@ namespace MoodDetectorWebApp.Controllers
         public ActionResult DeleteUserPost(int id)
         {
             _userService.DeleteUser(id);
+
             return View("SuccessfulAdd");
         }
     }

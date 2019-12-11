@@ -1,6 +1,11 @@
 ﻿using Model;
 using Model.Entity;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace ControllerProject.Service
@@ -14,7 +19,7 @@ namespace ControllerProject.Service
             _context = context;
         }
 
-        public void AddNewUser(UserWithLogin addUser)
+        public void AddNewUser(UserWithLogin addUser, Hash hash)
         {
             var loginInfo = new LoginInfo()
             {
@@ -25,7 +30,8 @@ namespace ControllerProject.Service
                     AccessRights = addUser.AccessRights
                 },
                 Username = addUser.Username,
-                Password = addUser.Password,
+                Salt = hash.Salt,
+                Hash = hash.SaltedHash,
                 Email = addUser.Email
             };
 
@@ -40,8 +46,22 @@ namespace ControllerProject.Service
             loginInfo.User.Lastname = editUser.Lastname;
             loginInfo.User.AccessRights = editUser.AccessRights;
             loginInfo.Username = editUser.Username;
-            loginInfo.Password = editUser.Password;
             loginInfo.Email = editUser.Email;
+
+            _context.SaveChanges();
+        }
+
+        public void EditUser(UserWithLogin editUser, int id, Hash hash)
+        {
+            var loginInfo = _context.LoginInfoes.Find(FindLoginInfoesIdByUserId(id));
+            loginInfo.User.Firstname = editUser.Firstname;
+            loginInfo.User.Lastname = editUser.Lastname;
+            loginInfo.User.AccessRights = editUser.AccessRights;
+            loginInfo.Username = editUser.Username;
+            loginInfo.Salt = hash.Salt;
+            loginInfo.Hash = hash.SaltedHash;
+            loginInfo.Email = editUser.Email;
+
             _context.SaveChanges();
         }
 
@@ -87,7 +107,6 @@ namespace ControllerProject.Service
             var user = GetUser(FindUsernameById(id));
             UserWithLogin userWithLogin = new UserWithLogin(
                 loginInfo.Username,
-                loginInfo.Password,
                 loginInfo.Email,
                 user.Firstname,
                 user.Lastname,
@@ -100,12 +119,66 @@ namespace ControllerProject.Service
         public List<User> GetUsers()
         {
             List<User> usersList = new List<User>();
-            IQueryable<User> users = (from u in _context.Users select u);
-            foreach (User user in users)
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MoodDetectorDB"].ConnectionString))
             {
-                usersList.Add(user);
+                string command = "SELECT * FROM Users";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                foreach (DataRow row in table.Rows)
+                {
+                    User user = new User()
+                    {
+                        Id = Convert.ToInt32(row["Id"].ToString()),
+                        Firstname = row["Firstname"].ToString(),
+                        Lastname = row["Lastname"].ToString(),
+                        AccessRights = row["AccessRights"].ToString(),
+                    };
+
+                    usersList.Add(user);
+                }
+                adapter.Dispose();
+
+                return usersList;
             }
-            return usersList;
+        }
+
+        public List<UserListItem> GetUsersPaginated(int currentPage, int usersPerPage)
+        {
+            var users = (from u in _context.Users
+                         join l in _context.LoginInfoes on u.Id equals l.UserId
+                         where u.AccessRights != "Admin"
+                         orderby u.Id ascending
+                         select new UserListItem { Id = u.Id, Username = l.Username, Firstname = u.Firstname, Lastname = u.Lastname })
+                         .Skip((currentPage - 1) * usersPerPage)
+                         .Take(usersPerPage)
+                         .ToList();
+
+            return users;
+        }
+
+        public int GetUsersCount()
+        {
+            var count = (from u in _context.Users
+                         where u.AccessRights != "Admin"
+                         select u).Count();
+
+            return count;
+        }
+
+        public List<AccessRightsCount> GetUsersCountGroupByAccessRights()
+        {
+            var counts = _context.Users
+                .GroupBy(u => u.AccessRights)
+                .Select(u => new AccessRightsCount { 
+                    AccessRights = u.Key,
+                    UsersCount = u.Count()
+                })
+                .ToList();
+
+            return counts;
         }
     }
 }
