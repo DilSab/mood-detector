@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Game";
+}
+    <html>
+    <h2>Game</h2>
+    
+    <head>
+        <style>
+            .score_text {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 20px;
+            }
+        </style>
+        <div id="score" class="score_text"><b>Score: </b></div>
+        <canvas class="canvas" height="600" width="400" style="background-color: #3e3e3e"></canvas>
+
+    </head>
+    <body>
+        
+        <div id="text-width"></div>
+        <div id="lightbox"></div>
+        <div id="facevideo-node" style="display: none;"></div>
+
+        <div class="row d-none align-items-center flex-fill" id="demo-setup">
+            <div class="col-md-8 offset-md-2" id="instructions">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <div class="row justify-content-center no-gutters" id="example-container">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row full-height align-items-center" id="video-container">
+            <div class="col text-center">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div id="video-wrapper">
+                            <div id="player" style="pointer-events: none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="https://download.affectiva.com/js/3.2.1/affdex.js"></script>
+    <script type="text/javascript" src="~/Assets/js/game/emotion-input.js"></script>
+    <script type="text/javascript" src="~/Assets/js/game/hero.js"></script>
+    <script type="text/javascript" src="~/Assets/js/game/enemy.js"></script>
+    <script type="text/javascript" src="~/Assets/js/game/draw.js"></script>
+    </html>
+
+
+

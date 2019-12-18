@@ -37,6 +37,7 @@
                         <li class="nav-item">@Html.ActionLink("Messages", "GlobalMessage", "Messenger", null, new { @class = "nav-link" })</li>
                         <li class="nav-item"><sup id="message-counter"></sup></li>            
                         <li class="nav-item">@Html.ActionLink("Join Session", "JoinSessionConnect", "JoinSession", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Game", "Game", "Game", null, new { @class = "nav-link" })</li>
                     }
                     @*For teacher*@
                     @if (accessRights == "teacher")

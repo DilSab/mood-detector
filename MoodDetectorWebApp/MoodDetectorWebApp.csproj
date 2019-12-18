@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\ImportantInfoController.cs" />
     <Compile Include="Controllers\LearningsAdminController.cs" />
     <Compile Include="Controllers\JoinSessionController.cs" />
@@ -174,14 +175,15 @@
     <Content Include="Assets\css\Logo.css" />
     <Content Include="Assets\css\liveDetector-session.css" />
     <Content Include="Assets\css\messenger-sidebar.css" />
+    <Content Include="Assets\js\game\draw.js" />
+    <Content Include="Assets\js\game\emotion-input.js" />
+    <Content Include="Assets\js\game\enemy.js" />
+    <Content Include="Assets\js\game\hero.js" />
     <Content Include="Assets\js\learnings-counter.js" />
     <Content Include="Assets\js\learnings-pop-up.js" />
-
     <Content Include="Assets\css\youtube.css" />
     <Content Include="Assets\js\JoinSessionDetector.js" />
-
     <Content Include="Assets\css\view-users.css" />
-
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\d3.v5.min.js" />
     <Content Include="Assets\js\lib\jquery.js" />
@@ -246,7 +248,6 @@
     <Content Include="Views\JoinSession\JoinSession.cshtml" />
     <Content Include="Views\JoinSession\JoinSessionList.cshtml" />
     <Content Include="Views\JoinSession\JoinSessionDiagram.cshtml" />
-
     <Content Include="Views\SessionRedirect\SessionRedirect.cshtml" />
     <Content Include="Views\LearningsAdmin\LearningsAdmin.cshtml" />
     <Content Include="Views\LearningsAdmin\EditLearning.cshtml" />
@@ -255,6 +256,7 @@
     <Content Include="Views\LearningsAdmin\LateTeachers.cshtml" />
     <Content Include="Views\Learnings\Feedback.cshtml" />
     <Content Include="Views\LearningsAdmin\ShowFeedbacks.cshtml" />
+    <Content Include="Views\Game\Game.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControllerProject\ControllerProject.csproj">
