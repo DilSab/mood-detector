@@ -12,69 +12,35 @@
     int cnt = 0;
     for (int i = 0; i < learnings.Count; i++)
     {
-
-        if (learnings[i].Text == "")
-        {
-            continue;
-        }
-        Debug.WriteLine(learnings[i].Text);
         cnt++;
-        Debug.WriteLine(learnings[i].SessionTime.ToString());
         <p>
             @learnings[i].Text
-            <b id="demo"></b>
-            <script>$("#demo").prop('id', 'demo'+@i)</script >
-            @Html.ActionLink("Link", "RemoveLearning", new { a = learnings[i].SessionId, b = learnings[i].Mask }, new { id = "myLink" + i })
+            @if (learnings[i].SessionTime < 0)
+            {
+                <b>@(-learnings[i].SessionTime) days late</b>
+            }
+            else
+            {
+                <b>@learnings[i].SessionTime days left</b>
+            }
+            @Html.ActionLink("Link", "RemoveLearning", new { a = learnings[i].session.Id, b = learnings[i].Mask, c=learnings[i].EmotionName }, new { id = "myLink" + i })
+            <br>
+            Learning was received on <b>@learnings[i].session.DateTime.ToString()</b>
+            in Class <b>@learnings[i].session.Class</b>
+            on Subject <b>@learnings[i].session.Subject</b>
         </p>
         <script>
                 $("#myLink"+@i).click(function (event) {
-                    event.preventDefault();
-                    $.ajax({
+                    //event.preventDefault();
+                    /*$.ajax({
 
                         url:$(this).attr("href"),
 
-                    });
+                    });*/
                     $("p").remove(":contains('@learnings[i].Text')");
                     window.open('@learnings[i].Link', "_blank");
 
                 });
-        </script>
-        <script>         
-
-            // Update the count down every 1 second
-            var x = setInterval(function () {
-                var ticks = @learnings[i].SessionTime;
-                var ticksToMicrotime = ticks / 10000;
-                var epochMicrotimeDiff = Math.abs(new Date(0, 0, 1).setFullYear(1));
-                var countDownDate = new Date(ticksToMicrotime-epochMicrotimeDiff).getTime();
-                // Get today's date and time
-                var now = new Date().getTime();
-
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
-
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Output the result in an element with id="demo(i)"
-                if (days == 0) {
-                    document.getElementById('demo' +@i).innerHTML = "! " + days + "d " + hours + "h "
-                        + minutes + "m " + seconds + "s !";
-                }
-                else {
-                    document.getElementById('demo' +@i).innerHTML = days + "d " + hours + "h "
-                        + minutes + "m " + seconds + "s ";
-                }
-
-                // If the count down is over, write some text
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById('demo'+@i).innerHTML = "EXPIRED";
-                }
-            }, 1000);
         </script>
 
 

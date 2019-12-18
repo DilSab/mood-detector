@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class JoinSessionSessionVideoID : DbMigration
+    public partial class JoinSessionVideoID : DbMigration
     {
         public override void Up()
         {
@@ -21,14 +21,12 @@
                 .ForeignKey("dbo.Sessions", t => t.SessionId, cascadeDelete: true)
                 .Index(t => t.SessionId);
             
-            AddColumn("dbo.Sessions", "VideoId", c => c.String());
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.JoinSessions", "SessionId", "dbo.Sessions");
             DropIndex("dbo.JoinSessions", new[] { "SessionId" });
-            DropColumn("dbo.Sessions", "VideoId");
             DropTable("dbo.JoinSessions");
         }
     }
